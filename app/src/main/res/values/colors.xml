@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="colorBlue">#6DFAFB</color>
+    <color name="colorFacebook">#2D70AB</color>
+    <color name="colorGrey">#727272</color>
+    <color name="colorGreyDark">#333333</color>
+    <color name="opacity80Black">#CC000000</color>
+    <color name="Tale">#58B3B2</color>
+    <color name="colorLightGray">#e8e8e8</color>
+    <color name="colorLightBlueGray">#99AAC6</color>
+    <color name="colorGreen">#359138</color>
+</resources>

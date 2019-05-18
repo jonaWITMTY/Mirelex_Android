@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    //general
+    <string name="getNeighborhood">general/neighborhood</string>
+
+    //user
+    <string name="userSignIn">user/login</string>
+    <string name="getUserInfo">user/info</string>
+    <string name="createUser">user/create</string>
+    <string name="updateUser">user/update/info</string>
+    <string name="userSizes">general/user/sizes</string>
+    <string name="womanCatalogs">general/women/catalogs</string>
+    <string name="forgotUser">user/forgot</string>
+
+    //Customer
+    //Product
+    <string name="getProducts">products</string>
+    <string name="getProductInfo">product/info</string>
+
+    //Order
+    <string name="createOrder">order/create</string>
+    <string name="getOrders">orders</string>
+    <string name="getOrderInfo">order/info</string>
+    <string name="getOrderTotal">order/total</string>
+
+    //Services
+    <string name="getOrderServices">service/orders</string>
+
+    //Cleanning
+    <string name="getCleanningTypes">service/cleaning/types</string>
+
+    //Sewing
+    <string name="getSewingTypes">service/sewing/types</string>
+
+</resources>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".StoreDetailActivity">
+
+    <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <ImageView
+                android:layout_width="0dp"
+                android:layout_height="230dp" app:srcCompat="@drawable/radius_corner"
+                android:id="@+id/storeDetailImageView" app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" android:scaleType="fitCenter"/>
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/storeDetailImageView"
+        >
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/storeDetailName"
+                    android:paddingTop="10dp" android:paddingBottom="10dp" android:textSize="16sp"
+                    android:textColor="@android:color/black" tools:text="storeName" android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"/>
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/storeDetailEmail"
+                    android:paddingTop="10dp" android:paddingBottom="10dp" android:textSize="16sp"
+                    android:textColor="@android:color/black" tools:text="storeEmail" android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"/>
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/storeDetailPersonalPhone"
+                    android:paddingTop="10dp" android:paddingBottom="10dp" android:textSize="16sp"
+                    android:textColor="@android:color/black" tools:text="storePhone" android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"/>
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp" android:id="@+id/view"
+                    android:background="@color/colorLightGray"/>
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/storeDetailAddress1"
+                    android:paddingTop="10dp" android:paddingBottom="10dp" android:textSize="16sp"
+                    android:textColor="@android:color/black" tools:text="sotreAddress1"
+                    android:layout_marginStart="16dp" android:layout_marginEnd="16dp"/>
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/storeDetailAddress2"
+                    android:paddingTop="10dp" android:paddingBottom="10dp" android:textSize="16sp"
+                    android:textColor="@android:color/black" tools:text="storeAddress2"
+                    android:layout_marginStart="16dp" android:layout_marginEnd="16dp"/>
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/storeDetailAddress3"
+                    android:paddingTop="10dp" android:paddingBottom="10dp" android:textSize="16sp"
+                    android:textColor="@android:color/black" tools:text="storeAddress3"
+                    android:layout_marginStart="16dp" android:layout_marginEnd="16dp"/>
+        </LinearLayout>
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>

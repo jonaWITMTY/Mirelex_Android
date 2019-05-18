@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                             xmlns:app="http://schemas.android.com/apk/res-auto"
+                                             xmlns:tools="http://schemas.android.com/tools"
+                                             android:layout_width="match_parent"
+                                             android:layout_height="wrap_content"
+                                             android:background="@drawable/border_bottom">
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="10dp" app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="10dp" android:layout_marginStart="16dp" tools:text="Title"
+            android:textSize="16sp" android:textStyle="bold" android:textColor="@android:color/black"
+            android:id="@+id/detailInfoChevronTitle"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/detailInfoChevronValue"
+            app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="10dp"
+            app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="10dp"
+            app:layout_constraintVertical_bias="0.0" android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toStartOf="@+id/imageView6" tools:text="Value" android:textSize="16sp"/>
+    <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp" app:srcCompat="@drawable/chevron_right"
+            android:id="@+id/imageView6" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="16dp" app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="12dp"
+            app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="10dp"/>
+</android.support.constraint.ConstraintLayout>
