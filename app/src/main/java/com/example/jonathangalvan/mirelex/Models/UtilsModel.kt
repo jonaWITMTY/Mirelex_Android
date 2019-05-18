@@ -21,7 +21,11 @@ class UtilsModel {
         private val errorUserAccessDenied: String = "{'title': 'Acceso denegado', 'desc': 'El tipo de usuario no es váido'}"
 
         fun postRequest(context: Context, endPoint: String, data: String = getGson().toJson(GlobalRequest())): Request{
-            val body: RequestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), data)
+            var newData = data
+            if(newData == "") {
+                newData = getGson().toJson(GlobalRequest())
+            }
+            val body: RequestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), newData)
             val request = Request.Builder()
             request.url("${context.resources.getString(R.string.apiUrl)}/v1/$endPoint")
             request.addHeader("Public-Key", context.getResources().getString(R.string.publicKey))

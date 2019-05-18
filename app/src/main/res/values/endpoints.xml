@@ -28,8 +28,10 @@
 
     //Cleanning
     <string name="getCleanningTypes">service/cleaning/types</string>
+    <string name="getCleanningStores">service/cleaning/stores</string>
 
     //Sewing
     <string name="getSewingTypes">service/sewing/types</string>
+    <string name="getSewingStores">service/sewing/stores</string>
 
 </resources>

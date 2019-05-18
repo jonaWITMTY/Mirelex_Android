@@ -39,3 +39,19 @@ class SewingType(
 class ServicesInterface(
     var data: ArrayList<ServiceInterface>
 ){}
+
+class ServiceStoresInterface(
+    var data: ArrayList<ServiceStore>
+){}
+
+class ServiceStore(
+    var userId: String?,
+    var name: String,
+    var profilePictureUrl: String?,
+    var total: String?,
+    var totalFormatted: String?
+) {
+    override fun toString(): String {
+        return name
+    }
+}
