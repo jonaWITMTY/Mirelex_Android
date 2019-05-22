@@ -17,18 +17,14 @@
             android:background="@drawable/radius_corner" android:backgroundTint="@color/colorBlue"
             app:layout_constraintHorizontal_bias="0.0"
             android:layout_marginBottom="16dp" app:layout_constraintBottom_toBottomOf="parent"/>
-    <CalendarView
-            android:layout_width="0dp"
-            android:layout_height="400dp"
-            android:id="@+id/calendarDateChooser" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:focusedMonthDateColor="@color/Tale" android:theme="@style/customCalendarView"
-    />
-    <Spinner
+    <com.squareup.timessquare.CalendarPickerView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:id="@+id/spinner" android:layout_marginTop="16dp"
-            app:layout_constraintTop_toBottomOf="@+id/calendarDateChooser"
+            android:layout_height="0dp"
+            android:id="@+id/calendar_view"
+            android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent" android:layout_marginBottom="20dp"
+            app:layout_constraintBottom_toTopOf="@+id/calendarContinueProcess"
             app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
-            android:visibility="invisible"/>
+            android:layout_marginStart="16dp" android:layout_marginEnd="16dp"
+            app:tsquare_titleTextColor="@color/Tale"
+    />
 </android.support.constraint.ConstraintLayout>

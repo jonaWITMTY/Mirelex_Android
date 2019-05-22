@@ -16,6 +16,7 @@
     //Product
     <string name="getProducts">products</string>
     <string name="getProductInfo">product/info</string>
+    <string name="getProducDates">product/dates</string>
 
     //Order
     <string name="createOrder">order/create</string>
