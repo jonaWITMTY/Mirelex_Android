@@ -16,6 +16,7 @@ import com.example.jonathangalvan.mirelex.Listeners.RecyclerItemClickListener
 import com.example.jonathangalvan.mirelex.Models.UtilsModel
 import com.example.jonathangalvan.mirelex.R
 import com.example.jonathangalvan.mirelex.ServiceCreateActivity
+import com.example.jonathangalvan.mirelex.ServiceOrderDetailActivity
 import kotlinx.android.synthetic.main.fragment_services.*
 import kotlinx.android.synthetic.main.view_centered_message.view.*
 import okhttp3.Call
@@ -54,11 +55,11 @@ class Services : Fragment() {
         servicesList.adapter = serviceAdapter
         servicesList.addOnItemTouchListener(RecyclerItemClickListener(context!!, servicesList, object : RecyclerItemClickListener.OnItemClickListener {
             override fun onItemClick(view: View, position: Int) {
-//                val goToOrderDetail = Intent(activity!!, OrderDetailActivity::class.java)
-//                val bundletToOrderDetail = Bundle()
-//                bundletToOrderDetail.putString("orderId", ordersAdapter.getOrder(position).orderId)
-//                goToOrderDetail.putExtras(bundletToOrderDetail)
-//                startActivity(goToOrderDetail)
+                val goToServiceDetail = Intent(activity!!, ServiceOrderDetailActivity::class.java)
+                val bundletToServiceDetail = Bundle()
+                bundletToServiceDetail.putString("serviceObj", UtilsModel.getGson().toJson(serviceAdapter.getService(position)))
+                goToServiceDetail.putExtras(bundletToServiceDetail)
+                startActivity(goToServiceDetail)
             }
 
             override fun onItemLongClick(view: View?, position: Int) {}

@@ -26,7 +26,7 @@ class ServicesAdapter( private var services: ArrayList<ServiceInterface>): Recyc
         notifyDataSetChanged()
     }
 
-    fun getOrder(position: Int): ServiceInterface{
+    fun getService(position: Int): ServiceInterface{
         return services[position]
     }
 

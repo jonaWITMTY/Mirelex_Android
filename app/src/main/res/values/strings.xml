@@ -71,4 +71,5 @@
     <string name="cleanning">Tintorería</string>
     <string name="sewing">Costurería</string>
     <string name="stores">Tiendas</string>
+    <string name="sendMessage">Enviar mensaje</string>
 </resources>

@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
+import com.example.jonathangalvan.mirelex.Interfaces.OrderInterface
 import com.example.jonathangalvan.mirelex.Interfaces.OrderProductInfo
 import com.example.jonathangalvan.mirelex.Models.UtilsModel
 import com.example.jonathangalvan.mirelex.Requests.GetOrderInfoRequest
@@ -17,6 +18,7 @@ import okhttp3.Response
 import java.io.IOException
 
 class OrderDetailActivity : AppCompatActivity() {
+    var orderInfoForBundle: OrderProductInfo? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +43,7 @@ class OrderDetailActivity : AppCompatActivity() {
                 val responseObj = UtilsModel.getPostResponse(responseStr)
                 if(responseObj.status == "success"){
                     val orderInfo = UtilsModel.getGson().fromJson(UtilsModel.getGson().toJson(responseObj.data!![0]), OrderProductInfo::class.java)
+                    orderInfoForBundle = orderInfo
                     runOnUiThread {
                         run {
                             supportActionBar?.title = orderInfo.orderInformation.folio
@@ -62,35 +65,32 @@ class OrderDetailActivity : AppCompatActivity() {
                                 startActivity(goToProductDetail)
                             })
 
-                            val orderFolio = layoutInflater.inflate(R.layout.view_detail_info_row_with_title, detailOrderInfo, false)
-                            orderFolio.detailInfoNameView.text = resources.getString(R.string.folio)
-                            orderFolio.detailInfoValueView.text = orderInfo.orderInformation.folio
-                            detailOrderInfo.addView(orderFolio)
-
-                            val orderType = layoutInflater.inflate(R.layout.view_detail_info_row_with_title, detailOrderInfo, false)
-                            orderType.detailInfoNameView.text = resources.getString(R.string.type)
-                            orderType.detailInfoValueView.text = orderInfo.orderInformation.orderType
-                            detailOrderInfo.addView(orderType)
-
-                            val orderStartDate = layoutInflater.inflate(R.layout.view_detail_info_row_with_title, detailOrderInfo, false)
-                            orderStartDate.detailInfoNameView.text = resources.getString(R.string.date)
-                            orderStartDate.detailInfoValueView.text = orderInfo.orderInformation.startDate
-                            detailOrderInfo.addView(orderStartDate)
-
-                            val orderStatus = layoutInflater.inflate(R.layout.view_detail_info_row_with_title, detailOrderInfo, false)
-                            orderStatus.detailInfoNameView.text = resources.getString(R.string.status)
-                            orderStatus.detailInfoValueView.text = orderInfo.orderInformation.orderStatus
-                            detailOrderInfo.addView(orderStatus)
-
-                            val orderTotal = layoutInflater.inflate(R.layout.view_detail_info_row_with_title, detailOrderInfo, false)
-                            orderTotal.detailInfoNameView.text = resources.getString(R.string.total)
-                            orderTotal.detailInfoValueView.text = orderInfo.orderInformation.totalFormatted
-                            detailOrderInfo.addView(orderTotal)
+                            addRow(resources.getString(R.string.folio), orderInfo.orderInformation.folio!!)
+                            addRow(resources.getString(R.string.type), orderInfo.orderInformation.orderType!!)
+                            addRow(resources.getString(R.string.date), orderInfo.orderInformation.startDate!!)
+                            addRow(resources.getString(R.string.status), orderInfo.orderInformation.orderStatus!!)
+                            addRow(resources.getString(R.string.total), orderInfo.orderInformation.totalFormatted!!)
                         }
                     }
                 }
             }
         })
+
+        /*Go to store detail*/
+        detailOrderGoToStoreProfile.setOnClickListener(View.OnClickListener {
+            val goToStoreDetailShort = Intent(this, StoreDetailShortActivity::class.java)
+            val bundleToStoreDetailShort = Bundle()
+            bundleToStoreDetailShort.putString("ownerObj",UtilsModel.getGson().toJson(orderInfoForBundle?.orderOwnerInformation))
+            goToStoreDetailShort.putExtras(bundleToStoreDetailShort)
+            startActivity(goToStoreDetailShort)
+        })
+    }
+
+    fun addRow(title: String, value: String){
+        val insertRow = layoutInflater.inflate(R.layout.view_detail_info_row_with_title, detailOrderInfo, false)
+        insertRow.detailInfoNameView.text = title
+        insertRow.detailInfoValueView.text = value
+        detailOrderInfo.addView(insertRow)
     }
 
     override fun onSupportNavigateUp(): Boolean {
