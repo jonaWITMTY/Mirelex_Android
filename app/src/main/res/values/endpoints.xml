@@ -25,6 +25,8 @@
 
     //Services
     <string name="getOrderServices">service/orders</string>
+    <string name="getOrderServiceTotal">service/order/total</string>
+    <string name="createServiceOrder">service/order/create</string>
 
     //Cleanning
     <string name="getCleanningTypes">service/cleaning/types</string>

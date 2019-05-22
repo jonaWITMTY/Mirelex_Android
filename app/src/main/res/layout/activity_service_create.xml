@@ -5,25 +5,25 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ServiceCreateActivity">
+        tools:context=".ServiceCreateActivity" android:id="@+id/serviceCreateContainer"
+        android:focusableInTouchMode="true">
 
-    <LinearLayout
-            android:orientation="vertical"
+    <Button
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" android:layout_marginStart="16dp" android:layout_marginEnd="16dp"
-            app:layout_constraintHorizontal_bias="1.0"
-            android:layout_marginTop="16dp" app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
-        <TextView
-                android:text="@string/date"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:textColor="@android:color/black" android:textSize="12sp"/>
-        <Spinner
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:id="@+id/serviceCreateDatee"
-                android:backgroundTint="@android:color/black" style="@style/Widget.AppCompat.Spinner.Underlined"/>
-    </LinearLayout>
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@drawable/radius_corner" android:backgroundTint="@color/colorBlue"
+            app:layout_constraintHorizontal_bias="0.0"
+            android:text="@string/orderProduct"
+            android:id="@+id/serviceCreateOrderService" android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@+id/serviceCreateTerms"/>
+    <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp" app:srcCompat="@drawable/close"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="16dp" android:id="@+id/serviceCreateClose"/>
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -42,12 +42,13 @@
                 style="@style/Widget.AppCompat.Spinner.Underlined" android:backgroundTint="@android:color/black"/>
     </LinearLayout>
     <android.support.design.widget.TabLayout
-            android:layout_width="395dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="16dp"
-            app:tabIndicatorColor="@color/colorBlue" android:id="@+id/createServiceType">
+            app:tabIndicatorColor="@color/colorBlue" android:id="@+id/createServiceType"
+            app:layout_constraintHorizontal_bias="1.0"
+            android:layout_marginTop="16dp" app:layout_constraintTop_toBottomOf="@+id/serviceCreateClose">
 
         <android.support.design.widget.TabItem
                 android:layout_width="wrap_content"
@@ -77,5 +78,51 @@
                 android:layout_height="wrap_content" android:id="@+id/serviceCreateTypes"
                 style="@style/Widget.AppCompat.Spinner.Underlined" android:backgroundTint="@android:color/black"
                 android:spinnerMode="dialog"/>
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout3" android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="16dp" android:id="@+id/linearLayout4">
+        <TextView
+                android:text="@string/date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/textView13"
+                android:textColor="@android:color/black" android:textSize="12sp"/>
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/serviceCreateDate"
+                android:textColor="@android:color/black" android:textSize="14sp"
+                android:background="@drawable/border_bottom_black"
+                android:paddingLeft="10dp" android:paddingBottom="5dp" android:paddingTop="5dp"/>
+    </LinearLayout>
+    <CheckBox
+            android:text="@string/checkboxTermsField"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/serviceCreateTerms" android:buttonTint="@color/colorBlue"
+            android:layout_marginStart="16dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout5"/>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="16dp" android:layout_marginEnd="16dp" android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout4" android:id="@+id/linearLayout5">
+        <TextView
+                android:text="@string/total"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/textView15"
+                android:textColor="@android:color/black" android:textSize="12sp"/>
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/serviceCreateServiceTotal"
+                android:textColor="@android:color/black" android:background="@drawable/border_bottom_black"
+                android:paddingLeft="10dp" android:paddingBottom="5dp" android:paddingTop="5dp"
+                android:textSize="14sp"/>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

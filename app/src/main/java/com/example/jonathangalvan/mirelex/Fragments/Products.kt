@@ -17,6 +17,7 @@ import com.example.jonathangalvan.mirelex.ProductDetailActivity
 import com.example.jonathangalvan.mirelex.R
 import com.example.jonathangalvan.mirelex.Requests.CustomerProductRequest
 import kotlinx.android.synthetic.main.fragment_products.*
+import kotlinx.android.synthetic.main.view_centered_message.view.*
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.Response
@@ -57,20 +58,35 @@ class Products : Fragment() {
                 val responseStr = response.body()?.string()
                 val responseObj = UtilsModel.getPostResponse(responseStr)
                 val responseProducts: ProductsInterface
-                if(responseObj.status == "success"){
-                    responseProducts = UtilsModel.getGson().fromJson(UtilsModel.getGson().toJson(responseObj), ProductsInterface::class.java)
-                    activity?.runOnUiThread {
-                        productsGrid.adapter = ProductsAdapter(activity!!.applicationContext, responseProducts.data)
-                        productsGrid.setOnItemClickListener { parent, view, position, id ->
-                            val goToProductDetail = Intent(activity!!, ProductDetailActivity::class.java)
-                            val b = Bundle()
-                            b.putString("productId", (productsGrid.adapter.getItem(position) as ProductInterface).productId.toString())
-                            goToProductDetail.putExtras(b)
-                            startActivity(goToProductDetail)
+                when(responseObj.status){
+                    "success" -> {
+                        responseProducts = UtilsModel.getGson().fromJson(UtilsModel.getGson().toJson(responseObj), ProductsInterface::class.java)
+                        activity?.runOnUiThread {
+                            productsGrid.adapter = ProductsAdapter(activity!!.applicationContext, responseProducts.data)
+                            productsGrid.setOnItemClickListener { parent, view, position, id ->
+                                val goToProductDetail = Intent(activity!!, ProductDetailActivity::class.java)
+                                val b = Bundle()
+                                b.putString("productId", (productsGrid.adapter.getItem(position) as ProductInterface).productId.toString())
+                                goToProductDetail.putExtras(b)
+                                startActivity(goToProductDetail)
+                            }
                         }
                     }
-                }else{
-                    UtilsModel.getAlertView().newInstance(responseStr, 1, 0).show(activity?.supportFragmentManager,"alertDialog")
+                    "noDataAvailable" -> {
+                        activity?.runOnUiThread {
+                            run {
+                                val ceneteredLayout = layoutInflater.inflate(
+                                    R.layout.view_centered_message,
+                                    activity!!.findViewById(R.id.customerTabsFrameLayout),
+                                    true
+                                )
+                                ceneteredLayout.centeredMessage.text = responseObj.desc
+                            }
+                        }
+                    }
+                    else -> {
+                        UtilsModel.getAlertView().newInstance(responseStr, 1, 0).show(activity?.supportFragmentManager,"alertDialog")
+                    }
                 }
             }
         })

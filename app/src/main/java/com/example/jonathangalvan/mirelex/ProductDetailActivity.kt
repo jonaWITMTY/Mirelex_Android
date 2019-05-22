@@ -133,12 +133,18 @@ class ProductDetailActivity : AppCompatActivity() {
                             productColor.detailInfoJustValueView.text = colors.dropLast(1)
                             detailProductInfo.addView(productColor)
 
-                            val productFitting = layoutInflater.inflate(R.layout.view_detail_info_row_with_chevron_title, detailProductInfo, false)
-                            productFitting.detailInfoChevronTitle.text = resources.getString(R.string.doFittingOrder)
-                            detailProductInfo.setOnClickListener(View.OnClickListener {
-                                continueForFitting()
-                            })
-                            detailProductInfo.addView(productFitting)
+                            if(productObj.productInformation.fittable == "1") {
+                                val productFitting = layoutInflater.inflate(
+                                    R.layout.view_detail_info_row_with_chevron_title,
+                                    detailProductInfo,
+                                    false
+                                )
+                                productFitting.detailInfoChevronTitle.text = resources.getString(R.string.doFittingOrder)
+                                detailProductInfo.setOnClickListener(View.OnClickListener {
+                                    continueForFitting()
+                                })
+                                detailProductInfo.addView(productFitting)
+                            }
 
                             if(productObj.productInformation.leaseable == "1"){
                                 val productLeaseable = layoutInflater.inflate(R.layout.view_detail_info_row_with_chevron_title, detailProductInfo, false)

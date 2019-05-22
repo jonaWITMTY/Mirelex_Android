@@ -7,9 +7,9 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.ViewGroup
-import com.example.jonathangalvan.mirelex.Fragments.RegisterExtraFieldsAddress
-import com.example.jonathangalvan.mirelex.Fragments.RegisterExtraFieldsInfo
-import com.example.jonathangalvan.mirelex.Fragments.RegisterExtraFieldsMeasure
+import com.example.jonathangalvan.mirelex.Fragments.RegisterExtraFields.RegisterExtraFieldsAddress
+import com.example.jonathangalvan.mirelex.Fragments.RegisterExtraFields.RegisterExtraFieldsInfo
+import com.example.jonathangalvan.mirelex.Fragments.RegisterExtraFields.RegisterExtraFieldsMeasure
 import com.example.jonathangalvan.mirelex.Interfaces.CatalogArrayInterface
 import com.example.jonathangalvan.mirelex.Interfaces.WomenCatalogsInterface
 import com.example.jonathangalvan.mirelex.Models.SessionModel

@@ -1,7 +1,7 @@
 package com.example.jonathangalvan.mirelex.Models
 
 import android.content.Context
-import com.example.jonathangalvan.mirelex.Fragments.CustomAlert
+import com.example.jonathangalvan.mirelex.Fragments.Utils.CustomAlert
 import com.example.jonathangalvan.mirelex.Interfaces.ResponseInterface
 import com.example.jonathangalvan.mirelex.R
 import com.example.jonathangalvan.mirelex.Requests.GlobalRequest
@@ -15,7 +15,8 @@ class UtilsModel {
     companion object {
         private val gson = Gson()
         private val client = OkHttpClient()
-        private var alertView : CustomAlert = CustomAlert()
+        private var alertView : CustomAlert =
+            CustomAlert()
         private val errorRequestCall: String = "{'title': 'Error en sistema', 'desc': 'Lo sentimos, por el momento estamos trabajando en ello'}"
         private val errorMissingTerms: String = "{'title': 'Términos y condiciones', 'desc': 'Por favor acepta nuestros términos y condiciones'}"
         private val errorUserAccessDenied: String = "{'title': 'Acceso denegado', 'desc': 'El tipo de usuario no es váido'}"

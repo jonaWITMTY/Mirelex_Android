@@ -52,6 +52,24 @@ class ServiceStore(
     var totalFormatted: String?
 ) {
     override fun toString(): String {
+        if(total == null){
+            return name
+        }else{
+            return "$name ($totalFormatted)"
+        }
+    }
+}
+
+class SewingInterface(
+    var sewingTypeId: Int?,
+    var name: String
+) {
+
+    override fun toString(): String {
         return name
     }
 }
+
+class SewingArrayInterface(
+    var data: ArrayList<SewingInterface>
+) {}

@@ -1,4 +1,4 @@
-package com.example.jonathangalvan.mirelex.Fragments
+package com.example.jonathangalvan.mirelex.Fragments.Utils
 
 import android.content.Context
 import android.net.Uri
@@ -7,10 +7,17 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.jonathangalvan.mirelex.R
+import android.widget.CalendarView
+import android.widget.TextView
 
-class RegisterStoreTab : Fragment() {
+import com.example.jonathangalvan.mirelex.R
+import kotlinx.android.synthetic.main.fragment_date_picker_available.*
+
+class DatePickerAvailable : Fragment() {
+
     private var listener: OnFragmentInteractionListener? = null
+
+    private var selectedDate: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,7 +30,23 @@ class RegisterStoreTab : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_register_store_tab, container, false)
+        return inflater.inflate(R.layout.fragment_date_picker_available, container, false)
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        datePickerSelection.setOnDateChangeListener(CalendarView.OnDateChangeListener { view, year, month, dayOfMonth ->
+            var newMonth: String = ""
+            var realMonth = month +1
+            if(realMonth < 10){
+                newMonth = "0$realMonth"
+            }else{
+                newMonth = realMonth.toString()
+            }
+            selectedDate = "$year-$newMonth-$dayOfMonth"
+            (activity?.findViewById<TextView>(R.id.serviceCreateDate))?.text = selectedDate
+            activity!!.supportFragmentManager.popBackStack()
+        })
     }
 
     fun onButtonPressed(uri: Uri) {
@@ -45,14 +68,12 @@ class RegisterStoreTab : Fragment() {
     }
 
     interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         fun onFragmentInteraction(uri: Uri)
     }
 
     companion object {
-        @JvmStatic
-        fun newInstance() =
-            RegisterStoreTab().apply {
+        fun newInstance(param1: String, param2: String) =
+            DatePickerAvailable().apply {
                 arguments = Bundle().apply {
                 }
             }

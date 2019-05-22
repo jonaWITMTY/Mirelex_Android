@@ -3,8 +3,8 @@ package com.example.jonathangalvan.mirelex.Adapters
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
-import com.example.jonathangalvan.mirelex.Fragments.RegisterCustomerTab
-import com.example.jonathangalvan.mirelex.Fragments.RegisterStoreTab
+import com.example.jonathangalvan.mirelex.Fragments.Register.RegisterCustomerTab
+import com.example.jonathangalvan.mirelex.Fragments.Register.RegisterStoreTab
 
 class RegisterTabsAdapter(fm: FragmentManager): FragmentPagerAdapter(fm) {
 

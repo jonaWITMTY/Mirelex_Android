@@ -17,6 +17,7 @@ import com.example.jonathangalvan.mirelex.Models.UtilsModel
 import com.example.jonathangalvan.mirelex.R
 import com.example.jonathangalvan.mirelex.ServiceCreateActivity
 import kotlinx.android.synthetic.main.fragment_services.*
+import kotlinx.android.synthetic.main.view_centered_message.view.*
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.Response
@@ -63,6 +64,15 @@ class Services : Fragment() {
             override fun onItemLongClick(view: View?, position: Int) {}
         }))
 
+        loadServiceOrders()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        loadServiceOrders()
+    }
+
+    fun loadServiceOrders(){
         val loader = layoutInflater.inflate(R.layout.view_progressbar, activity?.findViewById(android.R.id.content), true)
         UtilsModel.getOkClient().newCall(UtilsModel.postRequest(activity!!.applicationContext, activity!!.resources.getString(R.string.getOrderServices))).enqueue( object:
             Callback {
@@ -75,15 +85,30 @@ class Services : Fragment() {
                 activity?.runOnUiThread {run{activity?.findViewById<ViewGroup>(android.R.id.content)?.removeView(activity?.findViewById(R.id.view_progressbar))}}
                 val responseStr = response.body()?.string()
                 val responseObj = UtilsModel.getPostResponse(responseStr)
-                if(responseObj.status == "success"){
-                    val servicesObj = UtilsModel.getGson().fromJson(UtilsModel.getGson().toJson(responseObj), ServicesInterface::class.java)
-                    activity?.runOnUiThread {
-                        run {
-                            serviceAdapter.loadNewData(servicesObj.data)
+                when(responseObj.status){
+                    "success" -> {
+                        val servicesObj = UtilsModel.getGson().fromJson(UtilsModel.getGson().toJson(responseObj), ServicesInterface::class.java)
+                        activity?.runOnUiThread {
+                            run {
+                                serviceAdapter.loadNewData(servicesObj.data)
+                            }
                         }
                     }
-                }else{
-                    UtilsModel.getAlertView().newInstance(responseStr, 1, 0).show(activity?.supportFragmentManager,"alertDialog")
+                    "noDataAvailable" -> {
+                        activity?.runOnUiThread {
+                            run {
+                                val ceneteredLayout = layoutInflater.inflate(
+                                    R.layout.view_centered_message,
+                                    activity!!.findViewById(R.id.customerTabsFrameLayout),
+                                    true
+                                )
+                                ceneteredLayout.centeredMessage.text = responseObj.desc
+                            }
+                        }
+                    }
+                    else -> {
+                        UtilsModel.getAlertView().newInstance(responseStr, 1, 0).show(activity?.supportFragmentManager,"alertDialog")
+                    }
                 }
             }
         })

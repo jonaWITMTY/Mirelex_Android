@@ -1,4 +1,4 @@
-package com.example.jonathangalvan.mirelex.Fragments
+package com.example.jonathangalvan.mirelex.Fragments.Utils
 
 import android.app.AlertDialog
 import android.app.Dialog
@@ -13,6 +13,7 @@ import com.example.jonathangalvan.mirelex.OrderCheckoutActivity
 import com.example.jonathangalvan.mirelex.ProductDetailActivity
 import com.example.jonathangalvan.mirelex.R
 import com.example.jonathangalvan.mirelex.Requests.ForgotPasswordRequest
+import com.example.jonathangalvan.mirelex.ServiceCreateActivity
 import kotlinx.android.synthetic.main.fragment_custom_alert.view.*
 import okhttp3.Call
 import okhttp3.Callback
@@ -35,8 +36,9 @@ class CustomAlert : DialogFragment() {
         }
     }
 
-    fun newInstance(alertInfo: String?, alertType: Int, onSuccessFinish: Int): CustomAlert{
-        val ca: CustomAlert = CustomAlert()
+    fun newInstance(alertInfo: String?, alertType: Int, onSuccessFinish: Int): CustomAlert {
+        val ca: CustomAlert =
+            CustomAlert()
         val args = Bundle()
         args.putInt("onSuccessFinish", onSuccessFinish)
         args.putString("alertInfo", alertInfo)
@@ -115,6 +117,9 @@ class CustomAlert : DialogFragment() {
                     when(activity){
                         is OrderCheckoutActivity -> {
                             (activity as OrderCheckoutActivity).confirmBtnCallback()
+                        }
+                        is ServiceCreateActivity ->{
+                            (activity as ServiceCreateActivity).confirmBtnCallback()
                         }
                         else -> {
                             onDismiss(dialog)

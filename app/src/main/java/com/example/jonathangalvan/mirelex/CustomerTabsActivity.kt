@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
+import android.widget.FrameLayout
 import com.example.jonathangalvan.mirelex.Fragments.Orders
 import com.example.jonathangalvan.mirelex.Fragments.Products
 import com.example.jonathangalvan.mirelex.Fragments.Services
@@ -53,6 +54,7 @@ class CustomerTabsActivity : AppCompatActivity(),
     }
 
     fun openTab(fragment: Fragment){
+        findViewById<FrameLayout>(R.id.customerTabsFrameLayout).removeAllViews()
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.customerTabsFrameLayout, fragment)
         transaction.addToBackStack(null)

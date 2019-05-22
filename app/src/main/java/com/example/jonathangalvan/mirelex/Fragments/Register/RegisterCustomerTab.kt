@@ -1,4 +1,4 @@
-package com.example.jonathangalvan.mirelex.Fragments
+package com.example.jonathangalvan.mirelex.Fragments.Register
 
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context

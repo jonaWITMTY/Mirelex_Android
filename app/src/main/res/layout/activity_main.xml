@@ -73,7 +73,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/emailField"
-                        android:text="cesarp@gmail.com"
+                        android:text="ricardo.galvan@wiredit.mx"
                         android:singleLine="true"
                         android:inputType="textWebEmailAddress"/>
             </android.support.design.widget.TextInputLayout>
@@ -90,7 +90,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/passwordField" android:inputType="textPassword" android:singleLine="true"
-                        android:text="jona1993"/>
+                        android:text="Pass123*"/>
             </android.support.design.widget.TextInputLayout>
 
         </android.support.constraint.ConstraintLayout>
