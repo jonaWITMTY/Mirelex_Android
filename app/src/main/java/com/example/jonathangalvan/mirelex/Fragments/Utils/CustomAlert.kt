@@ -5,12 +5,16 @@ import android.app.Dialog
 import android.content.DialogInterface
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
+import android.support.v4.app.FragmentActivity
+import android.support.v4.app.FragmentManager
 import android.view.View
+import android.view.ViewGroup
 import android.widget.TextView
 import com.example.jonathangalvan.mirelex.*
 import com.example.jonathangalvan.mirelex.Interfaces.ResponseInterface
 import com.example.jonathangalvan.mirelex.Models.UtilsModel
 import com.example.jonathangalvan.mirelex.Requests.ForgotPasswordRequest
+import kotlinx.android.synthetic.main.activity_customer_tabs.view.*
 import kotlinx.android.synthetic.main.fragment_custom_alert.view.*
 import okhttp3.Call
 import okhttp3.Callback
@@ -76,13 +80,17 @@ class CustomAlert : DialogFragment() {
                 btnSubmit.setOnClickListener(View.OnClickListener {
                     val emailField = alertView?.findViewById<TextView>(R.id.emailFieldWarp)
                     val personObj = ForgotPasswordRequest(emailField?.text.toString())
+                    val loader = layoutInflater.inflate(R.layout.view_progressbar, activity!!.findViewById(android.R.id.content), true)
+                    dialog.hide()
                     UtilsModel.getOkClient().newCall(UtilsModel.postRequest(activity!!.applicationContext, activity!!.resources.getString(R.string.forgotUser), UtilsModel.getGson().toJson(personObj))).enqueue(object: Callback {
                         override fun onFailure(call: Call, e: IOException) {
+                            activity!!.runOnUiThread {run{activity!!.findViewById<ViewGroup>(android.R.id.content).removeView(activity!!.findViewById(R.id.view_progressbar))}}
                             UtilsModel.getAlertView().newInstance(UtilsModel.getErrorRequestCall(), 1, 0).show(activity?.supportFragmentManager,"alertDialog")
                             onDismiss(dialog)
                         }
 
                         override fun onResponse(call: Call, response: Response) {
+                            activity!!.runOnUiThread {run{activity!!.findViewById<ViewGroup>(android.R.id.content).removeView(activity!!.findViewById(R.id.view_progressbar))}}
                             val responseStr = response.body()?.string()
                             onDismiss(dialog)
                             UtilsModel.getAlertView().newInstance(responseStr, 1, 0).show(activity?.supportFragmentManager,"alertDialog")

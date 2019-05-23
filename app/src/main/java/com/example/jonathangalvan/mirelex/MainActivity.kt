@@ -110,4 +110,6 @@ class MainActivity : AppCompatActivity() {
         }
         return isCorrect
     }
+
+    override fun onBackPressed() { }
 }

@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebView
 import com.example.jonathangalvan.mirelex.ContactActivity
+import com.example.jonathangalvan.mirelex.MainActivity
 import com.example.jonathangalvan.mirelex.Models.SessionModel
 
 import com.example.jonathangalvan.mirelex.R
@@ -59,6 +60,13 @@ class Profile : Fragment() {
         /*Click event to fo to Contact*/
         sessionUserContact.setOnClickListener(View.OnClickListener {
             startActivity(Intent(activity!!, ContactActivity::class.java))
+        })
+
+        /*Click to logut*/
+        sessionUserLogout.setOnClickListener(View.OnClickListener {
+            SessionModel.saveSessionValue(activity!!, "token", "")
+            SessionModel.saveSessionValue(activity!!, "user", "")
+            startActivity(Intent(activity!!, MainActivity::class.java))
         })
     }
 
