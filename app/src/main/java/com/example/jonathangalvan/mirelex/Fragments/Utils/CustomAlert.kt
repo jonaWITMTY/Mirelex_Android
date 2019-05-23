@@ -7,13 +7,10 @@ import android.os.Bundle
 import android.support.v4.app.DialogFragment
 import android.view.View
 import android.widget.TextView
+import com.example.jonathangalvan.mirelex.*
 import com.example.jonathangalvan.mirelex.Interfaces.ResponseInterface
 import com.example.jonathangalvan.mirelex.Models.UtilsModel
-import com.example.jonathangalvan.mirelex.OrderCheckoutActivity
-import com.example.jonathangalvan.mirelex.ProductDetailActivity
-import com.example.jonathangalvan.mirelex.R
 import com.example.jonathangalvan.mirelex.Requests.ForgotPasswordRequest
-import com.example.jonathangalvan.mirelex.ServiceCreateActivity
 import kotlinx.android.synthetic.main.fragment_custom_alert.view.*
 import okhttp3.Call
 import okhttp3.Callback
@@ -120,6 +117,9 @@ class CustomAlert : DialogFragment() {
                         }
                         is ServiceCreateActivity ->{
                             (activity as ServiceCreateActivity).confirmBtnCallback()
+                        }
+                        is ContactActivity -> {
+                            (activity as ContactActivity).confirmBtnCallback()
                         }
                         else -> {
                             onDismiss(dialog)

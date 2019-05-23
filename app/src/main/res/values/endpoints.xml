@@ -2,6 +2,7 @@
 <resources>
     //general
     <string name="getNeighborhood">general/neighborhood</string>
+    <string name="sendContactMessage">general/contact</string>
 
     //user
     <string name="userSignIn">user/login</string>
@@ -12,7 +13,6 @@
     <string name="womanCatalogs">general/women/catalogs</string>
     <string name="forgotUser">user/forgot</string>
 
-    //Customer
     //Product
     <string name="getProducts">products</string>
     <string name="getProductInfo">product/info</string>

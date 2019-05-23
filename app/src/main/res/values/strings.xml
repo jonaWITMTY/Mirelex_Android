@@ -72,4 +72,11 @@
     <string name="sewing">Costurería</string>
     <string name="stores">Tiendas</string>
     <string name="sendMessage">Enviar mensaje</string>
+    <string name="messages">Mensajes</string>
+    <string name="contact">Contacto</string>
+    <string name="termsAndConditions">Términos y condiciones</string>
+    <string name="closeSession">Cerrar sesión</string>
+    <string name="sendUsYourComments">Envíanos tus comentarios, preguntas o sugerencias</string>
+    <string name="subject">Asunto</string>
+    <string name="message">Mensaje</string>
 </resources>

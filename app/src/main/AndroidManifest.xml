@@ -11,6 +11,10 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+        <activity android:name=".ContactActivity">
+        </activity>
+        <activity android:name=".WebviewActivity">
+        </activity>
         <activity android:name=".StoreDetailShortActivity">
         </activity>
         <activity android:name=".ServiceOrderDetailActivity">
