@@ -8,13 +8,9 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.webkit.WebView
-import com.example.jonathangalvan.mirelex.ContactActivity
-import com.example.jonathangalvan.mirelex.MainActivity
+import com.example.jonathangalvan.mirelex.*
 import com.example.jonathangalvan.mirelex.Models.SessionModel
 
-import com.example.jonathangalvan.mirelex.R
-import com.example.jonathangalvan.mirelex.WebviewActivity
 import kotlinx.android.synthetic.main.fragment_profile.*
 
 class Profile : Fragment() {
@@ -67,6 +63,11 @@ class Profile : Fragment() {
             SessionModel.saveSessionValue(activity!!, "token", "")
             SessionModel.saveSessionValue(activity!!, "user", "")
             startActivity(Intent(activity!!, MainActivity::class.java))
+        })
+
+        /*Click to profile information*/
+        sessionUserProfile.setOnClickListener(View.OnClickListener {
+            startActivity(Intent(activity!!, ProfileActivity::class.java))
         })
     }
 

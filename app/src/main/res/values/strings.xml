@@ -79,4 +79,6 @@
     <string name="sendUsYourComments">Envíanos tus comentarios, preguntas o sugerencias</string>
     <string name="subject">Asunto</string>
     <string name="message">Mensaje</string>
+    <string name="homePhone">Teléfono fijo</string>
+    <string name="updateInformation">Actualizar información</string>
 </resources>

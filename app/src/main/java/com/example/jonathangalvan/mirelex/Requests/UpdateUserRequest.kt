@@ -30,7 +30,8 @@ class UpdateUserRequest (
     var characteristicsId: String? = null,
     var userId: String? = "",
     var addressId: String? = null,
-    var userTypeId: String? = ""
+    var userTypeId: String? = "",
+    var isMirelexStore: String? = "0"
 
 ): GlobalRequest(){
 

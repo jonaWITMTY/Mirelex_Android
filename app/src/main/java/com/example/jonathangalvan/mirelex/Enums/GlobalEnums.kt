@@ -23,3 +23,15 @@ enum class ProductType(val productTypeId: String) {
     Dress("1"),
     Suit("2"),
 }
+
+enum class UserType(val userTypeId: String) {
+    SuperAdmin("1"),
+    Admin("2"),
+    Customer("3"),
+    Store("4"),
+}
+
+enum class Gender(val genderId: String) {
+    Male("1"),
+    Female("2"),
+}

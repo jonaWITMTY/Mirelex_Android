@@ -80,5 +80,6 @@ class Characteristics (
     var sizeId: String?,
     var skinColor: String?,
     var bodyType: String?,
-    var hairColor: String?
+    var hairColor: String?,
+    var bust: String?
 ){}
