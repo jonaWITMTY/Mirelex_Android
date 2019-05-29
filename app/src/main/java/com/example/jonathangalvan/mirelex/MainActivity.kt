@@ -78,7 +78,7 @@ class MainActivity : AppCompatActivity() {
                                             if (user.address!!.isEmpty()){
                                                 startActivity(Intent(this@MainActivity, RegisterExtraFieldsActivity::class.java))
                                             }else{
-                                                startActivity(Intent(this@MainActivity, CustomerTabsActivity::class.java))
+                                                startActivity(Intent(this@MainActivity, StoreTabsActivity::class.java))
                                             }
                                         }
                                         else ->{

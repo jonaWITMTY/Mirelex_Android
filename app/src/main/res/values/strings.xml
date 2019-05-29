@@ -16,7 +16,6 @@
     <string name="checkboxTermsField">Estoy de acuerdo con los términos y condiciones</string>
     <string name="accept">Aceptar</string>
     <string name="cancel">Cancelar</string>
-    <string name="title_activity_store_tabs">storeTabs</string>
     <string name="storeTabProducts">Productos</string>
     <string name="storeTabOrders">Órdenes</string>
     <string name="storeTabNotifications">Notificaciones</string>
@@ -81,4 +80,7 @@
     <string name="message">Mensaje</string>
     <string name="homePhone">Teléfono fijo</string>
     <string name="updateInformation">Actualizar información</string>
+    <string name="facebokkProfile">Perfil facebook</string>
+    <string name="instagramProfile">Perfil instagram</string>
+    <string name="products">Productos</string>
 </resources>

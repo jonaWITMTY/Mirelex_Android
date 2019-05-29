@@ -9,12 +9,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.jonathangalvan.mirelex.*
+import com.example.jonathangalvan.mirelex.Interfaces.UserInterface
 import com.example.jonathangalvan.mirelex.Models.SessionModel
 
 import kotlinx.android.synthetic.main.fragment_profile.*
 
 class Profile : Fragment() {
     private var listener: OnFragmentInteractionListener? = null
+    private var currentUser: UserInterface? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,19 +36,7 @@ class Profile : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         /*Fill user cell*/
-        val sessionModel = SessionModel(activity!!)
-        val currentUser = sessionModel.getUser()
-        var name = ""
-        when(currentUser.person?.userTypeId){
-            "4" -> {
-                name = "${currentUser.person?.companyName}"
-            }
-            else -> {
-                name = "${currentUser.person?.firstName} ${currentUser.person?.paternalLastName}"
-            }
-        }
-        sessionUserName.text = name
-        sessionUserEmail.text = currentUser.person?.email
+        updateUser()
 
         /*Click event to go to terms and conditions*/
         sessionUserTerms.setOnClickListener(View.OnClickListener {
@@ -73,6 +63,27 @@ class Profile : Fragment() {
 
     fun onButtonPressed(uri: Uri) {
         listener?.onFragmentInteraction(uri)
+    }
+
+    fun updateUser(){
+        val sessionModel = SessionModel(activity!!)
+        currentUser = sessionModel.getUser()
+        var name = ""
+        when(currentUser?.person?.userTypeId){
+            "4" -> {
+                name = "${currentUser?.person?.companyName}"
+            }
+            else -> {
+                name = "${currentUser?.person?.firstName} ${currentUser?.person?.paternalLastName}"
+            }
+        }
+        sessionUserName.text = name
+        sessionUserEmail.text = currentUser?.person?.email
+    }
+
+    override fun onResume() {
+        super.onResume()
+        updateUser()
     }
 
     override fun onAttach(context: Context) {

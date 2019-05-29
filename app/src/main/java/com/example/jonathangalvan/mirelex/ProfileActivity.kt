@@ -52,6 +52,9 @@ class ProfileActivity : AppCompatActivity() {
         supportActionBar?.title = title
 
         /*Fill common fields*/
+        updateSessionUserEmail.editText?.setText(user?.person?.email)
+        updateSessionUserPersonalPhone.editText?.setText(user?.person?.personalPhone)
+        updateSessionUserHomePhone.editText?.setText(user?.person?.homePhone)
         updateSessionUserStreet.editText?.setText(user?.address!![0].street)
         updateSessionUserNumber.editText?.setText(user?.address!![0].numExt)
         updateSessionUserInternalNumber.editText?.setText(user?.address!![0].numInt)
@@ -85,21 +88,23 @@ class ProfileActivity : AppCompatActivity() {
                 updateSessionUserWaist.visibility = View.GONE
                 updateSessionUserHip.visibility = View.GONE
 
-                /*Get store catalogs*/
+                /*Fill store fields*/
+                updateSessionUserCompanyName.editText?.setText(user?.person?.companyName)
+                updateSessionUserFacebook.editText?.setText(user?.person?.facebookUrl)
+                updateSessionUserInstagram.editText?.setText(user?.person?.instagramUrl)
 
             }
             else -> {
                 /*Hide store fields*/
                 updateSessionUserCompanyName.visibility = View.GONE
+                updateSessionUserInstagram.visibility = View.GONE
+                updateSessionUserFacebook.visibility = View.GONE
 
                 /*Fill common person fields*/
                 updateSessionUserName.editText?.setText(user?.person?.firstName )
                 updateSessionUserPaternal.editText?.setText(user?.person?.paternalLastName)
                 updateSessionUserMaternal.editText?.setText(user?.person?.maternalLastName)
                 updateSessionUserGender.editText?.setText(user?.person?.userGender)
-                updateSessionUserEmail.editText?.setText(user?.person?.email)
-                updateSessionUserPersonalPhone.editText?.setText(user?.person?.personalPhone)
-                updateSessionUserHomePhone.editText?.setText(user?.person?.homePhone)
                 updateSessionUserHeight.editText?.setText(user?.characteristics?.height)
 
                 /*Filter fields depending on user gender*/
@@ -205,11 +210,14 @@ class ProfileActivity : AppCompatActivity() {
                 updateUserObj.numInt = updateSessionUserInternalNumber.editText?.text.toString()
                 updateUserObj.zipCode = updateSessionUserZip.editText?.text.toString()
                 updateUserObj.neighborhoodId = neighborhoodsArr!!.data[updateSessionUserNeighborhoods.selectedItemPosition].neighborhoodId
-                updateUserObj.isMirelexStore = user?.person?.isMirelexStore.toString()
 
                 when(user?.person?.userTypeId){
                     UserType.Store.userTypeId -> {
                         updateUserObj.companyName = updateSessionUserCompanyName.editText?.text.toString()
+                        updateUserObj.isMirelexStore = user?.person?.isMirelexStore.toString()
+                        updateUserObj.instagramProfile = updateSessionUserInstagram.editText?.text.toString()
+                        updateUserObj.facebookProfile = updateSessionUserFacebook.editText?.text.toString()
+
                     }
                     else -> {
                         updateUserObj.height = updateSessionUserHeight.editText?.text.toString()
@@ -234,6 +242,7 @@ class ProfileActivity : AppCompatActivity() {
                         }
                     }
                 }
+
                 UtilsModel.getOkClient().newCall(UtilsModel.postRequest(this, resources.getString(R.string.updateUser), UtilsModel.getGson().toJson(updateUserObj))).enqueue(object: Callback{
                     override fun onFailure(call: Call, e: IOException) {
                         runOnUiThread {run{findViewById<ViewGroup>(android.R.id.content).removeView(findViewById(R.id.view_progressbar))}}

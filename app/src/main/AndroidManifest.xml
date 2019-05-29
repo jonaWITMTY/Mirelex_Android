@@ -11,6 +11,10 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+        <activity
+                android:name=".StoreTabsActivity"
+                android:label="">
+        </activity>
         <activity android:name=".ProfileActivity">
         </activity>
         <activity android:name=".ContactActivity">
@@ -37,7 +41,7 @@
         </activity>
         <activity
                 android:name=".CustomerTabsActivity"
-                android:label="@string/title_activity_store_tabs">
+                android:label="">
         </activity>
         <activity android:name=".RegisterActivity">
         </activity>
