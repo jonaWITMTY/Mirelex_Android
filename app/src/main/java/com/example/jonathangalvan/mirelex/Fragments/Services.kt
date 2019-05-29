@@ -11,8 +11,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.jonathangalvan.mirelex.Adapters.ServicesAdapter
+import com.example.jonathangalvan.mirelex.Enums.UserType
 import com.example.jonathangalvan.mirelex.Interfaces.ServicesInterface
 import com.example.jonathangalvan.mirelex.Listeners.RecyclerItemClickListener
+import com.example.jonathangalvan.mirelex.Models.SessionModel
 import com.example.jonathangalvan.mirelex.Models.UtilsModel
 import com.example.jonathangalvan.mirelex.R
 import com.example.jonathangalvan.mirelex.ServiceCreateActivity
@@ -45,6 +47,14 @@ class Services : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        /*Hide order service depending on sessionusertype*/
+        when(SessionModel(activity!!).getSessionUserType()){
+            UserType.Store.userTypeId -> {
+                servicesOrderService.visibility = View.GONE
+            }
+        }
+
         servicesOrderService.setOnClickListener(View.OnClickListener {
             val goToServiceCreate = Intent(activity!!, ServiceCreateActivity::class.java)
             val options = ActivityOptions.makeCustomAnimation(activity!!,  R.anim.abc_slide_in_bottom,  R.anim.abc_fade_out)

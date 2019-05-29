@@ -24,4 +24,9 @@ class SessionModel(val declaredContext: Context){
         val userJson = getSessionValue(declaredContext,"user")
         return UtilsModel.getGson().fromJson(userJson, UserInterface::class.java)
     }
+
+    fun getSessionUserType(): String?{
+        val user = getUser()
+        return user.person?.userTypeId
+    }
 }

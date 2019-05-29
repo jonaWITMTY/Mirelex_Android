@@ -9,11 +9,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.jonathangalvan.mirelex.Adapters.ProductsAdapter
+import com.example.jonathangalvan.mirelex.Enums.UserType
 import com.example.jonathangalvan.mirelex.Interfaces.ProductInterface
 import com.example.jonathangalvan.mirelex.Interfaces.ProductsInterface
 import com.example.jonathangalvan.mirelex.Models.SessionModel
 import com.example.jonathangalvan.mirelex.Models.UtilsModel
 import com.example.jonathangalvan.mirelex.ProductDetailActivity
+import com.example.jonathangalvan.mirelex.ProductUpdateActivity
 import com.example.jonathangalvan.mirelex.R
 import com.example.jonathangalvan.mirelex.Requests.CustomerProductRequest
 import kotlinx.android.synthetic.main.fragment_products.*
@@ -64,7 +66,15 @@ class Products : Fragment() {
                         activity?.runOnUiThread {
                             productsGrid.adapter = ProductsAdapter(activity!!.applicationContext, responseProducts.data)
                             productsGrid.setOnItemClickListener { parent, view, position, id ->
-                                val goToProductDetail = Intent(activity!!, ProductDetailActivity::class.java)
+                                val goToProductDetail: Intent
+                                when(SessionModel(activity!!).getSessionUserType()){
+                                    UserType.Store.userTypeId -> {
+                                        goToProductDetail = Intent(activity!!, ProductUpdateActivity::class.java)
+                                    }
+                                    else -> {
+                                        goToProductDetail = Intent(activity!!, ProductDetailActivity::class.java)
+                                    }
+                                }
                                 val b = Bundle()
                                 b.putString("productId", (productsGrid.adapter.getItem(position) as ProductInterface).productId.toString())
                                 goToProductDetail.putExtras(b)

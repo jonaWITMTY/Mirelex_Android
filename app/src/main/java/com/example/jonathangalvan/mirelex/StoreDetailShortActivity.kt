@@ -15,7 +15,7 @@ class StoreDetailShortActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val bundleFromServiceDetail = intent.extras
-        val ownerObj = UtilsModel.getGson().fromJson(bundleFromServiceDetail.getString("ownerObj"), OrderPersonInformation::class.java)
+        val ownerObj = UtilsModel.getGson().fromJson(bundleFromServiceDetail.getString("personObj"), OrderPersonInformation::class.java)
 
         Picasso.with(this).load(ownerObj.profilePictureUrl).into(storeDetailShortImageView)
 

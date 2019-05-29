@@ -54,3 +54,22 @@ class ProductColorInterface(
     var productColorId: String?,
     var color: String?
 ){}
+
+
+class ProductCatalogs(
+    var colors: ArrayList<ProductCatalog>,
+    var conditions: ArrayList<ProductCatalog>,
+    var materials: ArrayList<ProductCatalog>,
+    var sleeveStyles: ArrayList<ProductCatalog>,
+    var decorations: ArrayList<ProductCatalog>,
+    var styles: ArrayList<ProductCatalog>,
+    var lengths: ArrayList<ProductCatalog>,
+    var sizes: ArrayList<ProductCatalog>,
+    var occasions: ArrayList<ProductCatalog>,
+    var silhouettes: ArrayList<ProductCatalog>
+){}
+
+class ProductCatalog(
+    var productCatalogId: String?,
+    var name: String?
+){}
