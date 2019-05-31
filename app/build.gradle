@@ -47,4 +47,5 @@ dependencies {
     implementation 'com.android.support:cardview-v7:28.0.0'
     implementation 'com.mikhaellopez:circularimageview:3.2.0'
     implementation 'com.squareup:android-times-square:1.6.5@aar'
+    implementation 'com.github.pratikbutani:MultiSelectSpinner:08d324c98'
 }

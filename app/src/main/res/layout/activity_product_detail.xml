@@ -13,7 +13,7 @@
 
         <ImageView
                 android:layout_width="0dp"
-                android:layout_height="130dp" app:srcCompat="@drawable/default_image"
+                android:layout_height="130dp" app:srcCompat="@drawable/mirelex_logo_cian"
                 android:id="@+id/detailProductFeaturedImage"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -32,7 +32,8 @@
                     app:civ_border_color="#EEEEEE"
                     app:civ_shadow_radius="10"
                     android:id="@+id/detailProductOwnerProfileImage"
-                    android:layout_marginLeft="16dp" android:layout_marginRight="16dp"/>
+                    android:layout_marginLeft="16dp" android:layout_marginRight="16dp"
+                    app:srcCompat="@drawable/mirelex_logo_cian"/>
             <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" android:id="@+id/detailProductOwnerName"

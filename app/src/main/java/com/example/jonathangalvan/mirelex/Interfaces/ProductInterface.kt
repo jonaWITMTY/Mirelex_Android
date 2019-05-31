@@ -36,7 +36,13 @@ class ProductInterface (
     var productFeaturedImage: String?,
     var active: String?,
     var leaseableAvailable: String?,
-    var originalPrice: String?
+    var originalPrice: String?,
+    var bust: String?,
+    var waist: String?,
+    var hip: String?,
+    var height: String?,
+    var productSilhouetteId: String?,
+    var productOccasionId: String?
 ){}
 
 class ProductsInterface(
@@ -71,5 +77,9 @@ class ProductCatalogs(
 
 class ProductCatalog(
     var productCatalogId: String?,
-    var name: String?
-){}
+    var name: String
+){
+    override fun toString(): String {
+        return name
+    }
+}

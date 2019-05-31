@@ -23,7 +23,8 @@
                     app:civ_border_color="#EEEEEE"
                     app:civ_shadow_radius="10"
                     android:id="@+id/serviceDetailStoreImg"
-                    android:layout_marginLeft="16dp" android:layout_marginRight="16dp"/>
+                    android:layout_marginLeft="16dp" android:layout_marginRight="16dp"
+                    app:srcCompat="@drawable/mirelex_logo_cian"/>
             <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

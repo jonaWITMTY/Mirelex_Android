@@ -83,4 +83,12 @@
     <string name="facebokkProfile">Perfil facebook</string>
     <string name="instagramProfile">Perfil instagram</string>
     <string name="products">Productos</string>
+    <string name="brand">Marca</string>
+    <string name="price">Precio</string>
+    <string name="condition">Condición</string>
+    <string name="colors">Colores</string>
+    <string name="dressSilhouette">Silueta de vestido</string>
+    <string name="ocation">Ocación</string>
+    <string name="description">Descripción</string>
+    <string name="type_to_search">Buscar</string>
 </resources>

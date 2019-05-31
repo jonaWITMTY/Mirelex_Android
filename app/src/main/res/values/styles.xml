@@ -33,7 +33,7 @@
         <item name="android:elevation">24dp</item>
     </style>
 
-    <style name="customCalendarView" paren="Theme.AppCompat">
+    <style name="customCalendarView">
         <item name="colorControlActivated">@color/Tale</item>
     </style>
 </resources>
