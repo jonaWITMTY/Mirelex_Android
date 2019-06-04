@@ -33,6 +33,7 @@ class ProductInterface (
     var sellPriceFormatted: String?,
     var productColors: String?,
     var isFavorite: String?,
+    var isStretch: String?,
     var productFeaturedImage: String?,
     var active: String?,
     var leaseableAvailable: String?,

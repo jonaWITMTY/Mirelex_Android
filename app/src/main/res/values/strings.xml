@@ -91,4 +91,9 @@
     <string name="ocation">Ocación</string>
     <string name="description">Descripción</string>
     <string name="type_to_search">Buscar</string>
+    <string name="sellPrice">Precio de venta</string>
+    <string name="leasablePrice">Precio de renta</string>
+    <string name="isStretch">¿Es stretch?</string>
+    <string name="featuredImage">Foto principal</string>
+    <string name="addProduct">Crear producto</string>
 </resources>

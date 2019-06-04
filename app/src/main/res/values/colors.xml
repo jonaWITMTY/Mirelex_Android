@@ -19,4 +19,13 @@
     <color name="calendar_text_highlighted">@android:color/white</color>
     <color name="calendar_selected_day_bg">@color/Tale</color>
     <color name="calendar_text_active">@android:color/black</color>
+
+    /*Multi select*/
+    <color name="list_background">@android:color/white</color>
+    <color name="list_even">@android:color/white</color>
+    <color name="list_header">@color/cyan</color>
+    <color name="list_odd">@android:color/white</color>
+    <color name="list_selected">@color/colorGrey</color>
+    <color name="primary_pressed">@android:color/black</color>
+    <color name="android_text_color">@android:color/black</color>
 </resources>

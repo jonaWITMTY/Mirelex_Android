@@ -15,7 +15,7 @@ import com.example.jonathangalvan.mirelex.Interfaces.ProductsInterface
 import com.example.jonathangalvan.mirelex.Models.SessionModel
 import com.example.jonathangalvan.mirelex.Models.UtilsModel
 import com.example.jonathangalvan.mirelex.ProductDetailActivity
-import com.example.jonathangalvan.mirelex.ProductUpdateActivity
+import com.example.jonathangalvan.mirelex.ProductActivity
 import com.example.jonathangalvan.mirelex.R
 import com.example.jonathangalvan.mirelex.Requests.CustomerProductRequest
 import kotlinx.android.synthetic.main.fragment_products.*
@@ -69,7 +69,7 @@ class Products : Fragment() {
                                 val goToProductDetail: Intent
                                 when(SessionModel(activity!!).getSessionUserType()){
                                     UserType.Store.userTypeId -> {
-                                        goToProductDetail = Intent(activity!!, ProductUpdateActivity::class.java)
+                                        goToProductDetail = Intent(activity!!, ProductActivity::class.java)
                                     }
                                     else -> {
                                         goToProductDetail = Intent(activity!!, ProductDetailActivity::class.java)
