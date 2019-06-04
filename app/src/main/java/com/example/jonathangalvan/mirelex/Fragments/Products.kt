@@ -42,10 +42,19 @@ class Products : Fragment() {
 
     fun onButtonPressed(uri: Uri) {
         listener?.onFragmentInteraction(uri)
+        getProducts()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        getProducts()
+    }
+
+    fun getProducts(){
         val user = SessionModel(activity!!).getUser()
         val loader = layoutInflater.inflate(R.layout.view_progressbar, activity?.findViewById(android.R.id.content), true)
         var getProductsObj = CustomerProductRequest(user.characteristics?.sizeId)

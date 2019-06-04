@@ -1,6 +1,5 @@
 package com.example.jonathangalvan.mirelex
 
-import android.Manifest
 import android.arch.lifecycle.ViewModelProviders
 import android.net.Uri
 import android.support.v7.app.AppCompatActivity
@@ -13,12 +12,6 @@ import com.example.jonathangalvan.mirelex.Models.UtilsModel
 import com.example.jonathangalvan.mirelex.ViewModels.ProductViewModel
 import okhttp3.*
 import java.io.IOException
-import android.support.v4.app.ActivityCompat
-import android.content.pm.PackageManager
-import android.support.v4.content.ContextCompat
-import android.os.Build
-import okhttp3.internal.Util
-
 
 class ProductActivity : AppCompatActivity(),
     ProductUpdate.OnFragmentInteractionListener,
@@ -67,7 +60,7 @@ class ProductActivity : AppCompatActivity(),
                 val responseStr = response.body()?.string()
                 val responseObj = UtilsModel.getPostResponse(responseStr)
                 if(responseObj.status == "success"){
-                    if(UtilsModel.getImagePermissions(this@ProductActivity)){
+                    if(UtilsModel.getImagePermissions(this@ProductActivity) && vmp.featuredImage != null){
                         UtilsModel.getOkClient().newCall(UtilsModel.postImageRequest( this@ProductActivity, vmp.featuredImage!!, resources.getString(R.string.uploadFeatureImage), vmp.productObj?.productInformation?.productId.toString())).enqueue(object : Callback {
                             override fun onFailure(call: Call, e: IOException) {
                                 runOnUiThread {run{findViewById<ViewGroup>(android.R.id.content).removeView(findViewById(R.id.view_progressbar))}}
@@ -83,6 +76,7 @@ class ProductActivity : AppCompatActivity(),
                         })
                     }else{
                         runOnUiThread {run{findViewById<ViewGroup>(android.R.id.content).removeView(findViewById(R.id.view_progressbar))}}
+                        UtilsModel.getAlertView().newInstance(responseStr, 1, 1).show(supportFragmentManager,"alertDialog")
                     }
                 }
             }
