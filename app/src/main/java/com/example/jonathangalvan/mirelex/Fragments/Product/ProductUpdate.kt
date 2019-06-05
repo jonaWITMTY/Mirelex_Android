@@ -173,13 +173,26 @@ class ProductUpdate : Fragment()  {
         var isCorrect = true
         if(
             updateProductBrand.editText?.text.toString()!!.isEmpty() ||
-            updateProductBust.editText?.text.toString()!!.isEmpty() ||
-            updateProductWaist.editText?.text.toString()!!.isEmpty() ||
-            updateProductHip.editText?.text.toString()!!.isEmpty() ||
-            updateProductHeight.editText?.text.toString()!!.isEmpty() ||
-            updateProductDescription.editText?.text.toString()!!.isEmpty()
+            updateProductColors.selectedIds.size == 0
         ){
             isCorrect = false
+        }else{
+            when(productObj?.productInformation?.productTypeId){
+                ProductType.Dress.productTypeId -> {
+                    if(
+                        updateProductBust.editText?.text.toString()!!.isEmpty() ||
+                        updateProductWaist.editText?.text.toString()!!.isEmpty() ||
+                        updateProductHip.editText?.text.toString()!!.isEmpty() ||
+                        updateProductHeight.editText?.text.toString()!!.isEmpty() ||
+                        updateProductDescription.editText?.text.toString()!!.isEmpty()
+                    ){
+                        isCorrect = false
+                    }
+                }
+                else -> {
+
+                }
+            }
         }
         return isCorrect
     }

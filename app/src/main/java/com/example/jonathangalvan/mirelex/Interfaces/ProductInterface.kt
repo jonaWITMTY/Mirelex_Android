@@ -1,5 +1,7 @@
 package com.example.jonathangalvan.mirelex.Interfaces
 
+import com.example.jonathangalvan.mirelex.Enums.ProductType
+
 class ProductInterface (
     var productId: Long?,
     var userId: String?,
@@ -84,3 +86,25 @@ class ProductCatalog(
         return name
     }
 }
+
+class ProductTypes(
+    var data: ArrayList<ProductTypeInterface>
+) {}
+
+class ProductTypeInterface(
+    var productTypeId: String?,
+    var name: String
+){
+    override fun toString(): String {
+        return name
+    }
+}
+
+class GetProductPricesInterface(
+    var totalSell: String?,
+    var totalRent: String?
+) {}
+
+class CreateProductResponseInterface(
+    var productId: String?
+) {}

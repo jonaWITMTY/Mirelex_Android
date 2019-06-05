@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
+             tools:context=".Fragments.Product.ProductCreate">
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                      android:orientation="vertical"
+        >
+            <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" android:theme="@style/textInputLayoutBlack"
+                    android:layout_marginBottom="16dp" android:layout_marginRight="16dp"
+                    android:layout_marginLeft="16dp" android:id="@+id/createProductBrand"
+                    android:layout_marginTop="16dp">
+
+                <android.support.design.widget.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/brand" android:singleLine="true"/>
+            </android.support.design.widget.TextInputLayout>
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="16dp" android:layout_marginRight="16dp"
+                    android:layout_marginLeft="16dp">
+                <TextView
+                        android:text="@string/category"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:textSize="12sp"
+                        android:textColor="@android:color/black"/>
+                <Spinner
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:id="@+id/createProductCategory"
+                        style="@android:style/Widget.Material.Light.Spinner.Underlined"
+                        android:backgroundTint="@android:color/black" android:spinnerMode="dialog"/>
+            </LinearLayout>
+            <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" android:theme="@style/textInputLayoutBlack"
+                    android:layout_marginBottom="16dp" android:layout_marginRight="16dp"
+                    android:layout_marginLeft="16dp" android:id="@+id/createProductPrice">
+
+                <android.support.design.widget.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/price" android:singleLine="true" android:inputType="numberDecimal"/>
+            </android.support.design.widget.TextInputLayout>
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="16dp" android:layout_marginRight="16dp"
+                    android:layout_marginLeft="16dp">
+                <TextView
+                        android:text="@string/condition"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:textSize="12sp"
+                        android:textColor="@android:color/black"/>
+                <Spinner
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:id="@+id/createProductCondition"
+                        style="@android:style/Widget.Material.Light.Spinner.Underlined"
+                        android:backgroundTint="@android:color/black" android:spinnerMode="dialog"/>
+            </LinearLayout>
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:theme="@style/textInputLayoutBlack"
+                    android:layout_marginBottom="16dp">
+                <CheckBox
+                        android:text="@string/leaseable"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:id="@+id/createProductLeasable"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="16dp" android:layout_marginRight="16dp"
+                        android:theme="@style/AppTheme" android:layout_gravity="center_vertical"
+                        android:buttonTint="@color/cyan"/>
+                <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:layout_weight="1"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp" android:hint="@string/leasablePrice"
+                        android:id="@+id/createProductLeaseablePrice">
+
+                    <android.support.design.widget.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:focusable="false"/>
+                </android.support.design.widget.TextInputLayout>
+            </LinearLayout>
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" android:theme="@style/textInputLayoutBlack"
+                    android:layout_marginBottom="16dp">
+                <CheckBox
+                        android:text="@string/sellable"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:id="@+id/createProductSellable"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="16dp" android:layout_marginRight="16dp"
+                        android:theme="@style/AppTheme" android:layout_gravity="center_vertical"
+                        android:buttonTint="@color/cyan"/>
+                <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:layout_weight="1"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp" android:hint="@string/sellPrice"
+                        android:id="@+id/createProductSellablePrice">
+
+                    <android.support.design.widget.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:focusable="false"/>
+                </android.support.design.widget.TextInputLayout>
+            </LinearLayout>
+            <CheckBox
+                    android:text="@string/isStretch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/createProductIsStretch"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="16dp" android:layout_marginRight="16dp"
+                    android:theme="@style/AppTheme" android:layout_gravity="center_vertical"
+                    android:buttonTint="@color/cyan" android:layout_marginBottom="16dp"/>
+            <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:layout_weight="1"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:id="@+id/createProductUsedTimes" android:theme="@style/textInputLayoutBlack"
+                    android:layout_marginBottom="16dp" android:hint="@string/usedTimes">
+
+                <android.support.design.widget.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal"/>
+            </android.support.design.widget.TextInputLayout>
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="16dp" android:layout_marginRight="16dp"
+                    android:layout_marginLeft="16dp">
+                <TextView
+                        android:text="@string/style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:textSize="12sp"
+                        android:textColor="@android:color/black"/>
+                <Spinner
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:id="@+id/createProductStyle"
+                        style="@android:style/Widget.Material.Light.Spinner.Underlined"
+                        android:backgroundTint="@android:color/black" android:spinnerMode="dialog"/>
+            </LinearLayout>
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="16dp" android:layout_marginRight="16dp"
+                    android:layout_marginLeft="16dp">
+                <TextView
+                        android:text="@string/decoration"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:textSize="12sp"
+                        android:textColor="@android:color/black"/>
+                <Spinner
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:id="@+id/createProductDecoration"
+                        style="@android:style/Widget.Material.Light.Spinner.Underlined"
+                        android:backgroundTint="@android:color/black" android:spinnerMode="dialog"/>
+            </LinearLayout>
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="16dp" android:layout_marginRight="16dp"
+                    android:layout_marginLeft="16dp">
+                <TextView
+                        android:text="@string/length"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:textSize="12sp"
+                        android:textColor="@android:color/black"/>
+                <Spinner
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:id="@+id/createProductLength"
+                        style="@android:style/Widget.Material.Light.Spinner.Underlined"
+                        android:backgroundTint="@android:color/black" android:spinnerMode="dialog"/>
+            </LinearLayout>
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="16dp" android:layout_marginRight="16dp"
+                    android:layout_marginLeft="16dp">
+                <TextView
+                        android:text="@string/material"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:textSize="12sp"
+                        android:textColor="@android:color/black"/>
+                <Spinner
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:id="@+id/createProductMaterial"
+                        style="@android:style/Widget.Material.Light.Spinner.Underlined"
+                        android:backgroundTint="@android:color/black" android:spinnerMode="dialog"/>
+            </LinearLayout>
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="16dp" android:layout_marginRight="16dp"
+                    android:layout_marginLeft="16dp">
+                <TextView
+                        android:text="@string/colors"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:textSize="12sp"
+                        android:textColor="@android:color/black"/>
+                <com.androidbuts.multispinnerfilter.MultiSpinnerSearch
+                        android:id="@+id/createProductColors"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:hintText="Selecciona un color"
+                        android:dropDownWidth="match_parent"
+                        android:persistentDrawingCache="all"/>
+            </LinearLayout>
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="16dp" android:layout_marginRight="16dp"
+                    android:layout_marginLeft="16dp">
+                <TextView
+                        android:text="@string/dressSilhouette"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:textSize="12sp"
+                        android:textColor="@android:color/black"/>
+                <Spinner
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:id="@+id/createProductSilouete"
+                        style="@android:style/Widget.Material.Light.Spinner.Underlined"
+                        android:backgroundTint="@android:color/black" android:spinnerMode="dialog"/>
+            </LinearLayout>
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="16dp" android:layout_marginRight="16dp"
+                    android:layout_marginLeft="16dp">
+                <TextView
+                        android:text="@string/sleeveStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:textSize="12sp"
+                        android:textColor="@android:color/black"/>
+                <Spinner
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:id="@+id/createProductSleeveStyle"
+                        style="@android:style/Widget.Material.Light.Spinner.Underlined"
+                        android:backgroundTint="@android:color/black" android:spinnerMode="dialog"/>
+            </LinearLayout>
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="16dp" android:layout_marginRight="16dp"
+                    android:layout_marginLeft="16dp">
+                <TextView
+                        android:text="@string/ocation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:textSize="12sp"
+                        android:textColor="@android:color/black"/>
+                <Spinner
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:id="@+id/createProductOcation"
+                        style="@android:style/Widget.Material.Light.Spinner.Underlined"
+                        android:backgroundTint="@android:color/black" android:spinnerMode="dialog"/>
+            </LinearLayout>
+            <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" android:theme="@style/textInputLayoutBlack"
+                    android:layout_marginBottom="16dp" android:layout_marginRight="16dp"
+                    android:layout_marginLeft="16dp" android:id="@+id/createProductBust">
+
+                <android.support.design.widget.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/bust" android:singleLine="true" android:inputType="numberDecimal"/>
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" android:theme="@style/textInputLayoutBlack"
+                    android:layout_marginBottom="16dp" android:layout_marginRight="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:id="@+id/createProductWaist">
+
+                <android.support.design.widget.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/waist" android:singleLine="true" android:inputType="numberDecimal"/>
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" android:theme="@style/textInputLayoutBlack"
+                    android:layout_marginBottom="16dp" android:layout_marginRight="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:id="@+id/createProductHip">
+
+                <android.support.design.widget.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/hip" android:singleLine="true" android:inputType="numberDecimal"/>
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" android:theme="@style/textInputLayoutBlack"
+                    android:layout_marginBottom="16dp" android:layout_marginRight="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:id="@+id/createProductHeight">
+
+                <android.support.design.widget.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/heightInCms" android:singleLine="true"
+                        android:inputType="numberDecimal"/>
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" android:theme="@style/textInputLayoutBlack"
+                    android:layout_marginBottom="16dp" android:layout_marginRight="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:id="@+id/createProductDescription">
+
+                <android.support.design.widget.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/description"/>
+            </android.support.design.widget.TextInputLayout>
+            <Button
+                    android:text="@string/continueProcess"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorBlue" android:id="@+id/createProductContinue"/>
+        </LinearLayout>
+    </ScrollView>
+</FrameLayout>

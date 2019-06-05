@@ -96,4 +96,6 @@
     <string name="isStretch">¿Es stretch?</string>
     <string name="featuredImage">Foto principal</string>
     <string name="addProduct">Crear producto</string>
+    <string name="newProduct">Nuevo producto</string>
+    <string name="usedTimes">Veces usado</string>
 </resources>

@@ -6,8 +6,10 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.ViewGroup
+import com.example.jonathangalvan.mirelex.Fragments.Product.ProductCreate
 import com.example.jonathangalvan.mirelex.Fragments.Product.ProductImagePicker
 import com.example.jonathangalvan.mirelex.Fragments.Product.ProductUpdate
+import com.example.jonathangalvan.mirelex.Interfaces.CreateProductResponseInterface
 import com.example.jonathangalvan.mirelex.Models.UtilsModel
 import com.example.jonathangalvan.mirelex.ViewModels.ProductViewModel
 import okhttp3.*
@@ -15,7 +17,8 @@ import java.io.IOException
 
 class ProductActivity : AppCompatActivity(),
     ProductUpdate.OnFragmentInteractionListener,
-    ProductImagePicker.OnFragmentInteractionListener {
+    ProductImagePicker.OnFragmentInteractionListener,
+    ProductCreate.OnFragmentInteractionListener{
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +32,7 @@ class ProductActivity : AppCompatActivity(),
             vmp.productId = productId
             openTab(ProductUpdate(), "productUpdate")
         }else{
-
+            openTab(ProductCreate(), "productCreate")
         }
     }
 
@@ -50,7 +53,16 @@ class ProductActivity : AppCompatActivity(),
     fun doFinalProductProcess(){
         val loader = layoutInflater.inflate(R.layout.view_progressbar, findViewById(android.R.id.content), true)
         val vmp = ViewModelProviders.of(this).get(ProductViewModel::class.java)
-        UtilsModel.getOkClient().newCall(UtilsModel.postRequest(this, resources.getString(R.string.updateProduct), UtilsModel.getGson().toJson(vmp.productObjRequest))).enqueue(object : Callback {
+        var productEndpoint = ""
+        when(vmp.productProcessType){
+            "update" ->{
+                productEndpoint = resources.getString(R.string.updateProduct)
+            }
+            else ->{
+                productEndpoint = resources.getString(R.string.createProduct)
+            }
+        }
+        UtilsModel.getOkClient().newCall(UtilsModel.postRequest(this, productEndpoint, UtilsModel.getGson().toJson(vmp.productObjRequest))).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 runOnUiThread {run{findViewById<ViewGroup>(android.R.id.content).removeView(findViewById(R.id.view_progressbar))}}
                 UtilsModel.getAlertView().newInstance(UtilsModel.getErrorRequestCall(), 1, 0).show(supportFragmentManager,"alertDialog")
@@ -60,8 +72,19 @@ class ProductActivity : AppCompatActivity(),
                 val responseStr = response.body()?.string()
                 val responseObj = UtilsModel.getPostResponse(responseStr)
                 if(responseObj.status == "success"){
+                    var productId = ""
+                    when(vmp.productProcessType){
+                        "update" ->{
+                            productId = vmp.productObj?.productInformation?.productId.toString()
+                        }
+                        else ->{
+                            val responseProductProcess = UtilsModel.getGson().fromJson(UtilsModel.getGson().toJson(responseObj.data!![0]), CreateProductResponseInterface::class.java)
+                            productId = responseProductProcess.productId.toString()
+                        }
+                    }
+
                     if(UtilsModel.getImagePermissions(this@ProductActivity) && vmp.featuredImage != null){
-                        UtilsModel.getOkClient().newCall(UtilsModel.postImageRequest( this@ProductActivity, vmp.featuredImage!!, resources.getString(R.string.uploadFeatureImage), vmp.productObj?.productInformation?.productId.toString())).enqueue(object : Callback {
+                        UtilsModel.getOkClient().newCall(UtilsModel.postImageRequest( this@ProductActivity, vmp.featuredImage!!, resources.getString(R.string.uploadFeatureImage), productId)).enqueue(object : Callback {
                             override fun onFailure(call: Call, e: IOException) {
                                 runOnUiThread {run{findViewById<ViewGroup>(android.R.id.content).removeView(findViewById(R.id.view_progressbar))}}
                                 UtilsModel.getAlertView().newInstance(UtilsModel.getErrorRequestCall(), 1, 0).show(supportFragmentManager,"alertDialog")
@@ -78,6 +101,9 @@ class ProductActivity : AppCompatActivity(),
                         runOnUiThread {run{findViewById<ViewGroup>(android.R.id.content).removeView(findViewById(R.id.view_progressbar))}}
                         UtilsModel.getAlertView().newInstance(responseStr, 1, 1).show(supportFragmentManager,"alertDialog")
                     }
+                }else{
+                    runOnUiThread {run{findViewById<ViewGroup>(android.R.id.content).removeView(findViewById(R.id.view_progressbar))}}
+                    UtilsModel.getAlertView().newInstance(responseStr, 1, 1).show(supportFragmentManager,"alertDialog")
                 }
             }
         })
@@ -90,7 +116,7 @@ class ProductActivity : AppCompatActivity(),
 
     override fun onBackPressed() {
         val fragmentObj = supportFragmentManager.findFragmentById(R.id.productActivityContainer)
-        if(fragmentObj is ProductUpdate){
+        if(fragmentObj is ProductUpdate || fragmentObj is ProductCreate){
             finish()
         }else{
             super.onBackPressed()
