@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                             xmlns:app="http://schemas.android.com/apk/res-auto"
+                                             xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+                                             android:layout_height="wrap_content" android:orientation="horizontal">
+
+    <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="7dp" android:layout_marginTop="4dp" android:layout_marginEnd="7dp"
+            app:contentPadding="3dp" app:cardCornerRadius="10dp" app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="4dp">
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <ImageView
+                    android:layout_height="60dp" app:srcCompat="@drawable/mirelex_logo_cian"
+                    android:id="@+id/imageView13" android:layout_weight="0" android:layout_width="60dp"
+                    android:layout_marginRight="10dp"/>
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:layout_weight="0">
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/notificationAdapterText" android:textColor="@color/black"
+                        tools:text="NotificationDescription" android:textSize="14sp"/>
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/notificationAdapterDate"
+                        tools:text="NotificationDate" android:textAlignment="textEnd" android:layout_marginTop="16dp"
+                        android:textSize="12sp"/>
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+</android.support.constraint.ConstraintLayout>

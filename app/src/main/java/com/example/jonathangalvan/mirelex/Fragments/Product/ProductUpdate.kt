@@ -21,7 +21,7 @@ import com.example.jonathangalvan.mirelex.Interfaces.ProductInfoInterface
 import com.example.jonathangalvan.mirelex.Models.UtilsModel
 import com.example.jonathangalvan.mirelex.ProductActivity
 import com.example.jonathangalvan.mirelex.R
-import com.example.jonathangalvan.mirelex.Requests.GetProductCatalogs
+import com.example.jonathangalvan.mirelex.Requests.GetProductCatalogsRequest
 import com.example.jonathangalvan.mirelex.Requests.GetProductInfoRequest
 import com.example.jonathangalvan.mirelex.ViewModels.ProductViewModel
 import com.squareup.picasso.Picasso
@@ -225,7 +225,7 @@ class ProductUpdate : Fragment()  {
     }
 
     fun getProductCatalogs(){
-        val productCatalogsObj = UtilsModel.getGson().toJson(GetProductCatalogs(productObj?.productInformation?.productTypeId.toString()))
+        val productCatalogsObj = UtilsModel.getGson().toJson(GetProductCatalogsRequest(productObj?.productInformation?.productTypeId.toString()))
         UtilsModel.getOkClient().newCall(UtilsModel.postRequest( activity!!, resources.getString(R.string.getProducCatalogs), productCatalogsObj)).enqueue(object:
             Callback {
             override fun onFailure(call: Call, e: IOException) {

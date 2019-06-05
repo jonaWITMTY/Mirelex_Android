@@ -1,5 +1,5 @@
 package com.example.jonathangalvan.mirelex.Requests
 
-class GetProductCatalogs(
+class GetProductCatalogsRequest(
     var productTypeId: String?
 ): GlobalRequest() { }

@@ -6,17 +6,15 @@ import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.widget.FrameLayout
-import com.example.jonathangalvan.mirelex.Fragments.Orders
-import com.example.jonathangalvan.mirelex.Fragments.Products
-import com.example.jonathangalvan.mirelex.Fragments.Profile
-import com.example.jonathangalvan.mirelex.Fragments.Services
+import com.example.jonathangalvan.mirelex.Fragments.*
 import kotlinx.android.synthetic.main.activity_customer_tabs.*
 
 class CustomerTabsActivity : AppCompatActivity(),
     Products.OnFragmentInteractionListener,
     Services.OnFragmentInteractionListener,
     Orders.OnFragmentInteractionListener,
-    Profile.OnFragmentInteractionListener{
+    Profile.OnFragmentInteractionListener,
+    Notifications.OnFragmentInteractionListener{
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
@@ -37,6 +35,7 @@ class CustomerTabsActivity : AppCompatActivity(),
             }
             R.id.customerNavigationNotifications -> {
                 supportActionBar?.title = resources.getString(R.string.storeTabNotifications)
+                openTab(Notifications())
                 return@OnNavigationItemSelectedListener true
             }
             R.id.customerNavigationProfile -> {

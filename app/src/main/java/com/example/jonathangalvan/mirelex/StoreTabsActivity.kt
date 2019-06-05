@@ -13,16 +13,14 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.TextView
-import com.example.jonathangalvan.mirelex.Fragments.Orders
-import com.example.jonathangalvan.mirelex.Fragments.Products
-import com.example.jonathangalvan.mirelex.Fragments.Profile
-import com.example.jonathangalvan.mirelex.Fragments.Services
+import com.example.jonathangalvan.mirelex.Fragments.*
 
 class StoreTabsActivity : AppCompatActivity(),
 Profile.OnFragmentInteractionListener,
 Products.OnFragmentInteractionListener,
 Services.OnFragmentInteractionListener,
-Orders.OnFragmentInteractionListener{
+Orders.OnFragmentInteractionListener,
+Notifications.OnFragmentInteractionListener{
 
     private lateinit var textMessage: TextView
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
@@ -47,7 +45,7 @@ Orders.OnFragmentInteractionListener{
             }
             R.id.storeNavigationNotifications -> {
                 supportActionBar?.title = resources.getString(R.string.storeTabNotifications)
-//                openTab(Orders())
+                openTab(Notifications())
                 findViewById<View>(R.id.storeProductAdd).visibility = View.GONE
                 return@OnNavigationItemSelectedListener true
             }

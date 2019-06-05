@@ -20,10 +20,9 @@ import com.example.jonathangalvan.mirelex.Interfaces.*
 import com.example.jonathangalvan.mirelex.Models.UtilsModel
 import com.example.jonathangalvan.mirelex.ProductActivity
 import com.example.jonathangalvan.mirelex.R
-import com.example.jonathangalvan.mirelex.Requests.GetProductCatalogs
+import com.example.jonathangalvan.mirelex.Requests.GetProductCatalogsRequest
 import com.example.jonathangalvan.mirelex.Requests.GetProductPricesRequest
 import com.example.jonathangalvan.mirelex.ViewModels.ProductViewModel
-import com.rey.material.widget.Spinner
 import kotlinx.android.synthetic.main.fragment_product_create.*
 import okhttp3.Call
 import okhttp3.Callback
@@ -274,7 +273,7 @@ class ProductCreate : Fragment() {
 
     fun getProductCatalogs(productTypeId: String = "1"){
         val loader = layoutInflater.inflate(R.layout.view_progressbar, activity?.findViewById(android.R.id.content), true)
-        val productCatalogsObj = UtilsModel.getGson().toJson(GetProductCatalogs(productTypeId))
+        val productCatalogsObj = UtilsModel.getGson().toJson(GetProductCatalogsRequest(productTypeId))
         UtilsModel.getOkClient().newCall(UtilsModel.postRequest( activity!!, resources.getString(R.string.getProducCatalogs), productCatalogsObj)).enqueue(object:
             Callback {
             override fun onFailure(call: Call, e: IOException) {

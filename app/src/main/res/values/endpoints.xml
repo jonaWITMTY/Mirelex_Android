@@ -13,6 +13,10 @@
     <string name="womanCatalogs">general/women/catalogs</string>
     <string name="forgotUser">user/forgot</string>
 
+    //Notifiactions
+    <string name="getUserNotifications">user/notifications</string>
+    <string name="setNotificationRead">user/notification/read</string>
+
     //Product
     <string name="getProducts">products</string>
     <string name="getProductInfo">product/info</string>
