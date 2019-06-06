@@ -15,7 +15,7 @@
                 android:layout_height="230dp" app:srcCompat="@drawable/mirelex_logo_cian"
                 android:id="@+id/storeDetailShortImageView" app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" android:scaleType="fitCenter"/>
+                app:layout_constraintEnd_toEndOf="parent" android:scaleType="centerCrop"/>
         <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="0dp"

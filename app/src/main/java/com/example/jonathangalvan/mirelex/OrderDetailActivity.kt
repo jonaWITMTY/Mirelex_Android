@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import com.example.jonathangalvan.mirelex.Enums.UserType
+import com.example.jonathangalvan.mirelex.Fragments.Utils.ImagePreview
 import com.example.jonathangalvan.mirelex.Interfaces.OrderInterface
 import com.example.jonathangalvan.mirelex.Interfaces.OrderProductInfo
 import com.example.jonathangalvan.mirelex.Models.SessionModel
@@ -51,27 +52,40 @@ class OrderDetailActivity : AppCompatActivity() {
                             supportActionBar?.title = orderInfo.orderInformation.folio
 
                             /*Fill order and product info*/
-                            Picasso.with(this@OrderDetailActivity).load(orderInfo.orderProducts!![0].productFeaturedImage).into(detailOrderFeaturedImage)
-                            Picasso.with(this@OrderDetailActivity).load(orderInfo.orderProducts!![0].productFeaturedImage).into(detailOrderProductImage)
+                            if(orderInfo.orderProducts!![0].productFeaturedImage != null){
+                                Picasso.with(this@OrderDetailActivity).load(orderInfo.orderProducts!![0].productFeaturedImage).into(detailOrderFeaturedImage)
+                                detailOrderFeaturedImage.setOnClickListener( View.OnClickListener {
+                                    ImagePreview().newInstance(orderInfo.orderProducts!![0].productFeaturedImage).show(supportFragmentManager,"alertDialog")
+                                })
+                            }
+
+                            if(orderInfo.orderProducts!![0].productFeaturedImage != null){
+                                Picasso.with(this@OrderDetailActivity).load(orderInfo.orderProducts!![0].productFeaturedImage).into(detailOrderProductImage)
+                            }
                             detailOrderProductName.text = orderInfo.orderProducts!![0].brand
 
                             /*Set data depending on session user*/
                             var pictureUrl = ""
                             var name = ""
                             var json = ""
+                            var isThereImage: String? = null
                             when(SessionModel(this@OrderDetailActivity).getSessionUserType()){
                                 UserType.Store.userTypeId -> {
                                     pictureUrl = orderInfo.orderClientInformation.profilePictureUrl.toString()
                                     name = "${orderInfo.orderClientInformation.firstName} ${orderInfo.orderClientInformation.paternalLastName}"
                                     json = UtilsModel.getGson().toJson(orderInfo.orderClientInformation)
+                                    isThereImage = orderInfo.orderClientInformation.profilePictureUrl
                                 }
                                 else -> {
                                     pictureUrl = orderInfo.orderOwnerInformation.profilePictureUrl.toString()
                                     name = orderInfo.orderOwnerInformation.companyName.toString()
                                     json = UtilsModel.getGson().toJson(orderInfo.orderOwnerInformation)
+                                    isThereImage = orderInfo.orderOwnerInformation.profilePictureUrl
                                 }
                             }
-                            Picasso.with(this@OrderDetailActivity).load(pictureUrl).into(detailOrderOwnerImage)
+                            if(isThereImage != null){
+                                Picasso.with(this@OrderDetailActivity).load(pictureUrl).into(detailOrderOwnerImage)
+                            }
                             detailOrderOwnerName.text = name
 
                             /*Fill order info*/

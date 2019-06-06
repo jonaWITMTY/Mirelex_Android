@@ -15,7 +15,11 @@ class ProductsAdapter(private var context: Context, private var productsList: Ar
             view = View.inflate(context, R.layout.adapter_product, null)
             view.productAdapterName.text = "${context.resources.getText(R.string.size)}: ${productsList[position].size}"
             view.productadapterPrice.text = productsList[position].priceFormatted
-            Picasso.with(view.productAdapaterImage.context).load(productsList[position].productFeaturedImage).into(view.productAdapaterImage)
+            if(productsList[position].productFeaturedImage != null){
+                Picasso.with(view.productAdapaterImage.context).load(productsList[position].productFeaturedImage).resize(600, 0).into(view.productAdapaterImage)
+            }else{
+                Picasso.with(view.productAdapaterImage.context).load(R.drawable.mirelex_logo_cian).resize(600, 0).into(view.productAdapaterImage)
+            }
         }else{
             view = convertView
         }

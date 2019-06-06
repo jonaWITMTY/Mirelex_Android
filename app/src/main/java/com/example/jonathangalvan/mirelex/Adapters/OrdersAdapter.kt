@@ -38,7 +38,9 @@ class OrdersAdapter(private var orders: ArrayList<OrderInterface>): RecyclerView
     }
 
     override fun onBindViewHolder(p0: OrderViewHolder, p1: Int) {
-        Picasso.with(p0.orderAdapterFeaturedImage.context).load(orders[p1].product.productFeaturedImage).into(p0.orderAdapterFeaturedImage)
+        if(orders[p1].product.productFeaturedImage != null){
+            Picasso.with(p0.orderAdapterFeaturedImage.context).load(orders[p1].product.productFeaturedImage).into(p0.orderAdapterFeaturedImage)
+        }
         p0.orderAdapterBrand.text = orders[p1].product.brand
         p0.orderAdapterFolio.text = orders[p1].folio
         p0.orderAdapterPrice.text = orders[p1].totalFormatted

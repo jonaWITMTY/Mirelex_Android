@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.jonathangalvan.mirelex.Interfaces.ProductInfoInterface
 import com.example.jonathangalvan.mirelex.Enums.ProductType
+import com.example.jonathangalvan.mirelex.Fragments.Utils.ImagePreview
 import com.example.jonathangalvan.mirelex.Models.UtilsModel
 import com.example.jonathangalvan.mirelex.Requests.CreateOrderRequest
 import com.example.jonathangalvan.mirelex.Requests.GetProductInfoRequest
@@ -68,8 +69,18 @@ class ProductDetailActivity : AppCompatActivity() {
                                 startActivity(goToStoreDetail)
                             })
 
-                            Picasso.with(this@ProductDetailActivity).load(productObj.productInformation.productFeaturedImage).into(detailProductFeaturedImage)
-                            Picasso.with(this@ProductDetailActivity).load(productObj.productOwner.person?.profilePictureUrl).into(detailProductOwnerProfileImage)
+                            if(productObj.productInformation.productFeaturedImage != null){
+                                Picasso.with(this@ProductDetailActivity).load(productObj.productInformation.productFeaturedImage).into(detailProductFeaturedImage)
+                                /*Image preview*/
+                                detailProductFeaturedImage.setOnClickListener( View.OnClickListener {
+                                    ImagePreview().newInstance(productObj.productInformation.productFeaturedImage).show(supportFragmentManager,"alertDialog")
+                                })
+                            }
+
+                            if(productObj.productOwner.person?.profilePictureUrl != null){
+                                Picasso.with(this@ProductDetailActivity).load(productObj.productOwner.person?.profilePictureUrl).into(detailProductOwnerProfileImage)
+                            }
+
                             when(productObj.productOwner.person?.userTypeId){
                                 "4" -> {
                                     detailProductOwnerName.text = "${productObj.productOwner.person?.companyName}"

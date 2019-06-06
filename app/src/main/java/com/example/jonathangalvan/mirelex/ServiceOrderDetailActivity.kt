@@ -28,16 +28,19 @@ class ServiceOrderDetailActivity : AppCompatActivity() {
         var pictureUrl = ""
         var name = ""
         var json = ""
+        var isThereImage: String? = null
         when(SessionModel(this).getSessionUserType()){
             UserType.Store.userTypeId -> {
                 pictureUrl = serviceObj.client.profilePictureUrl.toString()
                 name = "${serviceObj.client.firstName} ${serviceObj.client.paternalLastName}"
                 json = UtilsModel.getGson().toJson(serviceObj.client)
+                isThereImage = serviceObj.client.profilePictureUrl
             }
             else -> {
                 pictureUrl = serviceObj.owner.profilePictureUrl.toString()
                 name = serviceObj.owner.companyName.toString()
                 json = UtilsModel.getGson().toJson(serviceObj.owner)
+                isThereImage = serviceObj.owner.profilePictureUrl
             }
         }
 
@@ -46,7 +49,10 @@ class ServiceOrderDetailActivity : AppCompatActivity() {
         addRow(resources.getString(R.string.status), serviceObj.orderStatus!!)
         addRow(resources.getString(R.string.total), serviceObj.totalFormatted!!)
 
-        Picasso.with(this).load(pictureUrl).into(serviceDetailStoreImg)
+        if( isThereImage != null){
+            Picasso.with(this).load(pictureUrl).into(serviceDetailStoreImg)
+        }
+
         serviceDetailStoreName.text = name
 
         /*On store click*/

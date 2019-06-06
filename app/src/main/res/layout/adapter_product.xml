@@ -24,12 +24,13 @@
                     android:layout_marginTop="10dp" android:textStyle="bold" android:textSize="18sp"
                     app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="10dp"/>
             <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="140dp" app:srcCompat="@drawable/default_image"
+                    android:layout_width="0dp"
+                    android:layout_height="140dp"
                     android:id="@+id/productAdapaterImage" android:scaleType="centerCrop"
                     app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintBottom_toTopOf="@+id/productAdapterName"/>
+                    app:layout_constraintBottom_toTopOf="@+id/productAdapterName"
+                    app:srcCompat="@drawable/mirelex_logo_cian"/>
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

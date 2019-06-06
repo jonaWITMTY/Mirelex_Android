@@ -2,6 +2,8 @@ package com.example.jonathangalvan.mirelex
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import com.example.jonathangalvan.mirelex.Fragments.Utils.ImagePreview
 import com.example.jonathangalvan.mirelex.Interfaces.ProductInfoInterface
 import com.example.jonathangalvan.mirelex.Models.UtilsModel
 import com.squareup.picasso.Picasso
@@ -17,7 +19,12 @@ class StoreDetailActivity : AppCompatActivity() {
         val productInfo = UtilsModel.getGson().fromJson(getProductInfoFromBundle.getString("productInfo"), ProductInfoInterface::class.java)
 
         supportActionBar?.title = ""
-        Picasso.with(this).load(productInfo.productOwner.person?.profilePictureUrl).into(storeDetailImageView)
+        if(productInfo.productOwner.person?.profilePictureUrl != null){
+            Picasso.with(this).load(productInfo.productOwner.person?.profilePictureUrl).into(storeDetailImageView)
+            storeDetailImageView.setOnClickListener( View.OnClickListener {
+                ImagePreview().newInstance(productInfo.productOwner.person?.profilePictureUrl).show(supportFragmentManager,"alertDialog")
+            })
+        }
         when(productInfo.productOwner.person?.userTypeId){
             "4" -> {
                 storeDetailName.text = "${productInfo.productOwner.person?.companyName}"

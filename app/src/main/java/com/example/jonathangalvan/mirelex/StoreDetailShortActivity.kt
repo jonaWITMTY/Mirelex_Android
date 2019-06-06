@@ -2,6 +2,8 @@ package com.example.jonathangalvan.mirelex
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import com.example.jonathangalvan.mirelex.Fragments.Utils.ImagePreview
 import com.example.jonathangalvan.mirelex.Interfaces.OrderPersonInformation
 import com.example.jonathangalvan.mirelex.Models.UtilsModel
 import com.squareup.picasso.Picasso
@@ -17,7 +19,12 @@ class StoreDetailShortActivity : AppCompatActivity() {
         val bundleFromServiceDetail = intent.extras
         val ownerObj = UtilsModel.getGson().fromJson(bundleFromServiceDetail.getString("personObj"), OrderPersonInformation::class.java)
 
-        Picasso.with(this).load(ownerObj.profilePictureUrl).into(storeDetailShortImageView)
+        if(ownerObj.profilePictureUrl != null){
+            Picasso.with(this).load(ownerObj.profilePictureUrl).into(storeDetailShortImageView)
+            storeDetailShortImageView.setOnClickListener( View.OnClickListener {
+                ImagePreview().newInstance(ownerObj.profilePictureUrl).show(supportFragmentManager,"alertDialog")
+            })
+        }
 
         var storeName : String = ""
         if(ownerObj.companyName == null){
