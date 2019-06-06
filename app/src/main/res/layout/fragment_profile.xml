@@ -53,7 +53,7 @@
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" android:paddingBottom="20dp" android:paddingTop="20dp"
-                    android:background="@drawable/border_bottom">
+                    android:background="@drawable/border_bottom" android:id="@+id/sessionUserMessages">
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" android:id="@+id/textView16" android:layout_weight="1"

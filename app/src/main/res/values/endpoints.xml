@@ -17,6 +17,10 @@
     <string name="getUserNotifications">user/notifications</string>
     <string name="setNotificationRead">user/notification/read</string>
 
+    //Messages
+    <string name="createConversationMessage">user/conversation/message/create</string>
+    <string name="getConversationMessages">user/conversation/messages</string>
+
     //Product
     <string name="getProducts">products</string>
     <string name="getProductInfo">product/info</string>

@@ -10,6 +10,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.jonathangalvan.mirelex.Adapters.NotificationsAdapter
+import com.example.jonathangalvan.mirelex.ChatActivity
+import com.example.jonathangalvan.mirelex.Interfaces.ConversationInterface
 import com.example.jonathangalvan.mirelex.Interfaces.NotificationDataInterface
 import com.example.jonathangalvan.mirelex.Interfaces.NotificationsInterface
 import com.example.jonathangalvan.mirelex.Listeners.RecyclerItemClickListener
@@ -69,7 +71,14 @@ class Notifications : Fragment() {
                 }
 
                 if(notificationDataObj.conversationId != null){
-
+                    val goToChat = Intent(activity!!, ChatActivity::class.java)
+                    val bundleToChat = Bundle()
+                    val conversationObj = UtilsModel.getGson().toJson(ConversationInterface(
+                        conversationId = notificationDataObj.conversationId
+                    ))
+                    bundleToChat.putString("conversationObj", conversationObj)
+                    goToChat.putExtras(bundleToChat)
+                    startActivity(goToChat)
                 }
 
                 if(notificationDataObj.serviceOrderId != null){

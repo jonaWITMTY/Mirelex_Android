@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.jonathangalvan.mirelex.*
+import com.example.jonathangalvan.mirelex.ConversationsActivity
 import com.example.jonathangalvan.mirelex.Interfaces.UserInterface
 import com.example.jonathangalvan.mirelex.Models.SessionModel
 
@@ -58,6 +59,11 @@ class Profile : Fragment() {
         /*Click to profile information*/
         sessionUserProfile.setOnClickListener(View.OnClickListener {
             startActivity(Intent(activity!!, ProfileActivity::class.java))
+        })
+
+        /*Click to messages*/
+        sessionUserMessages.setOnClickListener(View.OnClickListener {
+            startActivity(Intent(activity!!, ConversationsActivity::class.java))
         })
     }
 
