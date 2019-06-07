@@ -94,30 +94,33 @@ class MainActivity : AppCompatActivity() {
 
                                 override fun onResponse(call: Call, response: Response) {
                                     runOnUiThread {run{findViewById<ViewGroup>(android.R.id.content).removeView(findViewById(R.id.view_progressbar))}}
-                                    val responseUserObj = UtilsModel.getGson().fromJson(response.body()!!.string(), ResponseInterface::class.java)
-                                    SessionModel.saveSessionValue(this@MainActivity, "user", UtilsModel.getGson().toJson(responseUserObj.data!![0]))
-                                    val user = SessionModel(this@MainActivity).getUser()
-
-                                    when(user.person?.userTypeId){
-                                        "3" ->{
-                                            if (user.characteristics?.characteristicsId == null || user.address!!.isEmpty()){
-                                                startActivity(Intent(this@MainActivity, RegisterExtraFieldsActivity::class.java))
-                                            }else{
-                                                startActivity(Intent(this@MainActivity, CustomerTabsActivity::class.java))
+                                    val responseUserStr = response.body()!!.string()
+                                    val responseUserObj = UtilsModel.getGson().fromJson(responseUserStr, ResponseInterface::class.java)
+                                    if(responseUserObj.status == "success"){
+                                        SessionModel.saveSessionValue(this@MainActivity, "user", UtilsModel.getGson().toJson(responseUserObj.data!![0]))
+                                        val user = SessionModel(this@MainActivity).getUser()
+                                        when(user.person?.userTypeId){
+                                            "3" ->{
+                                                if (user.characteristics?.characteristicsId == null || user.address!!.isEmpty()){
+                                                    startActivity(Intent(this@MainActivity, RegisterExtraFieldsActivity::class.java))
+                                                }else{
+                                                    startActivity(Intent(this@MainActivity, CustomerTabsActivity::class.java))
+                                                }
+                                            }
+                                            "4" ->{
+                                                if (user.address!!.isEmpty()){
+                                                    startActivity(Intent(this@MainActivity, RegisterExtraFieldsActivity::class.java))
+                                                }else{
+                                                    startActivity(Intent(this@MainActivity, StoreTabsActivity::class.java))
+                                                }
+                                            }
+                                            else ->{
+                                                UtilsModel.getAlertView().newInstance(UtilsModel.getErrorUserAccessDenied(), 1, 0).show(supportFragmentManager,"alertDialog")
                                             }
                                         }
-                                        "4" ->{
-                                            if (user.address!!.isEmpty()){
-                                                startActivity(Intent(this@MainActivity, RegisterExtraFieldsActivity::class.java))
-                                            }else{
-                                                startActivity(Intent(this@MainActivity, StoreTabsActivity::class.java))
-                                            }
-                                        }
-                                        else ->{
-                                            UtilsModel.getAlertView().newInstance(UtilsModel.getErrorUserAccessDenied(), 1, 0).show(supportFragmentManager,"alertDialog")
-                                        }
+                                    }else{
+                                        UtilsModel.getAlertView().newInstance(responseUserStr, 1, 0).show(supportFragmentManager,"alertDialog")
                                     }
-
                                 }
                             })
                         }else{
