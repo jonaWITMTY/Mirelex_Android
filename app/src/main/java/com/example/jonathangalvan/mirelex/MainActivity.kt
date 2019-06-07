@@ -41,6 +41,18 @@ class MainActivity : AppCompatActivity() {
         OneSignal.startInit(this)
             .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
             .unsubscribeWhenNotificationsAreDisabled(true)
+            .setNotificationOpenedHandler {
+                if(SessionModel.getSessionValue(this, "user") != ""){
+                    when(SessionModel(this).getUser().person?.userTypeId){
+                        "3" ->{
+                            startActivity(Intent(this@MainActivity, CustomerTabsActivity::class.java))
+                        }
+                        "4" ->{
+                            startActivity(Intent(this@MainActivity, StoreTabsActivity::class.java))
+                        }
+                    }
+                }
+            }
             .init()
 
         /*Go to RegisterActivity*/

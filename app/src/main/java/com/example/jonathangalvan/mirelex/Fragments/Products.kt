@@ -51,6 +51,7 @@ class Products : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         getProducts()
 
+        /*Save onesignal id*/
         OneSignal.idsAvailable { userId, registrationId ->
             if(userId != null){
                 val oneSignalObj = UtilsModel.getGson().toJson(SetOneaSignalIdRequest(
