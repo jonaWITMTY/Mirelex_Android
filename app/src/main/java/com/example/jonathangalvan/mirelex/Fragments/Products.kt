@@ -58,9 +58,7 @@ class Products : Fragment() {
                 ))
                 UtilsModel.getOkClient().newCall(UtilsModel.postRequest(activity!!, resources.getString(R.string.setOneSignalId), oneSignalObj)).enqueue(object: Callback {
                     override fun onFailure(call: Call, e: IOException) {}
-                    override fun onResponse(call: Call, response: Response) {
-                        println(UtilsModel.getPostResponse(response.body()?.string()).status)
-                    }
+                    override fun onResponse(call: Call, response: Response) {}
                 })
             }
         }
