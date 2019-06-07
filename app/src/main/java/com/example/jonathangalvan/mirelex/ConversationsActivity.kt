@@ -13,6 +13,7 @@ import com.example.jonathangalvan.mirelex.Listeners.RecyclerItemClickListener
 import com.example.jonathangalvan.mirelex.Models.SessionModel
 import com.example.jonathangalvan.mirelex.Models.UtilsModel
 import kotlinx.android.synthetic.main.activity_conversations.*
+import kotlinx.android.synthetic.main.view_centered_message.view.*
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.Response
@@ -31,6 +32,7 @@ class ConversationsActivity : AppCompatActivity() {
         /*Fill conversation list*/
         conversationsList.layoutManager = LinearLayoutManager(this)
         conversationsList.adapter = conversationAdapter
+        val loader = layoutInflater.inflate(R.layout.view_progressbar, findViewById(android.R.id.content), true)
         UtilsModel.getOkClient().newCall(UtilsModel.postRequest(this, resources.getString(R.string.getConversations))).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 runOnUiThread {run{findViewById<ViewGroup>(android.R.id.content).removeView(findViewById(R.id.view_progressbar))}}
@@ -38,14 +40,33 @@ class ConversationsActivity : AppCompatActivity() {
             }
 
             override fun onResponse(call: Call, response: Response) {
+                runOnUiThread {run{findViewById<ViewGroup>(android.R.id.content).removeView(findViewById(R.id.view_progressbar))}}
                 val responseStr = response.body()?.string()
                 val responseObj = UtilsModel.getPostResponse(responseStr)
-                if(responseObj.status == "success"){
-                    var conversationObj = UtilsModel.getGson().fromJson(responseStr, ConversationsInterface::class.java)
-                    runOnUiThread {
-                        run {
-                            conversationAdapter.loadNewData(conversationObj.data)
+                when(responseObj.status){
+                    "success" -> {
+                        var conversationObj =
+                            UtilsModel.getGson().fromJson(responseStr, ConversationsInterface::class.java)
+                        runOnUiThread {
+                            run {
+                                conversationAdapter.loadNewData(conversationObj.data)
+                            }
                         }
+                    }
+                    "noDataAvailable" -> {
+                        runOnUiThread {
+                            run {
+                                val ceneteredLayout = layoutInflater.inflate(
+                                    R.layout.view_centered_message,
+                                    findViewById(R.id.customerTabsFrameLayout),
+                                    true
+                                )
+                                ceneteredLayout.centeredMessage.text = responseObj.desc
+                            }
+                        }
+                    }
+                    else -> {
+                        UtilsModel.getAlertView().newInstance(responseStr, 1, 0).show(supportFragmentManager,"alertDialog")
                     }
                 }
             }

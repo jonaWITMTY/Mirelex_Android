@@ -115,7 +115,7 @@ class ServiceCreateActivity : AppCompatActivity(),
                         override fun onResponse(call: Call, response: Response) {
                             runOnUiThread {run{findViewById<ViewGroup>(android.R.id.content).removeView(findViewById(R.id.view_progressbar))}}
                             val responseStr = response.body()?.string()
-                            val responseObj = UtilsModel.getGson().fromJson(responseStr, ResponseInterface::class.java)
+                            val responseObj = UtilsModel.getPostResponse(responseStr)
                             if(responseObj.status == "success"){
                                 UtilsModel.getAlertView().newInstance(responseStr, 4, 0).show(supportFragmentManager,"alertDialog")
                             }else{
@@ -182,8 +182,8 @@ class ServiceCreateActivity : AppCompatActivity(),
                 override fun onFailure(call: Call, e: IOException) {}
 
                 override fun onResponse(call: Call, response: Response) {
-                    val respinseStr = response.body()?.string()
-                    val responseObj = UtilsModel.getGson().fromJson(respinseStr, ResponseInterface::class.java)
+                    val responseStr = response.body()?.string()
+                    val responseObj = UtilsModel.getPostResponse(responseStr)
                     if(responseObj.status == "success"){
                         val serviceTotal = UtilsModel.getGson().fromJson(UtilsModel.getGson().toJson(responseObj.data!![0]),OrderTotal::class.java)
                         total = serviceTotal.total
@@ -218,7 +218,7 @@ class ServiceCreateActivity : AppCompatActivity(),
             override fun onResponse(call: Call, response: Response) {
                 runOnUiThread {run{findViewById<ViewGroup>(android.R.id.content)?.removeView(findViewById(R.id.view_progressbar))}}
                 val responseStr = response.body()?.string()
-                val responseObj = UtilsModel.getGson().fromJson(responseStr, ResponseInterface::class.java)
+                val responseObj = UtilsModel.getPostResponse(responseStr)
                 if(responseObj.status == "success"){
                     when(service){
                         0 -> {
@@ -277,7 +277,7 @@ class ServiceCreateActivity : AppCompatActivity(),
             override fun onResponse(call: Call, response: Response) {
                 runOnUiThread {run{findViewById<ViewGroup>(android.R.id.content)?.removeView(findViewById(R.id.view_progressbar))}}
                 val responseStr = response.body()?.string()
-                val responseObj = UtilsModel.getGson().fromJson(responseStr, ResponseInterface::class.java)
+                val responseObj = UtilsModel.getPostResponse(responseStr)
                 if(responseObj.status == "success"){
                     val serviceStoresObj = UtilsModel.getGson().fromJson(UtilsModel.getGson().toJson(responseObj), ServiceStoresInterface::class.java)
                     val adapterServicesStores = ArrayAdapter<ServiceStore>(this@ServiceCreateActivity, R.layout.view_spinner_item_black, serviceStoresObj.data)

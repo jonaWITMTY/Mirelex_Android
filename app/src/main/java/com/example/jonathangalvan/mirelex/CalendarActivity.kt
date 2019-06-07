@@ -66,7 +66,7 @@ class CalendarActivity : AppCompatActivity() {
             override fun onResponse(call: Call, response: Response) {
                 runOnUiThread {run{findViewById<ViewGroup>(android.R.id.content).removeView(findViewById(R.id.view_progressbar))}}
                 val responseStr = response.body()?.string()
-                val responseObj = UtilsModel.getGson().fromJson(responseStr, ResponseInterface::class.java)
+                val responseObj = UtilsModel.getPostResponse(responseStr)
                 if(responseObj.status == "success"){
                     val datesObj = UtilsModel.getGson().fromJson(UtilsModel.getGson().toJson(responseObj), DateTimeArrInterface::class.java)
                     val dateArr = ArrayList<Date>()

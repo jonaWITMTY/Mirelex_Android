@@ -22,6 +22,7 @@ import okhttp3.Response
 import java.io.IOException
 import java.util.ArrayList
 import com.example.jonathangalvan.mirelex.OrderDetailActivity
+import kotlinx.android.synthetic.main.view_centered_message.view.*
 
 
 class Orders : Fragment() {
@@ -71,15 +72,31 @@ class Orders : Fragment() {
                 activity?.runOnUiThread {run{activity?.findViewById<ViewGroup>(android.R.id.content)?.removeView(activity?.findViewById(R.id.view_progressbar))}}
                 val responseStr = response.body()?.string()
                 val responseObj = UtilsModel.getPostResponse(responseStr)
-                if(responseObj.status == "success"){
-                    val ordersObj = UtilsModel.getGson().fromJson(UtilsModel.getGson().toJson(responseObj), OrdersInterface::class.java)
-                    activity?.runOnUiThread {
-                        run {
-                            ordersAdapter.loadNewData(ordersObj.data)
+                when(responseObj.status){
+                    "success" -> {
+                        val ordersObj = UtilsModel.getGson()
+                            .fromJson(UtilsModel.getGson().toJson(responseObj), OrdersInterface::class.java)
+                        activity?.runOnUiThread {
+                            run {
+                                ordersAdapter.loadNewData(ordersObj.data)
+                            }
                         }
                     }
-                }else{
-                    UtilsModel.getAlertView().newInstance(responseStr, 1, 0).show(activity?.supportFragmentManager,"alertDialog")
+                    "noDataAvailable" -> {
+                        activity?.runOnUiThread {
+                            run {
+                                val ceneteredLayout = layoutInflater.inflate(
+                                    R.layout.view_centered_message,
+                                    activity!!.findViewById(R.id.customerTabsFrameLayout),
+                                    true
+                                )
+                                ceneteredLayout.centeredMessage.text = responseObj.desc
+                            }
+                        }
+                    }
+                    else -> {
+                        UtilsModel.getAlertView().newInstance(responseStr, 1, 0).show(activity?.supportFragmentManager,"alertDialog")
+                    }
                 }
             }
         })
