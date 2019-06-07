@@ -16,6 +16,7 @@
     //Notifiactions
     <string name="getUserNotifications">user/notifications</string>
     <string name="setNotificationRead">user/notification/read</string>
+    <string name="setOneSignalId">user/update/onesignal</string>
 
     //Messages
     <string name="createConversationMessage">user/conversation/message/create</string>

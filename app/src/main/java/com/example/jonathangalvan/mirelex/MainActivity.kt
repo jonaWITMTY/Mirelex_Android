@@ -15,6 +15,7 @@ import android.widget.Toast
 import com.example.jonathangalvan.mirelex.Interfaces.TokenInterface
 import com.example.jonathangalvan.mirelex.Models.SessionModel
 import com.example.jonathangalvan.mirelex.Models.UtilsModel
+import com.onesignal.OneSignal
 
 
 class MainActivity : AppCompatActivity() {
@@ -35,6 +36,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         supportActionBar?.hide()
+
+        /*OneSignal*/
+        OneSignal.startInit(this)
+            .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
+            .unsubscribeWhenNotificationsAreDisabled(true)
+            .init()
 
         /*Go to RegisterActivity*/
         val goToRegisterlistener = View.OnClickListener { v: View ->

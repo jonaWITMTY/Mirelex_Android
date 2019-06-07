@@ -18,12 +18,15 @@ import com.example.jonathangalvan.mirelex.ProductDetailActivity
 import com.example.jonathangalvan.mirelex.ProductActivity
 import com.example.jonathangalvan.mirelex.R
 import com.example.jonathangalvan.mirelex.Requests.CustomerProductRequest
+import com.example.jonathangalvan.mirelex.Requests.SetOneaSignalIdRequest
 import kotlinx.android.synthetic.main.fragment_products.*
 import kotlinx.android.synthetic.main.view_centered_message.view.*
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.Response
 import java.io.IOException
+import com.onesignal.OneSignal
+
 
 
 class Products : Fragment() {
@@ -42,11 +45,25 @@ class Products : Fragment() {
 
     fun onButtonPressed(uri: Uri) {
         listener?.onFragmentInteraction(uri)
-        getProducts()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        getProducts()
+
+        OneSignal.idsAvailable { userId, registrationId ->
+            if(userId != null){
+                val oneSignalObj = UtilsModel.getGson().toJson(SetOneaSignalIdRequest(
+                    userId
+                ))
+                UtilsModel.getOkClient().newCall(UtilsModel.postRequest(activity!!, resources.getString(R.string.setOneSignalId), oneSignalObj)).enqueue(object: Callback {
+                    override fun onFailure(call: Call, e: IOException) {}
+                    override fun onResponse(call: Call, response: Response) {
+                        println(UtilsModel.getPostResponse(response.body()?.string()).status)
+                    }
+                })
+            }
+        }
     }
 
     override fun onResume() {
