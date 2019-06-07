@@ -49,9 +49,9 @@ class StoreDetailShortActivity : AppCompatActivity() {
             val goToChat = Intent(this, ChatActivity::class.java)
             val sessionUser = SessionModel(this).getUser()
             val conversationObj = ConversationInterface(
-                ownerObj.userId,
-                if(ownerObj.companyName != null) ownerObj.companyName  else "${ownerObj.firstName } ${ownerObj.paternalLastName }",
-                sessionUser.person?.userId
+                userIdTo = ownerObj.userId,
+                userTo = if(ownerObj.companyName != null) ownerObj.companyName  else "${ownerObj.firstName } ${ownerObj.paternalLastName }",
+                userIdFrom = sessionUser.person?.userId
             )
             bundleToChat.putString("conversationObj", UtilsModel.getGson().toJson(conversationObj))
             goToChat.putExtras(bundleToChat)

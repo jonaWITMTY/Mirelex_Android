@@ -100,4 +100,5 @@
     <string name="usedTimes">Veces usado</string>
     <string name="invalid_date">Fecha invalida</string>
     <string name="send">Enviar</string>
+    <string name="conversations">Conversaciones</string>
 </resources>

@@ -20,6 +20,7 @@
     //Messages
     <string name="createConversationMessage">user/conversation/message/create</string>
     <string name="getConversationMessages">user/conversation/messages</string>
+    <string name="getConversations">user/conversations</string>
 
     //Product
     <string name="getProducts">products</string>

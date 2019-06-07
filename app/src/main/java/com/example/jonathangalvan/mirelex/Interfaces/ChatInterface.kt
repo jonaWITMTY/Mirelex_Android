@@ -1,10 +1,18 @@
 package com.example.jonathangalvan.mirelex.Interfaces
 
 class ConversationInterface(
+    var conversationId: String? = null,
     var userIdTo: String? = null,
     var userTo: String? = null,
+    var userToProfile: String? = null,
     var userIdFrom: String? = null,
-    var conversationId: String? = null
+    var userFrom: String? = null,
+    var userFromProfile: String? = null,
+    var message: String? = null
+){}
+
+class ConversationsInterface(
+    var data: ArrayList<ConversationInterface>
 ){}
 
 class ConverationMessagesInterface(
