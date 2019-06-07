@@ -1,5 +1,6 @@
 package com.example.jonathangalvan.mirelex
 
+import android.content.Context
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -17,6 +18,18 @@ import com.example.jonathangalvan.mirelex.Models.UtilsModel
 
 
 class MainActivity : AppCompatActivity() {
+
+    init {
+        instance = this
+    }
+
+    companion object{
+        private var instance: MainActivity? = null
+
+        fun getMainContext() : Context {
+            return instance!!.applicationContext
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

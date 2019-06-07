@@ -29,4 +29,9 @@ class SessionModel(val declaredContext: Context){
         val user = getUser()
         return user.person?.userTypeId
     }
+
+    fun signOutSession(){
+        saveSessionValue(declaredContext, "token", "")
+        saveSessionValue(declaredContext, "user", "")
+    }
 }

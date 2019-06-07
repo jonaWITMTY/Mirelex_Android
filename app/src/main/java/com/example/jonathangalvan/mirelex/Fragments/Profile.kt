@@ -51,8 +51,7 @@ class Profile : Fragment() {
 
         /*Click to logut*/
         sessionUserLogout.setOnClickListener(View.OnClickListener {
-            SessionModel.saveSessionValue(activity!!, "token", "")
-            SessionModel.saveSessionValue(activity!!, "user", "")
+            SessionModel(activity!!).signOutSession()
             startActivity(Intent(activity!!, MainActivity::class.java))
         })
 

@@ -3,6 +3,7 @@ package com.example.jonathangalvan.mirelex.Models
 import android.Manifest
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.support.v4.app.ActivityCompat
@@ -10,7 +11,9 @@ import android.support.v4.content.ContextCompat
 import android.view.ViewGroup
 import com.example.jonathangalvan.mirelex.Fragments.Utils.CustomAlert
 import com.example.jonathangalvan.mirelex.Interfaces.ResponseInterface
+import com.example.jonathangalvan.mirelex.MainActivity
 import com.example.jonathangalvan.mirelex.R
+import com.example.jonathangalvan.mirelex.RegisterActivity
 import com.example.jonathangalvan.mirelex.Requests.GlobalRequest
 import com.google.gson.Gson
 import okhttp3.*
@@ -80,7 +83,13 @@ class UtilsModel {
         }
 
         fun getPostResponse(response: String?): ResponseInterface{
-            return getGson().fromJson(response, ResponseInterface::class.java)
+            val responseObj = getGson().fromJson(response, ResponseInterface::class.java)
+            if(responseObj.status == "sessionFailed"){
+                val context: Context = MainActivity.getMainContext()
+                SessionModel(context).signOutSession()
+                context.startActivity(Intent(context, MainActivity::class.java))
+            }
+            return responseObj
         }
 
         fun dptopx(context: Context, dp: Int): Int {
