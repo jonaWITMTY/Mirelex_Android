@@ -21,16 +21,13 @@ class SplashActivity : AppCompatActivity() {
 
         /*Check for user info*/
         if(SessionModel.getSessionValue(this, "token") != ""){
-            val loader = layoutInflater.inflate(R.layout.view_progressbar, findViewById(android.R.id.content), true)
             UtilsModel.getOkClient().newCall(UtilsModel.postRequest(this,resources.getString(R.string.getUserInfo))).enqueue(object:
                 Callback {
                 override fun onFailure(call: Call, e: IOException) {
-                    runOnUiThread {run{findViewById<ViewGroup>(android.R.id.content).removeView(findViewById(R.id.view_progressbar))}}
                     UtilsModel.getAlertView().newInstance(UtilsModel.getErrorRequestCall(), 1, 0).show(supportFragmentManager,"alertDialog")
                 }
 
                 override fun onResponse(call: Call, response: Response) {
-                    runOnUiThread {run{findViewById<ViewGroup>(android.R.id.content).removeView(findViewById(R.id.view_progressbar))}}
                     val responseUserObj = UtilsModel.getGson().fromJson(response.body()!!.string(), ResponseInterface::class.java)
                     if(responseUserObj.status == "success"){
                         SessionModel.saveSessionValue(this@SplashActivity, "user", UtilsModel.getGson().toJson(responseUserObj.data!![0]))
