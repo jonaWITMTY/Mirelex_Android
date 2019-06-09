@@ -39,6 +39,9 @@
     <string name="getOrders">orders</string>
     <string name="getOrderInfo">order/info</string>
     <string name="getOrderTotal">order/total</string>
+    <string name="updateOrderStatus">order/status/update</string>
+    <string name="acceptOrder">order/accept</string>
+    <string name="rejectOrder">order/reject</string>
 
     //Services
     <string name="getOrderServices">service/orders</string>

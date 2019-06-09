@@ -58,8 +58,14 @@ class Orders : Fragment() {
 
             override fun onItemLongClick(view: View?, position: Int) {}
         }))
+    }
 
+    override fun onResume() {
+        super.onResume()
+        getOrders()
+    }
 
+    fun getOrders(){
         val loader = layoutInflater.inflate(R.layout.view_progressbar, activity?.findViewById(android.R.id.content), true)
         UtilsModel.getOkClient().newCall(UtilsModel.postRequest(activity!!.applicationContext, activity!!.resources.getString(R.string.getOrders))).enqueue( object:
             Callback {

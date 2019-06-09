@@ -11,6 +11,33 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/detailOrderActionButton"
+                android:id="@+id/detailOrderActionAceptReject" android:background="@color/Tale">
+            <Button
+                    android:text="@string/accept"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/detailOrderActionAceptOrder"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent" android:textColor="@color/white"/>
+            <Button
+                    android:text="@string/denied"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/detailOrderActionRejectOrder"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent" android:textColor="@color/white"/>
+        </LinearLayout>
+        <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/detailOrderInfo" app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:textColor="@color/white" android:background="@color/Tale"
+                android:id="@+id/detailOrderActionButton"/>
         <ImageView
                 android:layout_width="0dp"
                 android:layout_height="130dp" app:srcCompat="@drawable/mirelex_logo_cian"

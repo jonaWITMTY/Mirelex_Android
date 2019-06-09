@@ -102,4 +102,5 @@
     <string name="send">Enviar</string>
     <string name="conversations">Conversaciones</string>
     <string name="selectDate">Selecciona una fecha</string>
+    <string name="denied">Rechazar</string>
 </resources>
