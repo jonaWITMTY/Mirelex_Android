@@ -47,6 +47,9 @@
     <string name="getOrderServices">service/orders</string>
     <string name="getOrderServiceTotal">service/order/total</string>
     <string name="createServiceOrder">service/order/create</string>
+    <string name="acceptServiceOrder">service/order/accept</string>
+    <string name="rejectServiceOrder">service/order/reject</string>
+    <string name="updateServiceOrderStatus">service/order/status/update</string>
 
     //Cleanning
     <string name="getCleanningTypes">service/cleaning/types</string>

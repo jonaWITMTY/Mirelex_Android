@@ -74,8 +74,6 @@ class Services : Fragment() {
 
             override fun onItemLongClick(view: View?, position: Int) {}
         }))
-
-        loadServiceOrders()
     }
 
     override fun onResume() {
