@@ -103,4 +103,5 @@
     <string name="conversations">Conversaciones</string>
     <string name="selectDate">Selecciona una fecha</string>
     <string name="denied">Rechazar</string>
+    <string name="delivery">Envío</string>
 </resources>

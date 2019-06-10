@@ -9,8 +9,8 @@ class CreateOrderRequest(
     var orderType: String?,
     var total: String? = "0",
     var cardId: String? = "-1",
-    var clientDelivery: String = "0",
-    var ownerDelivery: String = "0",
+    var clientDelivery: Boolean = false,
+    var ownerDelivery: Boolean = false,
     var addressId: String? = ""
 ): GlobalRequest(){
     override fun toString(): String {

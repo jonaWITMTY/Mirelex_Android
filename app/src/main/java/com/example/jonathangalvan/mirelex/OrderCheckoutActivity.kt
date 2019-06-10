@@ -71,6 +71,7 @@ class OrderCheckoutActivity : AppCompatActivity() {
         orderCheckoutOrderProduct.setOnClickListener(View.OnClickListener {
             val loader = layoutInflater.inflate(R.layout.view_progressbar,findViewById(android.R.id.content), true)
             if(orderCheckoutTerms.isChecked){
+                orderRequestObj!!.clientDelivery = orderCheckoutDelivery.isChecked
                 UtilsModel.getOkClient().newCall(UtilsModel.postRequest(this, resources.getString(R.string.createOrder), UtilsModel.getGson().toJson(orderRequestObj))).enqueue(object: Callback {
                     override fun onFailure(call: Call, e: IOException) {
                         runOnUiThread {run{findViewById<ViewGroup>(android.R.id.content).removeView(findViewById(R.id.view_progressbar))}}
