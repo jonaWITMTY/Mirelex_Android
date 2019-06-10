@@ -104,13 +104,13 @@ class RegisterExtraFieldsActivity : AppCompatActivity(),
                 val responseRegisterStr = response.body()?.string()
                 val responseRegisterObj = UtilsModel.getPostResponse(responseRegisterStr)
                 if(responseRegisterObj.status == "success"){
+                    SessionModel.saveSessionValue(this@RegisterExtraFieldsActivity, "user", UtilsModel.getGson().toJson(responseRegisterObj.data!![0]))
                     when(viewModel?.userCall?.value?.person?.userTypeId){
                         "3" -> {
-                            SessionModel.saveSessionValue(this@RegisterExtraFieldsActivity, "user", UtilsModel.getGson().toJson(responseRegisterObj.data!![0]))
                             startActivity(Intent(this@RegisterExtraFieldsActivity, CustomerTabsActivity::class.java))
                         }
                         "4" -> {
-                            //Esta entra en fase 2
+                            startActivity(Intent(this@RegisterExtraFieldsActivity, StoreTabsActivity::class.java))
                         }
                     }
                 }
