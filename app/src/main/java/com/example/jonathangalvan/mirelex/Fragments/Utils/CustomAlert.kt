@@ -44,7 +44,7 @@ class CustomAlert : DialogFragment() {
         args.putInt("onSuccessFinish", onSuccessFinish)
         args.putString("alertInfo", alertInfo)
         args.putInt("alertType", alertType)
-        ca.setArguments(args)
+        ca.arguments = args
         return ca
     }
 

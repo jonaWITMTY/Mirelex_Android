@@ -20,18 +20,6 @@ import com.onesignal.OneSignal
 
 class MainActivity : AppCompatActivity() {
 
-    init {
-        instance = this
-    }
-
-    companion object{
-        private var instance: MainActivity? = null
-
-        fun getMainContext() : Context {
-            return instance!!.applicationContext
-        }
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)

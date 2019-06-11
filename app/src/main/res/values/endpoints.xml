@@ -34,6 +34,9 @@
     <string name="getProductPrices">product/suggested/prices</string>
     <string name="createProduct">product/create</string>
 
+    //Payment
+    <string name="deleteCard">user/card/delete</string>
+
     //Order
     <string name="createOrder">order/create</string>
     <string name="getOrders">orders</string>

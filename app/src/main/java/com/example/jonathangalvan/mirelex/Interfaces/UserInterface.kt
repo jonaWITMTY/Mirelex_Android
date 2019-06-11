@@ -3,7 +3,8 @@ package com.example.jonathangalvan.mirelex.Interfaces
 class UserInterface(
     var person: Person?,
     var address: ArrayList<Address>?,
-    var characteristics: Characteristics?
+    var characteristics: Characteristics?,
+    var paymentCards: ArrayList<PaymentCard>
 ) {}
 
 class Person(
@@ -82,4 +83,16 @@ class Characteristics (
     var bodyType: String?,
     var hairColor: String?,
     var bust: String?
+){}
+
+class PaymentCard(
+    var cardId: String?,
+    var conektaCardId: String?,
+    var name: String?,
+    var lastDigits: String?,
+    var bin: String?,
+    var expireMonth: String?,
+    var expireYear: String?,
+    var brand: String?,
+    var default: String?
 ){}

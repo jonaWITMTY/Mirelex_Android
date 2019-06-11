@@ -104,4 +104,7 @@
     <string name="selectDate">Selecciona una fecha</string>
     <string name="denied">Rechazar</string>
     <string name="delivery">Envío</string>
+    <string name="paymentMethods">Métodos de pago</string>
+    <string name="principal">Principal</string>
+    <string name="deletePaymentCard">Eliminar tarjeta de pago</string>
 </resources>

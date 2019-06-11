@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.jonathangalvan.mirelex.*
 import com.example.jonathangalvan.mirelex.ConversationsActivity
+import com.example.jonathangalvan.mirelex.Enums.UserType
 import com.example.jonathangalvan.mirelex.Interfaces.UserInterface
 import com.example.jonathangalvan.mirelex.Models.SessionModel
 
@@ -35,6 +36,11 @@ class Profile : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        /*Hide options for store*/
+        if(SessionModel(activity!!).getUser().person?.userTypeId == UserType.Store.userTypeId){
+            sessionUserPayments.visibility = View.GONE
+        }
 
         /*Fill user cell*/
         updateUser()
@@ -63,6 +69,11 @@ class Profile : Fragment() {
         /*Click to messages*/
         sessionUserMessages.setOnClickListener(View.OnClickListener {
             startActivity(Intent(activity!!, ConversationsActivity::class.java))
+        })
+
+        /*Click to payment methods*/
+        sessionUserPayments.setOnClickListener(View.OnClickListener {
+            startActivity(Intent(activity!!, PaymentCardsActivity::class.java))
         })
     }
 

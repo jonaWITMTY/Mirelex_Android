@@ -53,6 +53,29 @@
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" android:paddingBottom="20dp" android:paddingTop="20dp"
+                    android:background="@drawable/border_bottom" android:id="@+id/sessionUserPayments">
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:layout_weight="1"
+                        android:gravity="fill_vertical" android:text="@string/paymentMethods"
+                        android:textColor="@android:color/black" android:textSize="14sp"
+                        android:layout_marginLeft="20dp"/>
+
+                <ImageView
+                        android:src="@drawable/credit_card"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp" android:id="@+id/imageView16" android:layout_weight="0"
+                        android:layout_marginRight="40dp"/>
+                <ImageView
+                        android:src="@drawable/chevron_right"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp" android:layout_marginTop="1dp"
+                        android:layout_marginRight="10dp"/>
+            </LinearLayout>
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" android:paddingBottom="20dp" android:paddingTop="20dp"
                     android:background="@drawable/border_bottom" android:id="@+id/sessionUserMessages">
                 <TextView
                         android:layout_width="wrap_content"

@@ -15,6 +15,7 @@ import com.example.jonathangalvan.mirelex.MainActivity
 import com.example.jonathangalvan.mirelex.R
 import com.example.jonathangalvan.mirelex.RegisterActivity
 import com.example.jonathangalvan.mirelex.Requests.GlobalRequest
+import com.example.jonathangalvan.mirelex.SplashActivity
 import com.google.gson.Gson
 import okhttp3.*
 import java.io.File
@@ -85,7 +86,7 @@ class UtilsModel {
         fun getPostResponse(response: String?): ResponseInterface{
             val responseObj = getGson().fromJson(response, ResponseInterface::class.java)
             if(responseObj.status == "sessionFailed"){
-                val context: Context = MainActivity.getMainContext()
+                val context: Context = SplashActivity.getMainContext()
                 SessionModel(context).signOutSession()
                 context.startActivity(Intent(context, MainActivity::class.java))
             }

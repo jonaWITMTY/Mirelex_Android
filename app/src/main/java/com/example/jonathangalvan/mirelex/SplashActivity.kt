@@ -1,5 +1,6 @@
 package com.example.jonathangalvan.mirelex
 
+import android.content.Context
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -13,6 +14,18 @@ import okhttp3.Response
 import java.io.IOException
 
 class SplashActivity : AppCompatActivity() {
+
+    init {
+        instance = this
+    }
+
+    companion object{
+        private var instance: SplashActivity? = null
+
+        fun getMainContext() : Context {
+            return instance!!.applicationContext
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
