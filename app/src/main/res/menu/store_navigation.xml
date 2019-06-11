@@ -2,20 +2,20 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-            android:title="@string/products" android:icon="@drawable/products_tab"
+            android:title="@string/products" android:icon="@drawable/ic_products"
             android:id="@+id/storeNavigationProducts"/>
 
     <item
             android:id="@+id/storeNavigationServices"
-            android:title="@string/services" android:icon="@drawable/services_tab"/>
+            android:title="@string/services" android:icon="@drawable/ic_services"/>
 
     <item
             android:id="@+id/storeNavigationOrders"
-            android:icon="@drawable/orders_tab"
+            android:icon="@drawable/ic_orders"
             android:title="@string/storeTabOrders"/>
-    <item android:title="@string/storeTabNotifications" android:icon="@drawable/notifications_tab"
+    <item android:title="@string/storeTabNotifications" android:icon="@drawable/ic_notification"
           android:id="@+id/storeNavigationNotifications"/>
-    <item android:title="@string/storeTabProfile" android:icon="@drawable/profile_tab"
+    <item android:title="@string/storeTabProfile" android:icon="@drawable/ic_profile"
           android:id="@+id/storeNavigationProfile"/>
 
 </menu>
