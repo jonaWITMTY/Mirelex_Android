@@ -7,9 +7,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import com.example.jonathangalvan.mirelex.Adapters.OrdersAdapter
 import com.example.jonathangalvan.mirelex.Interfaces.OrdersInterface
 import com.example.jonathangalvan.mirelex.Listeners.RecyclerItemClickListener
@@ -31,6 +29,7 @@ class Orders : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
         arguments?.let {
         }
     }
@@ -106,6 +105,13 @@ class Orders : Fragment() {
                 }
             }
         })
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu?) {
+        super.onPrepareOptionsMenu(menu)
+
+        /*Store tabs icons*/
+        menu?.findItem(R.id.storeTabsAddIcon)?.isVisible = false
     }
 
     fun onButtonPressed(uri: Uri) {

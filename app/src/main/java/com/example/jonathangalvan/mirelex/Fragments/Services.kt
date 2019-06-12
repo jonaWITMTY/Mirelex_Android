@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import com.example.jonathangalvan.mirelex.Adapters.ServicesAdapter
@@ -33,6 +34,7 @@ class Services : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
         arguments?.let {
         }
     }
@@ -121,6 +123,13 @@ class Services : Fragment() {
                 }
             }
         })
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu?) {
+        super.onPrepareOptionsMenu(menu)
+
+        /*Store tabs icons*/
+        menu?.findItem(R.id.storeTabsAddIcon)?.isVisible = false
     }
 
     fun onButtonPressed(uri: Uri) {

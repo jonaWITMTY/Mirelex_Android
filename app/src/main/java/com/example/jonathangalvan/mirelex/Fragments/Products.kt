@@ -5,9 +5,9 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.support.v4.content.ContextCompat
+import android.support.v4.graphics.drawable.DrawableCompat
+import android.view.*
 import com.example.jonathangalvan.mirelex.Adapters.ProductsAdapter
 import com.example.jonathangalvan.mirelex.Enums.UserType
 import com.example.jonathangalvan.mirelex.Interfaces.ProductInterface
@@ -34,6 +34,7 @@ class Products : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
     }
 
     override fun onCreateView(
@@ -89,8 +90,8 @@ class Products : Fragment() {
                     "success" -> {
                         responseProducts = UtilsModel.getGson().fromJson(UtilsModel.getGson().toJson(responseObj), ProductsInterface::class.java)
                         activity?.runOnUiThread {
-                            productsGrid.adapter = ProductsAdapter(activity!!.applicationContext, responseProducts.data)
-                            productsGrid.setOnItemClickListener { parent, view, position, id ->
+                            productsGrid?.adapter = ProductsAdapter(activity!!, responseProducts.data)
+                            productsGrid?.setOnItemClickListener { parent, view, position, id ->
                                 val goToProductDetail: Intent
                                 when(SessionModel(activity!!).getSessionUserType()){
                                     UserType.Store.userTypeId -> {
@@ -125,6 +126,15 @@ class Products : Fragment() {
                 }
             }
         })
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when(item?.itemId){
+            R.id.storeTabsAddIcon ->{
+                startActivity(Intent(activity!!, ProductActivity::class.java))
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onAttach(context: Context) {
