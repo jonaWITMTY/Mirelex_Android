@@ -58,7 +58,7 @@ class ConversationsActivity : AppCompatActivity() {
                             run {
                                 val ceneteredLayout = layoutInflater.inflate(
                                     R.layout.view_centered_message,
-                                    findViewById(R.id.customerTabsFrameLayout),
+                                    findViewById(android.R.id.content),
                                     true
                                 )
                                 ceneteredLayout.centeredMessage.text = responseObj.desc

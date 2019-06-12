@@ -20,6 +20,7 @@ import com.example.jonathangalvan.mirelex.Listeners.RecyclerItemClickListener
 import com.example.jonathangalvan.mirelex.Models.SessionModel
 import com.example.jonathangalvan.mirelex.Models.UtilsModel
 import kotlinx.android.synthetic.main.activity_payment_cards.*
+import kotlinx.android.synthetic.main.view_centered_message.view.*
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.Response
@@ -82,7 +83,12 @@ class PaymentCardsActivity : AppCompatActivity() {
                     sessionUser = user
                     runOnUiThread {
                         run {
+                            findViewById<ViewGroup>(android.R.id.content)?.removeView(findViewById<ViewGroup>(R.id.viewCenteredMessage))
                             paymentAdapter.loadPaymentCards(sessionUser!!.paymentCards)
+                            if(sessionUser!!.paymentCards.isNullOrEmpty()){
+                                val ceneteredLayout = layoutInflater.inflate(R.layout.view_centered_message, findViewById(android.R.id.content), true)
+                                ceneteredLayout.centeredMessage.text = resources.getString(R.string.noDataAvailable)
+                            }
                         }
                     }
                 }

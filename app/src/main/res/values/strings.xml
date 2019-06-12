@@ -110,4 +110,5 @@
     <string name="cardNumber">Número de tarjeta</string>
     <string name="month">Mes</string>
     <string name="year">Año</string>
+    <string name="noDataAvailable">No hay datos disponibles</string>
 </resources>
