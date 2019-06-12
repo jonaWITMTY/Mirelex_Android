@@ -1,10 +1,15 @@
 package com.example.jonathangalvan.mirelex
 
+import android.app.ActivityOptions
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.FragmentManager
+import android.support.v4.content.ContextCompat
+import android.support.v4.graphics.drawable.DrawableCompat
 import android.support.v7.widget.LinearLayoutManager
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import com.example.jonathangalvan.mirelex.Adapters.PaymentCardsAdapter
@@ -51,6 +56,15 @@ class PaymentCardsActivity : AppCompatActivity() {
     }
 
     fun dialogCallback(){
+        updateUser()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        updateUser()
+    }
+
+    fun updateUser(){
         val loader = layoutInflater.inflate(R.layout.view_progressbar, findViewById(android.R.id.content), true)
         UtilsModel.getOkClient().newCall(UtilsModel.postRequest(this,resources.getString(R.string.getUserInfo))).enqueue(object:
             Callback {
@@ -76,9 +90,23 @@ class PaymentCardsActivity : AppCompatActivity() {
         })
     }
 
-    override fun onResume() {
-        super.onResume()
-        paymentAdapter.loadPaymentCards(sessionUser!!.paymentCards)
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when(item?.itemId){
+            R.id.paymentCardAdd -> {
+                val goToServiceCreate = Intent(this, PaymentCardCreateActivity::class.java)
+                val options = ActivityOptions.makeCustomAnimation(this,  R.anim.abc_slide_in_bottom,  R.anim.abc_fade_out)
+                startActivity(goToServiceCreate, options.toBundle())
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.payment_icons, menu)
+        menu?.getItem(0)?.icon?.let {
+            DrawableCompat.setTint(it, ContextCompat.getColor(this, android.R.color.white))
+        }
+        return super.onCreateOptionsMenu(menu)
     }
 
     override fun onSupportNavigateUp(): Boolean {

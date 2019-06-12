@@ -37,7 +37,8 @@ class SplashActivity : AppCompatActivity() {
             UtilsModel.getOkClient().newCall(UtilsModel.postRequest(this,resources.getString(R.string.getUserInfo))).enqueue(object:
                 Callback {
                 override fun onFailure(call: Call, e: IOException) {
-                    UtilsModel.getAlertView().newInstance(UtilsModel.getErrorRequestCall(), 1, 0).show(supportFragmentManager,"alertDialog")
+                    SessionModel(this@SplashActivity).signOutSession()
+                    startActivity(Intent(this@SplashActivity, MainActivity::class.java))
                 }
 
                 override fun onResponse(call: Call, response: Response) {

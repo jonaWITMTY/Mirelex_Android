@@ -36,6 +36,7 @@
 
     //Payment
     <string name="deleteCard">user/card/delete</string>
+    <string name="createCard">user/card/create</string>
 
     //Order
     <string name="createOrder">order/create</string>

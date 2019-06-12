@@ -57,10 +57,6 @@ Notifications.OnFragmentInteractionListener{
         setContentView(R.layout.activity_store_tabs)
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
         navView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
-    }
-
-    override fun onResume() {
-        super.onResume()
         supportActionBar?.title = resources.getString(R.string.storeTabProducts)
         openTab(Products())
     }

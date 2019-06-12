@@ -107,4 +107,7 @@
     <string name="paymentMethods">Métodos de pago</string>
     <string name="principal">Principal</string>
     <string name="deletePaymentCard">Eliminar tarjeta de pago</string>
+    <string name="cardNumber">Número de tarjeta</string>
+    <string name="month">Mes</string>
+    <string name="year">Año</string>
 </resources>

@@ -12,6 +12,8 @@
             android:label="@string/app_name"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+        <activity android:name=".PaymentCardCreateActivity">
+        </activity>
         <activity android:name=".PaymentCardsActivity">
         </activity>
         <activity android:name=".SplashActivity">
