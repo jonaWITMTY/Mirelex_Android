@@ -98,6 +98,7 @@ class ServiceCreateActivity : AppCompatActivity(),
                         0 -> {
                             /*Cleanning tab*/
                             serviceObj.productStyleId = serviceTypes[serviceCreateTypes.selectedItemPosition].productCatalogId.toString()
+                            serviceObj.clientDelivery = createServiceSend.isChecked
                         }
                         else -> {
                             /*Sewing tab*/
@@ -201,11 +202,12 @@ class ServiceCreateActivity : AppCompatActivity(),
             0 -> {
                 /*Cleanning tab*/
                 endpoint = resources.getString(R.string.getCleanningTypes)
+                createServiceSend.visibility = View.VISIBLE
             }
             else -> {
                 /*Sewing tab*/
                 endpoint = resources.getString(R.string.getSewingTypes)
-
+                createServiceSend.visibility = View.GONE
             }
         }
 

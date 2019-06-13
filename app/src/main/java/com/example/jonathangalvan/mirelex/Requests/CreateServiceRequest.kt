@@ -8,7 +8,7 @@ class CreateServiceRequest(
     var orderType: String?,
     var total: String? = "0",
     var cardId: String? = "-1",
-    var clientDelivery: String = "0",
+    var clientDelivery: Boolean = false,
     var addressId: String? = "",
     var storeId: String?,
     var productStyleId: String? = null,
