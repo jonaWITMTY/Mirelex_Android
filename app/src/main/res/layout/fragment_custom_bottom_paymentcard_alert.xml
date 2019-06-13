@@ -3,10 +3,15 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content" android:orientation="vertical">
     <Button
+            android:text="@string/defaultPaymentCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:id="@+id/paymentCardAlertSetDefault" android:layout_weight="1"
+            android:layout_marginTop="20dp" android:background="@android:color/transparent"/>
+    <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content" android:id="@+id/paymentCardAlertDelete" android:layout_weight="1"
             android:background="@android:color/transparent" android:text="@string/deletePaymentCard"
-            android:layout_marginTop="20dp" android:layout_marginBottom="30dp" android:textColor="@color/red"/>
+            android:layout_marginTop="10dp" android:layout_marginBottom="30dp" android:textColor="@color/red"/>
     <Button
             android:text="@string/cancel"
             android:layout_width="match_parent"

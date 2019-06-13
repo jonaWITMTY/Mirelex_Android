@@ -14,6 +14,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.jonathangalvan.mirelex.Adapters.PaymentCardsAdapter
 import com.example.jonathangalvan.mirelex.Fragments.Utils.CustomBottomAlert
+import com.example.jonathangalvan.mirelex.Interfaces.BottomAlertInterface
 import com.example.jonathangalvan.mirelex.Interfaces.ResponseInterface
 import com.example.jonathangalvan.mirelex.Interfaces.UserInterface
 import com.example.jonathangalvan.mirelex.Listeners.RecyclerItemClickListener
@@ -47,7 +48,12 @@ class PaymentCardsActivity : AppCompatActivity() {
             override fun onItemClick(view: View, position: Int) {
                 runOnUiThread {
                     run {
-                        CustomBottomAlert().bottomSheetDialogInstance(paymentAdapter.getItem(position).cardId).show(supportFragmentManager, "alert")
+                        val parameterObj = UtilsModel.getGson().toJson(BottomAlertInterface(
+                            alertType = "payment",
+                            cardDefault = paymentAdapter.getItem(position).default,
+                            cardId = paymentAdapter.getItem(position).cardId
+                        ))
+                        CustomBottomAlert().bottomSheetDialogInstance(parameterObj).show(supportFragmentManager, "alert")
                     }
                 }
             }

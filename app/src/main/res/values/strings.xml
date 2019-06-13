@@ -111,4 +111,5 @@
     <string name="month">Mes</string>
     <string name="year">Año</string>
     <string name="noDataAvailable">No hay datos disponibles</string>
+    <string name="defaultPaymentCard">Principal tarjeta de pago</string>
 </resources>
