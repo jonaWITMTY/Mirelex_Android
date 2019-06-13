@@ -50,7 +50,6 @@ class Products : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        getProducts()
 
         /*Save onesignal id*/
         OneSignal.idsAvailable { userId, registrationId ->

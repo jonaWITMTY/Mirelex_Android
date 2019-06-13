@@ -10,6 +10,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import com.example.jonathangalvan.mirelex.Fragments.Utils.CustomAlert
+import com.example.jonathangalvan.mirelex.Fragments.Utils.ImagePreview
 import com.example.jonathangalvan.mirelex.Interfaces.CatalogInterface
 import com.example.jonathangalvan.mirelex.Interfaces.WomenCatalogInterface
 import com.example.jonathangalvan.mirelex.R
@@ -60,12 +62,25 @@ class RegisterExtraFieldsMeasure : Fragment() {
         adapterHairColor.setDropDownViewResource(R.layout.view_spinner_item)
         registerExtraHairColorField.adapter = adapterHairColor
 
+        /*Clicks measures "?"*/
+        imagePreviewBust.setOnClickListener(View.OnClickListener {
+            ImagePreview().newInstance(R.drawable.mirelex_logo_cian.toString()).show(fragmentManager, "alertDialog")
+        })
+
+        imagePreviewWaist.setOnClickListener(View.OnClickListener {
+            ImagePreview().newInstance(R.drawable.mirelex_logo_cian.toString()).show(fragmentManager, "alertDialog")
+        })
+
+        imagePreviewHip.setOnClickListener(View.OnClickListener {
+            ImagePreview().newInstance(R.drawable.mirelex_logo_cian.toString()).show(fragmentManager, "alertDialog")
+        })
+
         /*Hide fields*/
         when(user?.genderId){
             "1" -> {
-                registerExtraBustField.visibility = View.GONE
-                registerExtraWaistField.visibility = View.GONE
-                registerExtraHipField.visibility = View.GONE
+                registerExtraBustLayout.visibility = View.GONE
+                registerExtraWaistLayout.visibility = View.GONE
+                registerExtraHipLayout.visibility = View.GONE
                 registerExtraBodyTypesWrap.visibility = View.GONE
                 registerExtraSkinColorWrap.visibility = View.GONE
                 registerExtraHairColorWrap.visibility = View.GONE

@@ -50,9 +50,6 @@ class Notifications : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        /*Get notifictions*/
-        getNotifications()
-
         /*Onclick notification item*/
         notificationsList.addOnItemTouchListener(RecyclerItemClickListener(context!!, notificationsList, object : RecyclerItemClickListener.OnItemClickListener {
             override fun onItemClick(view: View, position: Int) {
