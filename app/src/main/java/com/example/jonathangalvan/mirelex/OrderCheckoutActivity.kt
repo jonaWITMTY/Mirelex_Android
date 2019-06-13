@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.example.jonathangalvan.mirelex.Enums.OrderType
 import com.example.jonathangalvan.mirelex.Enums.UserType
 import com.example.jonathangalvan.mirelex.Interfaces.*
@@ -79,7 +80,7 @@ class OrderCheckoutActivity : AppCompatActivity() {
         /*Create order event*/
         orderCheckoutOrderProduct.setOnClickListener(View.OnClickListener {
             val loader = layoutInflater.inflate(R.layout.view_progressbar,findViewById(android.R.id.content), true)
-            if(orderCheckoutTerms.isChecked){
+            if(orderCheckoutTerms.isChecked && defaultCard != null){
                 orderRequestObj!!.clientDelivery = orderCheckoutDelivery.isChecked
                 when(orderRequestObj?.orderType){
                     OrderType.Lease.orderTypeId, OrderType.Fitting.orderTypeId -> {
@@ -107,7 +108,13 @@ class OrderCheckoutActivity : AppCompatActivity() {
                 })
             }else{
                 runOnUiThread {run{findViewById<ViewGroup>(android.R.id.content).removeView(findViewById(R.id.view_progressbar))}}
-                UtilsModel.getAlertView().newInstance(UtilsModel.getErrorMissingTerms(), 1, 0).show(supportFragmentManager, "alertView")
+                if(defaultCard == null){
+                    val text = resources.getText(R.string.fillRequiredFields)
+                    val duration = Toast.LENGTH_SHORT
+                    Toast.makeText(this, text, duration).show()
+                }else{
+                    UtilsModel.getAlertView().newInstance(UtilsModel.getErrorMissingTerms(), 1, 0).show(supportFragmentManager, "alertView")
+                }
             }
         })
     }

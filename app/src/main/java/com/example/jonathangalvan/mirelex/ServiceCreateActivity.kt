@@ -1,5 +1,7 @@
 package com.example.jonathangalvan.mirelex
 
+import android.app.ActivityOptions
+import android.content.Intent
 import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -15,6 +17,7 @@ import android.widget.Toast
 import com.example.jonathangalvan.mirelex.Enums.OrderType
 import com.example.jonathangalvan.mirelex.Fragments.Utils.DatePickerAvailable
 import com.example.jonathangalvan.mirelex.Interfaces.*
+import com.example.jonathangalvan.mirelex.Models.SessionModel
 import com.example.jonathangalvan.mirelex.Models.UtilsModel
 import com.example.jonathangalvan.mirelex.Requests.CreateServiceRequest
 import com.example.jonathangalvan.mirelex.Requests.GetCleanningServiceStoresRequest
@@ -33,6 +36,8 @@ class ServiceCreateActivity : AppCompatActivity(),
     private var sewingTypes: ArrayList<SewingInterface> = ArrayList()
     private var serviceStores: ArrayList<ServiceStore> = ArrayList()
     private var total: String? = null
+    private var sessionUser: UserInterface? = null
+    private var defaultCard: PaymentCard? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,6 +56,9 @@ class ServiceCreateActivity : AppCompatActivity(),
                 reseatServiceTypes()
             }
         })
+
+        /*PaymentsCard*/
+        paymentCardButtonAction()
 
         /*On type change*/
         serviceCreateTypes.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
@@ -74,7 +82,7 @@ class ServiceCreateActivity : AppCompatActivity(),
         /*Create service button*/
         serviceCreateOrderService.setOnClickListener(View.OnClickListener {
             if(serviceCreateTerms.isChecked){
-                if(inputValidations()){
+                if(inputValidations() && defaultCard != null){
                     val loader = layoutInflater.inflate(R.layout.view_progressbar,findViewById(android.R.id.content), true)
                     var orderTypeId = ""
                     when(service){
@@ -92,7 +100,8 @@ class ServiceCreateActivity : AppCompatActivity(),
                         endDate = serviceCreateDate.text.toString(),
                         orderType = orderTypeId,
                         total = total,
-                        storeId = serviceStores[serviceCreateStores.selectedItemPosition].userId
+                        storeId = serviceStores[serviceCreateStores.selectedItemPosition].userId,
+                        cardId = defaultCard?.cardId
                     )
                     when(service){
                         0 -> {
@@ -146,6 +155,61 @@ class ServiceCreateActivity : AppCompatActivity(),
         })
     }
 
+    override fun onResume() {
+        super.onResume()
+        updateUser()
+    }
+
+    fun paymentCardButtonAction(){
+        sessionUser = SessionModel(this).getUser()
+        getDefaultCard()
+        if(sessionUser?.paymentCards!!.isNotEmpty()){
+            createServicePaymentCard.text = "${defaultCard?.brand} - ${defaultCard?.lastDigits}"
+            createServicePaymentCard.setOnClickListener(null)
+        }else{
+            createServicePaymentCard.text = resources.getString(R.string.addPaymentCard)
+            createServicePaymentCard.setOnClickListener(View.OnClickListener {
+                val goToServiceCreate = Intent(this, PaymentCardCreateActivity::class.java)
+                val options = ActivityOptions.makeCustomAnimation(this,  R.anim.abc_slide_in_bottom,  R.anim.abc_fade_out)
+                startActivity(goToServiceCreate, options.toBundle())
+            })
+        }
+    }
+
+    fun getDefaultCard(){
+        for (card in sessionUser!!.paymentCards){
+            if(card.default == "1"){
+                defaultCard = card
+            }
+        }
+    }
+
+    fun updateUser(){
+        val loader = layoutInflater.inflate(R.layout.view_progressbar, findViewById(android.R.id.content), true)
+        UtilsModel.getOkClient().newCall(UtilsModel.postRequest(this,resources.getString(R.string.getUserInfo))).enqueue(object:
+            Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                runOnUiThread {run{findViewById<ViewGroup>(android.R.id.content).removeView(findViewById(R.id.view_progressbar))}}
+                UtilsModel.getAlertView().newInstance(UtilsModel.getErrorRequestCall(), 1, 0).show(supportFragmentManager,"alertDialog")
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                runOnUiThread {run{findViewById<ViewGroup>(android.R.id.content).removeView(findViewById(R.id.view_progressbar))}}
+                val responseUserObj = UtilsModel.getGson().fromJson(response.body()!!.string(), ResponseInterface::class.java)
+                if(responseUserObj.status == "success"){
+                    SessionModel.saveSessionValue(this@ServiceCreateActivity, "user", UtilsModel.getGson().toJson(responseUserObj.data!![0]))
+                    val user = SessionModel(this@ServiceCreateActivity).getUser()
+                    sessionUser = user
+                    runOnUiThread {
+                        run {
+                            paymentCardButtonAction()
+                        }
+                    }
+                }
+            }
+        })
+    }
+
     fun getServiceTotal(){
         if(inputValidations()){
             var orderTypeId = ""
@@ -188,7 +252,11 @@ class ServiceCreateActivity : AppCompatActivity(),
                     if(responseObj.status == "success"){
                         val serviceTotal = UtilsModel.getGson().fromJson(UtilsModel.getGson().toJson(responseObj.data!![0]),OrderTotal::class.java)
                         total = serviceTotal.total
-                        serviceCreateServiceTotal.text = serviceTotal.totalFormatted
+                        runOnUiThread {
+                            run{
+                                serviceCreateServiceTotal.text = serviceTotal.totalFormatted
+                            }
+                        }
                     }
                 }
             })
