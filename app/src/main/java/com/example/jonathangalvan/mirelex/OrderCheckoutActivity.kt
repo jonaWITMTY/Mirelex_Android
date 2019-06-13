@@ -83,38 +83,23 @@ class OrderCheckoutActivity : AppCompatActivity() {
             if(orderCheckoutTerms.isChecked && defaultCard != null){
                 orderRequestObj!!.clientDelivery = orderCheckoutDelivery.isChecked
                 when(orderRequestObj?.orderType){
-                    OrderType.Lease.orderTypeId, OrderType.Fitting.orderTypeId -> {
-                        orderRequestObj!!.cardId = defaultCard?.cardId
-                    }
-                }
-                UtilsModel.getOkClient().newCall(UtilsModel.postRequest(this, resources.getString(R.string.createOrder), UtilsModel.getGson().toJson(orderRequestObj))).enqueue(object: Callback {
-                    override fun onFailure(call: Call, e: IOException) {
-                        runOnUiThread {run{findViewById<ViewGroup>(android.R.id.content).removeView(findViewById(R.id.view_progressbar))}}
-                        UtilsModel.getAlertView().newInstance(UtilsModel.getErrorRequestCall(), 1, 0).show(supportFragmentManager,"alertDialog")
-                    }
-
-                    override fun onResponse(call: Call, response: Response) {
-                        runOnUiThread {run{findViewById<ViewGroup>(android.R.id.content).removeView(findViewById(R.id.view_progressbar))}}
-                        val responseStr = response.body()?.string()
-                        val responseObj = UtilsModel.getPostResponse(responseStr)
-                        if(responseObj.status == "success"){
-                            val newAlert = UtilsModel.getAlertView().newInstance(responseStr, 4, 0)
-                            newAlert.show(supportFragmentManager, "alertView")
+                    OrderType.Lease.orderTypeId, OrderType.Purchase.orderTypeId -> {
+                        if(defaultCard != null){
+                            orderRequestObj!!.cardId = defaultCard?.cardId
+                            createOrderRequest()
                         }else{
-                            val newAlert = UtilsModel.getAlertView().newInstance(responseStr, 1, 0)
-                            newAlert.show(supportFragmentManager, "alertView")
+                            val text = resources.getText(R.string.fillRequiredFields)
+                            val duration = Toast.LENGTH_SHORT
+                            Toast.makeText(this, text, duration).show()
                         }
                     }
-                })
+                    OrderType.Fitting.orderTypeId -> {
+                        createOrderRequest()
+                    }
+                }
             }else{
                 runOnUiThread {run{findViewById<ViewGroup>(android.R.id.content).removeView(findViewById(R.id.view_progressbar))}}
-                if(defaultCard == null){
-                    val text = resources.getText(R.string.fillRequiredFields)
-                    val duration = Toast.LENGTH_SHORT
-                    Toast.makeText(this, text, duration).show()
-                }else{
-                    UtilsModel.getAlertView().newInstance(UtilsModel.getErrorMissingTerms(), 1, 0).show(supportFragmentManager, "alertView")
-                }
+                UtilsModel.getAlertView().newInstance(UtilsModel.getErrorMissingTerms(), 1, 0).show(supportFragmentManager, "alertView")
             }
         })
     }
@@ -122,6 +107,28 @@ class OrderCheckoutActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         updateUser()
+    }
+
+    fun createOrderRequest(){
+        UtilsModel.getOkClient().newCall(UtilsModel.postRequest(this, resources.getString(R.string.createOrder), UtilsModel.getGson().toJson(orderRequestObj))).enqueue(object: Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                runOnUiThread {run{findViewById<ViewGroup>(android.R.id.content).removeView(findViewById(R.id.view_progressbar))}}
+                UtilsModel.getAlertView().newInstance(UtilsModel.getErrorRequestCall(), 1, 0).show(supportFragmentManager,"alertDialog")
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                runOnUiThread {run{findViewById<ViewGroup>(android.R.id.content).removeView(findViewById(R.id.view_progressbar))}}
+                val responseStr = response.body()?.string()
+                val responseObj = UtilsModel.getPostResponse(responseStr)
+                if(responseObj.status == "success"){
+                    val newAlert = UtilsModel.getAlertView().newInstance(responseStr, 4, 0)
+                    newAlert.show(supportFragmentManager, "alertView")
+                }else{
+                    val newAlert = UtilsModel.getAlertView().newInstance(responseStr, 1, 0)
+                    newAlert.show(supportFragmentManager, "alertView")
+                }
+            }
+        })
     }
 
     fun getOrderTotal(){
