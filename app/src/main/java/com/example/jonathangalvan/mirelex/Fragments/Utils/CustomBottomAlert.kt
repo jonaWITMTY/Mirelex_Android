@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import com.example.jonathangalvan.mirelex.Interfaces.BottomAlertInterface
 import com.example.jonathangalvan.mirelex.Models.SessionModel
 import com.example.jonathangalvan.mirelex.Models.UtilsModel
+import com.example.jonathangalvan.mirelex.OrderCheckoutActivity
 import com.example.jonathangalvan.mirelex.PaymentCardsActivity
 import com.example.jonathangalvan.mirelex.R
 import com.example.jonathangalvan.mirelex.Requests.DeleteCardRequest
@@ -106,7 +107,11 @@ class CustomBottomAlert: DialogFragment() {
                             if(responseObj.status == "success"){
                                 activity?.runOnUiThread {
                                     run{
-                                        (activity as PaymentCardsActivity).dialogCallback()
+                                        when(activity){
+                                            is PaymentCardsActivity -> {
+                                                (activity as PaymentCardsActivity).dialogCallback()
+                                            }
+                                        }
                                     }
                                 }
                             }
