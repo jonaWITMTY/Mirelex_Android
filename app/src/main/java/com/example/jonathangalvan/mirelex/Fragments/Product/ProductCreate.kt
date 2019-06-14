@@ -16,6 +16,7 @@ import android.widget.Toast
 import com.androidbuts.multispinnerfilter.KeyPairBoolData
 import com.androidbuts.multispinnerfilter.MultiSpinnerSearch
 import com.example.jonathangalvan.mirelex.Enums.ProductType
+import com.example.jonathangalvan.mirelex.Fragments.Utils.ImagePreview
 import com.example.jonathangalvan.mirelex.Interfaces.*
 import com.example.jonathangalvan.mirelex.Models.UtilsModel
 import com.example.jonathangalvan.mirelex.ProductActivity
@@ -93,6 +94,19 @@ class ProductCreate : Fragment() {
                 viewModel.productObjRequest.isStretch = "0"
             }
         }
+
+        /*Clicks measures "?"*/
+        imagePreviewBust.setOnClickListener(View.OnClickListener {
+            ImagePreview().newInstance(R.drawable.mirelex_logo_cian.toString()).show(fragmentManager, "alertDialog")
+        })
+
+        imagePreviewWaist.setOnClickListener(View.OnClickListener {
+            ImagePreview().newInstance(R.drawable.mirelex_logo_cian.toString()).show(fragmentManager, "alertDialog")
+        })
+
+        imagePreviewHip.setOnClickListener(View.OnClickListener {
+            ImagePreview().newInstance(R.drawable.mirelex_logo_cian.toString()).show(fragmentManager, "alertDialog")
+        })
 
         /*Change catalogs deppending on productype*/
         createProductCategory.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
