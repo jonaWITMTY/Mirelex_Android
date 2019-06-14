@@ -45,7 +45,8 @@ class ProductInterface (
     var hip: String?,
     var height: String?,
     var productSilhouetteId: String?,
-    var productOccasionId: String?
+    var productOccasionId: String?,
+    var fittings: ArrayList<ProductFittingsInterface>?
 ){}
 
 class ProductsInterface(
@@ -108,3 +109,12 @@ class GetProductPricesInterface(
 class CreateProductResponseInterface(
     var productId: String?
 ) {}
+
+class ProductFittingsInterface(
+    var productId: String?,
+    var userId: String?,
+    var bust: String?,
+    var waist: String?,
+    var hip: String?,
+    var height: String?
+){}

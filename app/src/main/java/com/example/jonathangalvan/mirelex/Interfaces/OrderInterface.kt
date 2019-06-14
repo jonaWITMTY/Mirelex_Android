@@ -46,7 +46,8 @@ class OrderProducts(
     var priceFormatted: String?,
     var sellPriceFormatted: String?,
     var productFeaturedImage: String?,
-    var active: String?
+    var active: String?,
+    var fittings: ArrayList<ProductFittingsInterface>?
 ){}
 
 class OrderUpdates(

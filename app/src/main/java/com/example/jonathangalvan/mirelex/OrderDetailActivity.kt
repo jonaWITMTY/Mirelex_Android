@@ -1,8 +1,12 @@
 package com.example.jonathangalvan.mirelex
 
 import android.content.Intent
+import android.graphics.Typeface
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
+import android.util.TypedValue
+import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
 import com.example.jonathangalvan.mirelex.Enums.OrderStatus
@@ -17,6 +21,8 @@ import com.example.jonathangalvan.mirelex.Models.UtilsModel
 import com.example.jonathangalvan.mirelex.Requests.AcceptRejectOrderRequest
 import com.example.jonathangalvan.mirelex.Requests.GetOrderInfoRequest
 import com.example.jonathangalvan.mirelex.Requests.UpdateOrderStatusRequest
+import com.rey.material.widget.LinearLayout
+import com.rey.material.widget.TextView
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_order_detail.*
 import kotlinx.android.synthetic.main.view_detail_info_row_with_title.view.*
@@ -165,11 +171,32 @@ class OrderDetailActivity : AppCompatActivity() {
                             detailOrderOwnerName.text = name
 
                             /*Fill order info*/
-                            addRow(resources.getString(R.string.folio), orderInfo.orderInformation.folio!!)
-                            addRow(resources.getString(R.string.type), orderInfo.orderInformation.orderType!!)
-                            addRow(resources.getString(R.string.date), orderInfo.orderInformation.startDate!!)
-                            addRow(resources.getString(R.string.status), orderInfo.orderInformation.orderStatus!!)
-                            addRow(resources.getString(R.string.total), orderInfo.orderInformation.totalFormatted!!)
+                            addRow(resources.getString(R.string.folio), orderInfo.orderInformation.folio!!, detailOrderInfo)
+                            addRow(resources.getString(R.string.type), orderInfo.orderInformation.orderType!!, detailOrderInfo)
+                            addRow(resources.getString(R.string.date), orderInfo.orderInformation.startDate!!, detailOrderInfo)
+                            addRow(resources.getString(R.string.status), orderInfo.orderInformation.orderStatus!!, detailOrderInfo)
+                            addRow(resources.getString(R.string.total), orderInfo.orderInformation.totalFormatted!!, detailOrderInfo)
+
+                            /*Fill order fitting info*/
+                            if(orderInfo.orderOwnerInformation.userId == SessionModel(this@OrderDetailActivity).getUser().person?.userId){
+                                if(orderInfo.orderProducts!![0].fittings!!.isNotEmpty()){
+                                    val tv = TextView(this@OrderDetailActivity)
+                                    val params = android.widget.LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+                                    params.setMargins(10, 10, 10, 10)
+                                    tv.layoutParams = params
+                                    tv.text = resources.getString(R.string.adjustedMesaurements)
+                                    tv.gravity = Gravity.CENTER
+                                    tv.setTextColor(ContextCompat.getColor(this@OrderDetailActivity, android.R.color.black))
+                                    tv.setTypeface(null, Typeface.BOLD)
+                                    tv.setTextSize(TypedValue.COMPLEX_UNIT_SP,16.toFloat())
+                                    detailOrderFittingInfo.addView(tv)
+
+                                    addRow(resources.getString(R.string.bust), orderInfo.orderProducts!![0].fittings!![0].bust.toString(), detailOrderFittingInfo)
+                                    addRow(resources.getString(R.string.waist), orderInfo.orderProducts!![0].fittings!![0].waist.toString(), detailOrderFittingInfo)
+                                    addRow(resources.getString(R.string.hip), orderInfo.orderProducts!![0].fittings!![0].hip.toString(), detailOrderFittingInfo)
+                                    addRow(resources.getString(R.string.heightInCms), orderInfo.orderProducts!![0].fittings!![0].height.toString(), detailOrderFittingInfo)
+                                }
+                            }
 
                             /*Go to detail product*/
                             detailOrderGoToProduct.setOnClickListener(View.OnClickListener {
@@ -464,11 +491,11 @@ class OrderDetailActivity : AppCompatActivity() {
 
     }
 
-    fun addRow(title: String, value: String){
+    fun addRow(title: String, value: String, viewGroup: ViewGroup){
         val insertRow = layoutInflater.inflate(R.layout.view_detail_info_row_with_title, detailOrderInfo, false)
         insertRow.detailInfoNameView.text = title
         insertRow.detailInfoValueView.text = value
-        detailOrderInfo.addView(insertRow)
+        viewGroup.addView(insertRow)
     }
 
     override fun onSupportNavigateUp(): Boolean {

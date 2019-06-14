@@ -114,4 +114,5 @@
     <string name="defaultPaymentCard">Principal tarjeta de pago</string>
     <string name="addPaymentCard">Agregar tarjeta de crédito</string>
     <string name="enterClientMesaurements">Ingresa las medidas del cliente</string>
+    <string name="adjustedMesaurements">Ajuste de medidas</string>
 </resources>
