@@ -113,4 +113,5 @@
     <string name="noDataAvailable">No hay datos disponibles</string>
     <string name="defaultPaymentCard">Principal tarjeta de pago</string>
     <string name="addPaymentCard">Agregar tarjeta de crédito</string>
+    <string name="enterClientMesaurements">Ingresa las medidas del cliente</string>
 </resources>

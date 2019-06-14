@@ -47,6 +47,7 @@
     <string name="updateOrderStatus">order/status/update</string>
     <string name="acceptOrder">order/accept</string>
     <string name="rejectOrder">order/reject</string>
+    <string name="orderFittingUpdate">order/fittings/update</string>
 
     //Services
     <string name="getOrderServices">service/orders</string>
