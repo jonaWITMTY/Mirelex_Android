@@ -19,7 +19,7 @@
                         android:layout_marginBottom="16dp"/>
                 <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" android:theme="@style/textInputLayoutBlack"
+                        android:layout_height="wrap_content" android:theme="@style/textInputLayoutBlack"
                         android:layout_marginBottom="16dp" android:layout_marginRight="16dp"
                         android:layout_marginLeft="16dp" android:id="@+id/updateProductBrand">
 
@@ -30,7 +30,7 @@
                 </android.support.design.widget.TextInputLayout>
                 <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" android:theme="@style/textInputLayoutBlack"
+                        android:layout_height="wrap_content" android:theme="@style/textInputLayoutBlack"
                         android:layout_marginBottom="16dp" android:layout_marginRight="16dp"
                         android:layout_marginLeft="16dp" android:id="@+id/updateProductCategory">
 
@@ -41,7 +41,7 @@
                 </android.support.design.widget.TextInputLayout>
                 <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" android:theme="@style/textInputLayoutBlack"
+                        android:layout_height="wrap_content" android:theme="@style/textInputLayoutBlack"
                         android:layout_marginBottom="16dp" android:layout_marginRight="16dp"
                         android:layout_marginLeft="16dp" android:id="@+id/updateProductPrice">
 
@@ -53,7 +53,7 @@
                 <LinearLayout
                         android:orientation="vertical"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_marginBottom="16dp" android:layout_marginRight="16dp"
                         android:layout_marginLeft="16dp">
                     <TextView
@@ -96,7 +96,7 @@
                 <LinearLayout
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" android:theme="@style/textInputLayoutBlack"
+                        android:layout_height="wrap_content" android:theme="@style/textInputLayoutBlack"
                         android:layout_marginBottom="16dp">
                     <CheckBox
                             android:text="@string/sellable"
@@ -130,7 +130,7 @@
                 <LinearLayout
                         android:orientation="vertical"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_marginBottom="16dp" android:layout_marginRight="16dp"
                         android:layout_marginLeft="16dp">
                     <TextView
@@ -147,7 +147,7 @@
                 <LinearLayout
                         android:orientation="vertical"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_marginBottom="16dp" android:layout_marginRight="16dp"
                         android:layout_marginLeft="16dp">
                     <TextView
@@ -164,7 +164,7 @@
                 <LinearLayout
                         android:orientation="vertical"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_marginBottom="16dp" android:layout_marginRight="16dp"
                         android:layout_marginLeft="16dp">
                     <TextView
@@ -181,7 +181,7 @@
                 <LinearLayout
                         android:orientation="vertical"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_marginBottom="16dp" android:layout_marginRight="16dp"
                         android:layout_marginLeft="16dp">
                     <TextView
@@ -198,7 +198,7 @@
                 <LinearLayout
                         android:orientation="vertical"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_marginBottom="16dp" android:layout_marginRight="16dp"
                         android:layout_marginLeft="16dp">
                     <TextView
@@ -217,7 +217,7 @@
                 <LinearLayout
                         android:orientation="vertical"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_marginBottom="16dp" android:layout_marginRight="16dp"
                         android:layout_marginLeft="16dp">
                     <TextView
@@ -234,7 +234,7 @@
                 <LinearLayout
                         android:orientation="vertical"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_marginBottom="16dp" android:layout_marginRight="16dp"
                         android:layout_marginLeft="16dp">
                     <TextView
@@ -251,7 +251,7 @@
                 <LinearLayout
                         android:orientation="vertical"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_marginBottom="16dp" android:layout_marginRight="16dp"
                         android:layout_marginLeft="16dp">
                     <TextView
@@ -265,44 +265,78 @@
                             style="@android:style/Widget.Material.Light.Spinner.Underlined"
                             android:backgroundTint="@android:color/black" android:spinnerMode="dialog"/>
                 </LinearLayout>
-                <android.support.design.widget.TextInputLayout
+                <LinearLayout
+                        android:orientation="horizontal"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" android:theme="@style/textInputLayoutBlack"
-                        android:layout_marginBottom="16dp" android:layout_marginRight="16dp"
-                        android:layout_marginLeft="16dp" android:id="@+id/updateProductBust">
-
-                    <android.support.design.widget.TextInputEditText
+                        android:layout_height="wrap_content" android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp" android:layout_marginBottom="16dp"
+                        android:id="@+id/updateProductBustLayout">
+                    <android.support.design.widget.TextInputLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="@string/bust" android:singleLine="true" android:inputType="numberDecimal"/>
-                </android.support.design.widget.TextInputLayout>
-                <android.support.design.widget.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" android:theme="@style/textInputLayoutBlack"
-                        android:layout_marginBottom="16dp" android:layout_marginRight="16dp"
-                        android:layout_marginLeft="16dp"
-                        android:id="@+id/updateProductWaist">
+                            android:layout_height="wrap_content" android:theme="@style/textInputLayoutBlack"
+                            android:id="@+id/updateProductBust" android:layout_weight="1">
 
-                    <android.support.design.widget.TextInputEditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="@string/waist" android:singleLine="true" android:inputType="numberDecimal"/>
-                </android.support.design.widget.TextInputLayout>
-                <android.support.design.widget.TextInputLayout
+                        <android.support.design.widget.TextInputEditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/bust" android:singleLine="true" android:inputType="numberDecimal"/>
+                    </android.support.design.widget.TextInputLayout>
+                    <Button
+                            android:text="?"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp" android:id="@+id/imagePreviewBust" android:layout_weight="0"
+                            android:textColor="@color/cyan" android:background="@color/colorGrey"
+                            android:layout_marginTop="15dp"/>
+                </LinearLayout>
+                <LinearLayout
+                        android:orientation="horizontal"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" android:theme="@style/textInputLayoutBlack"
-                        android:layout_marginBottom="16dp" android:layout_marginRight="16dp"
-                        android:layout_marginLeft="16dp"
-                        android:id="@+id/updateProductHip">
+                        android:layout_height="wrap_content" android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp" android:layout_marginBottom="16dp"
+                        android:id="@+id/updateProductWaistLayout">
+                    <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:theme="@style/textInputLayoutBlack"
+                            android:id="@+id/updateProductWaist" android:layout_weight="1">
 
-                    <android.support.design.widget.TextInputEditText
+                        <android.support.design.widget.TextInputEditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/waist" android:singleLine="true" android:inputType="numberDecimal"/>
+                    </android.support.design.widget.TextInputLayout>
+                    <Button
+                            android:text="?"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp" android:id="@+id/imagePreviewWaist" android:layout_weight="0"
+                            android:textColor="@color/cyan" android:background="@color/colorGrey"
+                            android:layout_marginTop="15dp"/>
+                </LinearLayout>
+                <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp" android:layout_marginBottom="16dp"
+                        android:id="@+id/updateProductHipLayout">
+                    <android.support.design.widget.TextInputLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="@string/hip" android:singleLine="true" android:inputType="numberDecimal"/>
-                </android.support.design.widget.TextInputLayout>
+                            android:layout_height="wrap_content" android:theme="@style/textInputLayoutBlack"
+                            android:id="@+id/updateProductHip" android:layout_weight="1">
+
+                        <android.support.design.widget.TextInputEditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/hip" android:singleLine="true" android:inputType="numberDecimal"/>
+                    </android.support.design.widget.TextInputLayout>
+                    <Button
+                            android:text="?"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp" android:id="@+id/imagePreviewHip" android:layout_weight="0"
+                            android:textColor="@color/cyan" android:background="@color/colorGrey"
+                            android:layout_marginTop="15dp"/>
+                </LinearLayout>
                 <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" android:theme="@style/textInputLayoutBlack"
+                        android:layout_height="wrap_content" android:theme="@style/textInputLayoutBlack"
                         android:layout_marginBottom="16dp" android:layout_marginRight="16dp"
                         android:layout_marginLeft="16dp"
                         android:id="@+id/updateProductHeight">
@@ -315,7 +349,7 @@
                 </android.support.design.widget.TextInputLayout>
                 <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" android:theme="@style/textInputLayoutBlack"
+                        android:layout_height="wrap_content" android:theme="@style/textInputLayoutBlack"
                         android:layout_marginBottom="16dp" android:layout_marginRight="16dp"
                         android:layout_marginLeft="16dp"
                         android:id="@+id/updateProductDescription">

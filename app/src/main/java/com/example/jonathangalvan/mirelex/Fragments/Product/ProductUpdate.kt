@@ -124,6 +124,19 @@ class ProductUpdate : Fragment()  {
             }
         }
 
+        /*Clicks measures "?"*/
+        imagePreviewBust.setOnClickListener(View.OnClickListener {
+            ImagePreview().newInstance(R.drawable.mirelex_logo_cian.toString()).show(fragmentManager, "alertDialog")
+        })
+
+        imagePreviewWaist.setOnClickListener(View.OnClickListener {
+            ImagePreview().newInstance(R.drawable.mirelex_logo_cian.toString()).show(fragmentManager, "alertDialog")
+        })
+
+        imagePreviewHip.setOnClickListener(View.OnClickListener {
+            ImagePreview().newInstance(R.drawable.mirelex_logo_cian.toString()).show(fragmentManager, "alertDialog")
+        })
+
         /*On press continue button*/
         updateProductContinue.setOnClickListener(View.OnClickListener {
             if(inputValidations()){
