@@ -12,6 +12,7 @@ import android.widget.Toast
 import com.example.jonathangalvan.mirelex.Enums.Gender
 import com.example.jonathangalvan.mirelex.Enums.ProductType
 import com.example.jonathangalvan.mirelex.Enums.UserType
+import com.example.jonathangalvan.mirelex.Fragments.Utils.ImagePreview
 import com.example.jonathangalvan.mirelex.Interfaces.*
 import com.example.jonathangalvan.mirelex.Models.SessionModel
 import com.example.jonathangalvan.mirelex.Models.UtilsModel
@@ -71,6 +72,19 @@ class ProfileActivity : AppCompatActivity() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         })
 
+        /*Clicks measures "?"*/
+        imagePreviewBust.setOnClickListener(View.OnClickListener {
+            ImagePreview().newInstance(R.drawable.mirelex_logo_cian.toString()).show(supportFragmentManager, "alertDialog")
+        })
+
+        imagePreviewWaist.setOnClickListener(View.OnClickListener {
+            ImagePreview().newInstance(R.drawable.mirelex_logo_cian.toString()).show(supportFragmentManager, "alertDialog")
+        })
+
+        imagePreviewHip.setOnClickListener(View.OnClickListener {
+            ImagePreview().newInstance(R.drawable.mirelex_logo_cian.toString()).show(supportFragmentManager, "alertDialog")
+        })
+
         /*Hide/show fields depending in usertype*/
         when(user?.person?.userTypeId){
             UserType.Store.userTypeId -> {
@@ -84,9 +98,9 @@ class ProfileActivity : AppCompatActivity() {
                 (updateSessionUserBodyType.parent as View).visibility = View.GONE
                 (updateSessionUserSkinColor.parent as View).visibility = View.GONE
                 (updateSessionUserHairColor.parent as View).visibility = View.GONE
-                updateSessionUserBust.visibility = View.GONE
-                updateSessionUserWaist.visibility = View.GONE
-                updateSessionUserHip.visibility = View.GONE
+                updateSessionUserBustLayout.visibility = View.GONE
+                updateSessionUserWaistLayout.visibility = View.GONE
+                updateSessionUserHipLayout.visibility = View.GONE
 
                 /*Fill store fields*/
                 updateSessionUserCompanyName.editText?.setText(user?.person?.companyName)
@@ -114,9 +128,9 @@ class ProfileActivity : AppCompatActivity() {
                         (updateSessionUserBodyType.parent as View).visibility = View.GONE
                         (updateSessionUserSkinColor.parent as View).visibility = View.GONE
                         (updateSessionUserHairColor.parent as View).visibility = View.GONE
-                        updateSessionUserBust.visibility = View.GONE
-                        updateSessionUserWaist.visibility = View.GONE
-                        updateSessionUserHip.visibility = View.GONE
+                        updateSessionUserBustLayout.visibility = View.GONE
+                        updateSessionUserWaistLayout.visibility = View.GONE
+                        updateSessionUserHipLayout.visibility = View.GONE
                         updateSessionUserSizeWoman.visibility = View.GONE
 
                         /*Get male catalogs*/
