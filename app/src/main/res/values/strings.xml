@@ -115,4 +115,7 @@
     <string name="addPaymentCard">Agregar tarjeta de crédito</string>
     <string name="enterClientMesaurements">Ingresa las medidas del cliente</string>
     <string name="adjustedMesaurements">Ajuste de medidas</string>
+    <string name="lease">Renta</string>
+    <string name="purchase">Compra</string>
+    <string name="all">Todo</string>
 </resources>

@@ -73,7 +73,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/emailField"
-                        android:text="ricardo.galvan@wiredit.mx"
+                        android:text="vestidosymas@gmail.com"
                         android:singleLine="true"
                         android:inputType="textWebEmailAddress"/>
             </android.support.design.widget.TextInputLayout>

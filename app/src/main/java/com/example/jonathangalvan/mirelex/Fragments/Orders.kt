@@ -8,7 +8,12 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.view.*
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import com.example.jonathangalvan.mirelex.Adapters.OrdersAdapter
+import com.example.jonathangalvan.mirelex.Enums.OrderType
+import com.example.jonathangalvan.mirelex.Interfaces.FilterInterface
+import com.example.jonathangalvan.mirelex.Interfaces.OrderInterface
 import com.example.jonathangalvan.mirelex.Interfaces.OrdersInterface
 import com.example.jonathangalvan.mirelex.Listeners.RecyclerItemClickListener
 import com.example.jonathangalvan.mirelex.Models.UtilsModel
@@ -26,6 +31,7 @@ import kotlinx.android.synthetic.main.view_centered_message.view.*
 class Orders : Fragment() {
     private var listener: OnFragmentInteractionListener? = null
     private val ordersAdapter = OrdersAdapter(ArrayList())
+    private var ordersObj: OrdersInterface? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,6 +63,41 @@ class Orders : Fragment() {
 
             override fun onItemLongClick(view: View?, position: Int) {}
         }))
+
+        /*Fill filter options*/
+        val filterArr = ArrayList<FilterInterface>()
+        filterArr.add(FilterInterface("0", activity!!.resources.getString(R.string.all)))
+        filterArr.add(FilterInterface(OrderType.Fitting.orderTypeId, activity!!.resources.getString(R.string.fitting)))
+        filterArr.add(FilterInterface(OrderType.Lease.orderTypeId, activity!!.resources.getString(R.string.lease)))
+        filterArr.add(FilterInterface(OrderType.Purchase.orderTypeId, activity!!.resources.getString(R.string.purchase)))
+        val filterAdapter = ArrayAdapter<FilterInterface>(activity!!, R.layout.view_spinner_item_black, filterArr)
+        filterAdapter.setDropDownViewResource(R.layout.view_spinner_item_black)
+        filterOrdersSpinner.adapter = filterAdapter
+
+        /*Do filter action*/
+        filterOrdersSpinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                if(ordersObj != null){
+                    activity?.runOnUiThread {
+                        run {
+                            var newObj = ArrayList<OrderInterface>()
+                            if(filterArr[position].id != "0"){
+                                for(order in ordersObj!!.data){
+                                    if(filterArr[position].id == order.orderTypeId){
+                                        newObj.add(order)
+                                    }
+                                }
+                            }else{
+                                newObj = ordersObj!!.data
+                            }
+                            ordersAdapter.loadNewData(newObj)
+                        }
+                    }
+                }
+            }
+        }
     }
 
     override fun onResume() {
@@ -79,11 +120,11 @@ class Orders : Fragment() {
                 val responseObj = UtilsModel.getPostResponse(responseStr)
                 when(responseObj.status){
                     "success" -> {
-                        val ordersObj = UtilsModel.getGson()
+                        ordersObj = UtilsModel.getGson()
                             .fromJson(UtilsModel.getGson().toJson(responseObj), OrdersInterface::class.java)
                         activity?.runOnUiThread {
                             run {
-                                ordersAdapter.loadNewData(ordersObj.data)
+                                ordersAdapter.loadNewData(ordersObj!!.data)
                             }
                         }
                     }
@@ -112,6 +153,15 @@ class Orders : Fragment() {
 
         /*Store tabs icons*/
         menu?.findItem(R.id.storeTabsAddIcon)?.isVisible = false
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when(item?.itemId){
+            R.id.storeTabsFilterIcon -> {
+                filterOrdersSpinner.performClick()
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     fun onButtonPressed(uri: Uri) {

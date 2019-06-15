@@ -143,6 +143,7 @@ class Notifications : Fragment() {
 
         /*Store tabs icons*/
         menu?.findItem(R.id.storeTabsAddIcon)?.isVisible = false
+        menu?.findItem(R.id.storeTabsFilterIcon)?.isVisible = false
     }
 
     fun onButtonPressed(uri: Uri) {

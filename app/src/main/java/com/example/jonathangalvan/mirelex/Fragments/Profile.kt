@@ -106,6 +106,7 @@ class Profile : Fragment() {
 
         /*Store tabs icons*/
         menu?.findItem(R.id.storeTabsAddIcon)?.isVisible = false
+        menu?.findItem(R.id.storeTabsFilterIcon)?.isVisible = false
     }
 
     override fun onAttach(context: Context) {

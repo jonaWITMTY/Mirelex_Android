@@ -127,6 +127,13 @@ class Products : Fragment() {
         })
     }
 
+    override fun onPrepareOptionsMenu(menu: Menu?) {
+        super.onPrepareOptionsMenu(menu)
+
+        /*Store tabs icons*/
+        menu?.findItem(R.id.storeTabsFilterIcon)?.isVisible = false
+    }
+
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item?.itemId){
             R.id.storeTabsAddIcon ->{
