@@ -354,8 +354,8 @@ class ProductUpdate : Fragment()  {
 
     fun fillSpinner(data: ArrayList<ProductCatalog>?, adapterView: AdapterView<ArrayAdapter<ProductCatalog>>){
         if(data != null){
-            val adapter = ArrayAdapter<ProductCatalog>(activity!!, R.layout.view_spinner_item_black, data)
-            adapter.setDropDownViewResource(R.layout.view_spinner_item_black)
+            val adapter = ArrayAdapter<ProductCatalog>(activity!!, R.layout.view_spinner_item_black, R.id.spinnerItemBlackSelect, data)
+            adapter.setDropDownViewResource(R.layout.view_spinner_item_black_select)
             adapterView.adapter = adapter
         }
     }

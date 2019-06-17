@@ -56,8 +56,8 @@
                                   <option name="values">
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
-                                      <entry key="imageAsset" value="$USER_HOME$/Desktop/home_tab.png" />
-                                      <entry key="outputName" value="ic_home" />
+                                      <entry key="imageAsset" value="$USER_HOME$/Downloads/sliders-h.png" />
+                                      <entry key="outputName" value="ic_sliders" />
                                       <entry key="themeColor" value="ffffff" />
                                     </map>
                                   </option>

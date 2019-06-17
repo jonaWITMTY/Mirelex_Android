@@ -83,7 +83,8 @@
             <Spinner
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/serviceCreateStores"
-                    style="@style/Widget.AppCompat.Spinner.Underlined" android:backgroundTint="@android:color/black"/>
+                    style="@style/Widget.AppCompat.Spinner.Underlined" android:backgroundTint="@android:color/black"
+                    android:spinnerMode="dialog"/>
         </LinearLayout>
         <CheckBox
                 android:text="@string/checkboxTermsField"

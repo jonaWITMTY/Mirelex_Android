@@ -243,7 +243,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" android:id="@+id/updateSessionUserNeighborhoods"
                         android:backgroundTint="@android:color/black"
-                        style="@android:style/Widget.Material.Light.Spinner.Underlined"/>
+                        style="@android:style/Widget.Material.Light.Spinner.Underlined" android:spinnerMode="dialog"/>
             </LinearLayout>
             <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
@@ -276,7 +276,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" android:id="@+id/updateSessionUserSize"
                         style="@android:style/Widget.Material.Light.Spinner.Underlined"
-                        android:backgroundTint="@android:color/black"/>
+                        android:backgroundTint="@android:color/black" android:spinnerMode="dialog"/>
             </LinearLayout>
             <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
@@ -310,7 +310,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" android:id="@+id/updateSessionUserBodyType"
                         style="@android:style/Widget.Material.Light.Spinner.Underlined"
-                        android:backgroundTint="@android:color/black"/>
+                        android:backgroundTint="@android:color/black" android:spinnerMode="dialog"/>
             </LinearLayout>
             <LinearLayout
                     android:orientation="vertical"
@@ -329,7 +329,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         style="@android:style/Widget.Material.Light.Spinner.Underlined"
-                        android:backgroundTint="@android:color/black" android:id="@+id/updateSessionUserSkinColor"/>
+                        android:backgroundTint="@android:color/black" android:id="@+id/updateSessionUserSkinColor" android:spinnerMode="dialog"/>
             </LinearLayout>
             <LinearLayout
                     android:orientation="vertical"
@@ -348,7 +348,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         style="@android:style/Widget.Material.Light.Spinner.Underlined"
-                        android:backgroundTint="@android:color/black" android:id="@+id/updateSessionUserHairColor"/>
+                        android:backgroundTint="@android:color/black" android:spinnerMode="dialog" android:id="@+id/updateSessionUserHairColor"/>
             </LinearLayout>
             <LinearLayout
                     android:orientation="horizontal"

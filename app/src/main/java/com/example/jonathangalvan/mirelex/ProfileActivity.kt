@@ -296,9 +296,9 @@ class ProfileActivity : AppCompatActivity() {
                     val responseObj = UtilsModel.getPostResponse(responseStr)
                     if(responseObj.status == "success") {
                         val neighborhoods= UtilsModel.getGson().fromJson(responseStr, NeighborhoodArrayInterface::class.java)
-                        val adapter = ArrayAdapter<NeighborhoodInterface>(this@ProfileActivity, R.layout.view_spinner_item_black, neighborhoods.data)
+                        val adapter = ArrayAdapter<NeighborhoodInterface>(this@ProfileActivity, R.layout.view_spinner_item_black, R.id.spinnerItemBlackSelect, neighborhoods.data)
                         neighborhoodsArr = neighborhoods
-                        adapter.setDropDownViewResource(R.layout.view_spinner_item_black)
+                        adapter.setDropDownViewResource(R.layout.view_spinner_item_black_select)
                         runOnUiThread {
                             run{
                                 updateSessionUserNeighborhoods.adapter = adapter
@@ -361,14 +361,14 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     fun fillWomanSpinner(data: ArrayList<WomenCatalogInterface>?, adapterView: AdapterView<ArrayAdapter<WomenCatalogInterface>>){
-        val adapter = ArrayAdapter<WomenCatalogInterface>(this@ProfileActivity, R.layout.view_spinner_item_black, data)
-        adapter.setDropDownViewResource(R.layout.view_spinner_item_black)
+        val adapter = ArrayAdapter<WomenCatalogInterface>(this@ProfileActivity, R.layout.view_spinner_item_black, R.id.spinnerItemBlackSelect, data)
+        adapter.setDropDownViewResource(R.layout.view_spinner_item_black_select)
         adapterView.adapter = adapter
     }
 
     fun fillMaleSpinner(data: ArrayList<CatalogInterface>?, adapterView: AdapterView<ArrayAdapter<CatalogInterface>>){
-        val adapter = ArrayAdapter<CatalogInterface>(this@ProfileActivity, R.layout.view_spinner_item_black, data)
-        adapter.setDropDownViewResource(R.layout.view_spinner_item_black)
+        val adapter = ArrayAdapter<CatalogInterface>(this@ProfileActivity, R.layout.view_spinner_item_black, R.id.spinnerItemBlackSelect, data)
+        adapter.setDropDownViewResource(R.layout.view_spinner_item_black_select)
         adapterView.adapter = adapter
     }
 

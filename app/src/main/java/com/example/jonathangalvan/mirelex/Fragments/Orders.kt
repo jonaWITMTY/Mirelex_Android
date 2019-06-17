@@ -70,8 +70,8 @@ class Orders : Fragment() {
         filterArr.add(FilterInterface(OrderType.Fitting.orderTypeId, activity!!.resources.getString(R.string.fitting)))
         filterArr.add(FilterInterface(OrderType.Lease.orderTypeId, activity!!.resources.getString(R.string.lease)))
         filterArr.add(FilterInterface(OrderType.Purchase.orderTypeId, activity!!.resources.getString(R.string.purchase)))
-        val filterAdapter = ArrayAdapter<FilterInterface>(activity!!, R.layout.view_spinner_item_black, filterArr)
-        filterAdapter.setDropDownViewResource(R.layout.view_spinner_item_black)
+        val filterAdapter = ArrayAdapter<FilterInterface>(activity!!, R.layout.view_spinner_item_black, R.id.spinnerItemBlackSelect, filterArr)
+        filterAdapter.setDropDownViewResource(R.layout.view_spinner_item_black_select)
         filterOrdersSpinner.adapter = filterAdapter
 
         /*Do filter action*/

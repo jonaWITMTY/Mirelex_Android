@@ -297,8 +297,8 @@ class ServiceCreateActivity : AppCompatActivity(),
                             serviceTypes = serviceTypesObj.data
                             runOnUiThread {
                                 run {
-                                    val adapterServicesTypes = ArrayAdapter<CatalogInterface>(this@ServiceCreateActivity, R.layout.view_spinner_item_black, serviceTypesObj.data)
-                                    adapterServicesTypes.setDropDownViewResource(R.layout.view_spinner_item_black)
+                                    val adapterServicesTypes = ArrayAdapter<CatalogInterface>(this@ServiceCreateActivity, R.layout.view_spinner_item_black, R.id.spinnerItemBlackSelect, serviceTypesObj.data)
+                                    adapterServicesTypes.setDropDownViewResource(R.layout.view_spinner_item_black_select)
                                     serviceCreateTypes.adapter = adapterServicesTypes
                                 }
                             }
@@ -309,8 +309,8 @@ class ServiceCreateActivity : AppCompatActivity(),
                             sewingTypes = serviceTypesObj.data
                             runOnUiThread {
                                 run {
-                                    val adapterServicesTypes = ArrayAdapter<SewingInterface>(this@ServiceCreateActivity, R.layout.view_spinner_item_black, serviceTypesObj.data)
-                                    adapterServicesTypes.setDropDownViewResource(R.layout.view_spinner_item_black)
+                                    val adapterServicesTypes = ArrayAdapter<SewingInterface>(this@ServiceCreateActivity, R.layout.view_spinner_item_black, R.id.spinnerItemBlackSelect, serviceTypesObj.data)
+                                    adapterServicesTypes.setDropDownViewResource(R.layout.view_spinner_item_black_select)
                                     serviceCreateTypes.adapter = adapterServicesTypes
                                 }
                             }
@@ -350,9 +350,9 @@ class ServiceCreateActivity : AppCompatActivity(),
                 val responseObj = UtilsModel.getPostResponse(responseStr)
                 if(responseObj.status == "success"){
                     val serviceStoresObj = UtilsModel.getGson().fromJson(UtilsModel.getGson().toJson(responseObj), ServiceStoresInterface::class.java)
-                    val adapterServicesStores = ArrayAdapter<ServiceStore>(this@ServiceCreateActivity, R.layout.view_spinner_item_black, serviceStoresObj.data)
+                    val adapterServicesStores = ArrayAdapter<ServiceStore>(this@ServiceCreateActivity, R.layout.view_spinner_item_black, R.id.spinnerItemBlackSelect, serviceStoresObj.data)
                     serviceStores = serviceStoresObj.data
-                    adapterServicesStores.setDropDownViewResource(R.layout.view_spinner_item_black)
+                    adapterServicesStores.setDropDownViewResource(R.layout.view_spinner_item_black_select)
                     runOnUiThread {
                         run {
                             serviceCreateStores.adapter = adapterServicesStores

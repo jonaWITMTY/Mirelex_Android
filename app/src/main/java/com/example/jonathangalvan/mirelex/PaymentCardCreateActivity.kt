@@ -120,8 +120,8 @@ class PaymentCardCreateActivity : AppCompatActivity() {
 
     fun fillSpinner(data: ArrayList<String>?, adapterView: AdapterView<ArrayAdapter<String>>){
         if(data != null){
-            val adapter = ArrayAdapter<String>(this, R.layout.view_spinner_item_black, data)
-            adapter.setDropDownViewResource(R.layout.view_spinner_item_black)
+            val adapter = ArrayAdapter<String>(this, R.layout.view_spinner_item_black, R.id.spinnerItemBlackSelect, data)
+            adapter.setDropDownViewResource(R.layout.view_spinner_item_black_select)
             adapterView.adapter = adapter
         }
     }
