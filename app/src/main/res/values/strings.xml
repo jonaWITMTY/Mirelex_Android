@@ -118,4 +118,6 @@
     <string name="lease">Renta</string>
     <string name="purchase">Compra</string>
     <string name="all">Todo</string>
+    <string name="availableUpdate">Actualización disponible</string>
+    <string name="availableUpdateDescription">Hay una nueva versión disponible. Por favor, actualiza a la versión</string>
 </resources>

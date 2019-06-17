@@ -1,12 +1,15 @@
 package com.example.jonathangalvan.mirelex.Fragments.Utils
 
 import android.app.Dialog
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.support.design.widget.BottomSheetDialog
 import android.support.design.widget.TextInputLayout
 import android.support.v4.app.DialogFragment
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import com.example.jonathangalvan.mirelex.Interfaces.BottomAlertInterface
 import com.example.jonathangalvan.mirelex.Models.SessionModel
@@ -145,10 +148,10 @@ class CustomBottomAlert: DialogFragment() {
                 val continueBtn = view.findViewById<View>(R.id.fittingCustomSizesBtn)
                 continueBtn.setOnClickListener(View.OnClickListener {
 
-                    var fittingHeight = view.findViewById<TextInputLayout>(R.id.fittingCustomSizesHeight)
-                    var fittingBust = view.findViewById<TextInputLayout>(R.id.fittingCustomSizesBust)
-                    var fittingWaist = view.findViewById<TextInputLayout>(R.id.fittingCustomSizesWaist)
-                    var fittingHip = view.findViewById<TextInputLayout>(R.id.fittingCustomSizesHip)
+                    var fittingHeight = view!!.findViewById<TextInputLayout>(R.id.fittingCustomSizesHeight)
+                    var fittingBust = view!!.findViewById<TextInputLayout>(R.id.fittingCustomSizesBust)
+                    var fittingWaist = view!!.findViewById<TextInputLayout>(R.id.fittingCustomSizesWaist)
+                    var fittingHip = view!!.findViewById<TextInputLayout>(R.id.fittingCustomSizesHip)
 
                     if(
                         fittingHeight.editText?.text.toString().isNotEmpty() &&
@@ -194,6 +197,28 @@ class CustomBottomAlert: DialogFragment() {
                         val text = resources.getText(R.string.fillRequiredFields)
                         val duration = Toast.LENGTH_SHORT
                         Toast.makeText(activity!!, text, duration).show()
+                    }
+                })
+            }
+            "newUpdateVersion" -> {
+                view = activity!!.layoutInflater.inflate(R.layout.fragment_custom_alert_confirm, null)
+
+                /*Set title*/
+                (view.findViewById<TextView>(R.id.alertTitle)).text = resources.getString(R.string.availableUpdate)
+                (view.findViewById<TextView>(R.id.alertDescription)).text = resources.getString(R.string.availableUpdateDescription)
+
+                /*Update action*/
+                val btn = view.findViewById<View>(R.id.btnSubmit)
+                btn.setOnClickListener(View.OnClickListener {
+                    try {
+                        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=${activity!!.packageName}")))
+                    } catch (anfe: android.content.ActivityNotFoundException) {
+                        startActivity(
+                            Intent(
+                                Intent.ACTION_VIEW,
+                                Uri.parse("https://play.google.com/store/apps/details?id=${activity!!.packageName}")
+                            )
+                        )
                     }
                 })
             }
