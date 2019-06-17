@@ -76,9 +76,9 @@ class RegisterExtraFieldsAddress : Fragment() {
                             val responseObj = UtilsModel.getPostResponse(responseStr)
                             if(responseObj.status == "success") {
                                 val neighborhoods= UtilsModel.getGson().fromJson(responseStr, NeighborhoodArrayInterface::class.java)
-                                val adapter = ArrayAdapter<NeighborhoodInterface>(activity, R.layout.view_spinner_item, neighborhoods.data)
+                                val adapter = ArrayAdapter<NeighborhoodInterface>(activity, R.layout.view_spinner_item, R.id.spinnerItemWhiteSelect, neighborhoods.data)
                                 neighborhoodsArr = neighborhoods
-                                adapter.setDropDownViewResource(R.layout.view_spinner_item)
+                                adapter.setDropDownViewResource( R.layout.view_spinner_item_select)
                                 activity!!.runOnUiThread {
                                     run{
                                         zipSpinner.adapter = adapter

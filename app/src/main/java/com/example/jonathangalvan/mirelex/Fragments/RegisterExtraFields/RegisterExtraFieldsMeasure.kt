@@ -43,23 +43,23 @@ class RegisterExtraFieldsMeasure : Fragment() {
         val registeredUserInfo = viewModel.userCall.value
 
         /*Fill sizes*/
-        val adapterSizes = ArrayAdapter<CatalogInterface>(activity, R.layout.view_spinner_item, viewModel.sizes.value)
-        adapterSizes.setDropDownViewResource(R.layout.view_spinner_item)
+        val adapterSizes = ArrayAdapter<CatalogInterface>(activity, R.layout.view_spinner_item, R.id.spinnerItemWhiteSelect, viewModel.sizes.value)
+        adapterSizes.setDropDownViewResource(R.layout.view_spinner_item_select)
         registerExtraSizesField.adapter = adapterSizes
 
         /*Fill bodyType*/
-        val adapterBodyType = ArrayAdapter<WomenCatalogInterface>(activity, R.layout.view_spinner_item, viewModel.womenCatalogs.value?.bodyTypes)
-        adapterBodyType.setDropDownViewResource(R.layout.view_spinner_item)
+        val adapterBodyType = ArrayAdapter<WomenCatalogInterface>(activity, R.layout.view_spinner_item, R.id.spinnerItemWhiteSelect, viewModel.womenCatalogs.value?.bodyTypes)
+        adapterBodyType.setDropDownViewResource(R.layout.view_spinner_item_select)
         registerExtraBodyTypesField.adapter = adapterBodyType
 
         /*Fill skinColorType*/
-        val adapterSkinColorType = ArrayAdapter<WomenCatalogInterface>(activity, R.layout.view_spinner_item, viewModel.womenCatalogs.value?.skinColors)
-        adapterSkinColorType.setDropDownViewResource(R.layout.view_spinner_item)
+        val adapterSkinColorType = ArrayAdapter<WomenCatalogInterface>(activity, R.layout.view_spinner_item, R.id.spinnerItemWhiteSelect, viewModel.womenCatalogs.value?.skinColors)
+        adapterSkinColorType.setDropDownViewResource(R.layout.view_spinner_item_select)
         registerExtraSkinColorField.adapter = adapterSkinColorType
 
         /*Fill hairColor*/
-        val adapterHairColor = ArrayAdapter<WomenCatalogInterface>(activity, R.layout.view_spinner_item, viewModel.womenCatalogs.value?.hairColors)
-        adapterHairColor.setDropDownViewResource(R.layout.view_spinner_item)
+        val adapterHairColor = ArrayAdapter<WomenCatalogInterface>(activity, R.layout.view_spinner_item, R.id.spinnerItemWhiteSelect, viewModel.womenCatalogs.value?.hairColors)
+        adapterHairColor.setDropDownViewResource(R.layout.view_spinner_item_select)
         registerExtraHairColorField.adapter = adapterHairColor
 
         /*Clicks measures "?"*/

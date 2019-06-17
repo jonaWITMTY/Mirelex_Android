@@ -37,8 +37,8 @@ class RegisterCustomerTab : Fragment() {
         val viewModel = ViewModelProviders.of(activity!!).get(RegisterViewModel::class.java)
 
         /*Gender List*/
-        val adapter = ArrayAdapter<GenderInterface>(activity, R.layout.view_spinner_item, viewModel.genderCall.value!!)
-        adapter.setDropDownViewResource(R.layout.view_spinner_item)
+        val adapter = ArrayAdapter<GenderInterface>(activity, R.layout.view_spinner_item, R.id.spinnerItemWhiteSelect, viewModel.genderCall.value!!)
+        adapter.setDropDownViewResource(R.layout.view_spinner_item_select)
         genderField.adapter = adapter
     }
 

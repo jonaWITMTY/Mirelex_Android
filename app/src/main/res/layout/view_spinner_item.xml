@@ -6,4 +6,4 @@
         android:textColor="@android:color/white"
         android:padding="5dp"
         android:textSize="14sp"
-/>
+        android:id="@+id/spinnerItemWhiteSelect"/>
