@@ -41,6 +41,9 @@ class Profile : Fragment() {
             sessionUserPayments.visibility = View.GONE
         }
 
+        /*Hide delivery and payments*/
+        sessionUserPayments.visibility = View.GONE
+
         /*Fill user cell*/
         updateUser()
 

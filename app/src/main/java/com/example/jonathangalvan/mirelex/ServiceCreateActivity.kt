@@ -79,10 +79,19 @@ class ServiceCreateActivity : AppCompatActivity(),
             finish()
         })
 
+        /*Hide delivery and payments - hide fields*/
+        createServiceSend.visibility = View.GONE
+        createServicePaymentCard.visibility = View.GONE
+
         /*Create service button*/
         serviceCreateOrderService.setOnClickListener(View.OnClickListener {
             if(serviceCreateTerms.isChecked){
-                if(inputValidations() && defaultCard != null){
+
+                /*Hide delivery and payments - conditional with payment*/
+//                if(inputValidations() && defaultCard != null){
+
+                /*Hide delivery and payments - conditional with payment*/
+                if(inputValidations()){
                     val loader = layoutInflater.inflate(R.layout.view_progressbar,findViewById(android.R.id.content), true)
                     var orderTypeId = ""
                     when(service){
@@ -100,14 +109,14 @@ class ServiceCreateActivity : AppCompatActivity(),
                         endDate = serviceCreateDate.text.toString(),
                         orderType = orderTypeId,
                         total = total,
-                        storeId = serviceStores[serviceCreateStores.selectedItemPosition].userId,
-                        cardId = defaultCard?.cardId
+                        storeId = serviceStores[serviceCreateStores.selectedItemPosition].userId
+//                        cardId = defaultCard?.cardId - Hide delivery and payments
                     )
                     when(service){
                         0 -> {
                             /*Cleanning tab*/
                             serviceObj.productStyleId = serviceTypes[serviceCreateTypes.selectedItemPosition].productCatalogId.toString()
-                            serviceObj.clientDelivery = createServiceSend.isChecked
+//                            serviceObj.clientDelivery = createServiceSend.isChecked - Hide delivery and payments
                         }
                         else -> {
                             /*Sewing tab*/
@@ -270,7 +279,9 @@ class ServiceCreateActivity : AppCompatActivity(),
             0 -> {
                 /*Cleanning tab*/
                 endpoint = resources.getString(R.string.getCleanningTypes)
-                createServiceSend.visibility = View.VISIBLE
+
+                /*Hide delivery and payments*/
+//                createServiceSend.visibility = View.VISIBLE
             }
             else -> {
                 /*Sewing tab*/

@@ -84,7 +84,7 @@ class OrderDetailActivity : AppCompatActivity() {
                                         orderInfoForBundle?.orderInformation?.orderStatusId == OrderStatus.Open.orderStatusId
                                     ){
                                         detailOrderActionAceptReject.visibility = View.VISIBLE
-                                        detailOrderDelivery.visibility = View.VISIBLE
+//                                        detailOrderDelivery.visibility = View.VISIBLE /*Hide delivery and payments*/
 
                                         detailOrderActionAceptOrder.setOnClickListener(View.OnClickListener {
                                             aceptOrder()
@@ -233,8 +233,8 @@ class OrderDetailActivity : AppCompatActivity() {
         /*Accept denied order service*/
         val loader = layoutInflater.inflate(R.layout.view_progressbar, findViewById(android.R.id.content), true)
         val aceptOrderObj= UtilsModel.getGson().toJson(AcceptRejectOrderRequest(
-            orderInfoForBundle?.orderInformation?.orderId,
-            detailOrderDelivery.isChecked
+            orderInfoForBundle?.orderInformation?.orderId
+//            detailOrderDelivery.isChecked  Hide delivery and payments
         ))
         UtilsModel.getOkClient().newCall(UtilsModel.postRequest(this@OrderDetailActivity, endpoint, aceptOrderObj)).enqueue(object: Callback {
             override fun onFailure(call: Call, e: IOException) {
