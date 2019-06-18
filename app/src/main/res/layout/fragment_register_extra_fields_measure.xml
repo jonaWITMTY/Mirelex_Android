@@ -17,25 +17,12 @@
                     android:id="@+id/textView5" android:layout_marginTop="8dp"
                     app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginStart="8dp" android:textSize="24sp" android:textColor="@android:color/white"/>
-            <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="16dp"
-                    android:layout_marginTop="30dp" app:layout_constraintTop_toBottomOf="@+id/textView5"
-                    android:theme="@style/textInputLayoutWhite" android:id="@+id/registerExtraHeightField"
-                    app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="16dp">
-
-                <android.support.design.widget.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/heightInCms" android:inputType="number" android:singleLine="true"/>
-            </android.support.design.widget.TextInputLayout>
             <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layout_constraintTop_toBottomOf="@+id/registerExtraSizesWrap"
-                    app:layout_constraintStart_toStartOf="parent" android:layout_marginTop="16dp"
+                    app:layout_constraintStart_toStartOf="parent" android:layout_marginTop="30dp"
                     app:layout_constraintEnd_toEndOf="parent" android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp" android:id="@+id/registerExtraBodyTypesWrap">
                 <TextView
@@ -119,6 +106,32 @@
                         tools:layout_editor_absoluteY="137dp" android:layout_weight="1"
                         style="@style/Widget.AppCompat.Spinner.Underlined"
                         android:backgroundTint="@android:color/white"/>
+            </LinearLayout>
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp" android:layout_marginTop="16dp"
+                    android:id="@+id/registerExtraHeightLayout">
+                <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView5"
+                        android:theme="@style/textInputLayoutWhite" android:id="@+id/registerExtraHeightField"
+                        app:layout_constraintEnd_toEndOf="parent" android:layout_weight="1">
+
+                    <android.support.design.widget.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/heightInCms" android:inputType="number" android:singleLine="true"/>
+                </android.support.design.widget.TextInputLayout>
+                <Button
+                        android:text="?"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp" android:id="@+id/imagePreviewHeight" android:layout_weight="0"
+                        android:textColor="@color/cyan" android:background="@color/colorGrey"
+                        android:layout_marginTop="15dp"/>
             </LinearLayout>
             <LinearLayout
                     android:orientation="horizontal"

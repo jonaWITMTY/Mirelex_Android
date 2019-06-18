@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
+    <string name="heightImage">http://servicio.mirelex.com.mx/Uploads/height.png</string>
+    <string name="bustImage">http://servicio.mirelex.com.mx/Uploads/bust.png</string>
+    <string name="waistImage">http://servicio.mirelex.com.mx/Uploads/waist.png</string>
+    <string name="hipImage">http://servicio.mirelex.com.mx/Uploads/hip.png</string>
+</resources>
