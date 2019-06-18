@@ -7,12 +7,14 @@ import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
-import android.view.LayoutInflater
-import android.view.Menu
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import com.example.jonathangalvan.mirelex.Adapters.ServicesAdapter
+import com.example.jonathangalvan.mirelex.Enums.OrderType
 import com.example.jonathangalvan.mirelex.Enums.UserType
+import com.example.jonathangalvan.mirelex.Interfaces.FilterInterface
+import com.example.jonathangalvan.mirelex.Interfaces.ServiceInterface
 import com.example.jonathangalvan.mirelex.Interfaces.ServicesInterface
 import com.example.jonathangalvan.mirelex.Listeners.RecyclerItemClickListener
 import com.example.jonathangalvan.mirelex.Models.SessionModel
@@ -31,6 +33,7 @@ class Services : Fragment() {
 
     private var listener: OnFragmentInteractionListener? = null
     private val serviceAdapter = ServicesAdapter(ArrayList())
+    private var servicesObj: ServicesInterface? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,6 +52,40 @@ class Services : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        /*Fill filter options*/
+        val filterArr = ArrayList<FilterInterface>()
+        filterArr.add(FilterInterface("0", activity!!.resources.getString(R.string.all)))
+        filterArr.add(FilterInterface(OrderType.Cleaning.orderTypeId, activity!!.resources.getString(R.string.cleanning)))
+        filterArr.add(FilterInterface(OrderType.Sewing.orderTypeId, activity!!.resources.getString(R.string.sewing)))
+        val filterAdapter = ArrayAdapter<FilterInterface>(activity!!, R.layout.view_spinner_item_black, R.id.spinnerItemBlackSelect, filterArr)
+        filterAdapter.setDropDownViewResource(R.layout.view_spinner_item_black_select)
+        filterServicesSpinner.adapter = filterAdapter
+
+        /*Do filter action*/
+        filterServicesSpinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                if(servicesObj != null){
+                    activity?.runOnUiThread {
+                        run {
+                            var newObj = ArrayList<ServiceInterface>()
+                            if(filterArr[position].id != "0"){
+                                for(service in servicesObj!!.data){
+                                    if(filterArr[position].id == service.orderTypeId){
+                                        newObj.add(service)
+                                    }
+                                }
+                            }else{
+                                newObj = servicesObj!!.data
+                            }
+                            serviceAdapter.loadNewData(newObj)
+                        }
+                    }
+                }
+            }
+        }
 
         /*Hide order service depending on sessionusertype*/
         when(SessionModel(activity!!).getSessionUserType()){
@@ -98,10 +135,10 @@ class Services : Fragment() {
                 val responseObj = UtilsModel.getPostResponse(responseStr)
                 when(responseObj.status){
                     "success" -> {
-                        val servicesObj = UtilsModel.getGson().fromJson(UtilsModel.getGson().toJson(responseObj), ServicesInterface::class.java)
+                        servicesObj = UtilsModel.getGson().fromJson(UtilsModel.getGson().toJson(responseObj), ServicesInterface::class.java)
                         activity?.runOnUiThread {
                             run {
-                                serviceAdapter.loadNewData(servicesObj.data)
+                                serviceAdapter.loadNewData(servicesObj!!.data)
                             }
                         }
                     }
@@ -123,6 +160,15 @@ class Services : Fragment() {
                 }
             }
         })
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when(item?.itemId){
+            R.id.storeTabsFilterIcon -> {
+                filterServicesSpinner.performClick()
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onPrepareOptionsMenu(menu: Menu?) {
