@@ -8,7 +8,9 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Toast
+import com.example.jonathangalvan.mirelex.Interfaces.GenderInterface
 import com.example.jonathangalvan.mirelex.R
 import com.example.jonathangalvan.mirelex.RegisterExtraFieldsActivity
 import com.example.jonathangalvan.mirelex.ViewModels.RegisterViewModel
@@ -32,6 +34,16 @@ class RegisterExtraFieldsInfo : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         val viewModel = ViewModelProviders.of(activity!!).get(RegisterViewModel::class.java)
+
+        /*Gender depending on facebook login*/
+        if(viewModel.userCall.value?.person?.userFacebookId != null){
+            val adapter = ArrayAdapter<GenderInterface>(activity, R.layout.view_spinner_item, R.id.spinnerItemWhiteSelect, viewModel.genderCall.value!!)
+            adapter.setDropDownViewResource(R.layout.view_spinner_item_select)
+            registerExtraGenderSpinner.adapter = adapter
+            registerExtraGenderField.visibility = View.GONE
+        }else{
+            (registerExtraGenderSpinner.parent as ViewGroup).visibility = View.GONE
+        }
 
         /*Hide and fill fields depending on usertype*/
         if(viewModel.userCall.value?.person?.userTypeId == "4"){
@@ -62,7 +74,13 @@ class RegisterExtraFieldsInfo : Fragment() {
                     completeUser?.firstName = registerExtraNameField.editText?.text.toString()
                     completeUser?.paternalLastName = registerExtraPaternalLastNameField.editText?.text.toString()
                     completeUser?.maternalLastName = registerExtraMaternalLastNameField.editText?.text.toString()
-                    completeUser?.genderId = viewModel.userCall.value?.person?.userGenderId
+
+                    /*Gender depending on facebook login*/
+                    if(viewModel.userCall.value?.person?.userFacebookId != null){
+                        completeUser?.genderId = viewModel.genderCall.value!![registerExtraGenderSpinner.selectedItemPosition].genderId
+                    }else{
+                        completeUser?.genderId = viewModel.userCall.value?.person?.userGenderId
+                    }
                 }
                 completeUser?.userTypeId = viewModel.userCall.value?.person?.userTypeId
                 completeUser?.email = viewModel.userCall.value?.person?.email!!
