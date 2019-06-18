@@ -157,7 +157,7 @@ class Orders : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item?.itemId){
-            R.id.storeTabsFilterIcon -> {
+            R.id.storeTabsFilterIcon, R.id.customerTabsFilterIcon -> {
                 filterOrdersSpinner.performClick()
             }
         }

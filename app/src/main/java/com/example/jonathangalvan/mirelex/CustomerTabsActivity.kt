@@ -5,7 +5,10 @@ import android.net.Uri
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat
+import android.support.v4.graphics.drawable.DrawableCompat
 import android.support.v7.app.AppCompatActivity
+import android.view.Menu
 import android.widget.FrameLayout
 import com.example.jonathangalvan.mirelex.Fragments.*
 import com.example.jonathangalvan.mirelex.Fragments.Utils.CustomBottomAlert
@@ -96,6 +99,14 @@ class CustomerTabsActivity : AppCompatActivity(),
         transaction.replace(R.id.customerTabsFrameLayout, fragment)
         transaction.addToBackStack(null)
         transaction.commit()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.customer_tabs_icons, menu)
+        menu?.getItem(0)?.icon?.let {
+            DrawableCompat.setTint(it, ContextCompat.getColor(this, android.R.color.white))
+        }
+        return super.onCreateOptionsMenu(menu)
     }
 
     override fun onBackPressed(){}

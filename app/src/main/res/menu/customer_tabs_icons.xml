@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:android="http://schemas.android.com/apk/res/android">
-    <item app:showAsAction="always" android:icon="@drawable/ic_plus" android:title="paymentCardAdd"/>
+    <item app:showAsAction="always" android:icon="@drawable/ic_sliders" android:title="paymentCardAdd"
+          android:id="@+id/customerTabsFilterIcon"/>
 </menu>
