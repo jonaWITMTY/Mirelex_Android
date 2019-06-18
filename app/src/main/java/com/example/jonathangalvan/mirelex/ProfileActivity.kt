@@ -73,16 +73,20 @@ class ProfileActivity : AppCompatActivity() {
         })
 
         /*Clicks measures "?"*/
+        imagePreviewHeight.setOnClickListener(View.OnClickListener {
+            ImagePreview().newInstance(resources.getString(R.string.heightImage)).show(supportFragmentManager, "alertDialog")
+        })
+
         imagePreviewBust.setOnClickListener(View.OnClickListener {
-            ImagePreview().newInstance(R.drawable.mirelex_logo_cian.toString()).show(supportFragmentManager, "alertDialog")
+            ImagePreview().newInstance(resources.getString(R.string.bustImage)).show(supportFragmentManager, "alertDialog")
         })
 
         imagePreviewWaist.setOnClickListener(View.OnClickListener {
-            ImagePreview().newInstance(R.drawable.mirelex_logo_cian.toString()).show(supportFragmentManager, "alertDialog")
+            ImagePreview().newInstance(resources.getString(R.string.waistImage)).show(supportFragmentManager, "alertDialog")
         })
 
         imagePreviewHip.setOnClickListener(View.OnClickListener {
-            ImagePreview().newInstance(R.drawable.mirelex_logo_cian.toString()).show(supportFragmentManager, "alertDialog")
+            ImagePreview().newInstance(resources.getString(R.string.hipImage)).show(supportFragmentManager, "alertDialog")
         })
 
         /*Hide/show fields depending in usertype*/
@@ -92,7 +96,7 @@ class ProfileActivity : AppCompatActivity() {
                 updateSessionUserPaternal.visibility = View.GONE
                 updateSessionUserMaternal.visibility = View.GONE
                 updateSessionUserGender.visibility = View.GONE
-                updateSessionUserHeight.visibility = View.GONE
+                updateSessionUserHeightLayout.visibility = View.GONE
                 updateSessionUserSizeWoman.visibility = View.GONE
                 (updateSessionUserSize.parent as View).visibility = View.GONE
                 (updateSessionUserBodyType.parent as View).visibility = View.GONE
