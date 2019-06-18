@@ -342,7 +342,12 @@ class ProductUpdate : Fragment()  {
         adapter =  ArrayAdapter<String>(activity!!, android.R.layout.simple_spinner_item)
         for((index, color) in catalogs?.colors!!.withIndex()){
             adapter!!.add(color.name)
-            selectedItems[index] = checkIfColorExist(color.productCatalogId!!.toLong())
+            if(checkIfColorExist(color.productCatalogId!!.toLong())){
+                selectedItems[index] = true
+                selectedIds.add(catalogs?.colors!![index].productCatalogId!!.toLong())
+            }else{
+                selectedItems[index] = false
+            }
         }
 
         /*Fill spinner with colors*/
