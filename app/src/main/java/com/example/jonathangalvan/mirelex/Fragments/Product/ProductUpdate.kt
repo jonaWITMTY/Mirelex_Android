@@ -11,8 +11,6 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import com.androidbuts.multispinnerfilter.KeyPairBoolData
-import com.androidbuts.multispinnerfilter.MultiSpinnerSearch
 import com.example.jonathangalvan.mirelex.Enums.ProductType
 import com.example.jonathangalvan.mirelex.Fragments.Utils.ImagePreview
 import com.example.jonathangalvan.mirelex.Interfaces.ProductCatalog
@@ -30,6 +28,7 @@ import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.Response
 import java.io.IOException
+import com.thomashaertel.widget.MultiSpinner
 
 
 class ProductUpdate : Fragment()  {
@@ -39,7 +38,9 @@ class ProductUpdate : Fragment()  {
     var productObj: ProductInfoInterface? = null
     var catalogs: ProductCatalogs? = null
     var imgPreview: String? = null
-    var multiSpinnerView: MultiSpinnerSearch? = null
+    var spinner: MultiSpinner? = null
+    var adapter: ArrayAdapter<String>? = null
+    var selectedIds: ArrayList<Long> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -154,7 +155,7 @@ class ProductUpdate : Fragment()  {
                 viewModel.productObjRequest.productMaterialId = catalogs!!.materials[updateProductMaterial.selectedItemPosition].productCatalogId
                 viewModel.productObjRequest.productOccasionId= catalogs!!.occasions[updateProductOcation.selectedItemPosition].productCatalogId
                 viewModel.productObjRequest.productSleeveStyleId = catalogs!!.sleeveStyles[updateProductSleeveStyle.selectedItemPosition].productCatalogId
-                viewModel.productObjRequest.productColors = multiSpinnerView?.selectedIds
+                viewModel.productObjRequest.productColors = selectedIds
 
                 /*Fill fields depending on category type*/
                 when(productObj?.productInformation?.productTypeId){
@@ -185,8 +186,8 @@ class ProductUpdate : Fragment()  {
     fun inputValidations(): Boolean{
         var isCorrect = true
         if(
-            updateProductBrand.editText?.text.toString()!!.isEmpty() ||
-            updateProductColors.selectedIds.size == 0
+            updateProductBrand.editText?.text.toString()!!.isEmpty()
+//            updateProductColors.selectedIds.size == 0
         ){
             isCorrect = false
         }else{
@@ -336,20 +337,29 @@ class ProductUpdate : Fragment()  {
         fillSpinner(catalogs?.occasions, activity!!.findViewById(R.id.updateProductOcation))
         updateProductOcation.setSelection(getAdapterItemPosition( productObj?.productInformation?.productOccasionId?.toLong(), catalogs?.occasions))
 
-        var colorArr: ArrayList<KeyPairBoolData> = ArrayList()
-        for(color in catalogs?.colors!!){
-            val colorObj = KeyPairBoolData()
-            colorObj.id = color.productCatalogId!!.toLong()
-            colorObj.name = color.name
-            productObj?.productColors
-            colorObj.isSelected  = checkIfColorExist(color.productCatalogId!!.toLong())
-            colorArr?.add(colorObj)
+        /*Get colors*/
+        var selectedItems = BooleanArray(catalogs?.colors!!.size)
+        adapter =  ArrayAdapter<String>(activity!!, android.R.layout.simple_spinner_item)
+        for((index, color) in catalogs?.colors!!.withIndex()){
+            adapter!!.add(color.name)
+            selectedItems[index] = checkIfColorExist(color.productCatalogId!!.toLong())
         }
 
-        multiSpinnerView = activity!!.findViewById<MultiSpinnerSearch>(R.id.updateProductColors)
-        multiSpinnerView!!.setItems(colorArr, -1) { items -> }
+        /*Fill spinner with colors*/
+        spinner = activity!!.findViewById(R.id.spinnerMulti)
+        spinner!!.setAdapter(adapter, false, onSelectedListener)
 
-        multiSpinnerView!!.setLimit(5, MultiSpinnerSearch.LimitExceedListener {})
+       /*set selected colors*/
+        spinner!!.setSelected(selectedItems)
+
+    }
+
+    private val onSelectedListener = MultiSpinner.MultiSpinnerListener {
+        for ((index, value) in it.withIndex()){
+            if(value){
+                selectedIds.add(catalogs?.colors!![index].productCatalogId!!.toLong())
+            }
+        }
     }
 
     fun fillSpinner(data: ArrayList<ProductCatalog>?, adapterView: AdapterView<ArrayAdapter<ProductCatalog>>){
