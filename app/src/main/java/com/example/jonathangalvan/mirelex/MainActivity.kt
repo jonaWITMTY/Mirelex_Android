@@ -15,10 +15,23 @@ import android.widget.Toast
 import com.example.jonathangalvan.mirelex.Interfaces.TokenInterface
 import com.example.jonathangalvan.mirelex.Models.SessionModel
 import com.example.jonathangalvan.mirelex.Models.UtilsModel
+import com.example.jonathangalvan.mirelex.Requests.FacebookLoginRequest
+import com.facebook.CallbackManager
 import com.onesignal.OneSignal
+import com.facebook.FacebookException
+import com.facebook.login.LoginResult
+import com.facebook.FacebookCallback
+import com.facebook.login.LoginManager
+import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
+    val callbackManager = CallbackManager.Factory.create()
+
+    public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        callbackManager.onActivityResult(requestCode, resultCode, data)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +43,44 @@ class MainActivity : AppCompatActivity() {
             .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
             .unsubscribeWhenNotificationsAreDisabled(true)
             .init()
+
+        /*Facebook login*/
+        var loginButtonFacebook = findViewById<View>(R.id.btnLoginFacebook)
+        loginButtonFacebook.setOnClickListener(View.OnClickListener {
+            LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile"))
+        })
+
+        LoginManager.getInstance().registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
+            override fun onSuccess(loginResult: LoginResult) {
+                val loader = layoutInflater.inflate(R.layout.view_progressbar, findViewById(android.R.id.content), true)
+                val loginObj = FacebookLoginRequest(loginResult.accessToken.token)
+                UtilsModel.getOkClient().newCall(UtilsModel.postRequest(this@MainActivity,resources.getString(R.string.userFacebookSignIn), UtilsModel.getGson().toJson(loginObj))).enqueue(object : Callback {
+                    override fun onFailure(call: Call, e: IOException) {
+                        runOnUiThread {run{findViewById<ViewGroup>(android.R.id.content).removeView(findViewById(R.id.view_progressbar))}}
+                        UtilsModel.getAlertView().newInstance(UtilsModel.getErrorRequestCall(), 1, 0).show(supportFragmentManager,"alertDialog")
+                    }
+
+                    override fun onResponse(call: Call, response: Response){
+                        val responseStr = response.body()?.string()
+                        val responseObj = UtilsModel.getPostResponse(responseStr)
+                        if(responseObj.status == "logged"){
+                            getUserInfo(responseObj.data!![0].toString())
+                        }else{
+                            runOnUiThread {run{findViewById<ViewGroup>(android.R.id.content).removeView(findViewById(R.id.view_progressbar))}}
+                            UtilsModel.getAlertView().newInstance(responseStr, 1, 0).show(supportFragmentManager,"alertDialog")
+                        }
+                    }
+                })
+            }
+
+            override fun onCancel() {}
+
+            override fun onError(exception: FacebookException) {
+                val text = resources.getText(R.string.facebookError)
+                val duration = Toast.LENGTH_SHORT
+                Toast.makeText(this@MainActivity, text, duration).show()
+            }
+        })
 
         /*Go to RegisterActivity*/
         val goToRegisterlistener = View.OnClickListener { v: View ->
@@ -60,45 +111,7 @@ class MainActivity : AppCompatActivity() {
                         val responseStr = response.body()?.string()
                         val responseObj = UtilsModel.getPostResponse(responseStr)
                         if(responseObj.status == "logged"){
-                            val tokenObj: TokenInterface = UtilsModel.getGson().fromJson(responseObj.data!![0].toString(), TokenInterface::class.java)
-                            SessionModel.saveSessionValue(this@MainActivity, "token", tokenObj.token)
-                            UtilsModel.getOkClient().newCall(UtilsModel.postRequest(this@MainActivity,resources.getString(R.string.getUserInfo))).enqueue(object: Callback {
-                                override fun onFailure(call: Call, e: IOException) {
-                                    runOnUiThread {run{findViewById<ViewGroup>(android.R.id.content).removeView(findViewById(R.id.view_progressbar))}}
-                                    UtilsModel.getAlertView().newInstance(UtilsModel.getErrorRequestCall(), 1, 0).show(supportFragmentManager,"alertDialog")
-                                }
-
-                                override fun onResponse(call: Call, response: Response) {
-                                    runOnUiThread {run{findViewById<ViewGroup>(android.R.id.content).removeView(findViewById(R.id.view_progressbar))}}
-                                    val responseUserStr = response.body()!!.string()
-                                    val responseUserObj = UtilsModel.getGson().fromJson(responseUserStr, ResponseInterface::class.java)
-                                    if(responseUserObj.status == "success"){
-                                        SessionModel.saveSessionValue(this@MainActivity, "user", UtilsModel.getGson().toJson(responseUserObj.data!![0]))
-                                        val user = SessionModel(this@MainActivity).getUser()
-                                        when(user.person?.userTypeId){
-                                            "3" ->{
-                                                if (user.characteristics?.characteristicsId == null || user.address!!.isEmpty()){
-                                                    startActivity(Intent(this@MainActivity, RegisterExtraFieldsActivity::class.java))
-                                                }else{
-                                                    startActivity(Intent(this@MainActivity, CustomerTabsActivity::class.java))
-                                                }
-                                            }
-                                            "4" ->{
-                                                if (user.address!!.isEmpty()){
-                                                    startActivity(Intent(this@MainActivity, RegisterExtraFieldsActivity::class.java))
-                                                }else{
-                                                    startActivity(Intent(this@MainActivity, StoreTabsActivity::class.java))
-                                                }
-                                            }
-                                            else ->{
-                                                UtilsModel.getAlertView().newInstance(UtilsModel.getErrorUserAccessDenied(), 1, 0).show(supportFragmentManager,"alertDialog")
-                                            }
-                                        }
-                                    }else{
-                                        UtilsModel.getAlertView().newInstance(responseUserStr, 1, 0).show(supportFragmentManager,"alertDialog")
-                                    }
-                                }
-                            })
+                            getUserInfo(responseObj.data!![0].toString())
                         }else{
                             runOnUiThread {run{findViewById<ViewGroup>(android.R.id.content).removeView(findViewById(R.id.view_progressbar))}}
                             UtilsModel.getAlertView().newInstance(responseStr, 1, 0).show(supportFragmentManager,"alertDialog")
@@ -120,6 +133,48 @@ class MainActivity : AppCompatActivity() {
             isCorrect = false
         }
         return isCorrect
+    }
+
+    fun getUserInfo(response: String?){
+        val tokenObj: TokenInterface = UtilsModel.getGson().fromJson(response, TokenInterface::class.java)
+        SessionModel.saveSessionValue(this@MainActivity, "token", tokenObj.token)
+        UtilsModel.getOkClient().newCall(UtilsModel.postRequest(this@MainActivity,resources.getString(R.string.getUserInfo))).enqueue(object: Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                runOnUiThread {run{findViewById<ViewGroup>(android.R.id.content).removeView(findViewById(R.id.view_progressbar))}}
+                UtilsModel.getAlertView().newInstance(UtilsModel.getErrorRequestCall(), 1, 0).show(supportFragmentManager,"alertDialog")
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                runOnUiThread {run{findViewById<ViewGroup>(android.R.id.content).removeView(findViewById(R.id.view_progressbar))}}
+                val responseUserStr = response.body()!!.string()
+                val responseUserObj = UtilsModel.getGson().fromJson(responseUserStr, ResponseInterface::class.java)
+                if(responseUserObj.status == "success"){
+                    SessionModel.saveSessionValue(this@MainActivity, "user", UtilsModel.getGson().toJson(responseUserObj.data!![0]))
+                    val user = SessionModel(this@MainActivity).getUser()
+                    when(user.person?.userTypeId){
+                        "3" ->{
+                            if (user.characteristics?.characteristicsId == null || user.address!!.isEmpty()){
+                                startActivity(Intent(this@MainActivity, RegisterExtraFieldsActivity::class.java))
+                            }else{
+                                startActivity(Intent(this@MainActivity, CustomerTabsActivity::class.java))
+                            }
+                        }
+                        "4" ->{
+                            if (user.address!!.isEmpty()){
+                                startActivity(Intent(this@MainActivity, RegisterExtraFieldsActivity::class.java))
+                            }else{
+                                startActivity(Intent(this@MainActivity, StoreTabsActivity::class.java))
+                            }
+                        }
+                        else ->{
+                            UtilsModel.getAlertView().newInstance(UtilsModel.getErrorUserAccessDenied(), 1, 0).show(supportFragmentManager,"alertDialog")
+                        }
+                    }
+                }else{
+                    UtilsModel.getAlertView().newInstance(responseUserStr, 1, 0).show(supportFragmentManager,"alertDialog")
+                }
+            }
+        })
     }
 
     override fun onBackPressed() { }

@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     //general
     <string name="getNeighborhood">general/neighborhood</string>
     <string name="sendContactMessage">general/contact</string>
 
     //user
     <string name="userSignIn">user/login</string>
+    <string name="userFacebookSignIn">user/fblogin</string>
     <string name="getUserInfo">user/info</string>
     <string name="createUser">user/create</string>
     <string name="updateUser">user/update/info</string>

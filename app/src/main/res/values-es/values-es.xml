@@ -101,4 +101,24 @@
     <string name="usedTimes">Veces usado</string>
     <string name="invalid_date">Fecha invalida</string>
     <string name="send">Enviar</string>
+    <string name="conversations">Conversaciones</string>
+    <string name="selectDate">Selecciona una fecha</string>
+    <string name="denied">Rechazar</string>
+    <string name="delivery">Envío</string>
+    <string name="paymentMethods">Métodos de pago</string>
+    <string name="principal">Principal</string>
+    <string name="deletePaymentCard">Eliminar tarjeta de pago</string>
+    <string name="cardNumber">Número de tarjeta</string>
+    <string name="month">Mes</string>
+    <string name="year">Año</string>
+    <string name="noDataAvailable">No hay datos disponibles</string>
+    <string name="defaultPaymentCard">Principal tarjeta de pago</string>
+    <string name="addPaymentCard">Agregar tarjeta de crédito</string>
+    <string name="enterClientMesaurements">Ingresa las medidas del cliente</string>
+    <string name="adjustedMesaurements">Ajuste de medidas</string>
+    <string name="lease">Renta</string>
+    <string name="purchase">Compra</string>
+    <string name="all">Todo</string>
+    <string name="availableUpdate">Actualización disponible</string>
+    <string name="availableUpdateDescription">Hay una nueva versión disponible. Por favor, actualiza a la versión</string>
 </resources>
