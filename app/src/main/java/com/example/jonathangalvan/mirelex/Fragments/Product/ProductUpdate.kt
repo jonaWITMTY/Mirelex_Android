@@ -186,8 +186,8 @@ class ProductUpdate : Fragment()  {
     fun inputValidations(): Boolean{
         var isCorrect = true
         if(
-            updateProductBrand.editText?.text.toString()!!.isEmpty()
-//            updateProductColors.selectedIds.size == 0
+            updateProductBrand.editText?.text.toString()!!.isEmpty() ||
+            selectedIds.size < 1
         ){
             isCorrect = false
         }else{
@@ -355,6 +355,7 @@ class ProductUpdate : Fragment()  {
     }
 
     private val onSelectedListener = MultiSpinner.MultiSpinnerListener {
+        selectedIds = ArrayList()
         for ((index, value) in it.withIndex()){
             if(value){
                 selectedIds.add(catalogs?.colors!![index].productCatalogId!!.toLong())

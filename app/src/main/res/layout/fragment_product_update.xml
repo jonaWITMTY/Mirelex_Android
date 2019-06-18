@@ -209,7 +209,9 @@
                     <com.thomashaertel.widget.MultiSpinner
                             android:id="@+id/spinnerMulti"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            style="@android:style/Widget.Material.Light.Spinner.Underlined"
+                            android:backgroundTint="@color/black"/>
                 </LinearLayout>
                 <LinearLayout
                         android:orientation="vertical"

@@ -24,6 +24,7 @@ import com.example.jonathangalvan.mirelex.R
 import com.example.jonathangalvan.mirelex.Requests.GetProductCatalogsRequest
 import com.example.jonathangalvan.mirelex.Requests.GetProductPricesRequest
 import com.example.jonathangalvan.mirelex.ViewModels.ProductViewModel
+import com.thomashaertel.widget.MultiSpinner
 import kotlinx.android.synthetic.main.fragment_product_create.*
 import okhttp3.Call
 import okhttp3.Callback
@@ -36,7 +37,9 @@ class ProductCreate : Fragment() {
     var productId: String = ""
     var catalogs: ProductCatalogs? = null
     var productTypes: ArrayList<ProductTypeInterface>? = null
-    var multiSpinnerView: MultiSpinnerSearch? = null
+    var spinner: MultiSpinner? = null
+    var adapter: ArrayAdapter<String>? = null
+    var selectedIds: ArrayList<Long> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -171,7 +174,7 @@ class ProductCreate : Fragment() {
                 viewModel.productObjRequest.productMaterialId = catalogs!!.materials[createProductMaterial.selectedItemPosition].productCatalogId
                 viewModel.productObjRequest.productOccasionId= catalogs!!.occasions[createProductOcation.selectedItemPosition].productCatalogId
                 viewModel.productObjRequest.productSleeveStyleId = catalogs!!.sleeveStyles[createProductSleeveStyle.selectedItemPosition].productCatalogId
-                viewModel.productObjRequest.productColors = multiSpinnerView?.selectedIds
+                viewModel.productObjRequest.productColors = selectedIds
 
                 /*Fill fields depending on category type*/
                 when(productTypes!![createProductCategory.selectedItemPosition].productTypeId.toString()){
@@ -204,7 +207,7 @@ class ProductCreate : Fragment() {
         if(
             createProductBrand.editText?.text.toString()!!.isEmpty() ||
             createProductPrice.editText?.text.toString()!!.isEmpty() ||
-            createProductColors.selectedIds.size == 0
+            selectedIds.size < 1
         ){
             isCorrect = false
         }else{
@@ -325,17 +328,24 @@ class ProductCreate : Fragment() {
         fillSpinner(catalogs?.sleeveStyles, activity!!.findViewById(R.id.createProductSleeveStyle))
         fillSpinner(catalogs?.occasions, activity!!.findViewById(R.id.createProductOcation))
 
-        var colorArr: ArrayList<KeyPairBoolData> = ArrayList()
-        for(color in catalogs?.colors!!){
-            val colorObj = KeyPairBoolData()
-            colorObj.id = color.productCatalogId!!.toLong()
-            colorObj.name = color.name
-            colorArr?.add(colorObj)
+        /*Get colors*/
+        adapter =  ArrayAdapter<String>(activity!!, android.R.layout.simple_spinner_item)
+        for((index, color) in catalogs?.colors!!.withIndex()){
+            adapter!!.add(color.name)
         }
 
-        multiSpinnerView = activity!!.findViewById<MultiSpinnerSearch>(R.id.createProductColors)
-        multiSpinnerView!!.setItems(colorArr, -1) { items -> }
-        multiSpinnerView!!.setLimit(5, MultiSpinnerSearch.LimitExceedListener {})
+        /*Fill spinner with colors*/
+        spinner = activity!!.findViewById(R.id.spinnerMulti)
+        spinner!!.setAdapter(adapter, false, onSelectedListener)
+    }
+
+    private val onSelectedListener = MultiSpinner.MultiSpinnerListener {
+        selectedIds = ArrayList()
+        for ((index, value) in it.withIndex()){
+            if(value){
+                selectedIds.add(catalogs?.colors!![index].productCatalogId!!.toLong())
+            }
+        }
     }
 
     fun fillSpinner(data: ArrayList<ProductCatalog>?, adapterView: AdapterView<ArrayAdapter<ProductCatalog>>){

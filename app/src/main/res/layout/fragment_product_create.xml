@@ -219,13 +219,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" android:textSize="12sp"
                         android:textColor="@android:color/black"/>
-                <com.androidbuts.multispinnerfilter.MultiSpinnerSearch
-                        android:id="@+id/createProductColors"
+                <com.thomashaertel.widget.MultiSpinner
+                        android:id="@+id/spinnerMulti"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:hintText="Selecciona un color"
-                        android:dropDownWidth="match_parent"
-                        android:persistentDrawingCache="all"/>
+                        style="@android:style/Widget.Material.Light.Spinner.Underlined"
+                        android:backgroundTint="@color/black"/>
             </LinearLayout>
             <LinearLayout
                     android:orientation="vertical"
