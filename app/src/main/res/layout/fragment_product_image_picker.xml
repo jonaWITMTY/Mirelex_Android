@@ -21,6 +21,12 @@
                     android:layout_height="200dp" android:id="@+id/productFeaturedImage"
                     android:scaleType="centerInside" android:layout_gravity="center"
                     android:layout_marginBottom="16dp"/>
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/textView26"
+                    android:textColor="@color/opacity80Black" android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp" android:layout_marginBottom="16dp" android:textSize="18sp"
+                    android:text="@string/complementaryPhotos"/>
             <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"

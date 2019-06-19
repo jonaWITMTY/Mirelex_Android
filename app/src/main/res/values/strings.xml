@@ -123,4 +123,5 @@
     <string name="facebookError">Lo sentimos, ocurrió un problema con facebook</string>
     <string name="selectImage">Seleccionar una imagen</string>
     <string name="delete">Eliminar</string>
+    <string name="complementaryPhotos">Fotos complementarias</string>
 </resources>

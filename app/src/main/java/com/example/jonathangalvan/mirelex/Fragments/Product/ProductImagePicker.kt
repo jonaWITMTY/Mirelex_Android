@@ -21,14 +21,20 @@ import com.example.jonathangalvan.mirelex.Interfaces.BottomAlertInterface
 import com.example.jonathangalvan.mirelex.Interfaces.ProductImageInterface
 import com.example.jonathangalvan.mirelex.Models.UtilsModel
 import com.example.jonathangalvan.mirelex.ProductActivity
+import com.example.jonathangalvan.mirelex.Requests.DeleteSecondaryImageRequest
 import com.example.jonathangalvan.mirelex.ViewModels.ProductViewModel
 import com.squareup.picasso.Picasso
+import okhttp3.Call
+import okhttp3.Callback
+import okhttp3.Response
 import java.io.File
+import java.io.IOException
 
 class ProductImagePicker : Fragment() {
     private var listener: OnFragmentInteractionListener? = null
     var imageTarget: ImageView? = null
     var imageSecondaryIndex: Int = 0
+    var viewModel: ProductViewModel = ProductViewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,7 +58,7 @@ class ProductImagePicker : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         /*Get productObj*/
-        val viewModel = ViewModelProviders.of(activity!!).get(ProductViewModel::class.java)
+        viewModel = ViewModelProviders.of(activity!!).get(ProductViewModel::class.java)
         var productObj = viewModel.productObj
 
         /*Validate if is update or insert for button text*/
@@ -61,20 +67,22 @@ class ProductImagePicker : Fragment() {
         }
 
         /*Update process only*/
-        if(productObj?.productInformation?.productFeaturedImage != null && viewModel.productProcessType == "update"){
-            Picasso.with(activity).load(productObj?.productInformation?.productFeaturedImage).into(productFeaturedImage)
-        }
+        if(productObj != null){
+            if(productObj?.productInformation?.productFeaturedImage != null && viewModel.productProcessType == "update"){
+                Picasso.with(activity).load(productObj?.productInformation?.productFeaturedImage).into(productFeaturedImage)
+            }
 
-        if(productObj?.productImages!!.size >= 1){
-            Picasso.with(productSecondaryImage1.context).load(productObj?.productImages!![0].imageUrl).into(productSecondaryImage1)
-        }
+            if(productObj?.productImages.size >= 1 && viewModel.productProcessType == "update"){
+                Picasso.with(productSecondaryImage1.context).load(productObj?.productImages!![0].imageUrl).into(productSecondaryImage1)
+            }
 
-        if(productObj?.productImages!!.size >= 2){
-            Picasso.with(productSecondaryImage2.context).load(productObj?.productImages!![1].imageUrl).into(productSecondaryImage2)
-        }
+            if(productObj?.productImages!!.size >= 2 && viewModel.productProcessType == "update"){
+                Picasso.with(productSecondaryImage2.context).load(productObj?.productImages!![1].imageUrl).into(productSecondaryImage2)
+            }
 
-        if(productObj?.productImages!!.size == 3){
-            Picasso.with(productSecondaryImage3.context).load(productObj?.productImages!![2].imageUrl).into(productSecondaryImage3)
+            if(productObj?.productImages!!.size == 3 && viewModel.productProcessType == "update"){
+                Picasso.with(productSecondaryImage3.context).load(productObj?.productImages!![2].imageUrl).into(productSecondaryImage3)
+            }
         }
 
         /*Set images*/
@@ -111,7 +119,6 @@ class ProductImagePicker : Fragment() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode === 1)
             if (resultCode === Activity.RESULT_OK) {
-                val viewModel = ViewModelProviders.of(activity!!).get(ProductViewModel::class.java)
                 val selectedImage = data!!.getData()
                 val filePath = getPath(selectedImage)
                 val file_extn = filePath.substring(filePath.lastIndexOf(".") + 1)
@@ -148,7 +155,6 @@ class ProductImagePicker : Fragment() {
     }
 
     fun setSecondaryImage(file: File){
-        val viewModel = ViewModelProviders.of(activity!!).get(ProductViewModel::class.java)
         var existsInArray = false
         for ((index, img) in viewModel.secondaryImgs.withIndex()){
             if(img.position == imageSecondaryIndex){
@@ -160,6 +166,7 @@ class ProductImagePicker : Fragment() {
         if(!existsInArray){
             viewModel.secondaryImgs.add(ProductImageInterface(file, imageSecondaryIndex))
         }
+        deletedSecondaryImages()
     }
 
     fun openImageSelection(){
@@ -178,7 +185,6 @@ class ProductImagePicker : Fragment() {
     }
 
     fun reseatImage(){
-        val viewModel = ViewModelProviders.of(activity!!).get(ProductViewModel::class.java)
         Picasso.with(imageTarget!!.context).load(R.drawable.image_picker).into(imageTarget)
         when(imageTarget){
             productFeaturedImage -> {
@@ -194,6 +200,23 @@ class ProductImagePicker : Fragment() {
                     }
                 }
                 viewModel.secondaryImgs = newObjArr
+                deletedSecondaryImages()
+            }
+        }
+    }
+
+    fun deletedSecondaryImages(){
+        if(viewModel.productObj?.productImages?.size != 0 && viewModel.productObj?.productImages?.size != null){
+            if(imageSecondaryIndex <= viewModel.productObj?.productImages!!.size){
+                val imageId = viewModel.productObj?.productImages!![imageSecondaryIndex - 1].imageId
+                val deleteImgObj = UtilsModel.getGson().toJson(DeleteSecondaryImageRequest(
+                    imageId
+                ))
+                UtilsModel.getOkClient().newCall(UtilsModel.postRequest(activity!!, resources.getString(R.string.deleteSecondaryImage), deleteImgObj)).enqueue(object : Callback {
+                    override fun onFailure(call: Call, e: IOException) {}
+
+                    override fun onResponse(call: Call, response: Response) {}
+                })
             }
         }
     }

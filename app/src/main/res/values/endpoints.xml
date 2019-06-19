@@ -32,6 +32,7 @@
     <string name="updateProduct">product/update</string>
     <string name="uploadFeatureImage">product/image/featured</string>
     <string name="uploadSecondaryImages">product/image/upload</string>
+    <string name="deleteSecondaryImage">product/image/delete</string>
     <string name="getProductTypes">product/types</string>
     <string name="getProductPrices">product/suggested/prices</string>
     <string name="createProduct">product/create</string>
