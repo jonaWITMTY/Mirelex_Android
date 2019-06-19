@@ -121,4 +121,13 @@
     <string name="all">Todo</string>
     <string name="availableUpdate">Actualización disponible</string>
     <string name="availableUpdateDescription">Hay una nueva versión disponible. Por favor, actualiza a la versión</string>
+    <string name="facebookError">Lo sentimos, ocurrió un problema con facebook</string>
+    <string name="selectImage">Seleccionar una imagen</string>
+    <string name="delete">Eliminar</string>
+    <string name="complementaryPhotos">Fotos complementarias</string>
+    <string name="confirmPhone">Confirma tu teléfono</string>
+    <string name="code">Código</string>
+    <string name="confirmPhoneText">Un mensaje de texto se envio con un código. Por favor ingresa el código</string>
+    <string name="resendCode">Reenviar código</string>
+    <string name="verifyCodeProcessing">Procesando código de verificación...</string>
 </resources>
