@@ -295,6 +295,9 @@ class CustomBottomAlert: DialogFragment() {
                                 val responseStr = response.body()?.string()
                                 val responseObj = UtilsModel.getGson().fromJson(responseStr, ResponseInterface::class.java)
                                 if(responseObj.status == "success"){
+                                    val user = SessionModel(activity!!).getUser()
+                                    user.person?.phoneVerified = "1"
+                                    SessionModel.saveSessionValue(activity!!, "user", UtilsModel.getGson().toJson(user))
                                     onDismiss(dialog)
                                 }else{
                                     inputText.text = responseObj.desc
