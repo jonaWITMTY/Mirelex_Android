@@ -3,6 +3,8 @@
     //general
     <string name="getNeighborhood">general/neighborhood</string>
     <string name="sendContactMessage">general/contact</string>
+    <string name="verifyPhone">user/verify/phone</string>
+    <string name="verifyPhoneResend">user/phone/resend/code</string>
 
     //user
     <string name="userSignIn">user/login</string>

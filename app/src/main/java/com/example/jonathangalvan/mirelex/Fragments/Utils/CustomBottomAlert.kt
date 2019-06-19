@@ -14,11 +14,13 @@ import android.widget.Toast
 import com.example.jonathangalvan.mirelex.*
 import com.example.jonathangalvan.mirelex.Fragments.Product.ProductImagePicker
 import com.example.jonathangalvan.mirelex.Interfaces.BottomAlertInterface
+import com.example.jonathangalvan.mirelex.Interfaces.ResponseInterface
 import com.example.jonathangalvan.mirelex.Models.SessionModel
 import com.example.jonathangalvan.mirelex.Models.UtilsModel
 import com.example.jonathangalvan.mirelex.Requests.CreateFittingMeasurementsRequest
 import com.example.jonathangalvan.mirelex.Requests.DeleteCardRequest
 import com.example.jonathangalvan.mirelex.Requests.SetDefaultPaymentCardRequest
+import com.example.jonathangalvan.mirelex.Requests.VerifyPhoneRequest
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.Response
@@ -245,6 +247,65 @@ class CustomBottomAlert: DialogFragment() {
                         frag!!.reseatImage()
                     }
                     onDismiss(dialog)
+                })
+            }
+            "confirmAccountPhone" -> {
+                view = activity!!.layoutInflater.inflate(R.layout.fragment_custom_bottom_verifyphone_alert, null)
+                alert.setCanceledOnTouchOutside(false)
+
+                /*Resend code*/
+                val btnResend = view.findViewById<View>(R.id.verifyPhoneResend)
+                btnResend.setOnClickListener(View.OnClickListener {
+
+                    val input = view.findViewById<TextView>(R.id.verifyPhoneInput)
+                    var inputText = view.findViewById<TextView>(R.id.verifyPhoneText)
+                    inputText.text = resources.getString(R.string.verifyCodeProcessing)
+
+                    UtilsModel.getOkClient().newCall(UtilsModel.postRequest(activity!!, resources.getString(R.string.verifyPhoneResend))).enqueue(object : Callback {
+                        override fun onFailure(call: Call, e: IOException) {
+                            inputText.text = e.message
+                        }
+
+                        override fun onResponse(call: Call, response: Response) {
+                            val responseStr = response.body()?.string()
+                            val responseObj = UtilsModel.getGson().fromJson(responseStr, ResponseInterface::class.java)
+                            inputText.text = responseObj.desc
+                        }
+                    })
+                })
+
+                /*Confirm code*/
+                val btnConfirm = view.findViewById<View>(R.id.verifyPhoneConfirm)
+                btnConfirm.setOnClickListener(View.OnClickListener {
+                    val input = view.findViewById<TextView>(R.id.verifyPhoneInput)
+                    var inputText = view.findViewById<TextView>(R.id.verifyPhoneText)
+                    if(input.text.toString().isNotEmpty()){
+
+                        inputText.text = resources.getString(R.string.verifyCodeProcessing)
+                        val codeConfirmObj = UtilsModel.getGson().toJson(VerifyPhoneRequest(
+                            input.text.toString()
+                        ))
+
+                        UtilsModel.getOkClient().newCall(UtilsModel.postRequest(activity!!, resources.getString(R.string.verifyPhone), codeConfirmObj)).enqueue(object : Callback {
+                            override fun onFailure(call: Call, e: IOException) {
+                                inputText.text = e.message
+                            }
+
+                            override fun onResponse(call: Call, response: Response) {
+                                val responseStr = response.body()?.string()
+                                val responseObj = UtilsModel.getGson().fromJson(responseStr, ResponseInterface::class.java)
+                                if(responseObj.status == "success"){
+                                    onDismiss(dialog)
+                                }else{
+                                    inputText.text = responseObj.desc
+                                }
+                            }
+                        })
+                    }else{
+                        val text = resources.getText(R.string.fillRequiredFields)
+                        val duration = Toast.LENGTH_SHORT
+                        Toast.makeText(activity!!, text, duration).show()
+                    }
                 })
             }
         }

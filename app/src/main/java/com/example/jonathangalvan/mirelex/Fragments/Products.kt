@@ -10,6 +10,8 @@ import android.support.v4.graphics.drawable.DrawableCompat
 import android.view.*
 import com.example.jonathangalvan.mirelex.Adapters.ProductsAdapter
 import com.example.jonathangalvan.mirelex.Enums.UserType
+import com.example.jonathangalvan.mirelex.Fragments.Utils.CustomBottomAlert
+import com.example.jonathangalvan.mirelex.Interfaces.BottomAlertInterface
 import com.example.jonathangalvan.mirelex.Interfaces.ProductInterface
 import com.example.jonathangalvan.mirelex.Interfaces.ProductsInterface
 import com.example.jonathangalvan.mirelex.Models.SessionModel
@@ -50,6 +52,17 @@ class Products : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        /*Confirm phone*/
+        val user = SessionModel(activity!!).getUser()
+        if(user.person?.phoneVerified == "0" || user.person?.phoneVerified == null){
+            val ba = UtilsModel.getGson().toJson(BottomAlertInterface(
+                alertType = "confirmAccountPhone"
+            ))
+            val alert = CustomBottomAlert().bottomSheetDialogInstance(ba)
+            alert.isCancelable = false
+            alert.show(activity!!.supportFragmentManager, "alert")
+        }
 
         /*Save onesignal id*/
         OneSignal.idsAvailable { userId, registrationId ->

@@ -43,7 +43,8 @@ class Person(
     var oneSignalId: String?,
     var facebookUrl: String?,
     var instagramUrl: String?,
-    var userFacebookId: String?
+    var userFacebookId: String?,
+    var phoneVerified: String?
 ) {}
 
 class Address (
