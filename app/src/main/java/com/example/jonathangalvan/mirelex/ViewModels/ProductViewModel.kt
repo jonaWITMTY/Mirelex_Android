@@ -1,6 +1,7 @@
 package com.example.jonathangalvan.mirelex.ViewModels
 
 import android.arch.lifecycle.ViewModel
+import com.example.jonathangalvan.mirelex.Interfaces.ProductImageInterface
 import com.example.jonathangalvan.mirelex.Interfaces.ProductInfoInterface
 import com.example.jonathangalvan.mirelex.Requests.UpdateProductRequest
 import java.io.File
@@ -11,4 +12,5 @@ class ProductViewModel: ViewModel() {
     var productObj: ProductInfoInterface? = null
     var productProcessType = ""
     var featuredImage: File? = null
+    var secondaryImgs: ArrayList<ProductImageInterface> = ArrayList()
 }

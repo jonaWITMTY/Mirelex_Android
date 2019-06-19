@@ -14,7 +14,12 @@ import android.app.Activity
 import android.arch.lifecycle.ViewModelProviders
 import java.io.FileNotFoundException
 import android.provider.MediaStore.MediaColumns
+import android.support.v4.app.FragmentManager
 import android.widget.ImageView
+import com.example.jonathangalvan.mirelex.Fragments.Utils.CustomBottomAlert
+import com.example.jonathangalvan.mirelex.Interfaces.BottomAlertInterface
+import com.example.jonathangalvan.mirelex.Interfaces.ProductImageInterface
+import com.example.jonathangalvan.mirelex.Models.UtilsModel
 import com.example.jonathangalvan.mirelex.ProductActivity
 import com.example.jonathangalvan.mirelex.ViewModels.ProductViewModel
 import com.squareup.picasso.Picasso
@@ -23,6 +28,7 @@ import java.io.File
 class ProductImagePicker : Fragment() {
     private var listener: OnFragmentInteractionListener? = null
     var imageTarget: ImageView? = null
+    var imageSecondaryIndex: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,31 +67,26 @@ class ProductImagePicker : Fragment() {
 
         /*Set images*/
         productFeaturedImage.setOnClickListener(View.OnClickListener {
-            val photoPickerIntent = Intent(Intent.ACTION_PICK)
-            photoPickerIntent.type = "image/*"
-            startActivityForResult(photoPickerIntent, 1)
             imageTarget = productFeaturedImage
+            openImageSelection()
         })
 
         productSecondaryImage1.setOnClickListener(View.OnClickListener {
-            val photoPickerIntent = Intent(Intent.ACTION_PICK)
-            photoPickerIntent.type = "image/*"
-            startActivityForResult(photoPickerIntent, 1)
             imageTarget = productSecondaryImage1
+            imageSecondaryIndex = 1
+            openImageSelection()
         })
 
         productSecondaryImage2.setOnClickListener(View.OnClickListener {
-            val photoPickerIntent = Intent(Intent.ACTION_PICK)
-            photoPickerIntent.type = "image/*"
-            startActivityForResult(photoPickerIntent, 1)
             imageTarget = productSecondaryImage2
+            imageSecondaryIndex = 2
+            openImageSelection()
         })
 
         productSecondaryImage3.setOnClickListener(View.OnClickListener {
-            val photoPickerIntent = Intent(Intent.ACTION_PICK)
-            photoPickerIntent.type = "image/*"
-            startActivityForResult(photoPickerIntent, 1)
             imageTarget = productSecondaryImage3
+            imageSecondaryIndex = 3
+            openImageSelection()
         })
 
         /*Product final process event*/
@@ -110,6 +111,11 @@ class ProductImagePicker : Fragment() {
                             productFeaturedImage -> {
                                 viewModel.featuredImage = File(filePath)
                             }
+                            productSecondaryImage1,
+                            productSecondaryImage2,
+                            productSecondaryImage3 -> {
+                                setSecondaryImage(File(filePath))
+                            }
                         }
                     } else {
                         //NOT IN REQUIRED FORMAT
@@ -127,6 +133,57 @@ class ProductImagePicker : Fragment() {
             .getColumnIndexOrThrow(MediaColumns.DATA)
         cursor.moveToFirst()
         return cursor.getString(column_index)
+    }
+
+    fun setSecondaryImage(file: File){
+        val viewModel = ViewModelProviders.of(activity!!).get(ProductViewModel::class.java)
+        var existsInArray = false
+        for ((index, img) in viewModel.secondaryImgs.withIndex()){
+            if(img.position == imageSecondaryIndex){
+                existsInArray = true
+                viewModel.secondaryImgs[index] = ProductImageInterface(file, imageSecondaryIndex)
+            }
+        }
+
+        if(!existsInArray){
+            viewModel.secondaryImgs.add(ProductImageInterface(file, imageSecondaryIndex))
+        }
+    }
+
+    fun openImageSelection(){
+        val ba = UtilsModel.getGson().toJson(BottomAlertInterface(
+            alertType = "imageSelectOptions"
+        ))
+        val alert = CustomBottomAlert().bottomSheetDialogInstance(ba)
+        alert.setTargetFragment(this, 1337)
+        alert.show(activity!!.supportFragmentManager, "alert")
+    }
+
+    fun openGalleryPicker(){
+        val photoPickerIntent = Intent(Intent.ACTION_PICK)
+        photoPickerIntent.type = "image/*"
+        startActivityForResult(photoPickerIntent, 1)
+    }
+
+    fun reseatImage(){
+        val viewModel = ViewModelProviders.of(activity!!).get(ProductViewModel::class.java)
+        Picasso.with(imageTarget!!.context).load(R.drawable.image_picker).into(imageTarget)
+        when(imageTarget){
+            productFeaturedImage -> {
+                viewModel.featuredImage = null
+            }
+            productSecondaryImage1,
+            productSecondaryImage2,
+            productSecondaryImage3 -> {
+                var newObjArr = ArrayList<ProductImageInterface>()
+                for (img in viewModel.secondaryImgs){
+                    if(img.position != imageSecondaryIndex){
+                        newObjArr.add(img)
+                    }
+                }
+                viewModel.secondaryImgs = newObjArr
+            }
+        }
     }
 
     override fun onAttach(context: Context) {

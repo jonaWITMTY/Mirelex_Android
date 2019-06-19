@@ -121,4 +121,6 @@
     <string name="availableUpdate">Actualización disponible</string>
     <string name="availableUpdateDescription">Hay una nueva versión disponible. Por favor, actualiza a la versión</string>
     <string name="facebookError">Lo sentimos, ocurrió un problema con facebook</string>
+    <string name="selectImage">Seleccionar una imagen</string>
+    <string name="delete">Eliminar</string>
 </resources>

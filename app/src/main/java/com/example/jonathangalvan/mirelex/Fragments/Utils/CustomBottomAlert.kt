@@ -11,13 +11,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import com.example.jonathangalvan.mirelex.*
+import com.example.jonathangalvan.mirelex.Fragments.Product.ProductImagePicker
 import com.example.jonathangalvan.mirelex.Interfaces.BottomAlertInterface
 import com.example.jonathangalvan.mirelex.Models.SessionModel
 import com.example.jonathangalvan.mirelex.Models.UtilsModel
-import com.example.jonathangalvan.mirelex.OrderCheckoutActivity
-import com.example.jonathangalvan.mirelex.OrderDetailActivity
-import com.example.jonathangalvan.mirelex.PaymentCardsActivity
-import com.example.jonathangalvan.mirelex.R
 import com.example.jonathangalvan.mirelex.Requests.CreateFittingMeasurementsRequest
 import com.example.jonathangalvan.mirelex.Requests.DeleteCardRequest
 import com.example.jonathangalvan.mirelex.Requests.SetDefaultPaymentCardRequest
@@ -224,6 +222,29 @@ class CustomBottomAlert: DialogFragment() {
                             )
                         )
                     }
+                })
+            }
+            "imageSelectOptions" -> {
+                view = activity!!.layoutInflater.inflate(R.layout.fragment_custom_bottom_image_detail, null)
+
+                /*Select image*/
+                val btnSelect = view.findViewById<View>(R.id.bottomImageDetailSelect)
+                btnSelect.setOnClickListener(View.OnClickListener {
+                    val frag = targetFragment as ProductImagePicker?
+                    if (frag != null) {
+                        frag!!.openGalleryPicker()
+                    }
+                    onDismiss(dialog)
+                })
+
+                /*Delete image*/
+                val btnDelete = view.findViewById<View>(R.id.bottomImageDetailDelete)
+                btnDelete.setOnClickListener(View.OnClickListener {
+                    val frag = targetFragment as ProductImagePicker?
+                    if (frag != null) {
+                        frag!!.reseatImage()
+                    }
+                    onDismiss(dialog)
                 })
             }
         }
