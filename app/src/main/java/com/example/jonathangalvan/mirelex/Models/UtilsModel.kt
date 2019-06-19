@@ -19,6 +19,8 @@ import com.example.jonathangalvan.mirelex.SplashActivity
 import com.google.gson.Gson
 import okhttp3.*
 import java.io.File
+import java.util.*
+import kotlin.collections.ArrayList
 
 class UtilsModel {
     companion object {
@@ -38,6 +40,7 @@ class UtilsModel {
             val request = Request.Builder()
             request.url("${context.resources.getString(R.string.apiUrl)}/v1/$endPoint")
             request.addHeader("Public-Key", context.getResources().getString(R.string.publicKey))
+            request.addHeader("Accept-Language", Locale.getDefault().language)
             request.post(body)
             if(SessionModel.getSessionValue(context, "token") != null){
                 request.addHeader("token", SessionModel.getSessionValue(context, "token")!!)
@@ -58,6 +61,7 @@ class UtilsModel {
             val request = Request.Builder()
             request.url("${context.resources.getString(R.string.apiUrl)}/v1/$endPoint")
             request.addHeader("Public-Key", context.resources.getString(R.string.publicKey))
+            request.addHeader("Accept-Language", Locale.getDefault().language)
             request.post(formBody)
             if(SessionModel.getSessionValue(context, "token") != null){
                 request.addHeader("token", SessionModel.getSessionValue(context, "token")!!)
