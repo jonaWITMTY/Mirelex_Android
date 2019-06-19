@@ -1,5 +1,6 @@
 package com.example.jonathangalvan.mirelex
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
@@ -23,7 +24,12 @@ import com.facebook.login.LoginResult
 import com.facebook.FacebookCallback
 import com.facebook.login.LoginManager
 import java.util.*
+import android.content.pm.PackageManager
+import android.support.v4.app.ActivityCompat
+import android.support.v4.content.ContextCompat
 
+private val REQUEST_CODE_ASK_PERMISSIONS = 1
+private val REQUIRED_SDK_PERMISSIONS = arrayOf<String>(Manifest.permission.WRITE_EXTERNAL_STORAGE)
 
 class MainActivity : AppCompatActivity() {
     val callbackManager = CallbackManager.Factory.create()
@@ -37,6 +43,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         supportActionBar?.hide()
+
+        /*App permissions*/
+        checkPermissions()
 
         /*OneSignal*/
         OneSignal.startInit(this)
@@ -175,6 +184,51 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
+    }
+
+    fun checkPermissions() {
+        val missingPermissions = ArrayList<String>()
+        // check all required dynamic permissions
+        for (permission in REQUIRED_SDK_PERMISSIONS) {
+            val result = ContextCompat.checkSelfPermission(this, permission)
+            if (result != PackageManager.PERMISSION_GRANTED) {
+                missingPermissions.add(permission)
+            }
+        }
+        if (!missingPermissions.isEmpty()) {
+            // request all missing permissions
+            val permissions = missingPermissions
+                .toTypedArray()
+            ActivityCompat.requestPermissions(this, permissions, REQUEST_CODE_ASK_PERMISSIONS)
+        } else {
+            val grantResults = IntArray(REQUIRED_SDK_PERMISSIONS.size)
+            Arrays.fill(grantResults, PackageManager.PERMISSION_GRANTED)
+            onRequestPermissionsResult(
+                REQUEST_CODE_ASK_PERMISSIONS, REQUIRED_SDK_PERMISSIONS,
+                grantResults
+            )
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int, permissions: Array<String>,
+        grantResults: IntArray
+    ) {
+        when (requestCode) {
+            REQUEST_CODE_ASK_PERMISSIONS -> {
+                for (index in permissions.indices.reversed()) {
+                    if (grantResults[index] != PackageManager.PERMISSION_GRANTED) {
+                        // exit the app if one permission is not granted
+                        Toast.makeText(
+                            this, "Required permission '" + permissions[index]
+                                    + "' not granted, exiting", Toast.LENGTH_LONG
+                        ).show()
+                        finish()
+                        return
+                    }
+                }
+            }
+        }
     }
 
     override fun onBackPressed() { }
