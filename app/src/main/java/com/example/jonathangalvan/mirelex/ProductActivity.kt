@@ -13,6 +13,7 @@ import com.example.jonathangalvan.mirelex.Interfaces.CreateProductResponseInterf
 import com.example.jonathangalvan.mirelex.Models.UtilsModel
 import com.example.jonathangalvan.mirelex.ViewModels.ProductViewModel
 import okhttp3.*
+import java.io.File
 import java.io.IOException
 
 class ProductActivity : AppCompatActivity(),
@@ -83,6 +84,7 @@ class ProductActivity : AppCompatActivity(),
                         }
                     }
 
+                    /*Feture image*/
                     if(UtilsModel.getImagePermissions(this@ProductActivity) && vmp.featuredImage != null){
                         UtilsModel.getOkClient().newCall(UtilsModel.postImageRequest( this@ProductActivity, vmp.featuredImage!!, resources.getString(R.string.uploadFeatureImage), productId)).enqueue(object : Callback {
                             override fun onFailure(call: Call, e: IOException) {
@@ -101,6 +103,23 @@ class ProductActivity : AppCompatActivity(),
                         runOnUiThread {run{findViewById<ViewGroup>(android.R.id.content).removeView(findViewById(R.id.view_progressbar))}}
                         UtilsModel.getAlertView().newInstance(responseStr, 1, 1).show(supportFragmentManager,"alertDialog")
                     }
+
+                    /*Gallery images*/
+                    if(UtilsModel.getImagePermissions(this@ProductActivity) && vmp.secondaryImgs.isNotEmpty()){
+                        val filesObj = ArrayList<File>()
+                        for(file in vmp.secondaryImgs){
+                            filesObj.add(file.file)
+                        }
+                        UtilsModel.getOkClient().newCall(UtilsModel.postImagesRequest( this@ProductActivity, filesObj, resources.getString(R.string.uploadSecondaryImages), productId)).enqueue(object : Callback {
+                            override fun onFailure(call: Call, e: IOException) {}
+
+                            override fun onResponse(call: Call, response: Response) {
+                                println("***********")
+                                println(response.body()?.string())
+                            }
+                        })
+                    }
+
                 }else{
                     runOnUiThread {run{findViewById<ViewGroup>(android.R.id.content).removeView(findViewById(R.id.view_progressbar))}}
                     UtilsModel.getAlertView().newInstance(responseStr, 1, 1).show(supportFragmentManager,"alertDialog")

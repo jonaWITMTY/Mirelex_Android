@@ -65,6 +65,18 @@ class ProductImagePicker : Fragment() {
             Picasso.with(activity).load(productObj?.productInformation?.productFeaturedImage).into(productFeaturedImage)
         }
 
+        if(productObj?.productImages!!.size >= 1){
+            Picasso.with(productSecondaryImage1.context).load(productObj?.productImages!![0].imageUrl).into(productSecondaryImage1)
+        }
+
+        if(productObj?.productImages!!.size >= 2){
+            Picasso.with(productSecondaryImage2.context).load(productObj?.productImages!![1].imageUrl).into(productSecondaryImage2)
+        }
+
+        if(productObj?.productImages!!.size == 3){
+            Picasso.with(productSecondaryImage3.context).load(productObj?.productImages!![2].imageUrl).into(productSecondaryImage3)
+        }
+
         /*Set images*/
         productFeaturedImage.setOnClickListener(View.OnClickListener {
             imageTarget = productFeaturedImage

@@ -56,7 +56,14 @@ class ProductsInterface(
 class ProductInfoInterface(
     var productInformation: ProductInterface,
     var productColors: ArrayList<ProductColorInterface>,
-    var productOwner: UserInterface
+    var productOwner: UserInterface,
+    var productImages: ArrayList<ProductImagesInterface>
+){}
+
+class ProductImagesInterface(
+    var imageId: String?,
+    var imageUrl: String?,
+    var featured: String?
 ){}
 
 class ProductColorInterface(

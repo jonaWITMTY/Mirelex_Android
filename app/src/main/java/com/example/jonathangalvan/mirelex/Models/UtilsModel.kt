@@ -65,6 +65,29 @@ class UtilsModel {
             return request.build()
         }
 
+        fun postImagesRequest(context: Context, files: ArrayList<File>, endPoint: String, id: String) : Request {
+            val formBody = MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
+                .addFormDataPart("productId", id)
+                .addFormDataPart("PrivateKey", context.resources.getString(R.string.privateKey))
+
+            for((index, file) in files.withIndex()){
+                formBody.addFormDataPart(
+                    "file_$index", file.name,
+                    RequestBody.create(MediaType.parse("text/plain"), file)
+                )
+            }
+
+            val request = Request.Builder()
+            request.url("${context.resources.getString(R.string.apiUrl)}/v1/$endPoint")
+            request.addHeader("Public-Key", context.resources.getString(R.string.publicKey))
+            request.post(formBody.build())
+            if(SessionModel.getSessionValue(context, "token") != null){
+                request.addHeader("token", SessionModel.getSessionValue(context, "token")!!)
+            }
+            return request.build()
+        }
+
         fun getImagePermissions(context: Context): Boolean{
             var isPermissionsCorrect = true
             if (Build.VERSION.SDK_INT >= 23) {
