@@ -132,16 +132,20 @@ class CustomBottomAlert: DialogFragment() {
                 view = activity!!.layoutInflater.inflate(R.layout.fragment_add_sizes_alert, null)
 
                 /*Clicks measures "?"*/
+                view.findViewById<View>(R.id.imagePreviewHeight).setOnClickListener(View.OnClickListener {
+                    ImagePreview().newInstance(resources.getString(R.string.heightImage)).show(fragmentManager, "alertDialog")
+                })
+
                 view.findViewById<View>(R.id.imagePreviewBust).setOnClickListener(View.OnClickListener {
-                    ImagePreview().newInstance(R.drawable.mirelex_logo_cian.toString()).show(fragmentManager, "alertDialog")
+                    ImagePreview().newInstance(resources.getString(R.string.bustImage)).show(fragmentManager, "alertDialog")
                 })
 
                 view.findViewById<View>(R.id.imagePreviewWaist).setOnClickListener(View.OnClickListener {
-                    ImagePreview().newInstance(R.drawable.mirelex_logo_cian.toString()).show(fragmentManager, "alertDialog")
+                    ImagePreview().newInstance(resources.getString(R.string.waistImage)).show(fragmentManager, "alertDialog")
                 })
 
                 view.findViewById<View>(R.id.imagePreviewHip).setOnClickListener(View.OnClickListener {
-                    ImagePreview().newInstance(R.drawable.mirelex_logo_cian.toString()).show(fragmentManager, "alertDialog")
+                    ImagePreview().newInstance(resources.getString(R.string.hipImage)).show(fragmentManager, "alertDialog")
                 })
 
                 /*Upload client mesaurements info*/
