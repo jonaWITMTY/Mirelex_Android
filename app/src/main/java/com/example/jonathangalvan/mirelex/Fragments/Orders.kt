@@ -131,12 +131,14 @@ class Orders : Fragment() {
                     "noDataAvailable" -> {
                         activity?.runOnUiThread {
                             run {
-                                val ceneteredLayout = layoutInflater.inflate(
-                                    R.layout.view_centered_message,
-                                    activity!!.findViewById(R.id.customerTabsFrameLayout),
-                                    true
-                                )
-                                ceneteredLayout.centeredMessage.text = responseObj.desc
+                                if((activity!!.findViewById<ViewGroup>(R.id.viewCenteredMessage)) == null){
+                                    val ceneteredLayout = layoutInflater.inflate(
+                                        R.layout.view_centered_message,
+                                        activity!!.findViewById(R.id.customerTabsFrameLayout),
+                                        true
+                                    )
+                                    ceneteredLayout.centeredMessage.text = responseObj.desc
+                                }
                             }
                         }
                     }
