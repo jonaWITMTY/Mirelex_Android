@@ -12,10 +12,12 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.example.jonathangalvan.mirelex.Adapters.OrdersAdapter
 import com.example.jonathangalvan.mirelex.Enums.OrderType
+import com.example.jonathangalvan.mirelex.Enums.UserType
 import com.example.jonathangalvan.mirelex.Interfaces.FilterInterface
 import com.example.jonathangalvan.mirelex.Interfaces.OrderInterface
 import com.example.jonathangalvan.mirelex.Interfaces.OrdersInterface
 import com.example.jonathangalvan.mirelex.Listeners.RecyclerItemClickListener
+import com.example.jonathangalvan.mirelex.Models.SessionModel
 import com.example.jonathangalvan.mirelex.Models.UtilsModel
 import com.example.jonathangalvan.mirelex.R
 import kotlinx.android.synthetic.main.fragment_orders.*
@@ -25,6 +27,7 @@ import okhttp3.Response
 import java.io.IOException
 import java.util.ArrayList
 import com.example.jonathangalvan.mirelex.OrderDetailActivity
+import com.example.jonathangalvan.mirelex.Requests.GetOrdersRequest
 import kotlinx.android.synthetic.main.view_centered_message.view.*
 
 
@@ -106,8 +109,18 @@ class Orders : Fragment() {
     }
 
     fun getOrders(){
+        val user = SessionModel(activity!!).getUser()
+        var isClient = "0"
+        if(user.person?.userTypeId == UserType.Customer.userTypeId){
+            isClient = "1"
+        }
+        val ordersObjRequest = UtilsModel.getGson().toJson(
+            GetOrdersRequest(
+                isClient
+            )
+        )
         val loader = layoutInflater.inflate(R.layout.view_progressbar, activity?.findViewById(android.R.id.content), true)
-        UtilsModel.getOkClient().newCall(UtilsModel.postRequest(activity!!.applicationContext, activity!!.resources.getString(R.string.getOrders))).enqueue( object:
+        UtilsModel.getOkClient().newCall(UtilsModel.postRequest(activity!!.applicationContext, activity!!.resources.getString(R.string.getOrders), ordersObjRequest)).enqueue( object:
             Callback {
             override fun onFailure(call: Call, e: IOException) {
                 activity?.runOnUiThread {run{activity?.findViewById<ViewGroup>(android.R.id.content)?.removeView(activity?.findViewById(R.id.view_progressbar))}}

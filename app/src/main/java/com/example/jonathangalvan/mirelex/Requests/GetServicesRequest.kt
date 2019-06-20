@@ -1,6 +1,5 @@
 package com.example.jonathangalvan.mirelex.Requests
 
-class CustomerProductRequest(
-    var sizeId: String?,
+class GetServicesRequest(
     var isClient: String?
-):GlobalRequest() {}
+): GlobalRequest() {}

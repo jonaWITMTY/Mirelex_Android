@@ -20,6 +20,7 @@ import com.example.jonathangalvan.mirelex.Listeners.RecyclerItemClickListener
 import com.example.jonathangalvan.mirelex.Models.SessionModel
 import com.example.jonathangalvan.mirelex.Models.UtilsModel
 import com.example.jonathangalvan.mirelex.R
+import com.example.jonathangalvan.mirelex.Requests.GetServicesRequest
 import com.example.jonathangalvan.mirelex.ServiceCreateActivity
 import com.example.jonathangalvan.mirelex.ServiceOrderDetailActivity
 import kotlinx.android.synthetic.main.fragment_services.*
@@ -121,8 +122,17 @@ class Services : Fragment() {
     }
 
     fun loadServiceOrders(){
+        val user = SessionModel(activity!!).getUser()
+        var isClient = "0"
+        if(user.person?.userTypeId == UserType.Customer.userTypeId){
+            isClient = "1"
+        }
+        val servicesObjRequest = UtilsModel.getGson().toJson(GetServicesRequest(
+                isClient
+        ))
+
         val loader = layoutInflater.inflate(R.layout.view_progressbar, activity?.findViewById(android.R.id.content), true)
-        UtilsModel.getOkClient().newCall(UtilsModel.postRequest(activity!!.applicationContext, activity!!.resources.getString(R.string.getOrderServices))).enqueue( object:
+        UtilsModel.getOkClient().newCall(UtilsModel.postRequest(activity!!.applicationContext, activity!!.resources.getString(R.string.getOrderServices), servicesObjRequest)).enqueue( object:
             Callback {
             override fun onFailure(call: Call, e: IOException) {
                 activity?.runOnUiThread {run{activity?.findViewById<ViewGroup>(android.R.id.content)?.removeView(activity?.findViewById(R.id.view_progressbar))}}
