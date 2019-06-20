@@ -31,7 +31,10 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
         supportActionBar?.hide()
+    }
 
+    override fun onResume() {
+        super.onResume()
         /*Check for user info*/
         if(SessionModel.getSessionValue(this, "token") != ""){
             UtilsModel.getOkClient().newCall(UtilsModel.postRequest(this,resources.getString(R.string.getUserInfo))).enqueue(object:

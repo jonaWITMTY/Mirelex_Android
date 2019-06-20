@@ -5,6 +5,10 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorGreyDark</item>
         <!--<item name="colorPrimaryDark">@color/colorGrey</item>-->
+
+        <!--Splashscreen fix-->
+        <item name="android:windowDisablePreview">true</item>
+        <item name="android:windowIsTranslucent">true</item>
     </style>
 
     <style name="textInputLayoutWhite" parent="TextAppearance.AppCompat">
