@@ -148,6 +148,9 @@ class Services : Fragment() {
                         servicesObj = UtilsModel.getGson().fromJson(UtilsModel.getGson().toJson(responseObj), ServicesInterface::class.java)
                         activity?.runOnUiThread {
                             run {
+                                if(activity!!.findViewById<ViewGroup>(R.id.viewCenteredMessage) != null) {
+                                    activity?.findViewById<ViewGroup>(R.id.customerTabsFrameLayout)?.removeView(activity?.findViewById(R.id.viewCenteredMessage))
+                                }
                                 serviceAdapter.loadNewData(servicesObj!!.data)
                             }
                         }

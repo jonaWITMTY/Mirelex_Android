@@ -136,6 +136,9 @@ class Products : Fragment() {
                     "success" -> {
                         responseProducts = UtilsModel.getGson().fromJson(UtilsModel.getGson().toJson(responseObj), ProductsInterface::class.java)
                         activity?.runOnUiThread {
+                            if(activity!!.findViewById<ViewGroup>(R.id.viewCenteredMessage) != null) {
+                                activity?.findViewById<ViewGroup>(R.id.customerTabsFrameLayout)?.removeView(activity?.findViewById(R.id.viewCenteredMessage))
+                            }
                             productAdapter = ProductsAdapter(activity!!, responseProducts.data)
                             productsGrid?.adapter = productAdapter
                             productsGrid?.setOnItemClickListener { parent, view, position, id ->
