@@ -30,11 +30,14 @@ import okhttp3.Response
 import java.io.IOException
 import com.onesignal.OneSignal
 import android.app.Activity
-
+import android.widget.FrameLayout
+import com.example.jonathangalvan.mirelex.Requests.ProductFilterRequest
 
 
 class Products : Fragment() {
     private var listener: OnFragmentInteractionListener? = null
+    var filterAction = false
+    var productAdapter: ProductsAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -82,35 +85,43 @@ class Products : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        getProducts()
+        if(!filterAction){
+            getProducts()
+        }else{
+            filterAction = false
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode === 1) {
             if (resultCode === Activity.RESULT_OK) {
-                val result = data?.getStringExtra("filterProductRequest")
-                println("*************")
-                println(result)
-            }
-            if (resultCode === Activity.RESULT_CANCELED) {
-                //Write your code if there's no result
+                val filterProduct = data?.getStringExtra("filterProductRequest")
+                filterAction = true
+                getProducts(filterProduct)
             }
         }
     }
 
-    fun getProducts(){
+    fun getProducts(filterProduct: String? = ""){
+        var requestStr = ""
         val user = SessionModel(activity!!).getUser()
         var isClient = "0"
         if(user.person?.userTypeId == UserType.Customer.userTypeId){
             isClient = "1"
         }
+        if(filterAction){
+            var filterProductObj = UtilsModel.getGson().fromJson(filterProduct, ProductFilterRequest::class.java)
+            filterProductObj.isClient = isClient
+            requestStr = UtilsModel.getGson().toJson(filterProductObj)
+        }else{
+            requestStr = UtilsModel.getGson().toJson(CustomerProductRequest(
+                user.characteristics?.sizeId,
+                isClient
+            ))
+        }
         val loader = layoutInflater.inflate(R.layout.view_progressbar, activity?.findViewById(android.R.id.content), true)
-        var getProductsObj = CustomerProductRequest(
-            user.characteristics?.sizeId,
-            isClient
-        )
-        UtilsModel.getOkClient().newCall(UtilsModel.postRequest(activity!!.applicationContext, activity!!.resources.getString(R.string.getProducts), UtilsModel.getGson().toJson(getProductsObj))).enqueue( object: Callback {
+        UtilsModel.getOkClient().newCall(UtilsModel.postRequest(activity!!.applicationContext, activity!!.resources.getString(R.string.getProducts), requestStr)).enqueue( object: Callback {
             override fun onFailure(call: Call, e: IOException) {
                 activity?.runOnUiThread {run{activity?.findViewById<ViewGroup>(android.R.id.content)?.removeView(activity?.findViewById(R.id.view_progressbar))}}
                 UtilsModel.getAlertView().newInstance(UtilsModel.getErrorRequestCall(), 1, 0).show(activity?.supportFragmentManager,"alertDialog")
@@ -125,7 +136,8 @@ class Products : Fragment() {
                     "success" -> {
                         responseProducts = UtilsModel.getGson().fromJson(UtilsModel.getGson().toJson(responseObj), ProductsInterface::class.java)
                         activity?.runOnUiThread {
-                            productsGrid?.adapter = ProductsAdapter(activity!!, responseProducts.data)
+                            productAdapter = ProductsAdapter(activity!!, responseProducts.data)
+                            productsGrid?.adapter = productAdapter
                             productsGrid?.setOnItemClickListener { parent, view, position, id ->
                                 val goToProductDetail: Intent
                                 when(SessionModel(activity!!).getSessionUserType()){
@@ -146,6 +158,8 @@ class Products : Fragment() {
                     "noDataAvailable" -> {
                         activity?.runOnUiThread {
                             run {
+                                productAdapter = ProductsAdapter(activity!!, ArrayList())
+                                productsGrid?.adapter = productAdapter
                                 if((activity!!.findViewById<ViewGroup>(R.id.viewCenteredMessage)) == null) {
                                     val ceneteredLayout = layoutInflater.inflate(
                                         R.layout.view_centered_message,

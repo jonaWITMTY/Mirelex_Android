@@ -1,6 +1,7 @@
 package com.example.jonathangalvan.mirelex.Requests
 
 class ProductFilterRequest(
+    var isClient: String? = null,
     var name: String? = null,
     var sizeId: String? = null,
     var productConditionId: String? = null,
