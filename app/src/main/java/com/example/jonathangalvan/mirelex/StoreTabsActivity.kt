@@ -97,9 +97,9 @@ Notifications.OnFragmentInteractionListener{
     }
 
     fun openTab(fragment: Fragment){
-        findViewById<FrameLayout>(R.id.storeTabsFrameLayout).removeAllViews()
+        findViewById<FrameLayout>(R.id.contentTabsFrameLayout).removeAllViews()
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.storeTabsFrameLayout, fragment)
+        transaction.replace(R.id.contentTabsFrameLayout, fragment)
         transaction.addToBackStack(null)
         transaction.commit()
     }

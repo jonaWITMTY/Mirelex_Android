@@ -94,9 +94,9 @@ class CustomerTabsActivity : AppCompatActivity(),
     }
 
     fun openTab(fragment: Fragment){
-        findViewById<FrameLayout>(R.id.customerTabsFrameLayout).removeAllViews()
+        findViewById<FrameLayout>(R.id.contentTabsFrameLayout).removeAllViews()
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.customerTabsFrameLayout, fragment)
+        transaction.replace(R.id.contentTabsFrameLayout, fragment)
         transaction.addToBackStack(null)
         transaction.commit()
     }

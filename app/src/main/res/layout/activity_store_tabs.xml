@@ -13,7 +13,7 @@
             android:layout_height="0dp" app:layout_constraintBottom_toTopOf="@+id/nav_view"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
-            android:id="@+id/storeTabsFrameLayout">
+            android:id="@+id/contentTabsFrameLayout">
 
     </FrameLayout>
     <android.support.design.widget.BottomNavigationView

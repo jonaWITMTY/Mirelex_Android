@@ -137,7 +137,7 @@ class Products : Fragment() {
                         responseProducts = UtilsModel.getGson().fromJson(UtilsModel.getGson().toJson(responseObj), ProductsInterface::class.java)
                         activity?.runOnUiThread {
                             if(activity!!.findViewById<ViewGroup>(R.id.viewCenteredMessage) != null) {
-                                activity?.findViewById<ViewGroup>(R.id.customerTabsFrameLayout)?.removeView(activity?.findViewById(R.id.viewCenteredMessage))
+                                activity?.findViewById<ViewGroup>(R.id.contentTabsFrameLayout)?.removeView(activity?.findViewById(R.id.viewCenteredMessage))
                             }
                             productAdapter = ProductsAdapter(activity!!, responseProducts.data)
                             productsGrid?.adapter = productAdapter
@@ -166,7 +166,7 @@ class Products : Fragment() {
                                 if((activity!!.findViewById<ViewGroup>(R.id.viewCenteredMessage)) == null) {
                                     val ceneteredLayout = layoutInflater.inflate(
                                         R.layout.view_centered_message,
-                                        activity!!.findViewById(R.id.customerTabsFrameLayout),
+                                        activity!!.findViewById(R.id.contentTabsFrameLayout),
                                         true
                                     )
                                     ceneteredLayout.centeredMessage.text = responseObj.desc

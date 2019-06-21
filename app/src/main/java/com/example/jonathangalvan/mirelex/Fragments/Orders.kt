@@ -147,7 +147,7 @@ class Orders : Fragment() {
                                 if((activity!!.findViewById<ViewGroup>(R.id.viewCenteredMessage)) == null){
                                     val ceneteredLayout = layoutInflater.inflate(
                                         R.layout.view_centered_message,
-                                        activity!!.findViewById(R.id.customerTabsFrameLayout),
+                                        activity!!.findViewById(R.id.contentTabsFrameLayout),
                                         true
                                     )
                                     ceneteredLayout.centeredMessage.text = responseObj.desc
