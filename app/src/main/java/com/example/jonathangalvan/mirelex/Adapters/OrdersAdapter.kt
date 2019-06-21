@@ -48,39 +48,27 @@ class OrdersAdapter(private var orders: ArrayList<OrderInterface>): RecyclerView
         p0.orderAdapterStartDate.text = orders[p1].startDate
         p0.orderAdapterStatus.text = orders[p1].orderStatus
 
-        when(orders[p1].orderTypeId){
-            OrderType.Lease.orderTypeId -> {
-                p0.orderAdapterOrderType.setTextColor(ContextCompat.getColor(p0.orderAdapterOrderType.context, R.color.colorGreen))
-            }
-            OrderType.Purchase.orderTypeId -> {
-                p0.orderAdapterOrderType.setTextColor(ContextCompat.getColor(p0.orderAdapterOrderType.context, R.color.colorGreen))
-            }
-            OrderType.Fitting.orderTypeId -> {
-                p0.orderAdapterOrderType.setTextColor(ContextCompat.getColor(p0.orderAdapterOrderType.context, R.color.colorGrey))
-            }
-        }
-
         when(orders[p1].orderStatusId){
             OrderStatus.Open.orderStatusId -> {
-                p0.orderAdapterStatus.setTextColor(ContextCompat.getColor(p0.orderAdapterOrderType.context, R.color.colorGreen))
+                p0.orderAdapterStatus.backgroundTintList = ContextCompat.getColorStateList(p0.orderAdapterStatus.context, R.color.colorGreenLight)
             }
             OrderStatus.Gathering.orderStatusId -> {
-                p0.orderAdapterStatus.setTextColor(ContextCompat.getColor(p0.orderAdapterOrderType.context, R.color.colorGreen))
+                p0.orderAdapterStatus.backgroundTintList = ContextCompat.getColorStateList(p0.orderAdapterStatus.context, android.R.color.black)
             }
             OrderStatus.Processing.orderStatusId -> {
-                p0.orderAdapterStatus.setTextColor(ContextCompat.getColor(p0.orderAdapterOrderType.context, R.color.colorGreen))
+                p0.orderAdapterStatus.backgroundTintList = ContextCompat.getColorStateList(p0.orderAdapterStatus.context, R.color.colorBlueLight)
             }
             OrderStatus.DeliveringProcess.orderStatusId -> {
-                p0.orderAdapterStatus.setTextColor(ContextCompat.getColor(p0.orderAdapterOrderType.context, R.color.colorGreen))
+                p0.orderAdapterStatus.backgroundTintList = ContextCompat.getColorStateList(p0.orderAdapterStatus.context, android.R.color.black)
             }
             OrderStatus.Delivered.orderStatusId -> {
-                p0.orderAdapterStatus.setTextColor(ContextCompat.getColor(p0.orderAdapterOrderType.context, R.color.colorGreen))
+                p0.orderAdapterStatus.backgroundTintList = ContextCompat.getColorStateList(p0.orderAdapterStatus.context, android.R.color.black)
             }
             OrderStatus.Received.orderStatusId -> {
-                p0.orderAdapterStatus.setTextColor(ContextCompat.getColor(p0.orderAdapterOrderType.context, R.color.colorGreen))
+                p0.orderAdapterStatus.backgroundTintList = ContextCompat.getColorStateList(p0.orderAdapterStatus.context, android.R.color.black)
             }
             OrderStatus.Finished.orderStatusId -> {
-                p0.orderAdapterStatus.setTextColor(ContextCompat.getColor(p0.orderAdapterOrderType.context, R.color.colorGreen))
+                p0.orderAdapterStatus.backgroundTintList = ContextCompat.getColorStateList(p0.orderAdapterStatus.context, android.R.color.black)
             }
         }
     }
