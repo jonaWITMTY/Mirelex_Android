@@ -129,4 +129,5 @@
     <string name="confirmPhoneText">Un mensaje de texto se envio con un código. Por favor ingresa el código</string>
     <string name="resendCode">Reenviar código</string>
     <string name="verifyCodeProcessing">Procesando código de verificación...</string>
+    <string name="searchProductActionBarTitle">Búsqueda</string>
 </resources>

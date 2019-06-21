@@ -10,6 +10,7 @@ import android.support.v4.graphics.drawable.DrawableCompat
 import android.view.*
 import com.example.jonathangalvan.mirelex.Adapters.ProductsAdapter
 import com.example.jonathangalvan.mirelex.Enums.UserType
+import com.example.jonathangalvan.mirelex.FilterProducts
 import com.example.jonathangalvan.mirelex.Fragments.Utils.CustomBottomAlert
 import com.example.jonathangalvan.mirelex.Interfaces.BottomAlertInterface
 import com.example.jonathangalvan.mirelex.Interfaces.ProductInterface
@@ -85,8 +86,15 @@ class Products : Fragment() {
 
     fun getProducts(){
         val user = SessionModel(activity!!).getUser()
+        var isClient = "0"
+        if(user.person?.userTypeId == UserType.Customer.userTypeId){
+            isClient = "1"
+        }
         val loader = layoutInflater.inflate(R.layout.view_progressbar, activity?.findViewById(android.R.id.content), true)
-        var getProductsObj = CustomerProductRequest(user.characteristics?.sizeId)
+        var getProductsObj = CustomerProductRequest(
+            user.characteristics?.sizeId,
+            isClient
+        )
         UtilsModel.getOkClient().newCall(UtilsModel.postRequest(activity!!.applicationContext, activity!!.resources.getString(R.string.getProducts), UtilsModel.getGson().toJson(getProductsObj))).enqueue( object: Callback {
             override fun onFailure(call: Call, e: IOException) {
                 activity?.runOnUiThread {run{activity?.findViewById<ViewGroup>(android.R.id.content)?.removeView(activity?.findViewById(R.id.view_progressbar))}}
@@ -153,6 +161,9 @@ class Products : Fragment() {
         when(item?.itemId){
             R.id.storeTabsAddIcon ->{
                 startActivity(Intent(activity!!, ProductActivity::class.java))
+            }
+            R.id.customerTabsFilterIcon -> {
+                startActivity(Intent(activity!!, FilterProducts::class.java))
             }
         }
         return super.onOptionsItemSelected(item)
