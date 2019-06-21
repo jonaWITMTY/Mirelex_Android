@@ -18,12 +18,15 @@ import com.example.jonathangalvan.mirelex.Interfaces.ProductCatalogs
 import com.example.jonathangalvan.mirelex.Models.SessionModel
 import com.example.jonathangalvan.mirelex.Models.UtilsModel
 import com.example.jonathangalvan.mirelex.Requests.GetProductCatalogsRequest
+import com.example.jonathangalvan.mirelex.Requests.ProductFilterRequest
 import com.example.jonathangalvan.mirelex.Requests.SizesRequest
 import com.thomashaertel.widget.MultiSpinner
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.Response
 import java.io.IOException
+import android.app.Activity
+import android.content.Intent
 
 
 class FilterProducts : AppCompatActivity() {
@@ -38,6 +41,7 @@ class FilterProducts : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_filter_products)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.elevation = 0F
 
         /*Set actionbar title*/
         supportActionBar?.title = resources.getString(R.string.searchProductActionBarTitle)
@@ -64,8 +68,68 @@ class FilterProducts : AppCompatActivity() {
     }
 
     fun doFilterProducts(query: String?){
-        println("********")
-        println(query)
+        val productFilterObj: ProductFilterRequest = ProductFilterRequest()
+        val user = SessionModel(this).getUser()
+
+        when(user.person?.userGenderId){
+            Gender.Female.genderId -> {
+                productFilterObj.productTypeId = ProductType.Dress.productTypeId
+            }
+            Gender.Male.genderId -> {
+                productFilterObj.productTypeId = ProductType.Suit.productTypeId
+            }
+        }
+
+        if(query.toString().isNotEmpty()){
+            productFilterObj.name = query.toString()
+        }
+
+        if(sizes!![filterProductSize.selectedItemPosition].productCatalogId.toString() != "0"){
+            productFilterObj.sizeId = sizes!![filterProductSize.selectedItemPosition].productCatalogId.toString()
+        }else{
+            productFilterObj.sizeId = user.characteristics?.sizeId
+        }
+
+        if(catalogs?.conditions!![filterProductCondition.selectedItemPosition].productCatalogId.toString() != "0"){
+            productFilterObj.productConditionId = catalogs?.conditions!![filterProductCondition.selectedItemPosition].productCatalogId.toString()
+        }
+
+        if(catalogs?.styles!![filterProductStyle.selectedItemPosition].productCatalogId.toString() != "0"){
+            productFilterObj.productStyleId = catalogs?.styles!![filterProductStyle.selectedItemPosition].productCatalogId.toString()
+        }
+
+        if(catalogs?.materials!![filterProductMaterial.selectedItemPosition].productCatalogId.toString() != "0"){
+            productFilterObj.productMaterialId = catalogs?.materials!![filterProductMaterial.selectedItemPosition].productCatalogId.toString()
+        }
+
+        if(catalogs?.sleeveStyles!![filterProductSleeveStyle.selectedItemPosition].productCatalogId.toString() != "0"){
+            productFilterObj.productSleeveStyleId = catalogs?.sleeveStyles!![filterProductSleeveStyle.selectedItemPosition].productCatalogId.toString()
+        }
+
+        if(catalogs?.lengths!![filterProductLength.selectedItemPosition].productCatalogId.toString() != "0"){
+            productFilterObj.productLengthId = catalogs?.lengths!![filterProductLength.selectedItemPosition].productCatalogId.toString()
+        }
+
+        if(catalogs?.decorations!![filterProductDecoration.selectedItemPosition].productCatalogId.toString() != "0"){
+            productFilterObj.productDecorationId = catalogs?.decorations!![filterProductDecoration.selectedItemPosition].productCatalogId.toString()
+        }
+
+        if(catalogs?.silhouettes!![filterProductSilouete.selectedItemPosition].productCatalogId.toString() != "0"){
+            productFilterObj.productSilhouetteId = catalogs?.silhouettes!![filterProductSilouete.selectedItemPosition].productCatalogId.toString()
+        }
+
+        if(catalogs?.occasions!![filterProductOcation.selectedItemPosition].productCatalogId.toString() != "0"){
+            productFilterObj.productOccasionId = catalogs?.occasions!![filterProductOcation.selectedItemPosition].productCatalogId.toString()
+        }
+
+        if(selectedIds != null){
+            productFilterObj.productColors = selectedIds
+        }
+
+        val returnIntent = Intent()
+        returnIntent.putExtra("filterProductRequest", UtilsModel.getGson().toJson(productFilterObj))
+        setResult(Activity.RESULT_OK, returnIntent)
+        finish()
     }
 
     fun getProductCatalogs(){

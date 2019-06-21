@@ -29,6 +29,7 @@ import okhttp3.Callback
 import okhttp3.Response
 import java.io.IOException
 import com.onesignal.OneSignal
+import android.app.Activity
 
 
 
@@ -82,6 +83,20 @@ class Products : Fragment() {
     override fun onResume() {
         super.onResume()
         getProducts()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode === 1) {
+            if (resultCode === Activity.RESULT_OK) {
+                val result = data?.getStringExtra("filterProductRequest")
+                println("*************")
+                println(result)
+            }
+            if (resultCode === Activity.RESULT_CANCELED) {
+                //Write your code if there's no result
+            }
+        }
     }
 
     fun getProducts(){
@@ -163,7 +178,7 @@ class Products : Fragment() {
                 startActivity(Intent(activity!!, ProductActivity::class.java))
             }
             R.id.customerTabsFilterIcon -> {
-                startActivity(Intent(activity!!, FilterProducts::class.java))
+                startActivityForResult(Intent(activity!!, FilterProducts::class.java), 1)
             }
         }
         return super.onOptionsItemSelected(item)
