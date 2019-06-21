@@ -10,54 +10,68 @@
             app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" android:layout_marginStart="7dp"
             android:layout_marginEnd="7dp" android:layout_marginTop="4dp" android:layout_marginBottom="4dp"
-            app:layout_constraintCircleRadius="20dp" app:contentPadding="3dp" app:cardCornerRadius="10dp">
+            app:layout_constraintCircleRadius="20dp" app:cardCornerRadius="10dp">
         <LinearLayout
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
             <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" android:layout_weight="0">
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:layout_weight="0">
+                <Button
+                        android:text="serviceType"
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp" android:id="@+id/serviceAdapterServiceType"
+                        android:layout_weight="1" android:background="@color/colorLightRed"
+                        android:textColor="@color/white" android:textAllCaps="false" android:textSize="8sp"/>
                 <ImageView
                         android:layout_width="60dp"
                         android:layout_height="60dp" app:srcCompat="@drawable/mirelex_logo_cian"
                         android:layout_weight="0"
                         android:scaleType="fitCenter"
-                        android:layout_marginRight="10dp" android:id="@+id/serviceAdapterFeaturedImage"/>
-                <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" android:id="@+id/serviceAdapterFolio"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical" tools:text="folio" android:textColor="@android:color/black"
-                        android:textSize="11dp"/>
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent" android:id="@+id/serviceAdapterTotal"
-                        android:layout_weight="0"
-                        android:gravity="center_vertical" tools:text="price" android:textColor="@color/Tale"
-                        android:textSize="11dp"/>
+                        android:layout_marginRight="10dp" android:id="@+id/serviceAdapterFeaturedImage"
+                        android:layout_marginLeft="10dp"/>
             </LinearLayout>
             <LinearLayout
-                    android:orientation="horizontal"
+                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" android:id="@+id/serviceAdapterServiceType"
-                        android:layout_weight="1"
-                        tools:text="orderType" android:textAlignment="viewStart" android:textSize="11dp"
-                        android:textColor="@android:color/black" android:layout_marginLeft="70dp"/>
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" android:id="@+id/serviceAdapterStartDate"
-                        android:layout_weight="1" tools:text="startDate" android:textAlignment="center"
-                        android:textSize="11dp" android:textColor="@android:color/black"/>
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" android:id="@+id/serviceAdapterStatus"
-                        android:layout_weight="1" tools:text="status" android:textAlignment="viewEnd"
-                        android:textSize="11dp" android:textColor="@android:color/black"/>
+                    android:layout_height="wrap_content">
+                <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:layout_weight="1"
+                        android:layout_marginBottom="9dp" android:layout_marginTop="35dp">
+                    <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" android:id="@+id/serviceAdapterFolio"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical" tools:text="folio"
+                            android:textColor="@android:color/black"
+                            android:textSize="11dp"/>
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent" android:id="@+id/serviceAdapterTotal"
+                            android:layout_weight="0"
+                            android:gravity="center_vertical" tools:text="price" android:textColor="@color/Tale"
+                            android:textSize="11dp" android:paddingEnd="10dp"/>
+                </LinearLayout>
+                <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:layout_weight="1">
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:id="@+id/serviceAdapterStartDate"
+                            android:layout_weight="1" tools:text="startDate" android:textAlignment="textStart"
+                            android:textSize="11dp" android:textColor="@android:color/black"/>
+                    <Button
+                            android:text="serviceStatus"
+                            android:layout_width="wrap_content"
+                            android:layout_height="35dp" android:id="@+id/serviceAdapterStatus"
+                            android:layout_weight="0" android:textAllCaps="false" android:textColor="@color/white"
+                            android:textSize="10sp" android:layout_marginEnd="3dp"/>
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>

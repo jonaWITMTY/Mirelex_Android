@@ -1,14 +1,20 @@
 package com.example.jonathangalvan.mirelex.Adapters
 
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
+import com.example.jonathangalvan.mirelex.Enums.OrderStatus
+import com.example.jonathangalvan.mirelex.Enums.OrderType
 import com.example.jonathangalvan.mirelex.Interfaces.ServiceInterface
 import com.example.jonathangalvan.mirelex.R
+import com.squareup.picasso.Picasso
 
 class ServiceViewHolder(view: View): RecyclerView.ViewHolder(view){
+    var serviceAdapterFeaturedImage = view.findViewById<ImageView>(R.id.serviceAdapterFeaturedImage)
     var serviceAdapterFolio = view.findViewById<TextView>(R.id.serviceAdapterFolio)
     var serviceAdapterStartDate = view.findViewById<TextView>(R.id.serviceAdapterStartDate)
     var serviceAdapterServiceType = view.findViewById<TextView>(R.id.serviceAdapterServiceType)
@@ -31,11 +37,48 @@ class ServicesAdapter( private var services: ArrayList<ServiceInterface>): Recyc
     }
 
     override fun onBindViewHolder(p0: ServiceViewHolder, p1: Int) {
+        var drawableStr = ""
+
         p0.serviceAdapterFolio.text = services[p1].folio
         p0.serviceAdapterStartDate.text = services[p1].startDate
         p0.serviceAdapterServiceType.text = services[p1].orderType
         p0.serviceAdapterStatus.text = services[p1].orderStatus
         p0.serviceAdapterTotal.text = services[p1].totalFormatted
+
+        when(services[p1].orderTypeId){
+            OrderType.Cleaning.orderTypeId -> {
+                drawableStr = p0.serviceAdapterFeaturedImage.context.resources.getString(R.string.cleaningImg)
+            }
+            OrderType.Sewing.orderTypeId -> {
+                drawableStr = p0.serviceAdapterFeaturedImage.context.resources.getString(R.string.sewingImg)
+            }
+        }
+
+        Picasso.with(p0.serviceAdapterFeaturedImage.context).load(drawableStr).into(p0.serviceAdapterFeaturedImage)
+
+        when(services[p1].orderStatusId){
+            OrderStatus.Open.orderStatusId -> {
+                p0.serviceAdapterStatus.backgroundTintList = ContextCompat.getColorStateList(p0.serviceAdapterStatus.context, R.color.colorGreenLight)
+            }
+            OrderStatus.Gathering.orderStatusId -> {
+                p0.serviceAdapterStatus.backgroundTintList = ContextCompat.getColorStateList(p0.serviceAdapterStatus.context, android.R.color.black)
+            }
+            OrderStatus.Processing.orderStatusId -> {
+                p0.serviceAdapterStatus.backgroundTintList = ContextCompat.getColorStateList(p0.serviceAdapterStatus.context, R.color.colorBlueLight)
+            }
+            OrderStatus.DeliveringProcess.orderStatusId -> {
+                p0.serviceAdapterStatus.backgroundTintList = ContextCompat.getColorStateList(p0.serviceAdapterStatus.context, android.R.color.black)
+            }
+            OrderStatus.Delivered.orderStatusId -> {
+                p0.serviceAdapterStatus.backgroundTintList = ContextCompat.getColorStateList(p0.serviceAdapterStatus.context, android.R.color.black)
+            }
+            OrderStatus.Received.orderStatusId -> {
+                p0.serviceAdapterStatus.backgroundTintList = ContextCompat.getColorStateList(p0.serviceAdapterStatus.context, android.R.color.black)
+            }
+            OrderStatus.Finished.orderStatusId -> {
+                p0.serviceAdapterStatus.backgroundTintList = ContextCompat.getColorStateList(p0.serviceAdapterStatus.context, android.R.color.black)
+            }
+        }
     }
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ServiceViewHolder {

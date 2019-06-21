@@ -4,4 +4,6 @@
     <string name="bustImage">http://servicio.mirelex.com.mx/Uploads/bust.jpg</string>
     <string name="waistImage">http://servicio.mirelex.com.mx/Uploads/waist.jpg</string>
     <string name="hipImage">http://servicio.mirelex.com.mx/Uploads/hip.jpg</string>
+    <string name="cleaningImg">http://servicio.mirelex.com.mx/Uploads/cleaning.jpg</string>
+    <string name="sewingImg">http://servicio.mirelex.com.mx/Uploads/sewing.jpg</string>
 </resources>
