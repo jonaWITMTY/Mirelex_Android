@@ -15,7 +15,8 @@
         <SearchView
                 android:layout_width="match_parent"
                 android:layout_height="40dp" android:iconifiedByDefault="false"
-                android:background="@color/white" android:id="@+id/filterProductSearch"/>
+                android:background="@color/white" android:id="@+id/filterProductSearch"
+                android:queryHint="@string/searchByBrand"/>
     </LinearLayout>
     <ScrollView
             android:layout_width="match_parent"

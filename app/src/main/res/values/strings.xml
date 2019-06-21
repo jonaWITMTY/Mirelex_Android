@@ -130,4 +130,5 @@
     <string name="resendCode">Reenviar código</string>
     <string name="verifyCodeProcessing">Procesando código de verificación...</string>
     <string name="searchProductActionBarTitle">Búsqueda</string>
+    <string name="searchByBrand">Buscar por marca...</string>
 </resources>
