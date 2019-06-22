@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity() {
         /*Facebook login*/
         var loginButtonFacebook = findViewById<View>(R.id.btnLoginFacebook)
         loginButtonFacebook.setOnClickListener(View.OnClickListener {
-            LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile"))
+            LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile", "email"))
         })
 
         LoginManager.getInstance().registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
