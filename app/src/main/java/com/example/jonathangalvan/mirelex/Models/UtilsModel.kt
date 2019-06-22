@@ -114,7 +114,9 @@ class UtilsModel {
             if(responseObj.status == "sessionFailed"){
                 val context: Context = SplashActivity.getMainContext()
                 SessionModel(context).signOutSession()
-                context.startActivity(Intent(context, MainActivity::class.java))
+                val goToMain = Intent(context, MainActivity::class.java)
+                goToMain.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                context.startActivity(goToMain)
             }
             return responseObj
         }
