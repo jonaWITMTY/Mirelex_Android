@@ -45,7 +45,7 @@ class SplashActivity : AppCompatActivity() {
                 }
 
                 override fun onResponse(call: Call, response: Response) {
-                    val responseUserObj = UtilsModel.getGson().fromJson(response.body()!!.string(), ResponseInterface::class.java)
+                    val responseUserObj = UtilsModel.getPostResponse(response.body()!!.string())
                     if(responseUserObj.status == "success"){
                         SessionModel.saveSessionValue(this@SplashActivity, "user", UtilsModel.getGson().toJson(responseUserObj.data!![0]))
                         val user = SessionModel(this@SplashActivity).getUser()
@@ -70,7 +70,6 @@ class SplashActivity : AppCompatActivity() {
                         }
                     }else{
                         SessionModel(this@SplashActivity).signOutSession()
-                        startActivity(Intent(this@SplashActivity, MainActivity::class.java))
                     }
                 }
             })

@@ -110,13 +110,16 @@ class UtilsModel {
         }
 
         fun getPostResponse(response: String?): ResponseInterface{
-            val responseObj = getGson().fromJson(response, ResponseInterface::class.java)
-            if(responseObj.status == "sessionFailed"){
-                val context: Context = SplashActivity.getMainContext()
-                SessionModel(context).signOutSession()
-                val goToMain = Intent(context, MainActivity::class.java)
-                goToMain.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                context.startActivity(goToMain)
+            var responseObj = ResponseInterface(status = "failed", title = "", desc = "", data = ArrayList())
+            if(response!!.isNotEmpty()){
+                responseObj = getGson().fromJson(response, ResponseInterface::class.java)
+                if(responseObj.status == "sessionFailed"){
+                    val context: Context = SplashActivity.getMainContext()
+                    SessionModel(context).signOutSession()
+                    val goToMain = Intent(context, MainActivity::class.java)
+                    goToMain.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                    context.startActivity(goToMain)
+                }
             }
             return responseObj
         }

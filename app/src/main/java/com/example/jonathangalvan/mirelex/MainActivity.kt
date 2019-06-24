@@ -156,7 +156,7 @@ class MainActivity : AppCompatActivity() {
             override fun onResponse(call: Call, response: Response) {
                 runOnUiThread {run{findViewById<ViewGroup>(android.R.id.content).removeView(findViewById(R.id.view_progressbar))}}
                 val responseUserStr = response.body()!!.string()
-                val responseUserObj = UtilsModel.getGson().fromJson(responseUserStr, ResponseInterface::class.java)
+                val responseUserObj = UtilsModel.getPostResponse(responseUserStr)
                 if(responseUserObj.status == "success"){
                     SessionModel.saveSessionValue(this@MainActivity, "user", UtilsModel.getGson().toJson(responseUserObj.data!![0]))
                     val user = SessionModel(this@MainActivity).getUser()
