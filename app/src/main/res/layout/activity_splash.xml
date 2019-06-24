@@ -5,7 +5,8 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".SplashActivity" android:background="@color/colorGrey">
+        tools:context=".SplashActivity" android:background="@color/colorGrey" android:clickable="false"
+        android:focusableInTouchMode="false" android:touchscreenBlocksFocus="true">
 
     <ImageView
             android:layout_width="0dp"
@@ -16,13 +17,16 @@
             app:layout_constraintBottom_toBottomOf="parent" android:scaleType="centerInside"
             android:layout_marginStart="8dp"
             app:layout_constraintStart_toStartOf="@+id/guideline" android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toStartOf="@+id/guideline2"/>
+            app:layout_constraintEnd_toStartOf="@+id/guideline2" android:clickable="false"
+            android:focusableInTouchMode="false"/>
     <android.support.constraint.Guideline android:layout_width="wrap_content" android:layout_height="wrap_content"
                                           android:id="@+id/guideline"
                                           android:orientation="vertical"
-                                          app:layout_constraintGuide_percent="0.2"/>
+                                          app:layout_constraintGuide_percent="0.2"
+                                          android:focusableInTouchMode="false"/>
     <android.support.constraint.Guideline android:layout_width="wrap_content" android:layout_height="wrap_content"
                                           android:id="@+id/guideline2"
                                           android:orientation="vertical"
-                                          app:layout_constraintGuide_percent="0.8"/>
+                                          app:layout_constraintGuide_percent="0.8"
+                                          android:focusableInTouchMode="false"/>
 </android.support.constraint.ConstraintLayout>

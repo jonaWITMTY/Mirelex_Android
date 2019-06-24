@@ -36,7 +36,8 @@ class SplashActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         /*Check for user info*/
-        if(SessionModel.getSessionValue(this, "token") != ""){
+        val pref = getSharedPreferences("SessionData", 0)
+        if(pref.contains("token")){
             UtilsModel.getOkClient().newCall(UtilsModel.postRequest(this,resources.getString(R.string.getUserInfo))).enqueue(object:
                 Callback {
                 override fun onFailure(call: Call, e: IOException) {
