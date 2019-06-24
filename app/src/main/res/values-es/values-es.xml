@@ -132,4 +132,10 @@
     <string name="verifyCodeProcessing">Procesando código de verificación...</string>
     <string name="searchProductActionBarTitle">Búsqueda</string>
     <string name="searchByBrand">Buscar por marca...</string>
+    <string name="systemError">Error en sistema</string>
+    <string name="systemErrorDescription">Lo sentimos, por el momento estamos trabajando en ello</string>
+    <string name="termsAlert">Términos y condiciones</string>
+    <string name="termsAlertDescription">Por favor acepta nuestros términos y condiciones</string>
+    <string name="accessDenied">Acceso denegado</string>
+    <string name="accessDeniedDescription">El tipo de usuario no es váido</string>
 </resources>

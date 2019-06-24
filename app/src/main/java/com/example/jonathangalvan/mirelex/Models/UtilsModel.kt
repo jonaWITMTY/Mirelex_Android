@@ -27,9 +27,9 @@ class UtilsModel {
         private val gson = Gson()
         private val client = OkHttpClient()
         private var alertView : CustomAlert = CustomAlert()
-        private val errorRequestCall: String = "{'title': 'Error en sistema', 'desc': 'Lo sentimos, por el momento estamos trabajando en ello'}"
-        private val errorMissingTerms: String = "{'title': 'Términos y condiciones', 'desc': 'Por favor acepta nuestros términos y condiciones'}"
-        private val errorUserAccessDenied: String = "{'title': 'Acceso denegado', 'desc': 'El tipo de usuario no es váido'}"
+        private val errorRequestCall: String = "{'status': 'systemError'}"
+        private val errorMissingTerms: String = "{'status': 'termsAndCondition'}"
+        private val errorUserAccessDenied: String = "{'status': 'deniedAccess'}"
 
         fun postRequest(context: Context, endPoint: String, data: String = getGson().toJson(GlobalRequest())): Request{
             var newData = data
@@ -110,7 +110,7 @@ class UtilsModel {
         }
 
         fun getPostResponse(response: String?): ResponseInterface{
-            var responseObj = ResponseInterface(status = "failed", title = "", desc = "", data = ArrayList())
+            var responseObj = ResponseInterface(status = "systemError", title = "", desc = "", data = ArrayList())
             if(response!!.isNotEmpty()){
                 responseObj = getGson().fromJson(response, ResponseInterface::class.java)
                 if(responseObj.status == "sessionFailed"){

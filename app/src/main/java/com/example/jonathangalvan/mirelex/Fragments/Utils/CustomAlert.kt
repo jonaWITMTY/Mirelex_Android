@@ -66,8 +66,28 @@ class CustomAlert : DialogFragment() {
         when(arguments?.getInt("alertType")){
             1 -> {
                 alertView = activity?.layoutInflater!!.inflate(R.layout.fragment_custom_alert, null)
-                alertView.alertTitle.text = alertInfo?.title
-                alertView.alertDescription.text = alertInfo?.desc
+                when(alertInfo?.status){
+                    "success", "failed", "noDataAvailable" -> {
+                        alertView.alertTitle.text = alertInfo?.title
+                        alertView.alertDescription.text = alertInfo?.desc
+                    }
+                    "sessionFailed" -> {
+                        alertView.visibility = View.GONE
+                        onDismiss(dialog)
+                    }
+                    "termsAndCondition"-> {
+                        alertView.alertTitle.text = activity?.getString(R.string.termsAlert)
+                        alertView.alertDescription.text = activity?.getString(R.string.termsAlertDescription)
+                    }
+                    "deniedAccess"-> {
+                        alertView.alertTitle.text = activity?.getString(R.string.accessDenied)
+                        alertView.alertDescription.text = activity?.getString(R.string.accessDeniedDescription)
+                    }
+                    else -> {
+                        alertView.alertTitle.text = activity?.getString(R.string.systemError)
+                        alertView.alertDescription.text = activity?.getString(R.string.systemErrorDescription)
+                    }
+                }
             }
             2 ->{
                 alertView = activity?.layoutInflater!!.inflate(R.layout.fragment_forgot_email_alert, null)
