@@ -45,7 +45,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/registerTabs"
                 android:id="@+id/viewPagerRegisterTabs" app:layout_constraintHorizontal_bias="0.0"
-                android:layout_marginTop="8dp" android:layout_height="220sp"
+                android:layout_marginTop="8dp" android:layout_height="250sp"
         >
         </android.support.v4.view.ViewPager>
         <Button

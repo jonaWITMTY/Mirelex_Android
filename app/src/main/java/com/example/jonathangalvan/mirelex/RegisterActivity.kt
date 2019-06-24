@@ -11,6 +11,7 @@ import com.example.jonathangalvan.mirelex.Adapters.RegisterTabsAdapter
 import com.example.jonathangalvan.mirelex.Fragments.Register.RegisterCustomerTab
 import kotlinx.android.synthetic.main.activity_register.*
 import android.support.v4.view.ViewPager
+import android.util.TypedValue
 import android.view.View
 import android.view.ViewGroup
 import com.example.jonathangalvan.mirelex.Fragments.Register.RegisterStoreTab
@@ -48,12 +49,12 @@ class RegisterActivity : AppCompatActivity(), RegisterCustomerTab.OnFragmentInte
                 when(position){
                     0 -> {
                         val params = viewPagerRegisterTabs.getLayoutParams()
-                        params.height = UtilsModel.dptopx(this@RegisterActivity,220)
+                        params.height = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 250f, resources.displayMetrics).toInt()
                         viewPagerRegisterTabs.requestLayout()
                     }
                     1 -> {
                         val params = viewPagerRegisterTabs.getLayoutParams()
-                        params.height = UtilsModel.dptopx(this@RegisterActivity,100)
+                        params.height = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 100f, resources.displayMetrics).toInt()
                         viewPagerRegisterTabs.requestLayout()
                     }
                 }
