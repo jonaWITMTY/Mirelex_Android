@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import com.example.jonathangalvan.mirelex.Adapters.SliderPagerAdapter
 import com.example.jonathangalvan.mirelex.Enums.ProductType
 import com.example.jonathangalvan.mirelex.Fragments.Utils.ImagePreview
 import com.example.jonathangalvan.mirelex.Interfaces.ProductCatalog
@@ -91,11 +92,6 @@ class ProductUpdate : Fragment()  {
 
         /*Get product info*/
         getProductInfo()
-
-        /*Image preview*/
-        updateProductImageView.setOnClickListener( View.OnClickListener {
-            ImagePreview().newInstance(imgPreview).show(activity!!.supportFragmentManager,"alertDialog")
-        })
 
         /*On price checkbox click*/
         updateProductSellable.setOnCheckedChangeListener { view, isChecked ->
@@ -275,8 +271,19 @@ class ProductUpdate : Fragment()  {
         /*Set image for image preview*/
         imgPreview = productObj?.productInformation?.productFeaturedImage.toString()
 
+        /*Slider Gallery*/
+        var images: ArrayList<String> = ArrayList()
+        if(imgPreview != null){
+            images.add(productObj?.productInformation?.productFeaturedImage.toString())
+        }
+        for(productImage in productObj!!.productImages){
+            images.add(productImage.imageUrl.toString())
+        }
+        val sliderAdapter = SliderPagerAdapter(images, activity?.supportFragmentManager)
+        updateProductImageSlider.adapter = sliderAdapter
+
         /*Fill common product fields*/
-        Picasso.with(activity!!).load(productObj?.productInformation?.productFeaturedImage).into(updateProductImageView)
+//        Picasso.with(activity!!).load(productObj?.productInformation?.productFeaturedImage).into(updateProductImageView)
         updateProductBrand.editText?.setText(productObj!!.productInformation.brand)
         updateProductCategory.editText?.setText(productObj!!.productInformation.productType)
         updateProductPrice.editText?.setText(productObj!!.productInformation.originalPrice)

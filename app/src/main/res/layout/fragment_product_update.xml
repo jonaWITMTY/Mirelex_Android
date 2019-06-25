@@ -12,11 +12,9 @@
             <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                           android:orientation="vertical"
             >
-                <ImageView
+                <android.support.v4.view.ViewPager
                         android:layout_width="match_parent"
-                        android:layout_height="150dp" app:srcCompat="@drawable/mirelex_logo_cian"
-                        android:id="@+id/updateProductImageView" android:scaleType="centerCrop"
-                        android:layout_marginBottom="16dp"/>
+                        android:layout_height="200dp" android:id="@+id/updateProductImageSlider"/>
                 <android.support.design.widget.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" android:theme="@style/textInputLayoutBlack"
