@@ -71,7 +71,7 @@ class MainActivity : AppCompatActivity() {
 
                     override fun onResponse(call: Call, response: Response){
                         val responseStr = response.body()?.string()
-                        val responseObj = UtilsModel.getPostResponse(responseStr)
+                        val responseObj = UtilsModel.getPostResponse(this@MainActivity, responseStr)
                         if(responseObj.status == "logged"){
                             getUserInfo(responseObj.data!![0].toString())
                         }else{
@@ -118,7 +118,7 @@ class MainActivity : AppCompatActivity() {
 
                     override fun onResponse(call: Call, response: Response){
                         val responseStr = response.body()?.string()
-                        val responseObj = UtilsModel.getPostResponse(responseStr)
+                        val responseObj = UtilsModel.getPostResponse(this@MainActivity, responseStr)
                         if(responseObj.status == "logged"){
                             getUserInfo(responseObj.data!![0].toString())
                         }else{
@@ -156,7 +156,7 @@ class MainActivity : AppCompatActivity() {
             override fun onResponse(call: Call, response: Response) {
                 runOnUiThread {run{findViewById<ViewGroup>(android.R.id.content).removeView(findViewById(R.id.view_progressbar))}}
                 val responseUserStr = response.body()!!.string()
-                val responseUserObj = UtilsModel.getPostResponse(responseUserStr)
+                val responseUserObj = UtilsModel.getPostResponse(this@MainActivity, responseUserStr)
                 if(responseUserObj.status == "success"){
                     SessionModel.saveSessionValue(this@MainActivity, "user", UtilsModel.getGson().toJson(responseUserObj.data!![0]))
                     val user = SessionModel(this@MainActivity).getUser()

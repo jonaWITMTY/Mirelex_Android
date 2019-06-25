@@ -70,7 +70,7 @@ class CustomBottomAlert: DialogFragment() {
                         override fun onResponse(call: Call, response: Response) {
                             activity!!.runOnUiThread {run{activity!!.findViewById<ViewGroup>(android.R.id.content).removeView(activity!!.findViewById(R.id.view_progressbar))}}
                             val responseStr = response.body()?.string()
-                            val responseObj = UtilsModel.getPostResponse(responseStr)
+                            val responseObj = UtilsModel.getPostResponse(activity!!, responseStr)
                             if(responseObj.status == "success"){
                                 activity?.runOnUiThread {
                                     run{
@@ -110,7 +110,7 @@ class CustomBottomAlert: DialogFragment() {
                         override fun onResponse(call: Call, response: Response) {
                             activity!!.runOnUiThread {run{activity!!.findViewById<ViewGroup>(android.R.id.content).removeView(activity!!.findViewById(R.id.view_progressbar))}}
                             val responseStr = response.body()?.string()
-                            val responseObj = UtilsModel.getPostResponse(responseStr)
+                            val responseObj = UtilsModel.getPostResponse(activity!!, responseStr)
                             if(responseObj.status == "success"){
                                 activity?.runOnUiThread {
                                     run{
@@ -184,7 +184,7 @@ class CustomBottomAlert: DialogFragment() {
                             override fun onResponse(call: Call, response: Response) {
                                 activity!!.runOnUiThread {run{activity!!.findViewById<ViewGroup>(android.R.id.content).removeView(activity!!.findViewById(R.id.view_progressbar))}}
                                 val responseStr = response.body()?.string()
-                                val responseObj = UtilsModel.getPostResponse(responseStr)
+                                val responseObj = UtilsModel.getPostResponse(activity!!, responseStr)
                                 if(responseObj.status == "success"){
                                     activity?.runOnUiThread {
                                         run {
@@ -268,7 +268,7 @@ class CustomBottomAlert: DialogFragment() {
 
                         override fun onResponse(call: Call, response: Response) {
                             val responseStr = response.body()?.string()
-                            val responseObj = UtilsModel.getGson().fromJson(responseStr, ResponseInterface::class.java)
+                            val responseObj = UtilsModel.getPostResponse(activity!!, responseStr)
                             inputText.text = responseObj.desc
                         }
                     })
@@ -293,7 +293,7 @@ class CustomBottomAlert: DialogFragment() {
 
                             override fun onResponse(call: Call, response: Response) {
                                 val responseStr = response.body()?.string()
-                                val responseObj = UtilsModel.getGson().fromJson(responseStr, ResponseInterface::class.java)
+                                val responseObj = UtilsModel.getPostResponse(activity!!, responseStr)
                                 if(responseObj.status == "success"){
                                     val user = SessionModel(activity!!).getUser()
                                     user.person?.phoneVerified = "1"

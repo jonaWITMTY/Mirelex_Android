@@ -51,7 +51,7 @@ class ProductDetailActivity : AppCompatActivity() {
             override fun onResponse(call: Call, response: Response) {
                 runOnUiThread {run{findViewById<ViewGroup>(android.R.id.content).removeView(findViewById(R.id.view_progressbar))}}
                 val responseStr = response.body()?.string()
-                val responseObj = UtilsModel.getPostResponse(responseStr)
+                val responseObj = UtilsModel.getPostResponse(this@ProductDetailActivity, responseStr)
                 if(responseObj.status == "success"){
                     val productObj = UtilsModel.getGson().fromJson(UtilsModel.getGson().toJson(responseObj.data!![0]), ProductInfoInterface::class.java)
                     productInfo = UtilsModel.getGson().toJson(productObj)

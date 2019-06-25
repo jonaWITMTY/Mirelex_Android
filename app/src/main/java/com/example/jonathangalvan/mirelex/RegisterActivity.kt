@@ -72,7 +72,7 @@ class RegisterActivity : AppCompatActivity(), RegisterCustomerTab.OnFragmentInte
                     override fun onResponse(call: Call, response: Response) {
                         runOnUiThread {run{findViewById<ViewGroup>(android.R.id.content).removeView(findViewById(R.id.view_progressbar))}}
                         val responseRegisterStr = response.body()?.string()
-                        val responseRegisterObj = UtilsModel.getPostResponse(responseRegisterStr)
+                        val responseRegisterObj = UtilsModel.getPostResponse(this@RegisterActivity, responseRegisterStr)
 
                         if(responseRegisterObj.status == "success"){
                             val loginObj = LoginRequest(registerEmailField.text.toString(), registerPasswordField.text.toString())
@@ -84,7 +84,7 @@ class RegisterActivity : AppCompatActivity(), RegisterCustomerTab.OnFragmentInte
 
                                 override fun onResponse(call: Call, response: Response){
                                     val responseLoginStr = response.body()?.string()
-                                    val responseLoginObj = UtilsModel.getPostResponse(responseLoginStr)
+                                    val responseLoginObj = UtilsModel.getPostResponse(this@RegisterActivity, responseLoginStr)
                                     if(responseLoginObj.status == "logged"){
                                         val tokenObj: TokenInterface = UtilsModel.getGson().fromJson(responseLoginObj.data!![0].toString(), TokenInterface::class.java)
                                         SessionModel.saveSessionValue(this@RegisterActivity, "token", tokenObj.token)
@@ -95,7 +95,7 @@ class RegisterActivity : AppCompatActivity(), RegisterCustomerTab.OnFragmentInte
                                             }
 
                                             override fun onResponse(call: Call, response: Response) {
-                                                val responseUserObj = UtilsModel.getGson().fromJson(response.body()!!.string(), ResponseInterface::class.java)
+                                                val responseUserObj = UtilsModel.getPostResponse(this@RegisterActivity, response.body()!!.string())
                                                 SessionModel.saveSessionValue(this@RegisterActivity, "user", UtilsModel.getGson().toJson(responseUserObj.data!![0]))
                                                 runOnUiThread {run{findViewById<ViewGroup>(android.R.id.content).removeView(findViewById(R.id.view_progressbar))}}
                                                 startActivity(Intent(this@RegisterActivity, RegisterExtraFieldsActivity::class.java))

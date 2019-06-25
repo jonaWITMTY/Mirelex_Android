@@ -73,7 +73,7 @@ class RegisterExtraFieldsAddress : Fragment() {
                         override fun onResponse(call: Call, response: Response) {
                             activity!!.runOnUiThread {run{activity!!.findViewById<ViewGroup>(android.R.id.content).removeView(activity!!.findViewById(R.id.view_progressbar))}}
                             val responseStr = response.body()?.string()
-                            val responseObj = UtilsModel.getPostResponse(responseStr)
+                            val responseObj = UtilsModel.getPostResponse(activity!!, responseStr)
                             if(responseObj.status == "success") {
                                 val neighborhoods= UtilsModel.getGson().fromJson(responseStr, NeighborhoodArrayInterface::class.java)
                                 val adapter = ArrayAdapter<NeighborhoodInterface>(activity, R.layout.view_spinner_item, R.id.spinnerItemWhiteSelect, neighborhoods.data)

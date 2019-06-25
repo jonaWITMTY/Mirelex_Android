@@ -69,7 +69,7 @@ class ContactActivity : AppCompatActivity() {
                     override fun onResponse(call: Call, response: Response) {
                         runOnUiThread {run{findViewById<ViewGroup>(android.R.id.content).removeView(findViewById(R.id.view_progressbar))}}
                         val responseStr = response.body()?.string()
-                        val responseObj = UtilsModel.getPostResponse(responseStr)
+                        val responseObj = UtilsModel.getPostResponse(this@ContactActivity, responseStr)
                         when(responseObj.status){
                             "success" -> {
                                 UtilsModel.getAlertView().newInstance(responseStr, 4, 0).show(supportFragmentManager,"alertDialog")

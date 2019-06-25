@@ -227,7 +227,7 @@ class ProductUpdate : Fragment()  {
 
             override fun onResponse(call: Call, response: Response) {
                 val responseStr = response.body()?.string()
-                val responseObj = UtilsModel.getPostResponse(responseStr)
+                val responseObj = UtilsModel.getPostResponse(activity!!, responseStr)
                 if(responseObj.status == "success"){
                     val viewModel = ViewModelProviders.of(activity!!).get(ProductViewModel::class.java)
                     productObj = UtilsModel.getGson().fromJson(UtilsModel.getGson().toJson(responseObj.data!![0]), ProductInfoInterface::class.java)
@@ -254,7 +254,7 @@ class ProductUpdate : Fragment()  {
             override fun onResponse(call: Call, response: Response) {
                 activity?.runOnUiThread {run{activity!!.findViewById<ViewGroup>(android.R.id.content).removeView(activity!!.findViewById(R.id.view_progressbar))}}
                 val responseStr = response.body()?.string()
-                val responseObj = UtilsModel.getPostResponse(responseStr)
+                val responseObj = UtilsModel.getPostResponse(activity!!, responseStr)
                 if(responseObj.status == "success"){
                     val productCatalogObj = UtilsModel.getGson().fromJson(UtilsModel.getGson().toJson(responseObj.data!![0]), ProductCatalogs::class.java)
                     catalogs = productCatalogObj

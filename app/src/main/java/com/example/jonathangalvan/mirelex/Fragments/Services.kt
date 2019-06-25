@@ -142,7 +142,7 @@ class Services : Fragment() {
             override fun onResponse(call: Call, response: Response) {
                 activity?.runOnUiThread {run{activity?.findViewById<ViewGroup>(android.R.id.content)?.removeView(activity?.findViewById(R.id.view_progressbar))}}
                 val responseStr = response.body()?.string()
-                val responseObj = UtilsModel.getPostResponse(responseStr)
+                val responseObj = UtilsModel.getPostResponse(activity!!, responseStr)
                 when(responseObj.status){
                     "success" -> {
                         servicesObj = UtilsModel.getGson().fromJson(UtilsModel.getGson().toJson(responseObj), ServicesInterface::class.java)

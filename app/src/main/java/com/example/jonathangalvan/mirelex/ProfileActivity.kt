@@ -150,7 +150,7 @@ class ProfileActivity : AppCompatActivity() {
                             override fun onResponse(call: Call, response: Response) {
                                 runOnUiThread {run{findViewById<ViewGroup>(android.R.id.content).removeView(findViewById(R.id.view_progressbar))}}
                                 val responseStr = response.body()?.string()
-                                val responseObj = UtilsModel.getPostResponse(responseStr)
+                                val responseObj = UtilsModel.getPostResponse(this@ProfileActivity, responseStr)
                                 if(responseObj.status == "success"){
                                     val sizesObj = UtilsModel.getGson().fromJson(responseStr, CatalogArrayInterface::class.java)
                                     sizes = sizesObj.data
@@ -186,7 +186,7 @@ class ProfileActivity : AppCompatActivity() {
                             override fun onResponse(call: Call, response: Response) {
                                 runOnUiThread {run{findViewById<ViewGroup>(android.R.id.content).removeView(findViewById(R.id.view_progressbar))}}
                                 val responseStr = response.body()?.string()
-                                val responseObj = UtilsModel.getPostResponse(responseStr)
+                                val responseObj = UtilsModel.getPostResponse(this@ProfileActivity, responseStr)
                                 if(responseObj.status == "success"){
                                     val womenCatalogObj = UtilsModel.getGson().fromJson(UtilsModel.getGson().toJson(responseObj.data!![0]), WomenCatalogsInterface::class.java)
                                     womanCatalog = womenCatalogObj
@@ -269,7 +269,7 @@ class ProfileActivity : AppCompatActivity() {
                     override fun onResponse(call: Call, response: Response) {
                         runOnUiThread {run{findViewById<ViewGroup>(android.R.id.content).removeView(findViewById(R.id.view_progressbar))}}
                         val responseStr = response.body()?.string()
-                        val responseObj = UtilsModel.getPostResponse(responseStr)
+                        val responseObj = UtilsModel.getPostResponse(this@ProfileActivity, responseStr)
                         if(responseObj.status == "success"){
                             SessionModel.saveSessionValue(this@ProfileActivity, "user", UtilsModel.getGson().toJson(responseObj.data!![0]))
                         }
@@ -297,7 +297,7 @@ class ProfileActivity : AppCompatActivity() {
                 override fun onResponse(call: Call, response: Response) {
                     runOnUiThread {run{findViewById<ViewGroup>(android.R.id.content).removeView(findViewById(R.id.view_progressbar))}}
                     val responseStr = response.body()?.string()
-                    val responseObj = UtilsModel.getPostResponse(responseStr)
+                    val responseObj = UtilsModel.getPostResponse(this@ProfileActivity, responseStr)
                     if(responseObj.status == "success") {
                         val neighborhoods= UtilsModel.getGson().fromJson(responseStr, NeighborhoodArrayInterface::class.java)
                         val adapter = ArrayAdapter<NeighborhoodInterface>(this@ProfileActivity, R.layout.view_spinner_item_black, R.id.spinnerItemBlackSelect, neighborhoods.data)

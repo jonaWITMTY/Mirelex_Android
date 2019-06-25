@@ -82,7 +82,7 @@ class PaymentCardsActivity : AppCompatActivity() {
 
             override fun onResponse(call: Call, response: Response) {
                 runOnUiThread {run{findViewById<ViewGroup>(android.R.id.content).removeView(findViewById(R.id.view_progressbar))}}
-                val responseUserObj = UtilsModel.getGson().fromJson(response.body()!!.string(), ResponseInterface::class.java)
+                val responseUserObj = UtilsModel.getPostResponse(this@PaymentCardsActivity, response.body()!!.string())
                 if(responseUserObj.status == "success"){
                     SessionModel.saveSessionValue(this@PaymentCardsActivity, "user", UtilsModel.getGson().toJson(responseUserObj.data!![0]))
                     val user = SessionModel(this@PaymentCardsActivity).getUser()

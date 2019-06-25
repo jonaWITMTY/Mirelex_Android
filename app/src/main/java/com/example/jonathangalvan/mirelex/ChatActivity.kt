@@ -51,7 +51,7 @@ class ChatActivity : AppCompatActivity() {
             override fun onResponse(call: Call, response: Response) {
                 runOnUiThread {run{findViewById<ViewGroup>(android.R.id.content).removeView(findViewById(R.id.view_progressbar))}}
                 val responseStr = response.body()?.string()
-                val responseObj = UtilsModel.getPostResponse(responseStr)
+                val responseObj = UtilsModel.getPostResponse(this@ChatActivity, responseStr)
                 if(responseObj.status == "success"){
                     val messagesObj = UtilsModel.getGson().fromJson(responseStr, ConverationMessagesInterface::class.java)
                     for (message in messagesObj.data) {

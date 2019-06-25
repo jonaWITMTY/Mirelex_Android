@@ -251,7 +251,7 @@ class ProductCreate : Fragment() {
                 override fun onResponse(call: Call, response: Response) {
                     activity?.runOnUiThread {run{activity?.findViewById<ViewGroup>(android.R.id.content)?.removeView(activity!!.findViewById(R.id.view_progressbar))}}
                     val responseStr = response.body()?.string()
-                    val responseObj = UtilsModel.getPostResponse(responseStr)
+                    val responseObj = UtilsModel.getPostResponse(activity!!, responseStr)
                     if(responseObj.status == "success"){
                         val productPrices = UtilsModel.getGson().fromJson(UtilsModel.getGson().toJson(responseObj.data!![0]), GetProductPricesInterface::class.java)
                         activity?.runOnUiThread {
@@ -278,7 +278,7 @@ class ProductCreate : Fragment() {
             override fun onResponse(call: Call, response: Response) {
                 activity?.runOnUiThread {run{activity!!.findViewById<ViewGroup>(android.R.id.content).removeView(activity!!.findViewById(R.id.view_progressbar))}}
                 val responseStr = response.body()?.string()
-                val responseObj = UtilsModel.getPostResponse(responseStr)
+                val responseObj = UtilsModel.getPostResponse(activity!!, responseStr)
                 if(responseObj.status == "success"){
                     val productTypesobj = UtilsModel.getGson().fromJson(UtilsModel.getGson().toJson(responseObj), ProductTypes::class.java)
                     productTypes = productTypesobj.data
@@ -305,7 +305,7 @@ class ProductCreate : Fragment() {
             override fun onResponse(call: Call, response: Response) {
                 activity?.runOnUiThread {run{activity!!.findViewById<ViewGroup>(android.R.id.content).removeView(activity!!.findViewById(R.id.view_progressbar))}}
                 val responseStr = response.body()?.string()
-                val responseObj = UtilsModel.getPostResponse(responseStr)
+                val responseObj = UtilsModel.getPostResponse(activity!!, responseStr)
                 if(responseObj.status == "success"){
                     val productCatalogObj = UtilsModel.getGson().fromJson(UtilsModel.getGson().toJson(responseObj.data!![0]), ProductCatalogs::class.java)
                     catalogs = productCatalogObj

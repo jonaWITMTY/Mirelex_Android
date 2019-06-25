@@ -55,7 +55,7 @@ class RegisterExtraFieldsActivity : AppCompatActivity(),
 
             override fun onResponse(call: Call, response: Response) {
                 val responseStr = response.body()?.string()
-                val responseObj = UtilsModel.getPostResponse(responseStr)
+                val responseObj = UtilsModel.getPostResponse(this@RegisterExtraFieldsActivity, responseStr)
                 if(responseObj.status == "success"){
                     val sizesObj = UtilsModel.getGson().fromJson(responseStr, CatalogArrayInterface::class.java)
                     viewModel?.sizes?.postValue(sizesObj.data)
@@ -71,7 +71,7 @@ class RegisterExtraFieldsActivity : AppCompatActivity(),
 
             override fun onResponse(call: Call, response: Response) {
                 val responseStr = response.body()?.string()
-                val responseObj = UtilsModel.getPostResponse(responseStr)
+                val responseObj = UtilsModel.getPostResponse(this@RegisterExtraFieldsActivity, responseStr)
                 if(responseObj.status == "success"){
                     val womenCatalogObj = UtilsModel.getGson().fromJson(UtilsModel.getGson().toJson(responseObj.data!![0]), WomenCatalogsInterface::class.java)
                     viewModel?.womenCatalogs?.postValue(womenCatalogObj)
@@ -102,7 +102,7 @@ class RegisterExtraFieldsActivity : AppCompatActivity(),
             override fun onResponse(call: Call, response: Response) {
                 runOnUiThread {run{findViewById<ViewGroup>(android.R.id.content)?.removeView(findViewById(R.id.view_progressbar))}}
                 val responseRegisterStr = response.body()?.string()
-                val responseRegisterObj = UtilsModel.getPostResponse(responseRegisterStr)
+                val responseRegisterObj = UtilsModel.getPostResponse(this@RegisterExtraFieldsActivity, responseRegisterStr)
                 if(responseRegisterObj.status == "success"){
                     SessionModel.saveSessionValue(this@RegisterExtraFieldsActivity, "user", UtilsModel.getGson().toJson(responseRegisterObj.data!![0]))
                     when(viewModel?.userCall?.value?.person?.userTypeId){

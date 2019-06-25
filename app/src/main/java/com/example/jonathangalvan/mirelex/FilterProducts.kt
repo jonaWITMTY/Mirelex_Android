@@ -153,7 +153,7 @@ class FilterProducts : AppCompatActivity() {
 
             override fun onResponse(call: Call, response: Response) {
                 val responseStr = response.body()?.string()
-                val responseObj = UtilsModel.getPostResponse(responseStr)
+                val responseObj = UtilsModel.getPostResponse(this@FilterProducts, responseStr)
                 if(responseObj.status == "success"){
                     val productCatalogObj = UtilsModel.getGson().fromJson(UtilsModel.getGson().toJson(responseObj.data!![0]), ProductCatalogs::class.java)
                     catalogs = productCatalogObj
@@ -188,7 +188,7 @@ class FilterProducts : AppCompatActivity() {
             override fun onResponse(call: Call, response: Response) {
                 runOnUiThread {run{findViewById<ViewGroup>(android.R.id.content).removeView(findViewById(R.id.view_progressbar))}}
                 val responseStr = response.body()?.string()
-                val responseObj = UtilsModel.getPostResponse(responseStr)
+                val responseObj = UtilsModel.getPostResponse(this@FilterProducts, responseStr)
                 if(responseObj.status == "success"){
                     val sizesObj = UtilsModel.getGson().fromJson(responseStr, CatalogArrayInterface::class.java)
                     sizes = sizesObj.data

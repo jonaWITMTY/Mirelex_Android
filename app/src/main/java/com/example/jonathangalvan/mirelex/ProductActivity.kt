@@ -71,7 +71,7 @@ class ProductActivity : AppCompatActivity(),
 
             override fun onResponse(call: Call, response: Response) {
                 val responseStr = response.body()?.string()
-                val responseObj = UtilsModel.getPostResponse(responseStr)
+                val responseObj = UtilsModel.getPostResponse(this@ProductActivity, responseStr)
                 if(responseObj.status == "success"){
                     var productId = ""
                     when(vmp.productProcessType){
@@ -95,7 +95,7 @@ class ProductActivity : AppCompatActivity(),
                             override fun onResponse(call: Call, response: Response) {
                                 runOnUiThread {run{findViewById<ViewGroup>(android.R.id.content).removeView(findViewById(R.id.view_progressbar))}}
                                 val responseStr = response.body()?.string()
-                                val responseObj = UtilsModel.getPostResponse(responseStr)
+                                val responseObj = UtilsModel.getPostResponse(this@ProductActivity, responseStr)
                                 UtilsModel.getAlertView().newInstance(responseStr, 1, 1).show(supportFragmentManager,"alertDialog")
                             }
                         })

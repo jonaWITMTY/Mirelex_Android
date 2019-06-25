@@ -133,7 +133,7 @@ class OrderCheckoutActivity : AppCompatActivity() {
             override fun onResponse(call: Call, response: Response) {
                 runOnUiThread {run{findViewById<ViewGroup>(android.R.id.content).removeView(findViewById(R.id.view_progressbar))}}
                 val responseStr = response.body()?.string()
-                val responseObj = UtilsModel.getPostResponse(responseStr)
+                val responseObj = UtilsModel.getPostResponse(this@OrderCheckoutActivity, responseStr)
                 if(responseObj.status == "success"){
                     val newAlert = UtilsModel.getAlertView().newInstance(responseStr, 4, 0)
                     newAlert.show(supportFragmentManager, "alertView")
@@ -156,7 +156,7 @@ class OrderCheckoutActivity : AppCompatActivity() {
             override fun onResponse(call: Call, response: Response) {
                 runOnUiThread {run{findViewById<ViewGroup>(android.R.id.content).removeView(findViewById(R.id.view_progressbar))}}
                 val responseStr = response.body()?.string()
-                val responseObj = UtilsModel.getPostResponse(responseStr)
+                val responseObj = UtilsModel.getPostResponse(this@OrderCheckoutActivity, responseStr)
                 if(responseObj.status == "success"){
                     val totalObj = UtilsModel.getGson().fromJson(UtilsModel.getGson().toJson(responseObj.data!![0]), OrderTotal::class.java)
                     orderRequestObj?.total = totalObj.total
@@ -205,7 +205,7 @@ class OrderCheckoutActivity : AppCompatActivity() {
 
             override fun onResponse(call: Call, response: Response) {
                 runOnUiThread {run{findViewById<ViewGroup>(android.R.id.content).removeView(findViewById(R.id.view_progressbar))}}
-                val responseUserObj = UtilsModel.getGson().fromJson(response.body()!!.string(), ResponseInterface::class.java)
+                val responseUserObj = UtilsModel.getPostResponse(this@OrderCheckoutActivity, response.body()!!.string())
                 if(responseUserObj.status == "success"){
                     SessionModel.saveSessionValue(this@OrderCheckoutActivity, "user", UtilsModel.getGson().toJson(responseUserObj.data!![0]))
                     val user = SessionModel(this@OrderCheckoutActivity).getUser()
