@@ -96,7 +96,7 @@ class RegisterExtraFieldsMeasure : Fragment() {
 
         /*Submit form*/
         registerExtraFinalMeasureBtn.setOnClickListener(View.OnClickListener {
-            if(inputValidations(registeredUserInfo?.person?.userGenderId)){
+            if(inputValidations(user?.genderId)){
                 user?.height = registerExtraHeightField.editText?.text.toString()
                 when(registeredUserInfo?.person?.userGenderId){
                     "1" -> {
