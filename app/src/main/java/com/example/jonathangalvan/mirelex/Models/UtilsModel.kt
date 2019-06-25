@@ -109,15 +109,17 @@ class UtilsModel {
             return isPermissionsCorrect
         }
 
-        fun getPostResponse(context: Context, response: String?): ResponseInterface{
+        fun getPostResponse(context: Context?, response: String?): ResponseInterface{
             var responseObj = ResponseInterface(status = "systemError", title = "", desc = "", data = ArrayList())
             if(response!!.isNotEmpty()){
                 responseObj = getGson().fromJson(response, ResponseInterface::class.java)
                 if(responseObj.status == "sessionFailed"){
-                    SessionModel(context).signOutSession()
+                    if (context != null) {
+                        SessionModel(context).signOutSession()
+                    }
                     val goToMain = Intent(context, MainActivity::class.java)
                     goToMain.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                    context.startActivity(goToMain)
+                    context?.startActivity(goToMain)
                 }
             }
             return responseObj

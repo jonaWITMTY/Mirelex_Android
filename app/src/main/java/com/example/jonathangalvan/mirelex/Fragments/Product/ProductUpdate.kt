@@ -41,6 +41,7 @@ class ProductUpdate : Fragment()  {
     var spinner: MultiSpinner? = null
     var adapter: ArrayAdapter<String>? = null
     var selectedIds: ArrayList<Long> = ArrayList()
+    var viewModel: ProductViewModel = ProductViewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -84,7 +85,7 @@ class ProductUpdate : Fragment()  {
         super.onActivityCreated(savedInstanceState)
 
         /*Get product viewmodel*/
-        val viewModel = ViewModelProviders.of(activity!!).get(ProductViewModel::class.java)
+        viewModel = ViewModelProviders.of(activity!!).get(ProductViewModel::class.java)
         viewModel.productProcessType = "update"
         productId = viewModel.productId
 
@@ -227,11 +228,10 @@ class ProductUpdate : Fragment()  {
 
             override fun onResponse(call: Call, response: Response) {
                 val responseStr = response.body()?.string()
-                val responseObj = UtilsModel.getPostResponse(activity!!, responseStr)
+                val responseObj = UtilsModel.getPostResponse(activity, responseStr)
                 if(responseObj.status == "success"){
-                    val viewModel = ViewModelProviders.of(activity!!).get(ProductViewModel::class.java)
                     productObj = UtilsModel.getGson().fromJson(UtilsModel.getGson().toJson(responseObj.data!![0]), ProductInfoInterface::class.java)
-                    viewModel.productObj = productObj
+                    viewModel?.productObj = productObj
                         activity?.runOnUiThread {
                         run {
                             getProductCatalogs()
@@ -254,7 +254,7 @@ class ProductUpdate : Fragment()  {
             override fun onResponse(call: Call, response: Response) {
                 activity?.runOnUiThread {run{activity!!.findViewById<ViewGroup>(android.R.id.content).removeView(activity!!.findViewById(R.id.view_progressbar))}}
                 val responseStr = response.body()?.string()
-                val responseObj = UtilsModel.getPostResponse(activity!!, responseStr)
+                val responseObj = UtilsModel.getPostResponse(activity, responseStr)
                 if(responseObj.status == "success"){
                     val productCatalogObj = UtilsModel.getGson().fromJson(UtilsModel.getGson().toJson(responseObj.data!![0]), ProductCatalogs::class.java)
                     catalogs = productCatalogObj
@@ -317,28 +317,28 @@ class ProductUpdate : Fragment()  {
     }
 
     fun fillProductsCatalogs(){
-        fillSpinner(catalogs?.conditions, activity!!.findViewById(R.id.updateProductCondition))
+        fillSpinner(catalogs?.conditions, activity?.findViewById(R.id.updateProductCondition))
         updateProductCondition.setSelection(getAdapterItemPosition( productObj?.productInformation?.productConditionId?.toLong(), catalogs?.conditions))
 
-        fillSpinner(catalogs?.styles, activity!!.findViewById(R.id.updateProductStyle))
+        fillSpinner(catalogs?.styles, activity?.findViewById(R.id.updateProductStyle))
         updateProductStyle.setSelection(getAdapterItemPosition( productObj?.productInformation?.productStyleId?.toLong(), catalogs?.styles))
 
-        fillSpinner(catalogs?.decorations, activity!!.findViewById(R.id.updateProductDecoration))
+        fillSpinner(catalogs?.decorations, activity?.findViewById(R.id.updateProductDecoration))
         updateProductDecoration.setSelection(getAdapterItemPosition( productObj?.productInformation?.productDecorationId?.toLong(), catalogs?.decorations))
 
-        fillSpinner(catalogs?.lengths, activity!!.findViewById(R.id.updateProductLength))
+        fillSpinner(catalogs?.lengths, activity?.findViewById(R.id.updateProductLength))
         updateProductLength.setSelection(getAdapterItemPosition( productObj?.productInformation?.productLengthId?.toLong(), catalogs?.lengths))
 
-        fillSpinner(catalogs?.materials, activity!!.findViewById(R.id.updateProductMaterial))
+        fillSpinner(catalogs?.materials, activity?.findViewById(R.id.updateProductMaterial))
         updateProductMaterial.setSelection(getAdapterItemPosition( productObj?.productInformation?.productMaterialId?.toLong(), catalogs?.materials))
 
-        fillSpinner(catalogs?.silhouettes, activity!!.findViewById(R.id.updateProductSilouete))
+        fillSpinner(catalogs?.silhouettes, activity?.findViewById(R.id.updateProductSilouete))
         updateProductSilouete.setSelection(getAdapterItemPosition( productObj?.productInformation?.productSilhouetteId?.toLong(), catalogs?.silhouettes))
 
-        fillSpinner(catalogs?.sleeveStyles, activity!!.findViewById(R.id.updateProductSleeveStyle))
+        fillSpinner(catalogs?.sleeveStyles, activity?.findViewById(R.id.updateProductSleeveStyle))
         updateProductSleeveStyle.setSelection(getAdapterItemPosition( productObj?.productInformation?.productSleeveStyleId?.toLong(), catalogs?.sleeveStyles))
 
-        fillSpinner(catalogs?.occasions, activity!!.findViewById(R.id.updateProductOcation))
+        fillSpinner(catalogs?.occasions, activity?.findViewById(R.id.updateProductOcation))
         updateProductOcation.setSelection(getAdapterItemPosition( productObj?.productInformation?.productOccasionId?.toLong(), catalogs?.occasions))
 
         /*Get colors*/
@@ -372,11 +372,11 @@ class ProductUpdate : Fragment()  {
         }
     }
 
-    fun fillSpinner(data: ArrayList<ProductCatalog>?, adapterView: AdapterView<ArrayAdapter<ProductCatalog>>){
+    fun fillSpinner(data: ArrayList<ProductCatalog>?, adapterView: AdapterView<ArrayAdapter<ProductCatalog>>?){
         if(data != null){
             val adapter = ArrayAdapter<ProductCatalog>(activity!!, R.layout.view_spinner_item_black, R.id.spinnerItemBlackSelect, data)
             adapter.setDropDownViewResource(R.layout.view_spinner_item_black_select)
-            adapterView.adapter = adapter
+            adapterView?.adapter = adapter
         }
     }
 
