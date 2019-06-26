@@ -281,6 +281,7 @@ class ProductUpdate : Fragment()  {
         }
         val sliderAdapter = SliderPagerAdapter(images, activity?.supportFragmentManager)
         updateProductImageSlider.adapter = sliderAdapter
+        indicator.setViewPager(updateProductImageSlider)
 
         /*Fill common product fields*/
 //        Picasso.with(activity!!).load(productObj?.productInformation?.productFeaturedImage).into(updateProductImageView)

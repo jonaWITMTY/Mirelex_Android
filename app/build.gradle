@@ -75,4 +75,5 @@ dependencies {
     implementation 'io.conekta:conektasdk:2.0' // Conekta
     implementation 'com.thomashaertel:multispinner:0.1.1@aar' // Multiselect
     implementation 'com.facebook.android:facebook-login:5.0.3' // Facebook
+    implementation 'me.relex:circleindicator:1.2.2' // Slider dots
 }
