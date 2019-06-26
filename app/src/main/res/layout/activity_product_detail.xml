@@ -10,22 +10,34 @@
     <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
-        <ImageView
-                android:layout_width="0dp"
-                android:layout_height="130dp" app:srcCompat="@drawable/mirelex_logo_cian"
-                android:id="@+id/detailProductFeaturedImage"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" android:scaleType="centerCrop"
-        />
+        <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                        android:orientation="vertical" app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:id="@+id/detailProductFeaturedSlider">
+            <android.support.v4.view.ViewPager
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp" android:id="@+id/detailProductImageSlider"/>
+            <me.relex.circleindicator.CircleIndicator
+                    android:id="@+id/indicator"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp" android:layout_alignBottom="@id/detailProductImageSlider"/>
+        </RelativeLayout>
+        <!--<ImageView-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="130dp" app:srcCompat="@drawable/mirelex_logo_cian"-->
+                <!--android:id="@+id/detailProductFeaturedImage"-->
+                <!--app:layout_constraintStart_toStartOf="parent"-->
+                <!--app:layout_constraintTop_toTopOf="parent"-->
+                <!--app:layout_constraintEnd_toEndOf="parent" android:scaleType="centerCrop"-->
+        <!--/>-->
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
                 android:id="@+id/detailProductGoToStoreProfile"
-                android:layout_marginTop="16dp" app:layout_constraintTop_toBottomOf="@+id/detailProductFeaturedImage">
+                android:layout_marginTop="16dp" app:layout_constraintTop_toBottomOf="@+id/detailProductFeaturedSlider">
             <com.mikhaellopez.circularimageview.CircularImageView
                     android:layout_width="60dp"
                     android:layout_height="60dp"

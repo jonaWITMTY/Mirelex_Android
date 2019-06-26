@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.view.View
 import android.view.ViewGroup
+import com.example.jonathangalvan.mirelex.Adapters.SliderPagerAdapter
 import com.example.jonathangalvan.mirelex.Interfaces.ProductInfoInterface
 import com.example.jonathangalvan.mirelex.Enums.ProductType
 import com.example.jonathangalvan.mirelex.Fragments.Utils.ImagePreview
@@ -70,11 +71,15 @@ class ProductDetailActivity : AppCompatActivity() {
                             })
 
                             if(productObj.productInformation.productFeaturedImage != null){
-                                Picasso.with(this@ProductDetailActivity).load(productObj.productInformation.productFeaturedImage).into(detailProductFeaturedImage)
-                                /*Image preview*/
-                                detailProductFeaturedImage.setOnClickListener( View.OnClickListener {
-                                    ImagePreview().newInstance(productObj.productInformation.productFeaturedImage).show(supportFragmentManager,"alertDialog")
-                                })
+                                /*Slider Gallery*/
+                                var images: ArrayList<String> = ArrayList()
+                                images.add(productObj.productInformation.productFeaturedImage.toString())
+                                for(productImage in productObj!!.productImages){
+                                    images.add(productImage.imageUrl.toString())
+                                }
+                                val sliderAdapter = SliderPagerAdapter(images, supportFragmentManager)
+                                detailProductImageSlider.adapter = sliderAdapter
+                                indicator.setViewPager(detailProductImageSlider)
                             }
 
                             if(productObj.productOwner.person?.profilePictureUrl != null){
