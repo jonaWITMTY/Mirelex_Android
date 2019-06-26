@@ -16,11 +16,16 @@ class SliderPagerAdapter(var images: ArrayList<String>, var fm: FragmentManager?
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         val imageLayout = LayoutInflater.from(container.context).inflate(R.layout.view_image_slider, container, false)
         val img = imageLayout.findViewById<ImageView>(R.id.imageSliderImg)
-        Picasso.with(container.context).load(images[position]).into(img)
 
-        img.setOnClickListener( View.OnClickListener {
-            ImagePreview().newInstance(images[position]).show(fm,"alertDialog")
-        })
+        if(images.isNotEmpty()){
+            Picasso.with(container.context).load(images[position]).into(img)
+            img.setOnClickListener( View.OnClickListener {
+                ImagePreview().newInstance(images[position]).show(fm,"alertDialog")
+            })
+        }else{
+            Picasso.with(container.context).load(R.drawable.mirelex_logo_cian).into(img)
+        }
+
 
         container.addView(imageLayout)
         return imageLayout
@@ -35,7 +40,11 @@ class SliderPagerAdapter(var images: ArrayList<String>, var fm: FragmentManager?
     }
 
     override fun getCount(): Int {
-        return images.size
+        return if(images.size != 0) {
+            return images.size
+        }else {
+            return 1
+        }
     }
 
 }

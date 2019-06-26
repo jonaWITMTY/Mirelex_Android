@@ -273,7 +273,7 @@ class ProductUpdate : Fragment()  {
 
         /*Slider Gallery*/
         var images: ArrayList<String> = ArrayList()
-        if(imgPreview != null){
+        if(productObj?.productInformation?.productFeaturedImage != null){
             images.add(productObj?.productInformation?.productFeaturedImage.toString())
         }
         for(productImage in productObj!!.productImages){
