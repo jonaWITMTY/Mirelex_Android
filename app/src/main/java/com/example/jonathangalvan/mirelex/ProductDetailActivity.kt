@@ -70,17 +70,17 @@ class ProductDetailActivity : AppCompatActivity() {
                                 startActivity(goToStoreDetail)
                             })
 
+                            /*Slider Gallery*/
+                            var images: ArrayList<String> = ArrayList()
                             if(productObj.productInformation.productFeaturedImage != null){
-                                /*Slider Gallery*/
-                                var images: ArrayList<String> = ArrayList()
                                 images.add(productObj.productInformation.productFeaturedImage.toString())
                                 for(productImage in productObj!!.productImages){
                                     images.add(productImage.imageUrl.toString())
                                 }
-                                val sliderAdapter = SliderPagerAdapter(images, supportFragmentManager)
-                                detailProductImageSlider.adapter = sliderAdapter
-                                indicator.setViewPager(detailProductImageSlider)
                             }
+                            val sliderAdapter = SliderPagerAdapter(images, supportFragmentManager)
+                            detailProductImageSlider.adapter = sliderAdapter
+                            indicator.setViewPager(detailProductImageSlider)
 
                             if(productObj.productOwner.person?.profilePictureUrl != null){
                                 Picasso.with(this@ProductDetailActivity).load(productObj.productOwner.person?.profilePictureUrl).into(detailProductOwnerProfileImage)
