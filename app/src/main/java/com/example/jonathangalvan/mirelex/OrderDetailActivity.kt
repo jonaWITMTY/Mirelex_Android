@@ -9,6 +9,7 @@ import android.util.TypedValue
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
+import com.example.jonathangalvan.mirelex.Adapters.SliderPagerAdapter
 import com.example.jonathangalvan.mirelex.Enums.OrderStatus
 import com.example.jonathangalvan.mirelex.Enums.OrderType
 import com.example.jonathangalvan.mirelex.Enums.UserType
@@ -30,6 +31,7 @@ import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.Response
 import java.io.IOException
+import java.util.ArrayList
 
 class OrderDetailActivity : AppCompatActivity() {
     var orderInfoForBundle: OrderProductInfo? = null
@@ -134,12 +136,18 @@ class OrderDetailActivity : AppCompatActivity() {
                             }
 
                             /*Fill order and product info*/
+
+                            /*Slider Gallery*/
+                            var images: ArrayList<String> = ArrayList()
                             if(orderInfo.orderProducts!![0].productFeaturedImage != null){
-                                Picasso.with(this@OrderDetailActivity).load(orderInfo.orderProducts!![0].productFeaturedImage).into(detailOrderFeaturedImage)
-                                detailOrderFeaturedImage.setOnClickListener( View.OnClickListener {
-                                    ImagePreview().newInstance(orderInfo.orderProducts!![0].productFeaturedImage).show(supportFragmentManager,"alertDialog")
-                                })
+                                images.add(orderInfo.orderProducts!![0].productFeaturedImage.toString())
+                                for(productImage in orderInfo.orderProducts!![0].images!!){
+                                    images.add(productImage.imageUrl.toString())
+                                }
                             }
+                            val sliderAdapter = SliderPagerAdapter(images, supportFragmentManager)
+                            detailOrderImageSlider.adapter = sliderAdapter
+                            indicator.setViewPager(detailOrderImageSlider)
 
                             if(orderInfo.orderProducts!![0].productFeaturedImage != null){
                                 Picasso.with(this@OrderDetailActivity).load(orderInfo.orderProducts!![0].productFeaturedImage).into(detailOrderProductImage)
