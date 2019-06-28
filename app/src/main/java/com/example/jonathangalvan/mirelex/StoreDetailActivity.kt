@@ -25,14 +25,19 @@ class StoreDetailActivity : AppCompatActivity() {
                 ImagePreview().newInstance(productInfo.productOwner.person?.profilePictureUrl).show(supportFragmentManager,"alertDialog")
             })
         }
+
+        var name: String? = ""
         when(productInfo.productOwner.person?.userTypeId){
             "4" -> {
-                storeDetailName.text = "${productInfo.productOwner.person?.companyName}"
+                name = "${productInfo.productOwner.person?.companyName}"
             }
             else -> {
-                storeDetailName.text = "${productInfo.productOwner.person?.firstName} ${productInfo.productOwner.person?.paternalLastName}"
+                name = "${productInfo.productOwner.person?.firstName} ${productInfo.productOwner.person?.paternalLastName}"
             }
         }
+        storeDetailName.text = name
+        supportActionBar?.title = name
+
         storeDetailEmail.text = productInfo.productOwner.person?.email
         storeDetailPersonalPhone.text = productInfo.productOwner.person?.personalPhone
         storeDetailAddress1.text = "${productInfo.productOwner.address!![0].street}, ${productInfo.productOwner.address!![0].numExt}"
