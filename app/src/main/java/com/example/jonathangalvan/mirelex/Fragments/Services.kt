@@ -118,6 +118,7 @@ class Services : Fragment() {
 
     override fun onResume() {
         super.onResume()
+        filterServicesSpinner.setSelection(0)
         loadServiceOrders()
     }
 
