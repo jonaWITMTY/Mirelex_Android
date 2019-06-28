@@ -41,4 +41,12 @@ class PaymentCardsAdapter(private var context: Context, private var paymentCards
         p0.paymentCardAdapterDefault.text =
             if (paymentCards[p1].default == "1") context.resources.getString(R.string.principal) else ""
     }
+
+    override fun getItemViewType(position: Int): Int {
+        return position
+    }
+
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
+    }
 }

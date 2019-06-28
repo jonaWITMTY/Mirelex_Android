@@ -85,4 +85,12 @@ class ServicesAdapter( private var services: ArrayList<ServiceInterface>): Recyc
         val view = LayoutInflater.from(p0.context).inflate(R.layout.adapter_service_list_row, p0, false)
         return ServiceViewHolder(view)
     }
+
+    override fun getItemViewType(position: Int): Int {
+        return position
+    }
+
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
+    }
 }

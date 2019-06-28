@@ -77,4 +77,12 @@ class OrdersAdapter(private var orders: ArrayList<OrderInterface>): RecyclerView
         val view = LayoutInflater.from(p0.context).inflate(R.layout.adapter_order_list_row, p0,false)
         return OrderViewHolder(view)
     }
+
+    override fun getItemViewType(position: Int): Int {
+        return position
+    }
+
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
+    }
 }

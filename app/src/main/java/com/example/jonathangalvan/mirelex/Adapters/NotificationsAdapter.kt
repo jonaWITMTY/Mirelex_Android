@@ -43,4 +43,12 @@ class NotificationsAdapter(private var notifications: ArrayList<NotificationInte
         p0.notificationDate.text = notifications[p1].created.toString()
 
     }
+
+    override fun getItemViewType(position: Int): Int {
+        return position
+    }
+
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
+    }
 }

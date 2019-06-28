@@ -39,4 +39,12 @@ class ConversationsAdapter(var context: Context, private var conversations: Arra
         p0.conversationViewSendTo.text = if(SessionModel(context).getUser().person?.userId == conversations[p1].userIdTo) conversations[p1].userFrom else conversations[p1].userTo
         p0.conversationViewLastMessage.text = conversations[p1].message.toString()
     }
+
+    override fun getItemViewType(position: Int): Int {
+        return position
+    }
+
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
+    }
 }
