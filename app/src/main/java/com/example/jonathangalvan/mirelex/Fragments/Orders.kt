@@ -105,6 +105,7 @@ class Orders : Fragment() {
 
     override fun onResume() {
         super.onResume()
+        filterOrdersSpinner.setSelection(0)
         getOrders()
     }
 
