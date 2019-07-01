@@ -36,7 +36,7 @@ class ContactActivity : AppCompatActivity() {
         /*Whatsapp event*/
         contactWhatsapp.setOnClickListener(View.OnClickListener {
             try {
-                val smsNumber = "5218115315833"
+                val smsNumber = resources.getString(R.string.whatsapp)
                 val sendIntent = Intent("android.intent.action.MAIN")
                 sendIntent.component = ComponentName("com.whatsapp", "com.whatsapp.Conversation")
                 sendIntent.putExtra(
