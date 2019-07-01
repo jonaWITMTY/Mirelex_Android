@@ -58,8 +58,8 @@ class RegisterActivity : AppCompatActivity(), RegisterCustomerTab.OnFragmentInte
                 viewPagerRegisterTabs.registerNameField?.text.toString(),
                 viewPagerRegisterTabs.registerPaternalLastNameField?.text.toString(),
                 viewPagerRegisterTabs.registerCompanyNameField?.text.toString(),
-                viewModel.genderCall.value!![viewPagerRegisterTabs.genderField.selectedItemPosition].genderId,
                 viewPagerRegisterTabs.currentItem
+//                viewModel.genderCall.value!![viewPagerRegisterTabs.genderField.selectedItemPosition].genderId
             )
 
             if(termsCheckbox.isChecked){

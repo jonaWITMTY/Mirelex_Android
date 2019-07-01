@@ -6,8 +6,8 @@ class RegisterRequest(
     var firstName: String?,
     var paternalLastName: String?,
     var companyName: String?,
-    var genderId: String?,
-    var isStore: Int
+    var isStore: Int,
+    var genderId: String? = null
 ): GlobalRequest() {
 
 }
