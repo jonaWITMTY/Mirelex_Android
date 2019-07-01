@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import com.example.jonathangalvan.mirelex.Enums.ProductType
 import com.example.jonathangalvan.mirelex.Interfaces.GenderInterface
 import com.example.jonathangalvan.mirelex.R
 import com.example.jonathangalvan.mirelex.RegisterExtraFieldsActivity
@@ -64,8 +65,15 @@ class RegisterExtraFieldsInfo : Fragment() {
                     completeUser?.paternalLastName = registerExtraPaternalLastNameField.editText?.text.toString()
                     completeUser?.maternalLastName = registerExtraMaternalLastNameField.editText?.text.toString()
 
-                    /*Gender depending on facebook login*/
-                    completeUser?.genderId = viewModel.genderCall.value!![registerExtraGenderSpinner.selectedItemPosition].genderId
+                    /*Gender*/
+                    when(viewModel.productTypes[registerExtraGenderSpinner.selectedItemPosition].productTypeId){
+                        ProductType.Suit.productTypeId -> {
+                            completeUser?.genderId = "1"
+                        }
+                        ProductType.Dress.productTypeId -> {
+                            completeUser?.genderId = "2"
+                        }
+                    }
                 }
                 completeUser?.userTypeId = viewModel.userCall.value?.person?.userTypeId
                 completeUser?.email = viewModel.userCall.value?.person?.email!!
