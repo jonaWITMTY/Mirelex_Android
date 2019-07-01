@@ -9,9 +9,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Spinner
 import android.widget.Toast
 import com.example.jonathangalvan.mirelex.Enums.ProductType
 import com.example.jonathangalvan.mirelex.Interfaces.GenderInterface
+import com.example.jonathangalvan.mirelex.Interfaces.ProductTypeInterface
 import com.example.jonathangalvan.mirelex.R
 import com.example.jonathangalvan.mirelex.RegisterExtraFieldsActivity
 import com.example.jonathangalvan.mirelex.ViewModels.RegisterViewModel
@@ -52,6 +54,13 @@ class RegisterExtraFieldsInfo : Fragment() {
 
         registerExtraEmailField.editText?.setText(viewModel.userCall.value?.person?.email)
         registerExtraPersonalPhoneField.editText?.setText(viewModel.userCall.value?.person?.personalPhone)
+
+        /*If producttypes exists in viewmodel, set gender*/
+        if(viewModel.productTypes.isNotEmpty()){
+            val adapter = ArrayAdapter<ProductTypeInterface>(activity, R.layout.view_spinner_item, R.id.spinnerItemWhiteSelect, viewModel.productTypes)
+            adapter.setDropDownViewResource(R.layout.view_spinner_item_select)
+            activity?.findViewById<Spinner>(R.id.registerExtraGenderSpinner)?.adapter = adapter
+        }
 
         /*Continue btn event*/
         continueBtn.setOnClickListener(View.OnClickListener {
