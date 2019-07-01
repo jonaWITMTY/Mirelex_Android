@@ -98,7 +98,7 @@ class RegisterExtraFieldsMeasure : Fragment() {
         registerExtraFinalMeasureBtn.setOnClickListener(View.OnClickListener {
             if(inputValidations(user?.genderId)){
                 user?.height = registerExtraHeightField.editText?.text.toString()
-                when(registeredUserInfo?.person?.userGenderId){
+                when(user?.genderId){
                     "1" -> {
                         user?.sizeId = viewModel.sizes.value?.get(registerExtraSizesField.selectedItemPosition)?.productCatalogId?.toString()
                     }
