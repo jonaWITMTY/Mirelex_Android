@@ -7,15 +7,21 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import com.example.jonathangalvan.mirelex.Fragments.RegisterExtraFields.RegisterExtraFieldsAddress
 import com.example.jonathangalvan.mirelex.Fragments.RegisterExtraFields.RegisterExtraFieldsInfo
 import com.example.jonathangalvan.mirelex.Fragments.RegisterExtraFields.RegisterExtraFieldsMeasure
 import com.example.jonathangalvan.mirelex.Interfaces.CatalogArrayInterface
+import com.example.jonathangalvan.mirelex.Interfaces.ProductTypeInterface
+import com.example.jonathangalvan.mirelex.Interfaces.ProductTypes
 import com.example.jonathangalvan.mirelex.Interfaces.WomenCatalogsInterface
 import com.example.jonathangalvan.mirelex.Models.SessionModel
 import com.example.jonathangalvan.mirelex.Models.UtilsModel
 import com.example.jonathangalvan.mirelex.Requests.SizesRequest
 import com.example.jonathangalvan.mirelex.ViewModels.RegisterViewModel
+import kotlinx.android.synthetic.main.fragment_register_extra_fields_info.*
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.Response
@@ -45,11 +51,36 @@ class RegisterExtraFieldsActivity : AppCompatActivity(),
                 }
             }
         }
+
+        /*Get and set product types*/
         val loader = layoutInflater.inflate(R.layout.view_progressbar, findViewById(android.R.id.content), true)
+        UtilsModel.getOkClient().newCall(UtilsModel.postRequest(this, resources.getString(R.string.getProductTypes))).enqueue(object: Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                runOnUiThread {run{findViewById<ViewGroup>(android.R.id.content).removeView(findViewById(R.id.view_progressbar))}}
+                UtilsModel.getAlertView().newInstance(UtilsModel.getErrorRequestCall(), 1, 0).show(supportFragmentManager,"alertDialog")
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                runOnUiThread {run{findViewById<ViewGroup>(android.R.id.content).removeView(findViewById(R.id.view_progressbar))}}
+                val responseStr = response.body()?.string()
+                val responseObj = UtilsModel.getPostResponse(this@RegisterExtraFieldsActivity, responseStr)
+                if(responseObj.status == "success"){
+                    val productTypeObj = UtilsModel.getGson().fromJson(UtilsModel.getGson().toJson(responseObj), ProductTypes::class.java)
+                    viewModel?.productTypes = productTypeObj.data
+                    val adapter = ArrayAdapter<ProductTypeInterface>(this@RegisterExtraFieldsActivity, R.layout.view_spinner_item, R.id.spinnerItemWhiteSelect, productTypeObj.data)
+                    adapter.setDropDownViewResource(R.layout.view_spinner_item_select)
+                    runOnUiThread {
+                        run{
+                            findViewById<Spinner>(R.id.registerExtraGenderSpinner).adapter = adapter
+                        }
+                    }
+                }
+            }
+        })
+
         val sizesObj = SizesRequest(productTypeId)
         UtilsModel.getOkClient().newCall(UtilsModel.postRequest( this, resources.getString(R.string.userSizes), UtilsModel.getGson().toJson(sizesObj))).enqueue(object: Callback {
             override fun onFailure(call: Call, e: IOException) {
-                runOnUiThread {run{findViewById<ViewGroup>(android.R.id.content).removeView(findViewById(R.id.view_progressbar))}}
                 UtilsModel.getAlertView().newInstance(UtilsModel.getErrorRequestCall(), 1, 0).show(supportFragmentManager,"alertDialog")
             }
 
@@ -59,7 +90,6 @@ class RegisterExtraFieldsActivity : AppCompatActivity(),
                 if(responseObj.status == "success"){
                     val sizesObj = UtilsModel.getGson().fromJson(responseStr, CatalogArrayInterface::class.java)
                     viewModel?.sizes?.postValue(sizesObj.data)
-                    runOnUiThread {run{findViewById<ViewGroup>(android.R.id.content).removeView(findViewById(R.id.view_progressbar))}}
                 }
             }
         })

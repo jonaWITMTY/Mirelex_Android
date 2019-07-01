@@ -3,10 +3,7 @@ package com.example.jonathangalvan.mirelex.ViewModels
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
-import com.example.jonathangalvan.mirelex.Interfaces.CatalogInterface
-import com.example.jonathangalvan.mirelex.Interfaces.GenderInterface
-import com.example.jonathangalvan.mirelex.Interfaces.UserInterface
-import com.example.jonathangalvan.mirelex.Interfaces.WomenCatalogsInterface
+import com.example.jonathangalvan.mirelex.Interfaces.*
 import com.example.jonathangalvan.mirelex.Requests.UpdateUserRequest
 
 class RegisterViewModel: ViewModel() {
@@ -23,6 +20,8 @@ class RegisterViewModel: ViewModel() {
     var sizes = MutableLiveData<ArrayList<CatalogInterface>>()
 
     var womenCatalogs = MutableLiveData<WomenCatalogsInterface>()
+
+    var productTypes = ArrayList<ProductTypeInterface>()
 
     init {
         setGenders()

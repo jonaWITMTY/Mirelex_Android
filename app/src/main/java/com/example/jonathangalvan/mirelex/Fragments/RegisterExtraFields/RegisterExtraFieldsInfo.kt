@@ -35,29 +35,18 @@ class RegisterExtraFieldsInfo : Fragment() {
         super.onActivityCreated(savedInstanceState)
         val viewModel = ViewModelProviders.of(activity!!).get(RegisterViewModel::class.java)
 
-        /*Gender depending on facebook login*/
-        if(viewModel.userCall.value?.person?.userFacebookId != null){
-            val adapter = ArrayAdapter<GenderInterface>(activity, R.layout.view_spinner_item, R.id.spinnerItemWhiteSelect, viewModel.genderCall.value!!)
-            adapter.setDropDownViewResource(R.layout.view_spinner_item_select)
-            registerExtraGenderSpinner.adapter = adapter
-            registerExtraGenderField.visibility = View.GONE
-        }else{
-            (registerExtraGenderSpinner.parent as ViewGroup).visibility = View.GONE
-        }
-
         /*Hide and fill fields depending on usertype*/
         if(viewModel.userCall.value?.person?.userTypeId == "4"){
             registerExtraNameField.visibility = View.GONE
             registerExtraPaternalLastNameField.visibility = View.GONE
             registerExtraMaternalLastNameField.visibility = View.GONE
-            registerExtraGenderField.visibility = View.GONE
+            (registerExtraGenderSpinner.parent as ViewGroup).visibility = View.GONE
             registerExtraCompanyNameField.editText?.setText(viewModel.userCall.value?.person?.companyName)
         }else{
             registerExtraCompanyNameField.visibility = View.GONE
             registerExtraNameField.editText?.setText(viewModel.userCall.value?.person?.firstName)
             registerExtraPaternalLastNameField.editText?.setText(viewModel.userCall.value?.person?.paternalLastName)
             registerExtraMaternalLastNameField.editText?.setText(viewModel.userCall.value?.person?.maternalLastName)
-            registerExtraGenderField.editText?.setText(viewModel.userCall.value?.person?.userGender)
         }
 
         registerExtraEmailField.editText?.setText(viewModel.userCall.value?.person?.email)
@@ -76,11 +65,7 @@ class RegisterExtraFieldsInfo : Fragment() {
                     completeUser?.maternalLastName = registerExtraMaternalLastNameField.editText?.text.toString()
 
                     /*Gender depending on facebook login*/
-                    if(viewModel.userCall.value?.person?.userFacebookId != null){
-                        completeUser?.genderId = viewModel.genderCall.value!![registerExtraGenderSpinner.selectedItemPosition].genderId
-                    }else{
-                        completeUser?.genderId = viewModel.userCall.value?.person?.userGenderId
-                    }
+                    completeUser?.genderId = viewModel.genderCall.value!![registerExtraGenderSpinner.selectedItemPosition].genderId
                 }
                 completeUser?.userTypeId = viewModel.userCall.value?.person?.userTypeId
                 completeUser?.email = viewModel.userCall.value?.person?.email!!

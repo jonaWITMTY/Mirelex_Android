@@ -138,4 +138,5 @@
     <string name="termsAlertDescription">Por favor acepta nuestros términos y condiciones</string>
     <string name="accessDenied">Acceso denegado</string>
     <string name="accessDeniedDescription">El tipo de usuario no es váido</string>
+    <string name="whatAreYouInterestedOf">¿Qué te interesa?</string>
 </resources>
