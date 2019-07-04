@@ -1,6 +1,8 @@
 package com.example.jonathangalvan.mirelex
 
 import android.content.Intent
+import android.content.pm.ActivityInfo
+import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.example.jonathangalvan.mirelex.Interfaces.ResponseInterface
@@ -17,6 +19,11 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
         supportActionBar?.hide()
+
+        /*App orientation*/
+        if (Build.VERSION.SDK_INT != Build.VERSION_CODES.O) {
+            requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+        }
     }
 
     override fun onResume() {
