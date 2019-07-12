@@ -70,7 +70,7 @@ class CustomerTabsActivity : AppCompatActivity(),
         try {
             val pInfo = packageManager.getPackageInfo(packageName, 0)
             val version = pInfo.versionName
-            UtilsModel.getOkClient().newCall(UtilsModel.postRequest(this, "android-update.php")).enqueue(object:
+            UtilsModel.getOkClient().newCall(UtilsModel.postRequest(this, "android-update")).enqueue(object:
                 Callback {
                 override fun onFailure(call: Call, e: IOException) {}
 
