@@ -111,7 +111,7 @@ class UtilsModel {
 
         fun getPostResponse(context: Context?, response: String?): ResponseInterface{
             var responseObj = ResponseInterface(status = "systemError", title = "", desc = "", data = ArrayList())
-            if(response!!.isNotEmpty()){
+            if(response != null && response != ""){
                 responseObj = getGson().fromJson(response, ResponseInterface::class.java)
                 if(responseObj.status == "sessionFailed"){
                     if (context != null) {
