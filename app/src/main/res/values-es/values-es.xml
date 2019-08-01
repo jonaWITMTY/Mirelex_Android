@@ -44,7 +44,7 @@
     <string name="hairColor">Color cabello</string>
     <string name="neighborhood">Colonia</string>
     <string name="category">Categoría</string>
-    <string name="style">Estilo</string>
+    <string name="style">¿Qué outfit necesitas?</string>
     <string name="material">Material</string>
     <string name="decoration">Decoración</string>
     <string name="length">Largo</string>
@@ -89,7 +89,7 @@
     <string name="condition">Condición</string>
     <string name="colors">Colores</string>
     <string name="dressSilhouette">Silueta de vestido</string>
-    <string name="ocation">Ocación</string>
+    <string name="ocation">Protocolo</string>
     <string name="description">Descripción</string>
     <string name="type_to_search">Buscar</string>
     <string name="sellPrice">Precio de venta</string>
