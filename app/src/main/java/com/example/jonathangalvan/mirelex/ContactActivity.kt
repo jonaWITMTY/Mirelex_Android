@@ -1,5 +1,6 @@
 package com.example.jonathangalvan.mirelex
 
+import android.Manifest
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -9,6 +10,8 @@ import android.widget.Toast
 import android.content.pm.PackageManager
 import android.telephony.PhoneNumberUtils
 import android.content.ComponentName
+import android.net.Uri
+import android.support.v4.app.ActivityCompat
 import android.view.ViewGroup
 import com.example.jonathangalvan.mirelex.Interfaces.ResponseInterface
 import com.example.jonathangalvan.mirelex.Models.SessionModel
@@ -18,6 +21,9 @@ import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.Response
 import java.io.IOException
+import android.support.v4.content.PermissionChecker.checkCallingOrSelfPermission
+
+
 
 class ContactActivity : AppCompatActivity() {
 
@@ -47,6 +53,20 @@ class ContactActivity : AppCompatActivity() {
             } catch (e: PackageManager.NameNotFoundException) {
                 Toast.makeText(this, "WhatsApp not Installed", Toast.LENGTH_SHORT)
                     .show()
+            }
+        })
+
+        /*Phonecall number*/
+        contactCallus.setOnClickListener(View.OnClickListener {
+            val requiredPermission = "android.permission.CALL_PHONE"
+            val checkVal = checkCallingOrSelfPermission(requiredPermission)
+            if(checkVal==PackageManager.PERMISSION_GRANTED){
+                val callIntent = Intent(Intent.ACTION_CALL)
+                callIntent.data = Uri.parse("tel:${resources.getString(R.string.phoneCall)}")
+                startActivity(callIntent)
+            }else{
+                val permissions = arrayOf<String>(Manifest.permission.CALL_PHONE)
+                ActivityCompat.requestPermissions(this, permissions, 1)
             }
         })
 

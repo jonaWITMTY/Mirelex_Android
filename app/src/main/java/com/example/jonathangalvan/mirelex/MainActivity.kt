@@ -29,7 +29,7 @@ import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 
 private val REQUEST_CODE_ASK_PERMISSIONS = 1
-private val REQUIRED_SDK_PERMISSIONS = arrayOf<String>(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
+private val REQUIRED_SDK_PERMISSIONS = arrayOf<String>(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA, Manifest.permission.CALL_PHONE)
 
 class MainActivity : AppCompatActivity() {
     val callbackManager = CallbackManager.Factory.create()

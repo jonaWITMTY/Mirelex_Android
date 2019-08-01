@@ -139,4 +139,5 @@
     <string name="accessDenied">Acceso denegado</string>
     <string name="accessDeniedDescription">El tipo de usuario no es váido</string>
     <string name="whatAreYouInterestedOf">¿Qué te interesa?</string>
+    <string name="callus">Llámanos</string>
 </resources>
