@@ -16,8 +16,10 @@ import android.widget.Toast
 import com.androidbuts.multispinnerfilter.KeyPairBoolData
 import com.androidbuts.multispinnerfilter.MultiSpinnerSearch
 import com.example.jonathangalvan.mirelex.Enums.ProductType
+import com.example.jonathangalvan.mirelex.Enums.UserType
 import com.example.jonathangalvan.mirelex.Fragments.Utils.ImagePreview
 import com.example.jonathangalvan.mirelex.Interfaces.*
+import com.example.jonathangalvan.mirelex.Models.SessionModel
 import com.example.jonathangalvan.mirelex.Models.UtilsModel
 import com.example.jonathangalvan.mirelex.ProductActivity
 import com.example.jonathangalvan.mirelex.R
@@ -137,7 +139,14 @@ class ProductCreate : Fragment() {
             override fun afterTextChanged(s: Editable?) {}
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                getProductPrices()
+                val user = SessionModel(activity!!).getUser()
+                when(user.person?.userTypeId){
+                    UserType.Customer.userTypeId -> {
+                        getProductPrices()
+                        createProductLeaseablePrice.editText?.isFocusable = false
+                        createProductSellablePrice.editText?.isFocusable = false
+                    }
+                }
             }
         })
 
