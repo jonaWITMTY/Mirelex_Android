@@ -90,7 +90,7 @@
                     <android.support.design.widget.TextInputEditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                    />
+                            android:inputType="numberDecimal"/>
                 </android.support.design.widget.TextInputLayout>
             </LinearLayout>
             <LinearLayout
@@ -116,7 +116,7 @@
                     <android.support.design.widget.TextInputEditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                    />
+                            android:inputType="numberDecimal"/>
                 </android.support.design.widget.TextInputLayout>
             </LinearLayout>
             <CheckBox
@@ -143,6 +143,22 @@
             <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="match_parent"
+                    android:layout_height="match_parent" android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp" android:layout_marginBottom="16dp" android:id="@+id/createProductSizesLayout">
+                <TextView
+                        android:text="@string/size"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:id="@+id/textView28"
+                        android:textColor="@color/black"/>
+                <Spinner
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:id="@+id/createProductSizes"
+                        style="@style/Base.Widget.AppCompat.Spinner.Underlined" android:backgroundTint="@color/black"
+                        android:spinnerMode="dialog"/>
+            </LinearLayout>
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp" android:layout_marginRight="16dp"
                     android:layout_marginLeft="16dp">
@@ -162,7 +178,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp" android:layout_marginRight="16dp"
-                    android:layout_marginLeft="16dp">
+                    android:layout_marginLeft="16dp" android:id="@+id/createProductDecorationLayout">
                 <TextView
                         android:text="@string/decoration"
                         android:layout_width="match_parent"
@@ -179,7 +195,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp" android:layout_marginRight="16dp"
-                    android:layout_marginLeft="16dp">
+                    android:layout_marginLeft="16dp" android:id="@+id/createProductLengthLayout">
                 <TextView
                         android:text="@string/length"
                         android:layout_width="match_parent"
@@ -231,7 +247,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp" android:layout_marginRight="16dp"
-                    android:layout_marginLeft="16dp">
+                    android:layout_marginLeft="16dp" android:id="@+id/createProductSiloueteLayout">
                 <TextView
                         android:text="@string/dressSilhouette"
                         android:layout_width="match_parent"

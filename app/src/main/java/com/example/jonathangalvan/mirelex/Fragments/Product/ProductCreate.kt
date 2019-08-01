@@ -3,6 +3,7 @@ package com.example.jonathangalvan.mirelex.Fragments.Product
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.net.Uri
+import android.opengl.Visibility
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.text.Editable
@@ -125,8 +126,32 @@ class ProductCreate : Fragment() {
                 getProductCatalogs(productTypes!![position].productTypeId.toString())
                 when(productTypes!![position].productTypeId.toString()){
                     ProductType.Dress.productTypeId -> {
+                        /*Hide*/
+                        createProductSizesLayout.visibility = View.GONE
+
+                        /*Show*/
+                        createProductBustLayout.visibility = View.VISIBLE
+                        createProductWaistLayout.visibility = View.VISIBLE
+                        createProductHipLayout.visibility = View.VISIBLE
+                        createProductHeightLayout.visibility = View.VISIBLE
+                        createProductDecorationLayout.visibility = View.VISIBLE
+                        createProductLengthLayout.visibility = View.VISIBLE
+                        createProductSiloueteLayout.visibility = View.VISIBLE
+
                     }
                     else -> {
+                        /*Hide*/
+                        createProductBustLayout.visibility = View.GONE
+                        createProductWaistLayout.visibility = View.GONE
+                        createProductHipLayout.visibility = View.GONE
+                        createProductHeightLayout.visibility = View.GONE
+                        createProductDecorationLayout.visibility = View.GONE
+                        createProductLengthLayout.visibility = View.GONE
+                        createProductSiloueteLayout.visibility = View.GONE
+
+                        /*Show*/
+                        createProductSizesLayout.visibility = View.VISIBLE
+
                     }
                 }
             }
@@ -201,7 +226,7 @@ class ProductCreate : Fragment() {
                         viewModel.productObjRequest.height = createProductHeight.editText?.text.toString()
                     }
                     else -> {
-
+                        viewModel.productObjRequest.sizeId = catalogs!!.sizes[createProductSizes.selectedItemPosition].productCatalogId
                     }
                 }
 
@@ -237,7 +262,6 @@ class ProductCreate : Fragment() {
                     }
                 }
                 else -> {
-
                 }
             }
         }
@@ -332,6 +356,7 @@ class ProductCreate : Fragment() {
         createProductLeasable.isChecked = true
         createProductSellable.isChecked = true
         createProductIsStretch.isChecked = true
+        fillSpinner(catalogs?.sizes, activity!!.findViewById(R.id.createProductSizes))
         fillSpinner(catalogs?.conditions, activity!!.findViewById(R.id.createProductCondition))
         fillSpinner(catalogs?.styles, activity!!.findViewById(R.id.createProductStyle))
         fillSpinner(catalogs?.decorations, activity!!.findViewById(R.id.createProductDecoration))
