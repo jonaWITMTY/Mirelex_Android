@@ -140,4 +140,6 @@
     <string name="accessDeniedDescription">El tipo de usuario no es váido</string>
     <string name="whatAreYouInterestedOf">¿Qué te interesa?</string>
     <string name="callus">Llámanos</string>
+    <string name="facebook">Facebook</string>
+    <string name="instagram">Instagram</string>
 </resources>

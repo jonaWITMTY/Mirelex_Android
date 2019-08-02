@@ -1,6 +1,7 @@
 package com.example.jonathangalvan.mirelex
 
 import android.Manifest
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -35,9 +36,19 @@ class StoreDetailActivity : AppCompatActivity() {
         when(productInfo.productOwner.person?.userTypeId){
             "4" -> {
                 name = "${productInfo.productOwner.person?.companyName}"
+                /*Set social click events*/
+                storeDetailFacebook.setOnClickListener(View.OnClickListener {
+                    newFacebookIntent(this.packageManager, productInfo.productOwner.person?.facebookUrl!!)
+                })
+
+                storeDetailInstagram.setOnClickListener(View.OnClickListener {
+                    newInstagramIntent(productInfo.productOwner.person?.instagramUrl!!)
+                })
             }
             else -> {
                 name = "${productInfo.productOwner.person?.firstName} ${productInfo.productOwner.person?.paternalLastName}"
+                storeDetailFacebook.visibility = View.GONE
+                storeDetailInstagram.visibility = View.GONE
             }
         }
         storeDetailName.text = name
@@ -75,5 +86,34 @@ class StoreDetailActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         finish()
         return true
+    }
+
+    fun newFacebookIntent(pm: PackageManager, url: String) {
+        var uri = Uri.parse(url)
+        try {
+            val applicationInfo = pm.getApplicationInfo("com.facebook.katana", 0)
+            if (applicationInfo.enabled) {
+                // http://stackoverflow.com/a/24547437/1048340
+                uri = Uri.parse("fb://facewebmodal/f?href=$url")
+            }
+        } catch (ignored: PackageManager.NameNotFoundException) {
+        }
+        startActivity(Intent(Intent.ACTION_VIEW, uri))
+    }
+
+    fun newInstagramIntent(url: String?){
+        val uri = Uri.parse(url)
+        val likeIng = Intent(Intent.ACTION_VIEW, uri)
+        likeIng.setPackage("com.instagram.android")
+        try {
+            startActivity(likeIng)
+        } catch (e: ActivityNotFoundException) {
+            startActivity(
+                Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse(url)
+                )
+            )
+        }
     }
 }
