@@ -170,7 +170,7 @@ class ProductUpdate : Fragment()  {
                         viewModel.productObjRequest.height = updateProductHeight.editText?.text.toString()
                     }
                     else -> {
-
+                        viewModel.productObjRequest.sizeId = catalogs!!.sizes[updateProductSize.selectedItemPosition].productCatalogId
                     }
                 }
 
