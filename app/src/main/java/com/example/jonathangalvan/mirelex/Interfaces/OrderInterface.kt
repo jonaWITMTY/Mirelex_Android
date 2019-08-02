@@ -86,6 +86,8 @@ class OrderPersonInformation(
     var companyName: String?,
     var isMirelexStore: String?,
     var profilePictureUrl: String?,
+    var facebookUrl: String?,
+    var instagramUrl: String?,
     var address: Address
 ){}
 

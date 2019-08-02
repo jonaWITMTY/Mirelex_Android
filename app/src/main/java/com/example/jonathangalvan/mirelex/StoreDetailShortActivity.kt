@@ -15,6 +15,12 @@ import com.example.jonathangalvan.mirelex.Models.SessionModel
 import com.example.jonathangalvan.mirelex.Models.UtilsModel
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_store_detail_short.*
+import android.content.pm.ApplicationInfo
+import android.content.ActivityNotFoundException
+
+
+
+
 
 class StoreDetailShortActivity : AppCompatActivity() {
 
@@ -39,8 +45,19 @@ class StoreDetailShortActivity : AppCompatActivity() {
         var storeName : String = ""
         if(ownerObj.companyName == null){
             storeName = "${ownerObj.firstName} ${ownerObj.paternalLastName}"
+            storeDetailShortFacebook.visibility = View.GONE
+            storeDetailShortInstagram.visibility = View.GONE
         }else{
             storeName = ownerObj.companyName!!
+
+            /*Set social click events*/
+            storeDetailShortFacebook.setOnClickListener(View.OnClickListener {
+                newFacebookIntent(this.packageManager, ownerObj.facebookUrl!!)
+            })
+
+            storeDetailShortInstagram.setOnClickListener(View.OnClickListener {
+                newInstagramIntent(ownerObj.instagramUrl)
+            })
         }
         supportActionBar?.title = storeName
         storeDetailShortName.text = storeName
@@ -88,5 +105,34 @@ class StoreDetailShortActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         finish()
         return true
+    }
+
+    fun newFacebookIntent(pm: PackageManager, url: String) {
+        var uri = Uri.parse(url)
+        try {
+            val applicationInfo = pm.getApplicationInfo("com.facebook.katana", 0)
+            if (applicationInfo.enabled) {
+                // http://stackoverflow.com/a/24547437/1048340
+                uri = Uri.parse("fb://facewebmodal/f?href=$url")
+            }
+        } catch (ignored: PackageManager.NameNotFoundException) {
+        }
+        startActivity(Intent(Intent.ACTION_VIEW, uri))
+    }
+
+    fun newInstagramIntent(url: String?){
+        val uri = Uri.parse(url)
+        val likeIng = Intent(Intent.ACTION_VIEW, uri)
+        likeIng.setPackage("com.instagram.android")
+        try {
+            startActivity(likeIng)
+        } catch (e: ActivityNotFoundException) {
+            startActivity(
+                Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse(url)
+                )
+            )
+        }
     }
 }
