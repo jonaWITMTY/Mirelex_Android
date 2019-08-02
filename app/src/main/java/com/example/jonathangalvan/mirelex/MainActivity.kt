@@ -47,12 +47,6 @@ class MainActivity : AppCompatActivity() {
         /*App permissions*/
         checkPermissions()
 
-        /*OneSignal*/
-        OneSignal.startInit(this)
-            .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
-            .unsubscribeWhenNotificationsAreDisabled(true)
-            .init()
-
         /*Facebook login*/
         var loginButtonFacebook = findViewById<View>(R.id.btnLoginFacebook)
         loginButtonFacebook.setOnClickListener(View.OnClickListener {

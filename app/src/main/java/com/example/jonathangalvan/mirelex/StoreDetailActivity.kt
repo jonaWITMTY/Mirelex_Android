@@ -1,8 +1,12 @@
 package com.example.jonathangalvan.mirelex
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v4.app.ActivityCompat
 import android.view.View
 import com.example.jonathangalvan.mirelex.Fragments.Utils.ImagePreview
 import com.example.jonathangalvan.mirelex.Interfaces.ProductInfoInterface
@@ -51,6 +55,20 @@ class StoreDetailActivity : AppCompatActivity() {
             intent.type = "plain/text"
             intent.putExtra(Intent.EXTRA_EMAIL, arrayOf(productInfo.productOwner.person?.email))
             startActivity(Intent.createChooser(intent, ""))
+        })
+
+        /*Phone click event*/
+        storeDetailPersonalPhone.setOnClickListener(View.OnClickListener {
+            val requiredPermission = "android.permission.CALL_PHONE"
+            val checkVal = checkCallingOrSelfPermission(requiredPermission)
+            if(checkVal== PackageManager.PERMISSION_GRANTED){
+                val callIntent = Intent(Intent.ACTION_CALL)
+                callIntent.data = Uri.parse("tel:+${productInfo.productOwner.person?.personalPhone}")
+                startActivity(callIntent)
+            }else{
+                val permissions = arrayOf<String>(Manifest.permission.CALL_PHONE)
+                ActivityCompat.requestPermissions(this, permissions, 1)
+            }
         })
     }
 

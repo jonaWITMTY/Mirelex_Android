@@ -8,6 +8,7 @@ import android.os.Bundle
 import com.example.jonathangalvan.mirelex.Interfaces.ResponseInterface
 import com.example.jonathangalvan.mirelex.Models.SessionModel
 import com.example.jonathangalvan.mirelex.Models.UtilsModel
+import com.onesignal.OneSignal
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.Response
@@ -24,6 +25,12 @@ class SplashActivity : AppCompatActivity() {
         if (Build.VERSION.SDK_INT != Build.VERSION_CODES.O) {
             requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         }
+
+        /*Onesignal Init*/
+        OneSignal.startInit(this)
+            .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
+            .unsubscribeWhenNotificationsAreDisabled(true)
+            .init()
     }
 
     override fun onResume() {
