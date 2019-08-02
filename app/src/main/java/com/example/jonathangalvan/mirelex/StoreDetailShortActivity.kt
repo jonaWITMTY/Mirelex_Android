@@ -57,6 +57,14 @@ class StoreDetailShortActivity : AppCompatActivity() {
             goToChat.putExtras(bundleToChat)
             startActivity(goToChat)
         })
+
+        /*Email click event*/
+        storeDetailShortEmail.setOnClickListener(View.OnClickListener {
+            val intent = Intent(Intent.ACTION_SEND)
+            intent.type = "plain/text"
+            intent.putExtra(Intent.EXTRA_EMAIL, arrayOf(ownerObj.email))
+            startActivity(Intent.createChooser(intent, ""))
+        })
     }
 
     override fun onSupportNavigateUp(): Boolean {

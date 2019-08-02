@@ -1,5 +1,6 @@
 package com.example.jonathangalvan.mirelex
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -43,6 +44,14 @@ class StoreDetailActivity : AppCompatActivity() {
         storeDetailAddress1.text = "${productInfo.productOwner.address!![0].street}, ${productInfo.productOwner.address!![0].numExt}"
         storeDetailAddress2.text = "${productInfo.productOwner.address!![0].neighborhoodName},  ${productInfo.productOwner.address!![0].postalCode}"
         storeDetailAddress3.text = "${productInfo.productOwner.address!![0].cityName},  ${productInfo.productOwner.address!![0].stateName}"
+
+        /*Email click event*/
+        storeDetailEmail.setOnClickListener(View.OnClickListener {
+            val intent = Intent(Intent.ACTION_SEND)
+            intent.type = "plain/text"
+            intent.putExtra(Intent.EXTRA_EMAIL, arrayOf(productInfo.productOwner.person?.email))
+            startActivity(Intent.createChooser(intent, ""))
+        })
     }
 
     override fun onSupportNavigateUp(): Boolean {
