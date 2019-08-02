@@ -265,8 +265,6 @@ class ProductUpdate : Fragment()  {
     }
 
     fun fillProductFields(){
-        /*Fill products catalogs*/
-        fillProductsCatalogs()
 
         /*Set image for image preview*/
         imgPreview = productObj?.productInformation?.productFeaturedImage.toString()
@@ -307,6 +305,7 @@ class ProductUpdate : Fragment()  {
             updateProductIsStretch.isChecked = true
         }
 
+        fillCommonProductCatalogs()
 
         when(productObj?.productInformation?.productTypeId){
             ProductType.Dress.productTypeId -> {
@@ -317,31 +316,53 @@ class ProductUpdate : Fragment()  {
                 updateProductWaist.editText?.setText(productObj!!.productInformation.waist)
                 updateProductHip.editText?.setText(productObj!!.productInformation.hip)
                 updateProductHeight.editText?.setText(productObj!!.productInformation.height)
+
+                /*Fill women products catalogs*/
+                fillWomanProductsCatalogs()
+
+                /*Hide*/
+                updateProductSizeLayout.visibility = View.GONE
+
+                /*Show*/
+                updateProductBustLayout.visibility = View.VISIBLE
+                updateProductWaistLayout.visibility = View.VISIBLE
+                updateProductHipLayout.visibility = View.VISIBLE
+                updateProductHeightLayout.visibility = View.VISIBLE
+                updateProductDecorationLayout.visibility = View.VISIBLE
+                updateProductLengthLayout.visibility = View.VISIBLE
+                updateProductSiloueteLayout.visibility = View.VISIBLE
             }
             else -> {
                 (activity as ProductActivity).setActionBarTitle("${productObj?.productInformation?.brand}")
+
+                /*Fill men products catalogs*/
+                fillMenProductsCatalogs()
+
+                /*Hide*/
+                updateProductBustLayout.visibility = View.GONE
+                updateProductWaistLayout.visibility = View.GONE
+                updateProductHipLayout.visibility = View.GONE
+                updateProductHeightLayout.visibility = View.GONE
+                updateProductDecorationLayout.visibility = View.GONE
+                updateProductLengthLayout.visibility = View.GONE
+                updateProductSiloueteLayout.visibility = View.GONE
+
+                /*Show*/
+                updateProductSizeLayout.visibility = View.VISIBLE
             }
         }
     }
 
-    fun fillProductsCatalogs(){
+    fun fillCommonProductCatalogs(){
+
         fillSpinner(catalogs?.conditions, activity?.findViewById(R.id.updateProductCondition))
         updateProductCondition.setSelection(getAdapterItemPosition( productObj?.productInformation?.productConditionId?.toLong(), catalogs?.conditions))
 
         fillSpinner(catalogs?.styles, activity?.findViewById(R.id.updateProductStyle))
         updateProductStyle.setSelection(getAdapterItemPosition( productObj?.productInformation?.productStyleId?.toLong(), catalogs?.styles))
 
-        fillSpinner(catalogs?.decorations, activity?.findViewById(R.id.updateProductDecoration))
-        updateProductDecoration.setSelection(getAdapterItemPosition( productObj?.productInformation?.productDecorationId?.toLong(), catalogs?.decorations))
-
-        fillSpinner(catalogs?.lengths, activity?.findViewById(R.id.updateProductLength))
-        updateProductLength.setSelection(getAdapterItemPosition( productObj?.productInformation?.productLengthId?.toLong(), catalogs?.lengths))
-
         fillSpinner(catalogs?.materials, activity?.findViewById(R.id.updateProductMaterial))
         updateProductMaterial.setSelection(getAdapterItemPosition( productObj?.productInformation?.productMaterialId?.toLong(), catalogs?.materials))
-
-        fillSpinner(catalogs?.silhouettes, activity?.findViewById(R.id.updateProductSilouete))
-        updateProductSilouete.setSelection(getAdapterItemPosition( productObj?.productInformation?.productSilhouetteId?.toLong(), catalogs?.silhouettes))
 
         fillSpinner(catalogs?.sleeveStyles, activity?.findViewById(R.id.updateProductSleeveStyle))
         updateProductSleeveStyle.setSelection(getAdapterItemPosition( productObj?.productInformation?.productSleeveStyleId?.toLong(), catalogs?.sleeveStyles))
@@ -366,9 +387,24 @@ class ProductUpdate : Fragment()  {
         spinner = activity!!.findViewById(R.id.spinnerMulti)
         spinner!!.setAdapter(adapter, false, onSelectedListener)
 
-       /*set selected colors*/
-        spinner!!.setSelected(selectedItems)
+        /*set selected colors*/
+        spinner!!.selected = selectedItems
+    }
 
+    fun fillWomanProductsCatalogs(){
+        fillSpinner(catalogs?.decorations, activity?.findViewById(R.id.updateProductDecoration))
+        updateProductDecoration.setSelection(getAdapterItemPosition( productObj?.productInformation?.productDecorationId?.toLong(), catalogs?.decorations))
+
+        fillSpinner(catalogs?.lengths, activity?.findViewById(R.id.updateProductLength))
+        updateProductLength.setSelection(getAdapterItemPosition( productObj?.productInformation?.productLengthId?.toLong(), catalogs?.lengths))
+
+        fillSpinner(catalogs?.silhouettes, activity?.findViewById(R.id.updateProductSilouete))
+        updateProductSilouete.setSelection(getAdapterItemPosition( productObj?.productInformation?.productSilhouetteId?.toLong(), catalogs?.silhouettes))
+    }
+
+    fun fillMenProductsCatalogs(){
+        fillSpinner(catalogs?.sizes, activity?.findViewById(R.id.updateProductSize))
+        updateProductSize.setSelection(getAdapterItemPosition( productObj?.productInformation?.sizeId?.toLong(), catalogs?.sizes))
     }
 
     private val onSelectedListener = MultiSpinner.MultiSpinnerListener {
