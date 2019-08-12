@@ -45,7 +45,7 @@
             <View
                     android:layout_width="match_parent"
                     android:layout_height="40dp" android:id="@+id/view"
-                    android:background="@color/colorLightGray"/>
+                    android:background="@color/colorLightGray" android:visibility="gone"/>
             <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/storeDetailAddress1"
@@ -64,6 +64,12 @@
                     android:paddingTop="10dp" android:paddingBottom="10dp" android:textSize="16sp"
                     android:textColor="@android:color/black" tools:text="storeAddress3"
                     android:layout_marginStart="16dp" android:layout_marginEnd="16dp" android:visibility="gone"/>
+            <TextView
+                    android:text="@string/followUs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/storeDetailSocialTitle"
+                    android:paddingStart="16dp" android:paddingEnd="16dp" android:paddingTop="10dp"
+                    android:paddingBottom="10dp" android:background="@color/colorLightGray" android:textSize="16sp"/>
             <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"

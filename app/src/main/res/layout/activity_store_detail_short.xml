@@ -57,10 +57,12 @@
                     android:textColor="@android:color/black"
                     android:layout_marginStart="16dp" android:layout_marginEnd="16dp"
                     tools:text="storePhone"/>
-            <View
+            <TextView
+                    android:text="@string/followUs"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp" android:id="@+id/view6"
-                    android:background="@color/colorLightGray"/>
+                    android:layout_height="wrap_content" android:id="@+id/storeDetailShortSocialTitle" android:paddingStart="16dp"
+                    android:paddingEnd="16dp" android:paddingTop="10dp" android:paddingBottom="10dp"
+                    android:background="@color/colorLightGray" android:textSize="16sp"/>
             <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"

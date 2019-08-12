@@ -50,6 +50,10 @@ class StoreDetailShortActivity : AppCompatActivity() {
             storeDetailShortInstagram.visibility = View.GONE
         }
 
+        if(ownerObj?.facebookUrl == null && ownerObj?.instagramUrl  == null){
+            storeDetailShortSocialTitle.visibility = View.GONE
+        }
+
         /*Fill store fields*/
         var storeName : String = ""
         if(ownerObj.companyName == null){

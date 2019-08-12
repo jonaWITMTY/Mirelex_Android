@@ -41,6 +41,10 @@ class StoreDetailActivity : AppCompatActivity() {
             storeDetailInstagram.visibility = View.GONE
         }
 
+        if(productInfo.productOwner.person?.facebookUrl == null && productInfo.productOwner.person?.instagramUrl == null){
+            storeDetailSocialTitle.visibility = View.GONE
+        }
+
         var name: String? = ""
         when(productInfo.productOwner.person?.userTypeId){
             "4" -> {
