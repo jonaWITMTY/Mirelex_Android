@@ -61,18 +61,39 @@
                     android:layout_width="match_parent"
                     android:layout_height="40dp" android:id="@+id/view6"
                     android:background="@color/colorLightGray"/>
-            <TextView
+            <LinearLayout
+                    android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:id="@+id/storeDetailShortFacebook"
-                    android:layout_marginStart="16dp" android:layout_marginEnd="16dp" android:text="@string/facebook"
-                    android:paddingTop="10dp" android:paddingBottom="10dp" android:textColor="@color/black"
-                    android:textSize="16sp"/>
-            <TextView
-                    android:text="@string/instagram"
+                    android:layout_height="match_parent" android:id="@+id/storeDetailShortFacebook">
+                <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp" app:srcCompat="@drawable/facebook"
+                        android:id="@+id/imageView21" android:layout_weight="0" android:layout_marginTop="5dp"
+                        android:layout_marginStart="10dp"/>
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp" android:layout_marginEnd="16dp"
+                        android:text="@string/facebook"
+                        android:paddingTop="10dp" android:paddingBottom="10dp" android:textColor="@color/black"
+                        android:textSize="16sp"/>
+            </LinearLayout>
+            <LinearLayout
+                    android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:id="@+id/storeDetailShortInstagram"
-                    android:layout_marginStart="16dp" android:layout_marginEnd="16dp" android:paddingTop="10dp"
-                    android:paddingBottom="10dp" android:textColor="@color/black" android:textSize="16sp"/>
+                    android:layout_height="match_parent" android:id="@+id/storeDetailShortInstagram">
+                <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp" app:srcCompat="@drawable/instagram"
+                        android:id="@+id/imageView22" android:layout_weight="0" android:layout_marginTop="5dp"
+                        android:layout_marginStart="10dp"/>
+                <TextView
+                        android:text="@string/instagram"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp" android:layout_marginEnd="16dp" android:paddingTop="10dp"
+                        android:paddingBottom="10dp" android:textColor="@color/black" android:textSize="16sp"/>
+            </LinearLayout>
         </LinearLayout>
     </android.support.constraint.ConstraintLayout>
 </ScrollView>
