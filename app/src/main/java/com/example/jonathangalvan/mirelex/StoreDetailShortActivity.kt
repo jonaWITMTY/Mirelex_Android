@@ -41,6 +41,15 @@ class StoreDetailShortActivity : AppCompatActivity() {
             })
         }
 
+        /*Hide social buttons if empty*/
+        if(ownerObj?.facebookUrl == null){
+            storeDetailShortFacebook.visibility = View.GONE
+        }
+
+        if(ownerObj?.instagramUrl == null){
+            storeDetailShortInstagram.visibility = View.GONE
+        }
+
         /*Fill store fields*/
         var storeName : String = ""
         if(ownerObj.companyName == null){

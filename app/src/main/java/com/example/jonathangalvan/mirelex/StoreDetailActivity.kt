@@ -32,6 +32,15 @@ class StoreDetailActivity : AppCompatActivity() {
             })
         }
 
+        /*Hide social buttons if empty*/
+        if(productInfo.productOwner.person?.facebookUrl == null){
+            storeDetailFacebook.visibility = View.GONE
+        }
+
+        if(productInfo.productOwner.person?.instagramUrl == null){
+            storeDetailInstagram.visibility = View.GONE
+        }
+
         var name: String? = ""
         when(productInfo.productOwner.person?.userTypeId){
             "4" -> {
