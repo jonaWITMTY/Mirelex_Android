@@ -64,16 +64,9 @@ class ProfileProductsActivity : AppCompatActivity() {
                             profileProductsGrid?.adapter = productAdapter
                             profileProductsGrid?.setOnItemClickListener { parent, view, position, id ->
                                 val goToProductDetail: Intent
-                                when(SessionModel(this@ProfileProductsActivity).getSessionUserType()){
-                                    UserType.Store.userTypeId -> {
-                                        goToProductDetail = Intent(this@ProfileProductsActivity, ProductActivity::class.java)
-                                    }
-                                    else -> {
-                                        goToProductDetail = Intent(this@ProfileProductsActivity, ProductDetailActivity::class.java)
-                                    }
-                                }
+                                goToProductDetail = Intent(this@ProfileProductsActivity, ProductActivity::class.java)
                                 val b = Bundle()
-                                b.putString("productId", (productsGrid.adapter.getItem(position) as ProductInterface).productId.toString())
+                                b.putString("productId", (profileProductsGrid.adapter.getItem(position) as ProductInterface).productId.toString())
                                 goToProductDetail.putExtras(b)
                                 startActivity(goToProductDetail)
                             }
