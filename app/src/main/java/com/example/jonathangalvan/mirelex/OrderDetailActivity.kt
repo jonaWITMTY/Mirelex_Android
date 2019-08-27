@@ -167,10 +167,20 @@ class OrderDetailActivity : AppCompatActivity() {
                                     isThereImage = orderInfo.orderClientInformation.profilePictureUrl
                                 }
                                 else -> {
-                                    pictureUrl = orderInfo.orderOwnerInformation.profilePictureUrl.toString()
-                                    name = orderInfo.orderOwnerInformation.companyName.toString()
-                                    json = UtilsModel.getGson().toJson(orderInfo.orderOwnerInformation)
-                                    isThereImage = orderInfo.orderOwnerInformation.profilePictureUrl
+                                    when(orderInfo.orderOwnerInformation.companyName){
+                                        null -> {
+                                            pictureUrl = orderInfo.orderClientInformation.profilePictureUrl.toString()
+                                            name = "${orderInfo.orderClientInformation.firstName} ${orderInfo.orderClientInformation.paternalLastName}"
+                                            json = UtilsModel.getGson().toJson(orderInfo.orderClientInformation)
+                                            isThereImage = orderInfo.orderClientInformation.profilePictureUrl
+                                        }
+                                        else -> {
+                                            pictureUrl = orderInfo.orderOwnerInformation.profilePictureUrl.toString()
+                                            name = orderInfo.orderOwnerInformation.companyName.toString()
+                                            json = UtilsModel.getGson().toJson(orderInfo.orderOwnerInformation)
+                                            isThereImage = orderInfo.orderOwnerInformation.profilePictureUrl
+                                        }
+                                    }
                                 }
                             }
                             if(isThereImage != null){
