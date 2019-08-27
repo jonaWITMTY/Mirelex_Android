@@ -39,6 +39,7 @@ class Profile : Fragment() {
         /*Hide options for store*/
         if(SessionModel(activity!!).getUser().person?.userTypeId == UserType.Store.userTypeId){
             sessionUserPayments.visibility = View.GONE
+            sessionUserProducts.visibility = View.GONE
         }
 
         /*Hide delivery and payments*/
@@ -77,6 +78,11 @@ class Profile : Fragment() {
         sessionUserPayments.setOnClickListener(View.OnClickListener {
             startActivity(Intent(activity!!, PaymentCardsActivity::class.java))
         })
+
+        /*Click to my products*/
+        sessionUserProducts.setOnClickListener(View.OnClickListener {
+            startActivity(Intent(activity, ProfileProductsActivity::class.java))
+        })
     }
 
     fun onButtonPressed(uri: Uri) {
@@ -113,6 +119,7 @@ class Profile : Fragment() {
 
         /*Customer tabs icons*/
         menu?.findItem(R.id.customerTabsFilterIcon)?.isVisible = false
+        menu?.findItem(R.id.customerTabsAddProductIcon)?.isVisible = false
     }
 
     override fun onAttach(context: Context) {

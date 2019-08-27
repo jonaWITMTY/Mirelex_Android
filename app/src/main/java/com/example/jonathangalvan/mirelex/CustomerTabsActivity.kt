@@ -106,6 +106,9 @@ class CustomerTabsActivity : AppCompatActivity(),
         menu?.getItem(0)?.icon?.let {
             DrawableCompat.setTint(it, ContextCompat.getColor(this, android.R.color.white))
         }
+        menu?.getItem(1)?.icon?.let {
+            DrawableCompat.setTint(it, ContextCompat.getColor(this, android.R.color.white))
+        }
         return super.onCreateOptionsMenu(menu)
     }
 

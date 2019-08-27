@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.example.jonathangalvan.mirelex">
+        package="com.example.jonathangalvan.mirelex">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
             android:allowBackup="true"
@@ -15,124 +15,61 @@
             android:networkSecurityConfig="@xml/network_security_config"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".FilterProducts" >
-        </activity>
+        <activity android:name=".ProfileProductsActivity"></activity>
+        <activity android:name=".FilterProducts"></activity>
 
         <meta-data
                 android:name="com.facebook.sdk.ApplicationId"
-                android:value="@string/facebook_app_id"/>
+                android:value="@string/facebook_app_id" />
 
         <activity
                 android:name="com.facebook.FacebookActivity"
                 android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-                android:label="@string/app_name"/>
+                android:label="@string/app_name" />
         <activity
                 android:name="com.facebook.CustomTabActivity"
                 android:exported="true">
             <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
+                <action android:name="android.intent.action.VIEW" />
 
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
 
-                <data android:scheme="@string/fb_login_protocol_scheme"/>
+                <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-        <activity
-                android:name=".PaymentCardCreateActivity"
-                >
-        </activity>
-        <activity
-                android:name=".PaymentCardsActivity"
-                >
-        </activity>
-        <activity
-                android:name=".SplashActivity"
-                >
+        <activity android:name=".PaymentCardCreateActivity"></activity>
+        <activity android:name=".PaymentCardsActivity"></activity>
+        <activity android:name=".SplashActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-                android:name=".ConversationsActivity"
-                >
-        </activity>
-        <activity
-                android:name=".ChatActivity"
-                >
-        </activity>
-        <activity
-                android:name=".ProductActivity"
-                >
-        </activity>
+        <activity android:name=".ConversationsActivity"></activity>
+        <activity android:name=".ChatActivity"></activity>
+        <activity android:name=".ProductActivity"></activity>
         <activity
                 android:name=".StoreTabsActivity"
-                android:label=""
-                >
-        </activity>
-        <activity
-                android:name=".ProfileActivity"
-                >
-        </activity>
-        <activity
-                android:name=".ContactActivity"
-                >
-        </activity>
-        <activity
-                android:name=".WebviewActivity"
-                >
-        </activity>
-        <activity
-                android:name=".StoreDetailShortActivity"
-                >
-        </activity>
-        <activity
-                android:name=".ServiceOrderDetailActivity"
-                >
-        </activity>
-        <activity
-                android:name=".ServiceCreateActivity"
-                >
-        </activity>
-        <activity
-                android:name=".OrderDetailActivity"
-                >
-        </activity>
-        <activity
-                android:name=".OrderCheckoutActivity"
-                >
-        </activity>
-        <activity
-                android:name=".CalendarActivity"
-                >
-        </activity>
-        <activity
-                android:name=".StoreDetailActivity"
-                >
-        </activity>
-        <activity
-                android:name=".ProductDetailActivity"
-                >
-        </activity>
-        <activity
-                android:name=".RegisterExtraFieldsActivity"
-                >
-        </activity>
+                android:label=""></activity>
+        <activity android:name=".ProfileActivity"></activity>
+        <activity android:name=".ContactActivity"></activity>
+        <activity android:name=".WebviewActivity"></activity>
+        <activity android:name=".StoreDetailShortActivity"></activity>
+        <activity android:name=".ServiceOrderDetailActivity"></activity>
+        <activity android:name=".ServiceCreateActivity"></activity>
+        <activity android:name=".OrderDetailActivity"></activity>
+        <activity android:name=".OrderCheckoutActivity"></activity>
+        <activity android:name=".CalendarActivity"></activity>
+        <activity android:name=".StoreDetailActivity"></activity>
+        <activity android:name=".ProductDetailActivity"></activity>
+        <activity android:name=".RegisterExtraFieldsActivity"></activity>
         <activity
                 android:name=".CustomerTabsActivity"
-                android:label=""
-                >
-        </activity>
-        <activity
-                android:name=".RegisterActivity"
-                >
-        </activity>
-        <activity
-                android:name=".MainActivity"
-                >
-        </activity>
+                android:label=""></activity>
+        <activity android:name=".RegisterActivity"></activity>
+        <activity android:name=".MainActivity"></activity>
     </application>
 
 </manifest>

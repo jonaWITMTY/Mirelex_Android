@@ -149,6 +149,7 @@ class Notifications : Fragment() {
 
         /*Customer tabs icons*/
         menu?.findItem(R.id.customerTabsFilterIcon)?.isVisible = false
+        menu?.findItem(R.id.customerTabsAddProductIcon)?.isVisible = false
     }
 
     fun onButtonPressed(uri: Uri) {

@@ -192,6 +192,9 @@ class Services : Fragment() {
 
         /*Store tabs icons*/
         menu?.findItem(R.id.storeTabsAddIcon)?.isVisible = false
+
+        /*Customer tabs icons*/
+        menu?.findItem(R.id.customerTabsAddProductIcon)?.isVisible = false
     }
 
     fun onButtonPressed(uri: Uri) {

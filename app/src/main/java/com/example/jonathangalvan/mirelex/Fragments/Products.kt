@@ -191,7 +191,7 @@ class Products : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item?.itemId){
-            R.id.storeTabsAddIcon ->{
+            R.id.storeTabsAddIcon, R.id.customerTabsAddProductIcon ->{
                 startActivity(Intent(activity!!, ProductActivity::class.java))
             }
             R.id.customerTabsFilterIcon -> {
