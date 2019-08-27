@@ -31,6 +31,10 @@ class ProfileProductsActivity : AppCompatActivity() {
 
         /*Set title to activity*/
         supportActionBar?.title = resources.getString(R.string.myProducts)
+    }
+
+    override fun onResume() {
+        super.onResume()
 
         /*Load products*/
         loadProducts()
