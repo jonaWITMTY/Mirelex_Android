@@ -1,14 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context=".Fragments.Orders">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".Fragments.Orders">
+
+    <android.support.design.widget.TabLayout
+            android:id="@+id/ordersTabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabIndicatorColor="@color/cyan">
+
+        <android.support.design.widget.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/storeTabOrders" />
+
+        <android.support.design.widget.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/myOrders" />
+
+    </android.support.design.widget.TabLayout>
+
     <Spinner
+            android:id="@+id/filterOrdersSpinner"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:id="@+id/filterOrdersSpinner" android:visibility="invisible"
-            android:spinnerMode="dialog"/>
+            android:layout_height="1dp"
+            android:spinnerMode="dialog"
+            android:visibility="invisible" />
+
     <android.support.v7.widget.RecyclerView
+            android:id="@+id/ordersList"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" android:id="@+id/ordersList"/>
-</FrameLayout>
+            android:layout_height="match_parent"
+            android:layout_marginTop="16dp" />
+</LinearLayout>

@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.view.*
@@ -35,6 +36,7 @@ class Orders : Fragment() {
     private var listener: OnFragmentInteractionListener? = null
     private val ordersAdapter = OrdersAdapter(ArrayList())
     private var ordersObj: OrdersInterface? = null
+    private var selectedTab: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -101,6 +103,18 @@ class Orders : Fragment() {
                 }
             }
         }
+
+        /*Tabs change event*/
+        ordersTabs.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener {
+            override fun onTabReselected(p0: TabLayout.Tab?) { }
+
+            override fun onTabUnselected(p0: TabLayout.Tab?) { }
+
+            override fun onTabSelected(p0: TabLayout.Tab?) {
+                selectedTab = p0!!.position
+                getOrders()
+            }
+        })
     }
 
     override fun onResume() {
@@ -113,7 +127,12 @@ class Orders : Fragment() {
         val user = SessionModel(activity!!).getUser()
         var isClient = "0"
         if(user.person?.userTypeId == UserType.Customer.userTypeId){
-            isClient = "1"
+            if(selectedTab == 0){
+                isClient = "1"
+            }else{
+                isClient = "0"
+            }
+
         }
         val ordersObjRequest = UtilsModel.getGson().toJson(
             GetOrdersRequest(
