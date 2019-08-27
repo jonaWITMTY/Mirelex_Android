@@ -115,6 +115,14 @@ class Orders : Fragment() {
                 getOrders()
             }
         })
+
+        /*Hide tabs when is userType supplier*/
+        val user = SessionModel(activity!!).getUser()
+        when(user.person?.userTypeId){
+            UserType.Store.userTypeId -> {
+                ordersTabs.visibility = View.GONE
+            }
+        }
     }
 
     override fun onResume() {
