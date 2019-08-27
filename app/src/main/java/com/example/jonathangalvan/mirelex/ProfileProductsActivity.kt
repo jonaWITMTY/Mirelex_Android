@@ -3,7 +3,9 @@ package com.example.jonathangalvan.mirelex
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.view.ViewGroup
+import android.support.v4.content.ContextCompat
+import android.support.v4.graphics.drawable.DrawableCompat
+import android.view.*
 import com.example.jonathangalvan.mirelex.Adapters.ProductsAdapter
 import com.example.jonathangalvan.mirelex.Enums.UserType
 import com.example.jonathangalvan.mirelex.Interfaces.ProductInterface
@@ -28,7 +30,7 @@ class ProfileProductsActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         /*Set title to activity*/
-        supportActionBar?.title = resources.getString(R.string.products)
+        supportActionBar?.title = resources.getString(R.string.myProducts)
 
         /*Load products*/
         loadProducts()
@@ -95,6 +97,33 @@ class ProfileProductsActivity : AppCompatActivity() {
                 }
             }
         })
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
+        menu?.findItem(R.id.customerTabsFilterIcon)?.isVisible = false
+        return super.onPrepareOptionsMenu(menu)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.customer_tabs_icons, menu)
+        menu?.getItem(0)?.icon?.let {
+            DrawableCompat.setTint(it, ContextCompat.getColor(this, android.R.color.white))
+        }
+        menu?.getItem(1)?.icon?.let {
+            DrawableCompat.setTint(it, ContextCompat.getColor(this, android.R.color.white))
+        }
+        return super.onCreateOptionsMenu(menu)
+
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+//        return super.onOptionsItemSelected(item)
+        when(item?.itemId){
+            R.id.customerTabsAddProductIcon ->{
+                startActivity(Intent(this, ProductActivity::class.java))
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onSupportNavigateUp(): Boolean {
