@@ -64,7 +64,6 @@ class FilterProducts : AppCompatActivity() {
         })
 
         /*Set catalogs depending on session usertypeid*/
-//        getProductCatalogs()
         val bundleFromProducts = intent.extras
         val sizesObj = UtilsModel.getGson().fromJson(bundleFromProducts.getString("sizes"), CatalogArrayInterface::class.java)
         catalogs = UtilsModel.getGson().fromJson(bundleFromProducts.getString("catalogs"), ProductCatalogs::class.java)
@@ -159,6 +158,58 @@ class FilterProducts : AppCompatActivity() {
         /*Fill spinner with colors*/
         spinner = findViewById(R.id.spinnerMulti)
         spinner!!.setAdapter(adapter, false, onSelectedListener)
+
+        if(SessionModel.existSessionValue(this, "filterProductRequest")){
+            fillProductCatalogsInputs()
+        }
+    }
+
+    fun fillProductCatalogsInputs(){
+        val filterContent = UtilsModel.getGson().fromJson(SessionModel.getSessionValue(this, "filterProductRequest"), ProductFilterRequest::class.java)
+        filterProductSize.setSelection(getSizeItemPosition(filterContent.sizeId?.toLong()))
+        filterProductSearch.setQuery(filterContent.name, false)
+        filterProductCondition.setSelection(getCatalogItemPosition(filterContent.productConditionId?.toLong(), catalogs!!.conditions))
+        filterProductStyle.setSelection(getCatalogItemPosition(filterContent.productStyleId?.toLong(), catalogs!!.styles))
+        filterProductMaterial.setSelection(getCatalogItemPosition(filterContent.productMaterialId?.toLong(), catalogs!!.materials))
+        filterProductSleeveStyle.setSelection(getCatalogItemPosition(filterContent.productSleeveStyleId?.toLong(), catalogs!!.sleeveStyles))
+        filterProductLength.setSelection(getCatalogItemPosition(filterContent.productLengthId?.toLong(), catalogs!!.lengths))
+        filterProductDecoration.setSelection(getCatalogItemPosition(filterContent.productDecorationId?.toLong(), catalogs!!.decorations))
+        filterProductSilouete.setSelection(getCatalogItemPosition(filterContent.productSilhouetteId?.toLong(), catalogs!!.silhouettes))
+        filterProductOcation.setSelection(getCatalogItemPosition(filterContent.productOccasionId?.toLong(), catalogs!!.occasions))
+
+        /*Get colors*/
+        var selectedItems = BooleanArray(catalogs?.colors!!.size)
+        adapter =  ArrayAdapter<String>(this, android.R.layout.simple_spinner_item)
+        for((index, color) in catalogs?.colors!!.withIndex()){
+            adapter!!.add(color.name)
+            if(checkIfColorExist(color.productCatalogId!!.toLong(), filterContent?.productColors)){
+                selectedItems[index] = true
+                selectedIds.add(catalogs?.colors!![index].productCatalogId!!.toLong())
+            }else{
+                selectedItems[index] = false
+            }
+        }
+
+        /*Fill spinner with colors*/
+        spinner = findViewById(R.id.spinnerMulti)
+        spinner!!.setAdapter(adapter, false, onSelectedListener)
+
+        /*set selected colors*/
+        spinner!!.selected = selectedItems
+    }
+
+    fun checkIfColorExist(colorId: Long, colorArr: ArrayList<Long>?): Boolean{
+        var isInColorArr = false
+        if(!isInColorArr){
+            if (colorArr != null) {
+                for(color in colorArr){
+                    if(color == colorId){
+                        isInColorArr = true
+                    }
+                }
+            }
+        }
+        return isInColorArr
     }
 
     private val onSelectedListener = MultiSpinner.MultiSpinnerListener {
@@ -186,6 +237,20 @@ class FilterProducts : AppCompatActivity() {
             adapter.setDropDownViewResource(R.layout.view_spinner_item_black_select)
             adapterView.adapter = adapter
         }
+    }
+
+    fun getCatalogItemPosition(id: Long?, arr: ArrayList<ProductCatalog>): Int {
+        for (position in 0 until arr.size)
+            if (arr?.get(position)?.productCatalogId?.toLong() == id)
+                return position
+        return 0
+    }
+
+    fun getSizeItemPosition(id: Long?): Int {
+        for (position in 0 until sizes!!.size)
+            if (sizes!![position].productCatalogId?.toLong() == id)
+                return position
+        return 0
     }
 
     override fun onSupportNavigateUp(): Boolean {

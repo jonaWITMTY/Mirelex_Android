@@ -277,6 +277,11 @@ class Products : Fragment() {
         listener = null
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        SessionModel.deleteSessionValue(activity!!, "filterProductRequest")
+    }
+
     interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         fun onFragmentInteraction(uri: Uri)
