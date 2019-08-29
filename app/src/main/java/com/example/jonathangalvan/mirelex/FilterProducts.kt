@@ -131,8 +131,10 @@ class FilterProducts : AppCompatActivity() {
             productFilterObj.productColors = selectedIds
         }
 
+        val strFilter = UtilsModel.getGson().toJson(productFilterObj)
+        SessionModel.saveSessionValue(this, "filterProductRequest", strFilter)
         val returnIntent = Intent()
-        returnIntent.putExtra("filterProductRequest", UtilsModel.getGson().toJson(productFilterObj))
+        returnIntent.putExtra("filterProductRequest", strFilter)
         setResult(Activity.RESULT_OK, returnIntent)
         finish()
     }

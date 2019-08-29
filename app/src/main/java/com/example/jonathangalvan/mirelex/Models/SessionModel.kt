@@ -2,6 +2,8 @@ package com.example.jonathangalvan.mirelex.Models
 
 import android.content.Context
 import com.example.jonathangalvan.mirelex.Interfaces.UserInterface
+import android.content.Context.MODE_PRIVATE
+import android.content.SharedPreferences
 
 class SessionModel(val declaredContext: Context){
     companion object{
@@ -16,6 +18,16 @@ class SessionModel(val declaredContext: Context){
         fun getSessionValue(context: Context, tag: String): String?{
             val pref = context.getApplicationContext().getSharedPreferences("SessionData", 0)
             return pref.getString(tag, null)
+        }
+
+        fun existSessionValue(context: Context, tag: String): Boolean {
+            val sharedPrefs = context.getSharedPreferences("SessionData", MODE_PRIVATE)
+            return sharedPrefs.contains(tag)
+        }
+
+        fun deleteSessionValue(context:Context, tag: String){
+            val preferences = context.getSharedPreferences("SessionData", 0)
+            preferences.edit().remove(tag).commit()
         }
     }
 

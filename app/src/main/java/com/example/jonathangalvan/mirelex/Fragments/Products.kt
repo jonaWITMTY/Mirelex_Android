@@ -93,8 +93,6 @@ class Products : Fragment() {
         super.onResume()
         if(!filterAction){
             getProducts()
-        }else{
-            filterAction = false
         }
     }
 
