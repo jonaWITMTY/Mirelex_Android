@@ -95,6 +95,7 @@ class SelectItems() : Fragment() {
     override fun onDetach() {
         super.onDetach()
         listener = null
+        ml?.callbackClose(tag!!)
     }
 
     interface OnFragmentInteractionListener {
