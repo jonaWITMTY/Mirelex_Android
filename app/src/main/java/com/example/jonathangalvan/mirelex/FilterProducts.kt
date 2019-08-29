@@ -67,7 +67,7 @@ class FilterProducts : AppCompatActivity() {
         val bundleFromProducts = intent.extras
         val sizesObj = UtilsModel.getGson().fromJson(bundleFromProducts.getString("sizes"), CatalogArrayInterface::class.java)
         catalogs = UtilsModel.getGson().fromJson(bundleFromProducts.getString("catalogs"), ProductCatalogs::class.java)
-        sizes = sizesObj.data
+        sizes = sizesObj?.data
         fillProductsCatalogs()
     }
 
@@ -151,8 +151,10 @@ class FilterProducts : AppCompatActivity() {
 
         /*Get colors*/
         adapter =  ArrayAdapter<String>(this, android.R.layout.simple_spinner_item)
-        for((index, color) in catalogs?.colors!!.withIndex()){
-            adapter!!.add(color.name)
+        if(catalogs?.colors != null){
+            for((index, color) in catalogs?.colors!!.withIndex()){
+                adapter!!.add(color.name)
+            }
         }
 
         /*Fill spinner with colors*/
