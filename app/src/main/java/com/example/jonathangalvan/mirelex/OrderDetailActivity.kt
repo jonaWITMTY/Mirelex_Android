@@ -17,6 +17,7 @@ import com.example.jonathangalvan.mirelex.Fragments.Utils.CustomBottomAlert
 import com.example.jonathangalvan.mirelex.Fragments.Utils.ImagePreview
 import com.example.jonathangalvan.mirelex.Interfaces.BottomAlertInterface
 import com.example.jonathangalvan.mirelex.Interfaces.OrderProductInfo
+import com.example.jonathangalvan.mirelex.Interfaces.UserInterface
 import com.example.jonathangalvan.mirelex.Models.SessionModel
 import com.example.jonathangalvan.mirelex.Models.UtilsModel
 import com.example.jonathangalvan.mirelex.Requests.AcceptRejectOrderRequest
@@ -39,6 +40,7 @@ class OrderDetailActivity : AppCompatActivity() {
     var inputValue = ""
     var displayForm = false
     var orderId = ""
+    var sessionUser: UserInterface? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,6 +51,9 @@ class OrderDetailActivity : AppCompatActivity() {
         val bundleFromOrders = intent.extras
         orderId = bundleFromOrders.getString("orderId")
         getOrderInfo()
+
+        /*Set user info*/
+        sessionUser = SessionModel(this).getUser()
 
         /*Hide action button and form*/
         detailOrderActionButton.visibility = View.GONE
@@ -78,8 +83,7 @@ class OrderDetailActivity : AppCompatActivity() {
                             supportActionBar?.title = orderInfo.orderInformation.folio
 
                             /*Event for action button*/
-                            val sessionUser = SessionModel(this@OrderDetailActivity).getUser()
-                            when(sessionUser.person?.userId){
+                            when(sessionUser?.person?.userId){
                                 orderInfoForBundle!!.orderOwnerInformation.userId -> {
                                     if(
                                         (orderInfoForBundle?.orderInformation?.acceptedDate == null && orderInfoForBundle?.orderInformation?.rejectedDate == null) ||
@@ -113,7 +117,7 @@ class OrderDetailActivity : AppCompatActivity() {
                                                 if(orderInfoForBundle!!.orderInformation.orderTypeId == OrderType.Fitting.orderTypeId){
                                                     if(
                                                         orderFutureStatus == OrderStatus.Finished.orderStatusId &&
-                                                        orderInfoForBundle?.orderOwnerInformation?.userId == SessionModel(this@OrderDetailActivity).getUser().person?.userId
+                                                        orderInfoForBundle?.orderOwnerInformation?.userId == sessionUser?.person?.userId
                                                     ){
                                                         val ba = UtilsModel.getGson().toJson(BottomAlertInterface(
                                                             alertType = "fittingOrderProcess",
@@ -130,7 +134,7 @@ class OrderDetailActivity : AppCompatActivity() {
                                         }
                                     }
                                 }
-                                else -> {
+                                orderInfoForBundle!!.orderClientInformation.userId -> {
                                     getOrderActionStatusClient()
                                 }
                             }
@@ -196,7 +200,7 @@ class OrderDetailActivity : AppCompatActivity() {
                             addRow(resources.getString(R.string.total), orderInfo.orderInformation.totalFormatted!!, detailOrderInfo)
 
                             /*Fill order fitting info*/
-                            if(orderInfo.orderOwnerInformation.userId == SessionModel(this@OrderDetailActivity).getUser().person?.userId){
+                            if(orderInfo.orderOwnerInformation.userId == sessionUser?.person?.userId){
                                 if(orderInfo.orderProducts!![0].fittings!!.isNotEmpty()){
                                     val tv = TextView(this@OrderDetailActivity)
                                     val params = android.widget.LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
@@ -302,7 +306,7 @@ class OrderDetailActivity : AppCompatActivity() {
         var currentDeliveryStatusWay = 1
         var currentDeliveryStatusCount = 0
         var currentDeliveryStatusDifference = 0
-        val sessionUserId = SessionModel(this).getUser().person?.userId
+        val sessionUserId = sessionUser?.person?.userId
 
         for(update in orderInfoForBundle!!.orderUpdates){
             if(update.newOrderStatusId == "2"){
@@ -369,7 +373,7 @@ class OrderDetailActivity : AppCompatActivity() {
         var currentDeliveryStatusWay = 1
         var currentDeliveryStatusCount = 0
         var currentDeliveryStatusDifference = 0
-        val sessionUserId = SessionModel(this).getUser().person?.userId
+        val sessionUserId = sessionUser?.person?.userId
 
         for(update in orderInfoForBundle!!.orderUpdates){
             if(update.newOrderStatusId == "2"){
