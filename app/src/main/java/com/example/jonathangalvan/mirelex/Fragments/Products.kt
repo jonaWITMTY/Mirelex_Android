@@ -12,16 +12,11 @@ import com.example.jonathangalvan.mirelex.Adapters.ProductsAdapter
 import com.example.jonathangalvan.mirelex.Enums.UserType
 import com.example.jonathangalvan.mirelex.FilterProducts
 import com.example.jonathangalvan.mirelex.Fragments.Utils.CustomBottomAlert
-import com.example.jonathangalvan.mirelex.Interfaces.BottomAlertInterface
-import com.example.jonathangalvan.mirelex.Interfaces.ProductInterface
-import com.example.jonathangalvan.mirelex.Interfaces.ProductsInterface
 import com.example.jonathangalvan.mirelex.Models.SessionModel
 import com.example.jonathangalvan.mirelex.Models.UtilsModel
 import com.example.jonathangalvan.mirelex.ProductDetailActivity
 import com.example.jonathangalvan.mirelex.ProductActivity
 import com.example.jonathangalvan.mirelex.R
-import com.example.jonathangalvan.mirelex.Requests.CustomerProductRequest
-import com.example.jonathangalvan.mirelex.Requests.SetOneaSignalIdRequest
 import kotlinx.android.synthetic.main.fragment_products.*
 import kotlinx.android.synthetic.main.view_centered_message.view.*
 import okhttp3.Call
@@ -30,14 +25,21 @@ import okhttp3.Response
 import java.io.IOException
 import com.onesignal.OneSignal
 import android.app.Activity
+import android.support.v4.app.FragmentManager
 import android.widget.FrameLayout
-import com.example.jonathangalvan.mirelex.Requests.ProductFilterRequest
+import com.example.jonathangalvan.mirelex.Enums.Gender
+import com.example.jonathangalvan.mirelex.Enums.ProductType
+import com.example.jonathangalvan.mirelex.Interfaces.*
+import com.example.jonathangalvan.mirelex.Requests.*
 
 
 class Products : Fragment() {
     private var listener: OnFragmentInteractionListener? = null
     var filterAction = false
     var productAdapter: ProductsAdapter? = null
+    var catalogs: ProductCatalogs? = null
+    var sizes: String = ""
+    var user: UserInterface? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,8 +61,8 @@ class Products : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         /*Confirm phone*/
-        val user = SessionModel(activity!!).getUser()
-        if(user.person?.phoneVerified == "0" || user.person?.phoneVerified == null){
+        user = SessionModel(activity!!).getUser()
+        if(user?.person?.phoneVerified == "0" || user?.person?.phoneVerified == null){
             val ba = UtilsModel.getGson().toJson(BottomAlertInterface(
                 alertType = "confirmAccountPhone"
             ))
@@ -81,6 +83,10 @@ class Products : Fragment() {
                 })
             }
         }
+
+        /*Get filter objs*/
+        getProductCatalogs()
+        getSizes()
     }
 
     override fun onResume() {
@@ -105,9 +111,8 @@ class Products : Fragment() {
 
     fun getProducts(filterProduct: String? = ""){
         var requestStr = ""
-        val user = SessionModel(activity!!).getUser()
         var isClient = "0"
-        if(user.person?.userTypeId == UserType.Customer.userTypeId){
+        if(user?.person?.userTypeId == UserType.Customer.userTypeId){
             isClient = "1"
         }
         if(filterAction){
@@ -116,7 +121,7 @@ class Products : Fragment() {
             requestStr = UtilsModel.getGson().toJson(filterProductObj)
         }else{
             requestStr = UtilsModel.getGson().toJson(CustomerProductRequest(
-                user.characteristics?.sizeId,
+                user?.characteristics?.sizeId,
                 isClient
             ))
         }
@@ -182,6 +187,57 @@ class Products : Fragment() {
         })
     }
 
+    fun getProductCatalogs(){
+        var productTypeId = ""
+        when(user?.person?.userGenderId){
+            Gender.Male.genderId -> {
+                productTypeId = ProductType.Suit.productTypeId
+            }
+            Gender.Female.genderId -> {
+                productTypeId = ProductType.Dress.productTypeId
+            }
+        }
+        val productCatalogsObj = UtilsModel.getGson().toJson(GetProductCatalogsRequest(productTypeId))
+        UtilsModel.getOkClient().newCall(UtilsModel.postRequest( activity!!, resources.getString(R.string.getProducCatalogs), productCatalogsObj)).enqueue(object:
+            Callback {
+            override fun onFailure(call: Call, e: IOException) {}
+
+            override fun onResponse(call: Call, response: Response) {
+                val responseStr = response.body()?.string()
+                val responseObj = UtilsModel.getPostResponse(activity!!, responseStr)
+                if(responseObj.status == "success"){
+                    val productCatalogObj = UtilsModel.getGson().fromJson(UtilsModel.getGson().toJson(responseObj.data!![0]), ProductCatalogs::class.java)
+                    catalogs = productCatalogObj
+                }
+            }
+        })
+    }
+
+    fun getSizes(){
+        var productTypeId = ""
+        when(user?.person?.userGenderId){
+            Gender.Male.genderId -> {
+                productTypeId = ProductType.Suit.productTypeId
+            }
+            Gender.Female.genderId -> {
+                productTypeId = ProductType.Dress.productTypeId
+            }
+        }
+        val sizesRequest = UtilsModel.getGson().toJson(SizesRequest(productTypeId.toInt()))
+        UtilsModel.getOkClient().newCall(UtilsModel.postRequest( activity!!, resources.getString(R.string.userSizes), sizesRequest)).enqueue(object:
+            Callback {
+            override fun onFailure(call: Call, e: IOException) {}
+
+            override fun onResponse(call: Call, response: Response) {
+                val responseStr = response.body()?.string()
+                val responseObj = UtilsModel.getPostResponse(activity!!, responseStr)
+                if(responseObj.status == "success"){
+                    sizes = responseStr!!
+                }
+            }
+        })
+    }
+
     override fun onPrepareOptionsMenu(menu: Menu?) {
         super.onPrepareOptionsMenu(menu)
 
@@ -198,7 +254,12 @@ class Products : Fragment() {
                 startActivity(Intent(activity!!, ProductActivity::class.java))
             }
             R.id.customerTabsFilterIcon -> {
-                startActivityForResult(Intent(activity!!, FilterProducts::class.java), 1)
+                val goToFilterProducts = Intent(activity!!, FilterProducts::class.java)
+                val b = Bundle()
+                b.putString("catalogs", UtilsModel.getGson().toJson(catalogs))
+                b.putString("sizes", sizes)
+                goToFilterProducts.putExtras(b)
+                startActivityForResult(goToFilterProducts, 1)
             }
         }
         return super.onOptionsItemSelected(item)

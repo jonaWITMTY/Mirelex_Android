@@ -64,7 +64,12 @@ class FilterProducts : AppCompatActivity() {
         })
 
         /*Set catalogs depending on session usertypeid*/
-        getProductCatalogs()
+//        getProductCatalogs()
+        val bundleFromProducts = intent.extras
+        val sizesObj = UtilsModel.getGson().fromJson(bundleFromProducts.getString("sizes"), CatalogArrayInterface::class.java)
+        catalogs = UtilsModel.getGson().fromJson(bundleFromProducts.getString("catalogs"), ProductCatalogs::class.java)
+        sizes = sizesObj.data
+        fillProductsCatalogs()
     }
 
     fun doFilterProducts(query: String?){
@@ -131,77 +136,6 @@ class FilterProducts : AppCompatActivity() {
         setResult(Activity.RESULT_OK, returnIntent)
         finish()
     }
-
-    fun getProductCatalogs(){
-        var productTypeId = ""
-        when(SessionModel(this).getUser().person?.userGenderId){
-            Gender.Male.genderId -> {
-                productTypeId = ProductType.Suit.productTypeId
-            }
-            Gender.Female.genderId -> {
-                productTypeId = ProductType.Dress.productTypeId
-            }
-        }
-        val loader = layoutInflater.inflate(R.layout.view_progressbar, findViewById(android.R.id.content), true)
-        val productCatalogsObj = UtilsModel.getGson().toJson(GetProductCatalogsRequest(productTypeId))
-        UtilsModel.getOkClient().newCall(UtilsModel.postRequest( this, resources.getString(R.string.getProducCatalogs), productCatalogsObj)).enqueue(object:
-            Callback {
-            override fun onFailure(call: Call, e: IOException) {
-                runOnUiThread {run{findViewById<ViewGroup>(android.R.id.content).removeView(findViewById(R.id.view_progressbar))}}
-                UtilsModel.getAlertView().newInstance(UtilsModel.getErrorRequestCall(), 1, 0).show(supportFragmentManager,"alertDialog")
-            }
-
-            override fun onResponse(call: Call, response: Response) {
-                val responseStr = response.body()?.string()
-                val responseObj = UtilsModel.getPostResponse(this@FilterProducts, responseStr)
-                if(responseObj.status == "success"){
-                    val productCatalogObj = UtilsModel.getGson().fromJson(UtilsModel.getGson().toJson(responseObj.data!![0]), ProductCatalogs::class.java)
-                    catalogs = productCatalogObj
-                    runOnUiThread {
-                        run{
-                            getSizes()
-                        }
-                    }
-                }
-            }
-        })
-    }
-
-    fun getSizes(){
-        var productTypeId = ""
-        when(SessionModel(this).getUser().person?.userGenderId){
-            Gender.Male.genderId -> {
-                productTypeId = ProductType.Suit.productTypeId
-            }
-            Gender.Female.genderId -> {
-                productTypeId = ProductType.Dress.productTypeId
-            }
-        }
-        val sizesRequest = UtilsModel.getGson().toJson(SizesRequest(productTypeId.toInt()))
-        UtilsModel.getOkClient().newCall(UtilsModel.postRequest( this, resources.getString(R.string.userSizes), sizesRequest)).enqueue(object:
-            Callback {
-            override fun onFailure(call: Call, e: IOException) {
-                runOnUiThread {run{findViewById<ViewGroup>(android.R.id.content).removeView(findViewById(R.id.view_progressbar))}}
-                UtilsModel.getAlertView().newInstance(UtilsModel.getErrorRequestCall(), 1, 0).show(supportFragmentManager,"alertDialog")
-            }
-
-            override fun onResponse(call: Call, response: Response) {
-                runOnUiThread {run{findViewById<ViewGroup>(android.R.id.content).removeView(findViewById(R.id.view_progressbar))}}
-                val responseStr = response.body()?.string()
-                val responseObj = UtilsModel.getPostResponse(this@FilterProducts, responseStr)
-                if(responseObj.status == "success"){
-                    val sizesObj = UtilsModel.getGson().fromJson(responseStr, CatalogArrayInterface::class.java)
-                    sizes = sizesObj.data
-                    runOnUiThread {
-                        run{
-                            fillProductsCatalogs()
-                        }
-                    }
-                }
-            }
-        })
-    }
-
 
     fun fillProductsCatalogs(){
         fillSpinnerSize(sizes, findViewById(R.id.filterProductSize))
