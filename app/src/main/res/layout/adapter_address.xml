@@ -26,6 +26,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
+                    android:textColor="@color/black"
                     android:textSize="15dp"
                     android:textStyle="bold"
                     tools:text="Name" />
@@ -41,6 +42,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:textColor="@color/black"
                         tools:text="@string/emailField" />
 
                 <TextView
@@ -48,6 +50,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="0"
+                        android:textColor="@color/black"
                         tools:text="Phone" />
             </LinearLayout>
 
@@ -55,6 +58,7 @@
                     android:id="@+id/addressAdapterAddress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/black"
                     android:textSize="16dp"
                     tools:text="Address" />
         </LinearLayout>
