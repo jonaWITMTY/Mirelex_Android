@@ -2,17 +2,24 @@ package com.example.jonathangalvan.mirelex
 
 import android.app.ActivityOptions
 import android.content.Intent
+import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.os.PersistableBundle
+import android.support.v4.app.Fragment
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.Toast
 import com.example.jonathangalvan.mirelex.Enums.OrderType
 import com.example.jonathangalvan.mirelex.Enums.UserType
+import com.example.jonathangalvan.mirelex.Fragments.Utils.SelectItems
 import com.example.jonathangalvan.mirelex.Interfaces.*
+import com.example.jonathangalvan.mirelex.Listeners.SelectedItemsListener
 import com.example.jonathangalvan.mirelex.Models.SessionModel
 import com.example.jonathangalvan.mirelex.Models.UtilsModel
 import com.example.jonathangalvan.mirelex.Requests.CreateOrderRequest
+import com.example.jonathangalvan.mirelex.Requests.GetMirelexStores
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_order_checkout.*
 import kotlinx.android.synthetic.main.view_centered_message.view.*
@@ -21,12 +28,13 @@ import okhttp3.Callback
 import okhttp3.Response
 import java.io.IOException
 
-class OrderCheckoutActivity : AppCompatActivity() {
+class OrderCheckoutActivity : AppCompatActivity(), SelectItems.OnFragmentInteractionListener, SelectedItemsListener.SelectedItemsListenerInterface {
 
     private var orderRequestObj: CreateOrderRequest? = null
     private var productObj: ProductInfoInterface? = null
     private var sessionUser: UserInterface? = null
     private var defaultCard: PaymentCard? = null
+    private var storeList: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -92,6 +100,19 @@ class OrderCheckoutActivity : AppCompatActivity() {
             if(orderCheckoutTerms.isChecked){
                 orderRequestObj!!.clientDelivery = orderCheckoutDelivery.isChecked
 
+                if(productObj?.productOwner?.person?.userTypeId == UserType.Customer.userTypeId){
+                    if(orderRequestObj!!.addressId.isNullOrEmpty()){
+                        runOnUiThread {run{findViewById<ViewGroup>(android.R.id.content).removeView(findViewById(R.id.view_progressbar))}}
+                        val text = resources.getText(R.string.fillRequiredFields)
+                        val duration = Toast.LENGTH_SHORT
+                        Toast.makeText(this, text, duration).show()
+                    }else{
+                        createOrderRequest()
+                    }
+                }else{
+                    createOrderRequest()
+                }
+
                 /*Hide delivery and Payments - switch*/
 //                when(orderRequestObj?.orderType){
 //                    OrderType.Lease.orderTypeId, OrderType.Purchase.orderTypeId -> {
@@ -108,14 +129,42 @@ class OrderCheckoutActivity : AppCompatActivity() {
 //                        createOrderRequest()
 //                    }
 //                }
-
-                /*Hide delivery and Payments - Order without delivery and payment call*/
-                createOrderRequest()
             }else{
                 runOnUiThread {run{findViewById<ViewGroup>(android.R.id.content).removeView(findViewById(R.id.view_progressbar))}}
                 UtilsModel.getAlertView().newInstance(UtilsModel.getErrorMissingTerms(), 1, 0).show(supportFragmentManager, "alertView")
             }
         })
+
+        /*Select store for customer - customer order*/
+        when(productObj?.productOwner?.person?.userTypeId){
+            UserType.Customer.userTypeId ->{
+                val getStoresObj = UtilsModel.getGson().toJson(GetMirelexStores(
+                    sessionUser?.address!![0].stateId.toString()
+                ))
+
+                UtilsModel.getOkClient().newCall(UtilsModel.postRequest(this, resources.getString(R.string.getStores), getStoresObj)).enqueue( object: Callback {
+                    override fun onFailure(call: Call, e: IOException) {}
+
+                    override fun onResponse(call: Call, response: Response) {
+                        val responseStr = response.body()?.string()
+                        val responseObj = UtilsModel.getPostResponse(this@OrderCheckoutActivity, responseStr)
+                        if(responseObj.status == "success"){
+                            storeList = responseStr!!
+                        }
+                    }
+                })
+
+                orderCheckoutStoreSelection.setOnClickListener(View.OnClickListener {
+                    val sil = SelectedItemsListener(this, supportFragmentManager)
+                    showSupportActionBar(false)
+                    sil.openTab(SelectItems(), "storesList", "storesList", storeList)
+                })
+            }
+            else -> {
+                orderCheckoutStoreSelection.visibility = View.GONE
+            }
+        }
+
     }
 
     override fun onResume() {
@@ -222,6 +271,34 @@ class OrderCheckoutActivity : AppCompatActivity() {
 
     fun confirmBtnCallback(){
        startActivity(Intent(this, CustomerTabsActivity::class.java))
+    }
+
+    override fun onFragmentInteraction(uri: Uri) {}
+
+    override fun callback(tag: String, inputName: String, id: String, inputText: String) {
+        showSupportActionBar()
+        val fragment = supportFragmentManager.findFragmentByTag(tag)
+        if (fragment != null) {
+            supportFragmentManager.beginTransaction().remove(fragment).commit()
+        }
+        orderCheckoutStoreSelection.text = inputText
+        orderRequestObj?.addressId = id
+    }
+
+    override fun callbackClose(tag: String){
+        showSupportActionBar()
+        val fragment = supportFragmentManager.findFragmentByTag(tag)
+        if (fragment != null) {
+            supportFragmentManager.beginTransaction().remove(fragment).commit()
+        }
+    }
+
+    fun showSupportActionBar(sab: Boolean = true){
+        if(sab){
+            supportActionBar?.show()
+        }else{
+            supportActionBar?.hide()
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {

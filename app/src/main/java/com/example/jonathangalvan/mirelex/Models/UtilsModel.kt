@@ -21,6 +21,9 @@ import okhttp3.*
 import java.io.File
 import java.util.*
 import kotlin.collections.ArrayList
+import org.json.JSONException
+import org.json.JSONArray
+import org.json.JSONObject
 
 class UtilsModel {
     companion object {
@@ -111,7 +114,7 @@ class UtilsModel {
 
         fun getPostResponse(context: Context?, response: String?): ResponseInterface{
             var responseObj = ResponseInterface(status = "systemError", title = "", desc = "", data = ArrayList())
-            if(response != null && response != ""){
+            if(response != null && response != "" && isJSONValid(response)){
                 responseObj = getGson().fromJson(response, ResponseInterface::class.java)
                 if(responseObj.status == "sessionFailed"){
                     if (context != null) {
@@ -129,6 +132,23 @@ class UtilsModel {
             val scale = context.resources.displayMetrics.density.toInt()
             val pixels = (dp * scale)
             return pixels
+        }
+
+        fun isJSONValid(test: String): Boolean {
+            try {
+                JSONObject(test)
+            } catch (ex: JSONException) {
+                // edited, to include @Arthur's comment
+                // e.g. in case JSONArray is valid as well...
+                try {
+                    JSONArray(test)
+                } catch (ex1: JSONException) {
+                    return false
+                }
+
+            }
+
+            return true
         }
 
         fun getAlertView(): CustomAlert {

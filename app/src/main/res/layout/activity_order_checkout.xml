@@ -65,6 +65,7 @@
             <View
                     android:layout_width="match_parent"
                     android:layout_height="40dp" android:id="@+id/view3" android:background="@color/colorLightGray"/>
+
             <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/orderCheckoutOrderType"
@@ -104,6 +105,26 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/orderCheckoutTerms"
                     android:buttonTint="@color/colorBlue"/>
+
+            <View
+                    android:id="@+id/view6"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="@color/colorLightGray" />
+
+            <TextView
+                    android:id="@+id/orderCheckoutStoreSelection"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="@string/selectStore"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
             <Button
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
