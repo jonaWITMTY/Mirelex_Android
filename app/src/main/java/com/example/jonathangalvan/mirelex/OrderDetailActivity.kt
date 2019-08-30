@@ -83,60 +83,33 @@ class OrderDetailActivity : AppCompatActivity() {
                             supportActionBar?.title = orderInfo.orderInformation.folio
 
                             /*Event for action button*/
-                            when(sessionUser?.person?.userId){
-                                orderInfoForBundle!!.orderOwnerInformation.userId -> {
-                                    if(
-                                        (orderInfoForBundle?.orderInformation?.acceptedDate == null && orderInfoForBundle?.orderInformation?.rejectedDate == null) ||
-                                        orderInfoForBundle?.orderInformation?.orderStatusId == OrderStatus.Open.orderStatusId
-                                    ){
-                                        detailOrderActionAceptReject.visibility = View.VISIBLE
+                            if(
+                                ((orderInfoForBundle?.orderInformation?.acceptedDate == null && orderInfoForBundle?.orderInformation?.rejectedDate == null) ||
+                                orderInfoForBundle?.orderInformation?.orderStatusId == OrderStatus.Open.orderStatusId) &&
+                                orderInfoForBundle?.orderOwnerInformation?.userId == sessionUser?.person?.userId
+                            ){
+                                detailOrderActionAceptReject.visibility = View.VISIBLE
 //                                        detailOrderDelivery.visibility = View.VISIBLE /*Hide delivery and payments*/
 
-                                        detailOrderActionAceptOrder.setOnClickListener(View.OnClickListener {
-                                            aceptOrder()
-                                        })
+                                detailOrderActionAceptOrder.setOnClickListener(View.OnClickListener {
+                                    aceptOrder()
+                                })
 
-                                        detailOrderActionRejectOrder.setOnClickListener(View.OnClickListener {
-                                            aceptOrder(false)
-                                        })
-                                    }else{
-                                        when(orderInfoForBundle!!.orderInformation.orderTypeId){
-                                            OrderType.Fitting.orderTypeId -> {
-                                                orderStatusFittingProcess()
-                                            }
-                                            OrderType.Lease.orderTypeId, OrderType.Purchase.orderTypeId -> {
-                                                orderStatusLeasePurchaseProcess()
-                                            }
-                                        }
-
-                                        /*Show or hide status form*/
-                                        if(displayForm){
-                                            detailOrderActionButton.visibility = View.VISIBLE
-                                            detailOrderActionButton.text = inputValue
-                                            detailOrderActionButton.setOnClickListener(View.OnClickListener {
-                                                if(orderInfoForBundle!!.orderInformation.orderTypeId == OrderType.Fitting.orderTypeId){
-                                                    if(
-                                                        orderFutureStatus == OrderStatus.Finished.orderStatusId &&
-                                                        orderInfoForBundle?.orderOwnerInformation?.userId == sessionUser?.person?.userId
-                                                    ){
-                                                        val ba = UtilsModel.getGson().toJson(BottomAlertInterface(
-                                                            alertType = "fittingOrderProcess",
-                                                            orderId = orderInfoForBundle!!.orderInformation.orderId,
-                                                            userId = orderInfoForBundle!!.orderClientInformation.userId,
-                                                            productId = orderInfo.orderProducts!![0].productId
-                                                        ))
-                                                        CustomBottomAlert().bottomSheetDialogInstance(ba).show(supportFragmentManager, "alert")
-                                                    }
-                                                }else{
-                                                    changeOrderStatus()
-                                                }
-                                            })
-                                        }
+                                detailOrderActionRejectOrder.setOnClickListener(View.OnClickListener {
+                                    aceptOrder(false)
+                                })
+                            }else{
+                                when(orderInfoForBundle!!.orderInformation.orderTypeId){
+                                    OrderType.Fitting.orderTypeId -> {
+                                        orderStatusFittingProcess()
+                                    }
+                                    OrderType.Lease.orderTypeId, OrderType.Purchase.orderTypeId -> {
+                                        orderStatusLeasePurchaseProcess()
                                     }
                                 }
-                                orderInfoForBundle!!.orderClientInformation.userId -> {
-                                    getOrderActionStatusClient()
-                                }
+
+                                /*Show or hide status form*/
+                                statusForm()
                             }
 
                             /*Fill order and product info*/
@@ -242,6 +215,31 @@ class OrderDetailActivity : AppCompatActivity() {
                 }
             }
         })
+    }
+
+    fun statusForm(){
+        if(displayForm){
+            detailOrderActionButton.visibility = View.VISIBLE
+            detailOrderActionButton.text = inputValue
+            detailOrderActionButton.setOnClickListener(View.OnClickListener {
+                if(orderInfoForBundle!!.orderInformation.orderTypeId == OrderType.Fitting.orderTypeId ){
+                    if(
+                        orderFutureStatus == OrderStatus.Finished.orderStatusId &&
+                        orderInfoForBundle?.orderOwnerInformation?.userId == sessionUser?.person?.userId
+                    ){
+                        val ba = UtilsModel.getGson().toJson(BottomAlertInterface(
+                            alertType = "fittingOrderProcess",
+                            orderId = orderInfoForBundle!!.orderInformation.orderId,
+                            userId = orderInfoForBundle!!.orderClientInformation.userId,
+                            productId = orderInfoForBundle?.orderProducts!![0].productId
+                        ))
+                        CustomBottomAlert().bottomSheetDialogInstance(ba).show(supportFragmentManager, "alert")
+                    }
+                }else{
+                    changeOrderStatus()
+                }
+            })
+        }
     }
 
     fun aceptOrder(isAcepted: Boolean = true){
@@ -381,18 +379,40 @@ class OrderDetailActivity : AppCompatActivity() {
             }
         }
 
-        when("${orderInfoForBundle!!.orderInformation.ownerDelivery}${orderInfoForBundle!!.orderInformation.clientDelivery}"){
-            "00"-> {
-                val coutnDeliveryStatus = 1
-                currentDeliveryStatusDifference = coutnDeliveryStatus - currentDeliveryStatusCount
+
+        if(orderInfoForBundle?.orderOwnerInformation?.isMirelexStore == "0"){
+
+            /*Order customer to customer*/
+            when("${orderInfoForBundle!!.orderInformation.ownerDelivery}${orderInfoForBundle!!.orderInformation.clientDelivery}"){
+                "00"-> {
+                    val coutnDeliveryStatus = 3
+                    currentDeliveryStatusDifference = coutnDeliveryStatus - currentDeliveryStatusCount
+                }
+//                "10", "01" -> {
+//                    val coutnDeliveryStatus = 2
+//                    currentDeliveryStatusDifference = coutnDeliveryStatus - currentDeliveryStatusCount
+//                }
+//                "11" -> {
+//                    val coutnDeliveryStatus = 3
+//                    currentDeliveryStatusDifference = coutnDeliveryStatus - currentDeliveryStatusCount
+//                }
             }
-            "10", "01" -> {
-                val coutnDeliveryStatus = 2
-                currentDeliveryStatusDifference = coutnDeliveryStatus - currentDeliveryStatusCount
-            }
-            "11" -> {
-                val coutnDeliveryStatus = 3
-                currentDeliveryStatusDifference = coutnDeliveryStatus - currentDeliveryStatusCount
+        }else{
+
+            /*Order store to customer*/
+            when("${orderInfoForBundle!!.orderInformation.ownerDelivery}${orderInfoForBundle!!.orderInformation.clientDelivery}"){
+                "00"-> {
+                    val coutnDeliveryStatus = 1
+                    currentDeliveryStatusDifference = coutnDeliveryStatus - currentDeliveryStatusCount
+                }
+//                "10", "01" -> {
+//                    val coutnDeliveryStatus = 2
+//                    currentDeliveryStatusDifference = coutnDeliveryStatus - currentDeliveryStatusCount
+//                }
+//                "11" -> {
+//                    val coutnDeliveryStatus = 3
+//                    currentDeliveryStatusDifference = coutnDeliveryStatus - currentDeliveryStatusCount
+//                }
             }
         }
 
@@ -401,35 +421,71 @@ class OrderDetailActivity : AppCompatActivity() {
         }
 
         if(orderInfoForBundle!!.orderOwnerInformation.isMirelexStore == "0"){
+
+            /*Process when order is customer - customer*/
+
+            /*Session user is owner*/
             if(orderInfoForBundle!!.orderOwnerInformation.userId == sessionUserId){
                 when (orderInfoForBundle!!.orderInformation.orderStatusId) {
-                    OrderStatus.Gathering.orderStatusId, OrderStatus.DeliveringProcess.orderStatusId -> {
+                    OrderStatus.Gathering.orderStatusId -> {
                         if (currentDeliveryStatusWay == 0){
                             orderFutureStatus = OrderStatus.Finished.orderStatusId
                             inputValue = "Finalizar"
                             displayForm = true
                         }
-                    }
-                }
-            }else{
-                when (orderInfoForBundle!!.orderInformation.orderStatusId) {
-                    OrderStatus.Processing.orderStatusId -> {
-                        if(currentDeliveryStatusWay == 1 && (currentDeliveryStatusDifference == 1 || currentDeliveryStatusDifference == 2)) {
-                            orderFutureStatus = OrderStatus.Gathering.orderStatusId
-                            inputValue = "Listo para recolectar"
-                            displayForm = true
-                        }
-                    }
-                    OrderStatus.Gathering.orderStatusId, OrderStatus.DeliveringProcess.orderStatusId -> {
-                        if(currentDeliveryStatusWay == 1 && (currentDeliveryStatusDifference == 1 || currentDeliveryStatusDifference == 2)) {
+
+                        if (currentDeliveryStatusWay == 1){
                             orderFutureStatus = OrderStatus.Processing.orderStatusId
                             inputValue = "Entregado en tienda"
                             displayForm = true
                         }
                     }
                 }
+            }else{
+
+                when(sessionUser?.person?.userTypeId){
+
+                    /*Session user is client*/
+                    UserType.Customer.userTypeId -> {
+
+                    }
+
+                    /*Session user is store*/
+                    UserType.Store.userTypeId ->{
+                        when (orderInfoForBundle!!.orderInformation.orderStatusId) {
+                            OrderStatus.Processing.orderStatusId -> {
+                                if(currentDeliveryStatusWay == 1){
+                                    orderFutureStatus = OrderStatus.Gathering.orderStatusId
+                                    inputValue = "Listo para recolectar"
+                                    displayForm = true
+                                }
+                            }
+
+                            OrderStatus.Gathering.orderStatusId -> {
+                                if(currentDeliveryStatusWay == 1){
+                                    orderFutureStatus = OrderStatus.Delivered.orderStatusId
+                                    inputValue = "Entregado"
+                                    displayForm = true
+                                }
+                            }
+
+                            OrderStatus.Delivered.orderStatusId -> {
+                                if(currentDeliveryStatusWay == 1){
+                                    orderFutureStatus = OrderStatus.Gathering.orderStatusId
+                                    inputValue = "Recibido"
+                                    displayForm = true
+                                }
+                            }
+                        }
+                    }
+                }
+
             }
         }else{
+
+            /*Process when order is store - customer*/
+
+            /*Session user is store*/
             if (orderInfoForBundle!!.orderOwnerInformation.userId == sessionUserId) {
                 when (orderInfoForBundle!!.orderInformation.orderStatusId) {
                     OrderStatus.Processing.orderStatusId -> {
@@ -452,65 +508,6 @@ class OrderDetailActivity : AppCompatActivity() {
                 }
             }
         }
-    }
-
-    fun getOrderActionStatusClient() {
-        var currentDeliveryStatusWay = 1
-        var currentDeliveryStatusCount = 0
-        var currentDeliveryStatusDifference = 0
-
-        for(update in orderInfoForBundle!!.orderUpdates){
-            if(update.newOrderStatusId == "2"){
-                currentDeliveryStatusCount++
-            }
-        }
-
-        when("${orderInfoForBundle!!.orderInformation.ownerDelivery}${orderInfoForBundle!!.orderInformation.clientDelivery}"){
-            "11" -> {
-                val coutnDeliveryStatus = 3
-                currentDeliveryStatusDifference = coutnDeliveryStatus - currentDeliveryStatusCount
-            }
-            else -> {
-                val coutnDeliveryStatus = 2
-                currentDeliveryStatusDifference = coutnDeliveryStatus - currentDeliveryStatusCount
-            }
-        }
-
-        if (currentDeliveryStatusDifference == 0) {
-            currentDeliveryStatusWay = 0
-        }
-
-        when(orderInfoForBundle?.orderInformation?.orderStatusId){
-            OrderStatus.Gathering.orderStatusId, OrderStatus.DeliveringProcess.orderStatusId -> {
-                if (currentDeliveryStatusWay == 0) {
-                    if (orderInfoForBundle?.orderInformation?.orderTypeId == OrderType.Purchase.orderTypeId) {
-                        inputValue = OrderStatus.Finished.orderStatusId
-                        orderFutureStatus = "Finalizar"
-                    } else {
-                        inputValue = OrderStatus.Delivered.orderStatusId
-                        orderFutureStatus = "Entregado"
-                    }
-                    displayForm = true
-                }
-            }
-            OrderStatus.Delivered.orderStatusId -> {
-                if (orderInfoForBundle?.orderInformation?.orderTypeId == OrderType.Lease.orderTypeId) {
-                    if (currentDeliveryStatusWay == 0) {
-                        inputValue = "Listo para recolectar"
-                        orderFutureStatus = OrderStatus.Gathering.orderStatusId
-                        displayForm = true
-                    }
-                } else {
-                    if (currentDeliveryStatusWay == 0) {
-                        inputValue = "Finalizar"
-                        orderFutureStatus = OrderStatus.Finished.orderStatusId
-                        displayForm = true
-                    }
-                }
-            }
-
-        }
-
     }
 
     fun addRow(title: String, value: String, viewGroup: ViewGroup){
