@@ -463,9 +463,15 @@ class OrderDetailActivity : AppCompatActivity() {
 
                             OrderStatus.Gathering.orderStatusId -> {
                                 if(currentDeliveryStatusWay == 1){
-                                    orderFutureStatus = OrderStatus.Delivered.orderStatusId
-                                    inputValue = "Entregado"
-                                    displayForm = true
+                                    if(orderInfoForBundle?.orderInformation?.orderTypeId == OrderType.Lease.orderTypeId){
+                                        orderFutureStatus = OrderStatus.Delivered.orderStatusId
+                                        inputValue = "Entregado"
+                                        displayForm = true
+                                    }else{
+                                        orderFutureStatus = OrderStatus.Finished.orderStatusId
+                                        inputValue = "Finalizar"
+                                        displayForm = true
+                                    }
                                 }
                             }
 
