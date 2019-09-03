@@ -75,6 +75,7 @@ class OrderPaymentInformation(
 
 class OrderPersonInformation(
     var userId: String?,
+    var userTypeId: String?,
     var firstName: String?,
     var secondName: String?,
     var paternalLastName: String?,
