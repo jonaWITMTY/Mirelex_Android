@@ -489,7 +489,7 @@ class OrderDetailActivity : AppCompatActivity(), OrderStatusDetailList.OnFragmen
                             displayForm = true
                         }
 
-                        if (currentDeliveryStatusWay == 1){
+                        if (currentDeliveryStatusWay == 1 && currentDeliveryStatusDifference == 2){
                             orderFutureStatus = OrderStatus.Processing.orderStatusId
                             inputValue = "Entregado en tienda"
                             displayForm = true
@@ -517,7 +517,7 @@ class OrderDetailActivity : AppCompatActivity(), OrderStatusDetailList.OnFragmen
                             }
 
                             OrderStatus.Gathering.orderStatusId -> {
-                                if(currentDeliveryStatusWay == 1){
+                                if(currentDeliveryStatusWay == 1 && currentDeliveryStatusDifference == 1){
                                     if(orderInfoForBundle?.orderInformation?.orderTypeId == OrderType.Lease.orderTypeId){
                                         orderFutureStatus = OrderStatus.Delivered.orderStatusId
                                         inputValue = "Entregado"
