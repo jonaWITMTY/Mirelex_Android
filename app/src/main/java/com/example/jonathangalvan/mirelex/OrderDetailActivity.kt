@@ -27,6 +27,8 @@ import com.rey.material.widget.LinearLayout
 import com.rey.material.widget.TextView
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_order_detail.*
+import kotlinx.android.synthetic.main.view_detail_info_row.view.*
+import kotlinx.android.synthetic.main.view_detail_info_row_with_chevron_title.view.*
 import kotlinx.android.synthetic.main.view_detail_info_row_with_title.view.*
 import okhttp3.Call
 import okhttp3.Callback
@@ -171,6 +173,15 @@ class OrderDetailActivity : AppCompatActivity() {
                             addRow(resources.getString(R.string.date), orderInfo.orderInformation.startDate!!, detailOrderInfo)
                             addRow(resources.getString(R.string.status), orderInfo.orderInformation.orderStatus!!, detailOrderInfo)
                             addRow(resources.getString(R.string.total), orderInfo.orderInformation.totalFormatted!!, detailOrderInfo)
+
+                            if(orderInfo?.orderInformation?.deliveryAddress != null){
+                                addRowTitle(
+                                    "${orderInfo.orderInformation.deliveryAddress!!.street} ${orderInfo.orderInformation.deliveryAddress!!.numExt}, " +
+                                            "${orderInfo.orderInformation.deliveryAddress!!.cityName}, " +
+                                            "${orderInfo.orderInformation.deliveryAddress!!.stateName}" ,
+                                    detailOrderInfo
+                                )
+                            }
 
                             /*Fill order fitting info*/
                             if(orderInfo.orderOwnerInformation.userId == sessionUser?.person?.userId){
@@ -520,6 +531,12 @@ class OrderDetailActivity : AppCompatActivity() {
         val insertRow = layoutInflater.inflate(R.layout.view_detail_info_row_with_title, detailOrderInfo, false)
         insertRow.detailInfoNameView.text = title
         insertRow.detailInfoValueView.text = value
+        viewGroup.addView(insertRow)
+    }
+
+    fun addRowTitle(value: String, viewGroup: ViewGroup){
+        val insertRow = layoutInflater.inflate(R.layout.view_detail_info_row, detailOrderInfo, false)
+        insertRow.detailInfoJustValueView.text = value
         viewGroup.addView(insertRow)
     }
 

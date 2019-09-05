@@ -20,7 +20,8 @@ class OrderInterface(
     var rejectedDate: String?,
     var clientDelivery: String?,
     var ownerDelivery: String?,
-    var product: ProductInterface
+    var product: ProductInterface,
+    var deliveryAddress: Address?
 ) { }
 
 class OrdersInterface(
