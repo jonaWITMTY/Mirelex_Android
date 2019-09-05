@@ -40,9 +40,6 @@ class OrderStatusDetailList : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        orderStatusDetailListClose.setOnClickListener(View.OnClickListener {
-            (activity as OrderDetailActivity).closeTab()
-        })
         orderStatusDetailList.layoutManager = LinearLayoutManager(activity)
         orderStatusDetailList.adapter = orderStatusAdapter
         orderStatusAdapter.loadNewData(orderObj!!.orderUpdates)
@@ -64,7 +61,6 @@ class OrderStatusDetailList : Fragment() {
     override fun onDetach() {
         super.onDetach()
         listener = null
-        (activity as OrderDetailActivity).closeTab()
     }
 
     interface OnFragmentInteractionListener {

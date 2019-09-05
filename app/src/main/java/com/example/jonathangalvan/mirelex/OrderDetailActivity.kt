@@ -547,7 +547,6 @@ class OrderDetailActivity : AppCompatActivity(), OrderStatusDetailList.OnFragmen
         val insertRow = layoutInflater.inflate(R.layout.view_detail_info_row_with_chevron_title, detailOrderInfo, false)
         insertRow.detailInfoChevronTitle.text = resources.getString(R.string.statusHistory)
         insertRow.setOnClickListener(View.OnClickListener {
-            supportActionBar?.hide()
             openTab(OrderStatusDetailList())
         })
         viewGroup.addView(insertRow)
@@ -562,14 +561,6 @@ class OrderDetailActivity : AppCompatActivity(), OrderStatusDetailList.OnFragmen
         transaction.replace(android.R.id.content, fragment, "SelectedItemsFragment")
         transaction.addToBackStack(null)
         transaction.commit()
-    }
-
-    fun closeTab(){
-        supportActionBar?.show()
-        val f = supportFragmentManager.findFragmentByTag("SelectedItemsFragment")
-        if (f != null) {
-            supportFragmentManager.beginTransaction().remove(f).commit()
-        }
     }
 
     override fun onFragmentInteraction(uri: Uri) {}
