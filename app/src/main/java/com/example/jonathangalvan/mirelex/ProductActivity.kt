@@ -129,7 +129,7 @@ class ProductActivity : AppCompatActivity(),
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        finish()
+        onBackPressed()
         return true
     }
 
