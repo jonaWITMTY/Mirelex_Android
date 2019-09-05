@@ -146,4 +146,5 @@
     <string name="myProducts">Mis productos</string>
     <string name="myOrders">Mis órdenes</string>
     <string name="selectStore">Seleccione una tienda donde recogerá su pedido</string>
+    <string name="statusHistory">Ver historial de estatus</string>
 </resources>

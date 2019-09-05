@@ -2,8 +2,10 @@ package com.example.jonathangalvan.mirelex
 
 import android.content.Intent
 import android.graphics.Typeface
+import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.util.TypedValue
 import android.view.Gravity
@@ -13,8 +15,8 @@ import com.example.jonathangalvan.mirelex.Adapters.SliderPagerAdapter
 import com.example.jonathangalvan.mirelex.Enums.OrderStatus
 import com.example.jonathangalvan.mirelex.Enums.OrderType
 import com.example.jonathangalvan.mirelex.Enums.UserType
+import com.example.jonathangalvan.mirelex.Fragments.Order.OrderStatusDetailList
 import com.example.jonathangalvan.mirelex.Fragments.Utils.CustomBottomAlert
-import com.example.jonathangalvan.mirelex.Fragments.Utils.ImagePreview
 import com.example.jonathangalvan.mirelex.Interfaces.BottomAlertInterface
 import com.example.jonathangalvan.mirelex.Interfaces.OrderProductInfo
 import com.example.jonathangalvan.mirelex.Interfaces.UserInterface
@@ -23,7 +25,6 @@ import com.example.jonathangalvan.mirelex.Models.UtilsModel
 import com.example.jonathangalvan.mirelex.Requests.AcceptRejectOrderRequest
 import com.example.jonathangalvan.mirelex.Requests.GetOrderInfoRequest
 import com.example.jonathangalvan.mirelex.Requests.UpdateOrderStatusRequest
-import com.rey.material.widget.LinearLayout
 import com.rey.material.widget.TextView
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_order_detail.*
@@ -36,7 +37,7 @@ import okhttp3.Response
 import java.io.IOException
 import java.util.ArrayList
 
-class OrderDetailActivity : AppCompatActivity() {
+class OrderDetailActivity : AppCompatActivity(), OrderStatusDetailList.OnFragmentInteractionListener{
     var orderInfoForBundle: OrderProductInfo? = null
     var orderFutureStatus = ""
     var inputValue = ""
@@ -182,6 +183,8 @@ class OrderDetailActivity : AppCompatActivity() {
                                     detailOrderInfo
                                 )
                             }
+
+                            addStatusRow(detailOrderInfo)
 
                             /*Fill order fitting info*/
                             if(orderInfo.orderOwnerInformation.userId == sessionUser?.person?.userId){
@@ -540,8 +543,39 @@ class OrderDetailActivity : AppCompatActivity() {
         viewGroup.addView(insertRow)
     }
 
+    fun addStatusRow(viewGroup: ViewGroup){
+        val insertRow = layoutInflater.inflate(R.layout.view_detail_info_row_with_chevron_title, detailOrderInfo, false)
+        insertRow.detailInfoChevronTitle.text = resources.getString(R.string.statusHistory)
+        insertRow.setOnClickListener(View.OnClickListener {
+            supportActionBar?.hide()
+            openTab(OrderStatusDetailList())
+        })
+        viewGroup.addView(insertRow)
+    }
+
+    fun openTab(fragment: Fragment){
+        val b = Bundle()
+        b.putString("orderObj", UtilsModel.getGson().toJson(orderInfoForBundle))
+        fragment.arguments = b
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.setCustomAnimations(R.anim.abc_slide_in_bottom,  R.anim.abc_fade_out)
+        transaction.replace(android.R.id.content, fragment, "SelectedItemsFragment")
+        transaction.addToBackStack(null)
+        transaction.commit()
+    }
+
+    fun closeTab(){
+        supportActionBar?.show()
+        val f = supportFragmentManager.findFragmentByTag("SelectedItemsFragment")
+        if (f != null) {
+            supportFragmentManager.beginTransaction().remove(f).commit()
+        }
+    }
+
+    override fun onFragmentInteraction(uri: Uri) {}
+
     override fun onSupportNavigateUp(): Boolean {
-        finish()
+        onBackPressed()
         return true
     }
 }

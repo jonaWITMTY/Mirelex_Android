@@ -145,4 +145,5 @@
     <string name="myProducts">My products</string>
     <string name="myOrders">My orders</string>
     <string name="selectStore">Select a Store to pickup your order</string>
+    <string name="statusHistory">See status history</string>
 </resources>
