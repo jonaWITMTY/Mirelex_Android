@@ -557,7 +557,7 @@ class OrderDetailActivity : AppCompatActivity(), OrderStatusDetailList.OnFragmen
         b.putString("orderObj", UtilsModel.getGson().toJson(orderInfoForBundle))
         fragment.arguments = b
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.setCustomAnimations(R.anim.abc_slide_in_bottom,  R.anim.abc_fade_out)
+        transaction.setCustomAnimations(R.anim.abc_slide_in_bottom, R.anim.abc_slide_out_bottom, R.anim.abc_slide_in_bottom,  R.anim.abc_slide_out_bottom)
         transaction.replace(android.R.id.content, fragment, "SelectedItemsFragment")
         transaction.addToBackStack(null)
         transaction.commit()
