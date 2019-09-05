@@ -238,8 +238,8 @@ class OrderDetailActivity : AppCompatActivity(), OrderStatusDetailList.OnFragmen
             detailOrderActionButton.setOnClickListener(View.OnClickListener {
                 if(orderInfoForBundle!!.orderInformation.orderTypeId == OrderType.Fitting.orderTypeId ){
                     if(
-                        orderFutureStatus == OrderStatus.Finished.orderStatusId &&
-                        orderInfoForBundle?.orderOwnerInformation?.userId == sessionUser?.person?.userId
+                        (orderFutureStatus == OrderStatus.Finished.orderStatusId && sessionUser?.person?.isMirelexStore == "1") ||
+                        (orderFutureStatus == OrderStatus.Gathering.orderStatusId && sessionUser?.person?.isMirelexStore == "1")
                     ){
                         val ba = UtilsModel.getGson().toJson(BottomAlertInterface(
                             alertType = "fittingOrderProcess",
