@@ -279,7 +279,8 @@ class OrderCheckoutActivity : AppCompatActivity(), SelectItems.OnFragmentInterac
         showSupportActionBar()
         val fragment = supportFragmentManager.findFragmentByTag(tag)
         if (fragment != null) {
-            supportFragmentManager.beginTransaction().remove(fragment).commit()
+//            supportFragmentManager.beginTransaction().remove(fragment).commit()
+            supportFragmentManager.popBackStack()
         }
         orderCheckoutStoreSelection.text = inputText
         orderRequestObj?.addressId = id
@@ -289,7 +290,8 @@ class OrderCheckoutActivity : AppCompatActivity(), SelectItems.OnFragmentInterac
         showSupportActionBar()
         val fragment = supportFragmentManager.findFragmentByTag(tag)
         if (fragment != null) {
-            supportFragmentManager.beginTransaction().remove(fragment).commit()
+//            supportFragmentManager.beginTransaction().remove(fragment).commit()
+            supportFragmentManager.popBackStack()
         }
     }
 
@@ -302,7 +304,7 @@ class OrderCheckoutActivity : AppCompatActivity(), SelectItems.OnFragmentInterac
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        finish()
+        onBackPressed()
         return true
     }
 }
