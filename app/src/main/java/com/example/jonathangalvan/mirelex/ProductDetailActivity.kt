@@ -156,7 +156,7 @@ class ProductDetailActivity : AppCompatActivity() {
                                     false
                                 )
                                 productFitting.detailInfoChevronTitle.text = resources.getString(R.string.doFittingOrder)
-                                detailProductInfo.setOnClickListener(View.OnClickListener {
+                                productFitting.setOnClickListener(View.OnClickListener {
                                     continueForFitting()
                                 })
                                 detailProductInfo.addView(productFitting)
