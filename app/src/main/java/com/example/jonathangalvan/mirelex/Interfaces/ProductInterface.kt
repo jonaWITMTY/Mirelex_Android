@@ -74,7 +74,7 @@ class ProductColorInterface(
 
 
 class ProductCatalogs(
-    var colors: ArrayList<ProductCatalog>,
+    var colors: ArrayList<productColorCatalog>,
     var conditions: ArrayList<ProductCatalog>,
     var materials: ArrayList<ProductCatalog>,
     var sleeveStyles: ArrayList<ProductCatalog>,
@@ -89,6 +89,18 @@ class ProductCatalogs(
 class ProductCatalog(
     var productCatalogId: String?,
     var name: String
+){
+    override fun toString(): String {
+        return name
+    }
+}
+
+
+class productColorCatalog(
+    var productColorCatalogId: String?,
+    var name: String,
+    var hex: String?,
+    var imageUrl: String?
 ){
     override fun toString(): String {
         return name

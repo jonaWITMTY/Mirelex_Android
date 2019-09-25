@@ -184,9 +184,9 @@ class FilterProducts : AppCompatActivity() {
         adapter =  ArrayAdapter<String>(this, android.R.layout.simple_spinner_item)
         for((index, color) in catalogs?.colors!!.withIndex()){
             adapter!!.add(color.name)
-            if(checkIfColorExist(color.productCatalogId!!.toLong(), filterContent?.productColors)){
+            if(checkIfColorExist(color.productColorCatalogId!!.toLong(), filterContent?.productColors)){
                 selectedItems[index] = true
-                selectedIds.add(catalogs?.colors!![index].productCatalogId!!.toLong())
+                selectedIds.add(catalogs?.colors!![index].productColorCatalogId!!.toLong())
             }else{
                 selectedItems[index] = false
             }
@@ -218,7 +218,7 @@ class FilterProducts : AppCompatActivity() {
         selectedIds = ArrayList()
         for ((index, value) in it.withIndex()){
             if(value){
-                selectedIds.add(catalogs?.colors!![index].productCatalogId!!.toLong())
+                selectedIds.add(catalogs?.colors!![index].productColorCatalogId!!.toLong())
             }
         }
     }

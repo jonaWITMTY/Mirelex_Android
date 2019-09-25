@@ -396,7 +396,7 @@ class ProductCreate : Fragment() {
         selectedIds = ArrayList()
         for ((index, value) in it.withIndex()){
             if(value){
-                selectedIds.add(catalogs?.colors!![index].productCatalogId!!.toLong())
+                selectedIds.add(catalogs?.colors!![index].productColorCatalogId!!.toLong())
             }
         }
     }

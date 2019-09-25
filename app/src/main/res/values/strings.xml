@@ -44,6 +44,7 @@
     <string name="neighborhood">Neighborhood</string>
     <string name="category">Category</string>
     <string name="style">Style</string>
+    <string name="styleStore">Style</string>
     <string name="material">Material</string>
     <string name="decoration">Decoration</string>
     <string name="length">Length</string>

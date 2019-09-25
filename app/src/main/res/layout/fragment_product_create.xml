@@ -162,11 +162,13 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp" android:layout_marginRight="16dp"
                     android:layout_marginLeft="16dp">
+
                 <TextView
-                        android:text="@string/style"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" android:textSize="12sp"
-                        android:textColor="@android:color/black"/>
+                        android:layout_height="wrap_content"
+                        android:text="@string/styleStore"
+                        android:textColor="@android:color/black"
+                        android:textSize="12sp" />
                 <Spinner
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" android:id="@+id/createProductStyle"
