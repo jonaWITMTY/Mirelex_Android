@@ -3,6 +3,7 @@ package com.example.jonathangalvan.mirelex.Fragments.Utils
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
 import android.support.v4.app.FragmentActivity
@@ -120,17 +121,36 @@ class CustomAlert : DialogFragment() {
             }
             3 -> {
                 alertView = activity?.layoutInflater!!.inflate(R.layout.fragment_leasable_alert, null)
-                val btnCancel = alertView.findViewById<View>(R.id.btnCancel)
-                btnCancel.setOnClickListener(View.OnClickListener {
-                    (activity as ProductDetailActivity).continueForLeaseble()
-                    onDismiss(dialog)
-                })
+                when(activity){
+                    is ProductDetailActivity ->{
+                        val btnCancel = alertView.findViewById<View>(R.id.btnCancel)
+                        btnCancel.setOnClickListener(View.OnClickListener {
+                            (activity as ProductDetailActivity).continueForLeaseble()
+                            onDismiss(dialog)
+                        })
 
-                val btnSubmit = alertView.findViewById<View>(R.id.btnSubmit)
-                btnSubmit.setOnClickListener(View.OnClickListener {
-                    (activity as ProductDetailActivity).continueForFitting()
-                    onDismiss(dialog)
-                })
+                        val btnSubmit = alertView.findViewById<View>(R.id.btnSubmit)
+                        btnSubmit.setOnClickListener(View.OnClickListener {
+                            (activity as ProductDetailActivity).continueForFitting()
+                            onDismiss(dialog)
+                        })
+                    }
+                    is StoreTabsActivity, is CustomerTabsActivity -> {
+                        alertView.findViewById<TextView>(R.id.leasableAlertTitle).text = alertInfo?.title
+                        alertView.findViewById<TextView>(R.id.leasableAlertDesc).text = alertInfo?.desc
+
+                        val btnCancel = alertView.findViewById<View>(R.id.btnCancel)
+                        btnCancel.setOnClickListener(View.OnClickListener {
+                            onDismiss(dialog)
+                        })
+
+                        val btnSubmit = alertView.findViewById<View>(R.id.btnSubmit)
+                        btnSubmit.setOnClickListener(View.OnClickListener {
+                            startActivity(Intent(activity, ProfileActivity::class.java))
+                            onDismiss(dialog)
+                        })
+                    }
+                }
             }
             4 -> {
                 alertView = activity?.layoutInflater!!.inflate(R.layout.fragment_custom_alert_confirm, null)

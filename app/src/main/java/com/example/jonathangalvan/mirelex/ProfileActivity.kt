@@ -308,7 +308,9 @@ class ProfileActivity : AppCompatActivity() {
                         runOnUiThread {
                             run{
                                 updateSessionUserNeighborhoods.adapter = adapter
-                                updateSessionUserNeighborhoods.setSelection(getWomanAdapterItemPosition(user?.address!![0].neighborhoodId?.toLong()))
+                                if(user?.address!!.size > 0){
+                                    updateSessionUserNeighborhoods.setSelection(getWomanAdapterItemPosition(user?.address!![0].neighborhoodId?.toLong()))
+                                }
                             }
                         }
                     }

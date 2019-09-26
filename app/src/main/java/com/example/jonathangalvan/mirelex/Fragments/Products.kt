@@ -64,14 +64,19 @@ class Products : Fragment() {
         user = SessionModel(activity!!).getUser()
 
         /*Confirm phone*/
-//        if(user?.person?.phoneVerified == "0" || user?.person?.phoneVerified == null){
-//            val ba = UtilsModel.getGson().toJson(BottomAlertInterface(
-//                alertType = "confirmAccountPhone"
-//            ))
-//            val alert = CustomBottomAlert().bottomSheetDialogInstance(ba)
-//            alert.isCancelable = false
-//            alert.show(activity!!.supportFragmentManager, "alert")
-//        }
+        if(user?.address!!.size > 0) {
+            if(user?.person?.phoneVerified == "0" || user?.person?.phoneVerified == null){
+                val ba = UtilsModel.getGson().toJson(BottomAlertInterface(
+                    alertType = "confirmAccountPhone"
+                ))
+                val alert = CustomBottomAlert().bottomSheetDialogInstance(ba)
+                alert.isCancelable = false
+                alert.show(activity!!.supportFragmentManager, "alert")
+            }
+        }else{
+            CustomAlert().newInstance("{'title':'${resources.getString(R.string.alert)}', 'desc': '${resources.getString(R.string.completeYourProfile)}'}", 3, 0)
+                .show(activity?.supportFragmentManager, "alert")
+        }
 
         /*Save onesignal id*/
         OneSignal.idsAvailable { userId, registrationId ->
