@@ -56,11 +56,13 @@ class ProfileActivity : AppCompatActivity() {
         updateSessionUserEmail.editText?.setText(user?.person?.email)
         updateSessionUserPersonalPhone.editText?.setText(user?.person?.personalPhone)
         updateSessionUserHomePhone.editText?.setText(user?.person?.homePhone)
-        updateSessionUserStreet.editText?.setText(user?.address!![0].street)
-        updateSessionUserNumber.editText?.setText(user?.address!![0].numExt)
-        updateSessionUserInternalNumber.editText?.setText(user?.address!![0].numInt)
-        updateSessionUserZip.editText?.setText(user?.address!![0].postalCode)
-        getNeighborhoods()
+        if(user?.address!!.size > 0){
+            updateSessionUserStreet.editText?.setText(user?.address!![0].street)
+            updateSessionUserNumber.editText?.setText(user?.address!![0].numExt)
+            updateSessionUserInternalNumber.editText?.setText(user?.address!![0].numInt)
+            updateSessionUserZip.editText?.setText(user?.address!![0].postalCode)
+            getNeighborhoods()
+        }
 
         /*Postal code event*/
         updateSessionUserZip.editText?.addTextChangedListener(object: TextWatcher {

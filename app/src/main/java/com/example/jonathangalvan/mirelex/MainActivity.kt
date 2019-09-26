@@ -156,18 +156,10 @@ class MainActivity : AppCompatActivity() {
                     val user = SessionModel(this@MainActivity).getUser()
                     when(user.person?.userTypeId){
                         "3" ->{
-                            if (user.characteristics?.characteristicsId == null || user.address!!.isEmpty()){
-                                startActivity(Intent(this@MainActivity, RegisterExtraFieldsActivity::class.java))
-                            }else{
-                                startActivity(Intent(this@MainActivity, CustomerTabsActivity::class.java))
-                            }
+                            startActivity(Intent(this@MainActivity, CustomerTabsActivity::class.java))
                         }
                         "4" ->{
-                            if (user.address!!.isEmpty()){
-                                startActivity(Intent(this@MainActivity, RegisterExtraFieldsActivity::class.java))
-                            }else{
-                                startActivity(Intent(this@MainActivity, StoreTabsActivity::class.java))
-                            }
+                            startActivity(Intent(this@MainActivity, StoreTabsActivity::class.java))
                         }
                         else ->{
                             UtilsModel.getAlertView().newInstance(UtilsModel.getErrorUserAccessDenied(), 1, 0).show(supportFragmentManager,"alertDialog")

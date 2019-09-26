@@ -54,18 +54,10 @@ class SplashActivity : AppCompatActivity() {
                             val user = SessionModel(this@SplashActivity).getUser()
                             when(user.person?.userTypeId){
                                 "3" ->{
-                                    if (user.characteristics?.characteristicsId == null || user.address!!.isEmpty()){
-                                        startActivity(Intent(this@SplashActivity, RegisterExtraFieldsActivity::class.java))
-                                    }else{
-                                        startActivity(Intent(this@SplashActivity, CustomerTabsActivity::class.java))
-                                    }
+                                    startActivity(Intent(this@SplashActivity, CustomerTabsActivity::class.java))
                                 }
                                 "4" ->{
-                                    if (user.address!!.isEmpty()){
-                                        startActivity(Intent(this@SplashActivity, RegisterExtraFieldsActivity::class.java))
-                                    }else{
-                                        startActivity(Intent(this@SplashActivity, StoreTabsActivity::class.java))
-                                    }
+                                    startActivity(Intent(this@SplashActivity, StoreTabsActivity::class.java))
                                 }
                             }
                         }else{

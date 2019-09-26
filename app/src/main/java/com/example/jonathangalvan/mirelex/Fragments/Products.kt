@@ -62,15 +62,15 @@ class Products : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         /*Confirm phone*/
-        user = SessionModel(activity!!).getUser()
-        if(user?.person?.phoneVerified == "0" || user?.person?.phoneVerified == null){
-            val ba = UtilsModel.getGson().toJson(BottomAlertInterface(
-                alertType = "confirmAccountPhone"
-            ))
-            val alert = CustomBottomAlert().bottomSheetDialogInstance(ba)
-            alert.isCancelable = false
-            alert.show(activity!!.supportFragmentManager, "alert")
-        }
+//        user = SessionModel(activity!!).getUser()
+//        if(user?.person?.phoneVerified == "0" || user?.person?.phoneVerified == null){
+//            val ba = UtilsModel.getGson().toJson(BottomAlertInterface(
+//                alertType = "confirmAccountPhone"
+//            ))
+//            val alert = CustomBottomAlert().bottomSheetDialogInstance(ba)
+//            alert.isCancelable = false
+//            alert.show(activity!!.supportFragmentManager, "alert")
+//        }
 
         /*Save onesignal id*/
         OneSignal.idsAvailable { userId, registrationId ->
@@ -188,14 +188,20 @@ class Products : Fragment() {
 
     fun getProductCatalogs(){
         var productTypeId = ""
-        when(user?.person?.userGenderId){
-            Gender.Male.genderId -> {
-                productTypeId = ProductType.Suit.productTypeId
-            }
-            Gender.Female.genderId -> {
-                productTypeId = ProductType.Dress.productTypeId
+
+        if(user?.person?.userGenderId.isNullOrEmpty()){
+            productTypeId = ProductType.Dress.productTypeId
+        }else{
+            when(user?.person?.userGenderId){
+                Gender.Male.genderId -> {
+                    productTypeId = ProductType.Suit.productTypeId
+                }
+                Gender.Female.genderId -> {
+                    productTypeId = ProductType.Dress.productTypeId
+                }
             }
         }
+
         val productCatalogsObj = UtilsModel.getGson().toJson(GetProductCatalogsRequest(productTypeId))
         UtilsModel.getOkClient().newCall(UtilsModel.postRequest( activity!!, resources.getString(R.string.getProducCatalogs), productCatalogsObj)).enqueue(object:
             Callback {
@@ -214,14 +220,20 @@ class Products : Fragment() {
 
     fun getSizes(){
         var productTypeId = ""
-        when(user?.person?.userGenderId){
-            Gender.Male.genderId -> {
-                productTypeId = ProductType.Suit.productTypeId
-            }
-            Gender.Female.genderId -> {
-                productTypeId = ProductType.Dress.productTypeId
+
+        if(user?.person?.userGenderId.isNullOrEmpty()){
+            productTypeId = ProductType.Dress.productTypeId
+        }else{
+            when(user?.person?.userGenderId){
+                Gender.Male.genderId -> {
+                    productTypeId = ProductType.Suit.productTypeId
+                }
+                Gender.Female.genderId -> {
+                    productTypeId = ProductType.Dress.productTypeId
+                }
             }
         }
+
         val sizesRequest = UtilsModel.getGson().toJson(SizesRequest(productTypeId.toInt()))
         UtilsModel.getOkClient().newCall(UtilsModel.postRequest( activity!!, resources.getString(R.string.userSizes), sizesRequest)).enqueue(object:
             Callback {
