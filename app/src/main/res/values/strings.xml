@@ -147,4 +147,6 @@
     <string name="myOrders">My orders</string>
     <string name="selectStore">Select a Store to pickup your order</string>
     <string name="statusHistory">See status history</string>
+    <string name="pendingApprovalAlertTitle">Pending Approval</string>
+    <string name="pendingApprovalAlertDesc">Your profile is under review, to upload products you need to be approved.</string>
 </resources>

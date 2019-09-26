@@ -29,6 +29,7 @@ import android.support.v4.app.FragmentManager
 import android.widget.FrameLayout
 import com.example.jonathangalvan.mirelex.Enums.Gender
 import com.example.jonathangalvan.mirelex.Enums.ProductType
+import com.example.jonathangalvan.mirelex.Fragments.Utils.CustomAlert
 import com.example.jonathangalvan.mirelex.Interfaces.*
 import com.example.jonathangalvan.mirelex.Requests.*
 
@@ -249,7 +250,22 @@ class Products : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item?.itemId){
             R.id.storeTabsAddIcon ->{
-                startActivity(Intent(activity!!, ProductActivity::class.java))
+                when(user?.person?.userTypeId){
+                    UserType.Store.userTypeId ->{
+                        if(user?.person?.authorized == "1"){
+                            startActivity(Intent(activity!!, ProductActivity::class.java))
+                        }else{
+                            CustomAlert().newInstance(
+                                "{'status':'success', 'title':'${resources.getString(R.string.pendingApprovalAlertTitle)}', 'desc':'${resources.getString(R.string.pendingApprovalAlertDesc)}'}",
+                                1,
+                                0)
+                                .show(activity?.supportFragmentManager,"alertDialog")
+                        }
+                    }
+                    UserType.Customer.userTypeId ->{
+                        startActivity(Intent(activity!!, ProductActivity::class.java))
+                    }
+                }
             }
             R.id.customerTabsFilterIcon -> {
                 val goToFilterProducts = Intent(activity!!, FilterProducts::class.java)

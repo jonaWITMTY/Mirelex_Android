@@ -148,4 +148,6 @@
     <string name="myOrders">Mis órdenes</string>
     <string name="selectStore">Seleccione una tienda donde recogerá su pedido</string>
     <string name="statusHistory">Ver historial de estatus</string>
+    <string name="pendingApprovalAlertTitle">Autorización Pendiente</string>
+    <string name="pendingApprovalAlertDesc">Se esta revisando tu perfíl, para subir productos tienes que estar autorizado.</string>
 </resources>

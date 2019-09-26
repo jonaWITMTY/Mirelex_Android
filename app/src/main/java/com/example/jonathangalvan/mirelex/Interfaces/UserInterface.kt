@@ -44,7 +44,8 @@ class Person(
     var facebookUrl: String?,
     var instagramUrl: String?,
     var userFacebookId: String?,
-    var phoneVerified: String?
+    var phoneVerified: String?,
+    var authorized: String?
 ) {}
 
 class Address (
