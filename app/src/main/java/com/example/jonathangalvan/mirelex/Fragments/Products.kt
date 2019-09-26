@@ -60,9 +60,10 @@ class Products : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        /*Session user info*/
+        user = SessionModel(activity!!).getUser()
 
         /*Confirm phone*/
-//        user = SessionModel(activity!!).getUser()
 //        if(user?.person?.phoneVerified == "0" || user?.person?.phoneVerified == null){
 //            val ba = UtilsModel.getGson().toJson(BottomAlertInterface(
 //                alertType = "confirmAccountPhone"
