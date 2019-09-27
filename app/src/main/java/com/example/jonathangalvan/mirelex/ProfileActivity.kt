@@ -221,7 +221,9 @@ class ProfileActivity : AppCompatActivity() {
                 val updateUserObj = UpdateUserRequest()
                 updateUserObj.userId = user?.person?.userId
                 updateUserObj.userTypeId = user?.person?.userTypeId
-                updateUserObj.addressId = user?.address!![0].addressId
+                if(user?.address!!.size > 0){
+                    updateUserObj.addressId = user?.address!![0].addressId
+                }
                 updateUserObj.email = updateSessionUserEmail.editText?.text.toString()
                 updateUserObj.personalPhone = updateSessionUserPersonalPhone.editText?.text.toString()
                 updateUserObj.homePhone = updateSessionUserHomePhone.editText?.text.toString()
