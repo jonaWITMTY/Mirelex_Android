@@ -125,6 +125,13 @@
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
+            <Spinner
+                    android:id="@+id/orderCheckoutStateSelection"
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp"
+                    android:spinnerMode="dialog"
+                    android:visibility="invisible" />
+
             <Button
                     android:layout_width="match_parent"
                     android:layout_height="40dp"

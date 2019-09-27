@@ -6,6 +6,7 @@
     <string name="verifyPhone">user/verify/phone</string>
     <string name="verifyPhoneResend">user/phone/resend/code</string>
     <string name="getStores">general/mirelex/stores</string>
+    <string name="getStates">general/states</string>
 
     //user
     <string name="userSignIn">user/login</string>

@@ -9,12 +9,15 @@ import android.os.PersistableBundle
 import android.support.v4.app.Fragment
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.FrameLayout
 import android.widget.Toast
 import com.example.jonathangalvan.mirelex.Enums.OrderType
 import com.example.jonathangalvan.mirelex.Enums.UserType
 import com.example.jonathangalvan.mirelex.Fragments.Utils.SelectItems
 import com.example.jonathangalvan.mirelex.Interfaces.*
+import com.example.jonathangalvan.mirelex.Listeners.RecyclerItemClickListener
 import com.example.jonathangalvan.mirelex.Listeners.SelectedItemsListener
 import com.example.jonathangalvan.mirelex.Models.SessionModel
 import com.example.jonathangalvan.mirelex.Models.UtilsModel
@@ -35,6 +38,7 @@ class OrderCheckoutActivity : AppCompatActivity(), SelectItems.OnFragmentInterac
     private var sessionUser: UserInterface? = null
     private var defaultCard: PaymentCard? = null
     private var storeList: String = ""
+    private var states: StatesInterface? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -140,27 +144,90 @@ class OrderCheckoutActivity : AppCompatActivity(), SelectItems.OnFragmentInterac
             productObj?.productOwner?.person?.userTypeId == UserType.Customer.userTypeId ||
             (productObj?.productOwner?.person?.userTypeId == UserType.Store.userTypeId && productObj?.productOwner?.person?.isMirelexStore == "0")
         ){
-            val getStoresObj = UtilsModel.getGson().toJson(GetMirelexStores(
-                sessionUser?.address!![0].stateId.toString()
-            ))
+            if(sessionUser?.address!!.size > 0){
+                val getStoresObj = UtilsModel.getGson().toJson(GetMirelexStores(
+                    sessionUser?.address!![0].stateId.toString()
+                ))
 
-            UtilsModel.getOkClient().newCall(UtilsModel.postRequest(this, resources.getString(R.string.getStores), getStoresObj)).enqueue( object: Callback {
-                override fun onFailure(call: Call, e: IOException) {}
+                UtilsModel.getOkClient().newCall(UtilsModel.postRequest(this, resources.getString(R.string.getStores), getStoresObj)).enqueue( object: Callback {
+                    override fun onFailure(call: Call, e: IOException) {}
 
-                override fun onResponse(call: Call, response: Response) {
-                    val responseStr = response.body()?.string()
-                    val responseObj = UtilsModel.getPostResponse(this@OrderCheckoutActivity, responseStr)
-                    if(responseObj.status == "success"){
-                        storeList = responseStr!!
+                    override fun onResponse(call: Call, response: Response) {
+                        val responseStr = response.body()?.string()
+                        val responseObj = UtilsModel.getPostResponse(this@OrderCheckoutActivity, responseStr)
+                        if(responseObj.status == "success"){
+                            storeList = responseStr!!
+                        }
+                    }
+                })
+
+                orderCheckoutStoreSelection.setOnClickListener(View.OnClickListener {
+                    val sil = SelectedItemsListener(this, supportFragmentManager)
+                    showSupportActionBar(false)
+                    sil.openTab(SelectItems(), "storesList", "storesList", storeList)
+                })
+            }else{
+                /*Fill states spinner*/
+                UtilsModel.getOkClient().newCall(UtilsModel.postRequest(this, resources.getString(R.string.getStates))).enqueue(object: Callback{
+                    override fun onFailure(call: Call, e: IOException) {}
+
+                    override fun onResponse(call: Call, response: Response) {
+                        val responseStr = response.body()?.string()
+                        val responseObj = UtilsModel.getPostResponse(this@OrderCheckoutActivity, responseStr)
+                        when(responseObj.status){
+                            "success" -> {
+                                states = UtilsModel.getGson().fromJson(responseStr, StatesInterface::class.java)
+
+                                val adapterStates = ArrayAdapter<StateInterface>(this@OrderCheckoutActivity, R.layout.view_spinner_item_black, R.id.spinnerItemBlackSelect, states?.data)
+                                adapterStates.setDropDownViewResource(R.layout.view_spinner_item_black_select)
+                                runOnUiThread{
+                                    run {
+                                        orderCheckoutStateSelection.adapter = adapterStates
+                                    }
+                                }
+                            }
+                        }
+                    }
+                })
+
+                /*When click store event*/
+                orderCheckoutStoreSelection.setOnClickListener(View.OnClickListener {
+                    orderCheckoutStateSelection.performClick()
+                })
+
+                /*When selecting state*/
+                var firstTime = false
+                orderCheckoutStateSelection.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
+                    override fun onNothingSelected(parent: AdapterView<*>?) {}
+
+                    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                        if(firstTime){
+                            val getStoresObj = UtilsModel.getGson().toJson(GetMirelexStores(
+                                states?.data!![position].catalogId
+                            ))
+
+                            UtilsModel.getOkClient().newCall(UtilsModel.postRequest(this@OrderCheckoutActivity, resources.getString(R.string.getStores), getStoresObj)).enqueue( object: Callback {
+                                override fun onFailure(call: Call, e: IOException) {}
+
+                                override fun onResponse(call: Call, response: Response) {
+                                    val responseStr = response.body()?.string()
+                                    val responseObj = UtilsModel.getPostResponse(this@OrderCheckoutActivity, responseStr)
+                                    if(responseObj.status == "success"){
+                                        storeList = responseStr!!
+                                        val sil = SelectedItemsListener(this@OrderCheckoutActivity, supportFragmentManager)
+                                        runOnUiThread { run {
+                                            showSupportActionBar(false)
+                                            sil.openTab(SelectItems(), "storesList", "storesList", storeList)
+                                        }}
+                                    }
+                                }
+                            })
+                        }else{
+                            firstTime = true
+                        }
                     }
                 }
-            })
-
-            orderCheckoutStoreSelection.setOnClickListener(View.OnClickListener {
-                val sil = SelectedItemsListener(this, supportFragmentManager)
-                showSupportActionBar(false)
-                sil.openTab(SelectItems(), "storesList", "storesList", storeList)
-            })
+            }
         }else{
             orderCheckoutStoreSelection.visibility = View.GONE
         }
