@@ -41,8 +41,11 @@ class ProductCreate : Fragment() {
     var catalogs: ProductCatalogs? = null
     var productTypes: ArrayList<ProductTypeInterface>? = null
     var spinner: MultiSpinner? = null
+    var spinnerDecorations: MultiSpinner? = null
     var adapter: ArrayAdapter<String>? = null
+    var adapterDecorations: ArrayAdapter<String>? = null
     var selectedIds: ArrayList<Long> = ArrayList()
+    var selectedDecorationsIds: ArrayList<Long> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -232,7 +235,7 @@ class ProductCreate : Fragment() {
                 /*Fill fields depending on category type*/
                 when(productTypes!![createProductCategory.selectedItemPosition].productTypeId.toString()){
                     ProductType.Dress.productTypeId -> {
-                        viewModel.productObjRequest.productDecorationId = catalogs!!.decorations[createProductDecoration.selectedItemPosition].productCatalogId
+                        viewModel.productObjRequest.productDecorations = selectedDecorationsIds
                         viewModel.productObjRequest.productLengthId = catalogs!!.lengths[createProductLength.selectedItemPosition].productCatalogId
                         viewModel.productObjRequest.productSilhouetteId = catalogs!!.silhouettes[createProductSilouete.selectedItemPosition].productCatalogId
                         viewModel.productObjRequest.bust = createProductBust.editText?.text.toString()
@@ -374,7 +377,6 @@ class ProductCreate : Fragment() {
         fillSpinner(catalogs?.sizes, activity!!.findViewById(R.id.createProductSizes))
         fillSpinner(catalogs?.conditions, activity!!.findViewById(R.id.createProductCondition))
         fillSpinner(catalogs?.styles, activity!!.findViewById(R.id.createProductStyle))
-        fillSpinner(catalogs?.decorations, activity!!.findViewById(R.id.createProductDecoration))
         fillSpinner(catalogs?.lengths, activity!!.findViewById(R.id.createProductLength))
         fillSpinner(catalogs?.materials, activity!!.findViewById(R.id.createProductMaterial))
         fillSpinner(catalogs?.silhouettes, activity!!.findViewById(R.id.createProductSilouete))
@@ -390,6 +392,16 @@ class ProductCreate : Fragment() {
         /*Fill spinner with colors*/
         spinner = activity!!.findViewById(R.id.spinnerMulti)
         spinner!!.setAdapter(adapter, false, onSelectedListener)
+
+        /*Get decorations*/
+        adapterDecorations =  ArrayAdapter<String>(activity!!, android.R.layout.simple_spinner_item)
+        for((index, decoration) in catalogs?.decorations!!.withIndex()){
+            adapterDecorations!!.add(decoration.name)
+        }
+
+        /*Fill spinner with decorations*/
+        spinnerDecorations = activity!!.findViewById(R.id.createProductDecoration)
+        spinnerDecorations!!.setAdapter(adapterDecorations, false, onSelectedDecorationListener)
     }
 
     private val onSelectedListener = MultiSpinner.MultiSpinnerListener {
@@ -397,6 +409,15 @@ class ProductCreate : Fragment() {
         for ((index, value) in it.withIndex()){
             if(value){
                 selectedIds.add(catalogs?.colors!![index].productColorCatalogId!!.toLong())
+            }
+        }
+    }
+
+    private val onSelectedDecorationListener = MultiSpinner.MultiSpinnerListener {
+        selectedDecorationsIds = ArrayList()
+        for ((index, value) in it.withIndex()){
+            if(value){
+                selectedDecorationsIds.add(catalogs?.decorations!![index].productCatalogId!!.toLong())
             }
         }
     }

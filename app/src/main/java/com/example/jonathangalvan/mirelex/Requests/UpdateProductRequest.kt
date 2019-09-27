@@ -16,6 +16,7 @@ class UpdateProductRequest(
     var sellPrice: String? = "",
     var productOccasionId: String? = "",
     var productDecorationId: String? = "",
+    var productDecorations: List<Long>? = null,
     var productLengthId: String? = "",
     var productSilhouetteId: String? = "",
     var bust: String? = "",
