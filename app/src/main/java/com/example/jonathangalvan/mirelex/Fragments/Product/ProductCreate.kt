@@ -263,7 +263,8 @@ class ProductCreate : Fragment() {
         if(
             createProductBrand.editText?.text.toString()!!.isEmpty() ||
             createProductPrice.editText?.text.toString()!!.isEmpty() ||
-            selectedIds.size < 1
+            selectedIds.size < 1 ||
+            selectedDecorationsIds.size < 1
         ){
             isCorrect = false
         }else{
