@@ -161,10 +161,12 @@ class Orders : Fragment() {
                 val responseObj = UtilsModel.getPostResponse(activity, responseStr)
                 when(responseObj.status){
                     "success" -> {
-                        ordersObj = UtilsModel.getGson()
-                            .fromJson(UtilsModel.getGson().toJson(responseObj), OrdersInterface::class.java)
+                        ordersObj = UtilsModel.getGson().fromJson(UtilsModel.getGson().toJson(responseObj), OrdersInterface::class.java)
                         activity?.runOnUiThread {
                             run {
+                                if((activity!!.findViewById<ViewGroup>(R.id.viewCenteredMessage)) != null){
+                                    activity?.findViewById<ViewGroup>(R.id.contentTabsFrameLayout)?.removeView(activity?.findViewById(R.id.viewCenteredMessage))
+                                }
                                 ordersAdapter.loadNewData(ordersObj!!.data)
                             }
                         }
@@ -172,6 +174,7 @@ class Orders : Fragment() {
                     "noDataAvailable" -> {
                         activity?.runOnUiThread {
                             run {
+                                ordersAdapter.loadNewData(ArrayList())
                                 if((activity!!.findViewById<ViewGroup>(R.id.viewCenteredMessage)) == null){
                                     val ceneteredLayout = layoutInflater.inflate(
                                         R.layout.view_centered_message,
