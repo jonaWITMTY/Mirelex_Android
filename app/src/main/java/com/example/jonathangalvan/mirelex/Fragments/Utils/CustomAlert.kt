@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.example.jonathangalvan.mirelex.*
+import com.example.jonathangalvan.mirelex.Enums.OrderType
 import com.example.jonathangalvan.mirelex.Interfaces.ResponseInterface
 import com.example.jonathangalvan.mirelex.Models.UtilsModel
 import com.example.jonathangalvan.mirelex.Requests.ForgotPasswordRequest
@@ -123,32 +124,44 @@ class CustomAlert : DialogFragment() {
                 alertView = activity?.layoutInflater!!.inflate(R.layout.fragment_leasable_alert, null)
                 when(activity){
                     is ProductDetailActivity ->{
-                        val btnCancel = alertView.findViewById<View>(R.id.btnCancel)
-                        btnCancel.setOnClickListener(View.OnClickListener {
-                            (activity as ProductDetailActivity).continueForLeaseble()
-                            onDismiss(dialog)
-                        })
+                        if(alertInfo?.desc.isNullOrEmpty()){
+                            val btnCancel = alertView.findViewById<View>(R.id.btnCancel)
+                            btnCancel.setOnClickListener(View.OnClickListener {
+                                (activity as ProductDetailActivity).continueForLeaseble()
+                                onDismiss(dialog)
+                            })
 
-                        val btnSubmit = alertView.findViewById<View>(R.id.btnSubmit)
-                        btnSubmit.setOnClickListener(View.OnClickListener {
-                            (activity as ProductDetailActivity).continueForFitting()
-                            onDismiss(dialog)
-                        })
-                    }
-                    is StoreTabsActivity, is CustomerTabsActivity -> {
-                        alertView.findViewById<TextView>(R.id.leasableAlertTitle).text = alertInfo?.title
-                        alertView.findViewById<TextView>(R.id.leasableAlertDesc).text = alertInfo?.desc
+                            val btnSubmit = alertView.findViewById<View>(R.id.btnSubmit)
+                            btnSubmit.setOnClickListener(View.OnClickListener {
+                                (activity as ProductDetailActivity).continueForFitting()
+                                onDismiss(dialog)
+                            })
+                        }else{
+                            alertView.findViewById<TextView>(R.id.leasableAlertTitle).text = alertInfo?.title
+                            alertView.findViewById<TextView>(R.id.leasableAlertDesc).text = alertInfo?.desc
 
-                        val btnCancel = alertView.findViewById<View>(R.id.btnCancel)
-                        btnCancel.setOnClickListener(View.OnClickListener {
-                            onDismiss(dialog)
-                        })
+                            val btnCancel = alertView.findViewById<View>(R.id.btnCancel)
+                            btnCancel.setOnClickListener(View.OnClickListener {
+                                when(alertInfo?.status){
+                                    OrderType.Fitting.orderTypeId -> {
+                                        (activity as ProductDetailActivity).continueForFitting()
+                                    }
+                                    OrderType.Lease.orderTypeId -> {
+                                        (activity as ProductDetailActivity).confirmFittingAlert()
+                                    }
+                                    OrderType.Purchase.orderTypeId -> {
+                                        (activity as ProductDetailActivity).continueForPurchase()
+                                    }
+                                }
+                                onDismiss(dialog)
+                            })
 
-                        val btnSubmit = alertView.findViewById<View>(R.id.btnSubmit)
-                        btnSubmit.setOnClickListener(View.OnClickListener {
-                            startActivity(Intent(activity, ProfileActivity::class.java))
-                            onDismiss(dialog)
-                        })
+                            val btnSubmit = alertView.findViewById<View>(R.id.btnSubmit)
+                            btnSubmit.setOnClickListener(View.OnClickListener {
+                                startActivity(Intent(activity, ProfileActivity::class.java))
+                                onDismiss(dialog)
+                            })
+                        }
                     }
                 }
             }

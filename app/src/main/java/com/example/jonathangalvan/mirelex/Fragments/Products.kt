@@ -73,9 +73,6 @@ class Products : Fragment() {
                 alert.isCancelable = false
                 alert.show(activity!!.supportFragmentManager, "alert")
             }
-        }else{
-            CustomAlert().newInstance("{'title':'${resources.getString(R.string.alert)}', 'desc': '${resources.getString(R.string.completeYourProfile)}'}", 3, 0)
-                .show(activity?.supportFragmentManager, "alert")
         }
 
         /*Save onesignal id*/
