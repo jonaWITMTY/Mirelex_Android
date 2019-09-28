@@ -56,6 +56,7 @@ class ProductsInterface(
 class ProductInfoInterface(
     var productInformation: ProductInterface,
     var productColors: ArrayList<ProductColorInterface>,
+    var productDecorations: ArrayList<ProductDecorationInterface>,
     var productOwner: UserInterface,
     var productImages: ArrayList<ProductImagesInterface>
 ){}
@@ -64,6 +65,12 @@ class ProductImagesInterface(
     var imageId: String?,
     var imageUrl: String?,
     var featured: String?
+){}
+
+class ProductDecorationInterface(
+    var productDecorationsId: String?,
+    var productDecorationId: String?,
+    var decoration: String?
 ){}
 
 class ProductColorInterface(

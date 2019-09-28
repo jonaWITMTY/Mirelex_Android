@@ -40,8 +40,11 @@ class ProductUpdate : Fragment()  {
     var catalogs: ProductCatalogs? = null
     var imgPreview: String? = null
     var spinner: MultiSpinner? = null
+    var spinnerDecorations: MultiSpinner? = null
     var adapter: ArrayAdapter<String>? = null
+    var adapterDecorations: ArrayAdapter<String>? = null
     var selectedIds: ArrayList<Long> = ArrayList()
+    var selectedDecorationsIds: ArrayList<Long> = ArrayList()
     var viewModel: ProductViewModel = ProductViewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -161,7 +164,7 @@ class ProductUpdate : Fragment()  {
                 /*Fill fields depending on category type*/
                 when(productObj?.productInformation?.productTypeId){
                     ProductType.Dress.productTypeId -> {
-                        viewModel.productObjRequest.productDecorationId = catalogs!!.decorations[updateProductDecoration.selectedItemPosition].productCatalogId
+                        viewModel.productObjRequest.productDecorations = selectedDecorationsIds
                         viewModel.productObjRequest.productLengthId = catalogs!!.lengths[updateProductLength.selectedItemPosition].productCatalogId
                         viewModel.productObjRequest.productSilhouetteId = catalogs!!.silhouettes[updateProductSilouete.selectedItemPosition].productCatalogId
                         viewModel.productObjRequest.bust = updateProductBust.editText?.text.toString()
@@ -199,7 +202,8 @@ class ProductUpdate : Fragment()  {
                         updateProductWaist.editText?.text.toString()!!.isEmpty() ||
                         updateProductHip.editText?.text.toString()!!.isEmpty() ||
                         updateProductHeight.editText?.text.toString()!!.isEmpty() ||
-                        updateProductDescription.editText?.text.toString()!!.isEmpty()
+                        updateProductDescription.editText?.text.toString()!!.isEmpty() ||
+                        selectedDecorationsIds.size < 1
                     ){
                         isCorrect = false
                     }
@@ -392,14 +396,34 @@ class ProductUpdate : Fragment()  {
     }
 
     fun fillWomanProductsCatalogs(){
-        fillSpinner(catalogs?.decorations, activity?.findViewById(R.id.updateProductDecoration))
-        updateProductDecoration.setSelection(getAdapterItemPosition( productObj?.productInformation?.productDecorationId?.toLong(), catalogs?.decorations))
+//        fillSpinner(catalogs?.decorations, activity?.findViewById(R.id.updateProductDecoration))
+//        updateProductDecoration.setSelection(getAdapterItemPosition( productObj?.productInformation?.productDecorationId?.toLong(), catalogs?.decorations))
 
         fillSpinner(catalogs?.lengths, activity?.findViewById(R.id.updateProductLength))
         updateProductLength.setSelection(getAdapterItemPosition( productObj?.productInformation?.productLengthId?.toLong(), catalogs?.lengths))
 
         fillSpinner(catalogs?.silhouettes, activity?.findViewById(R.id.updateProductSilouete))
         updateProductSilouete.setSelection(getAdapterItemPosition( productObj?.productInformation?.productSilhouetteId?.toLong(), catalogs?.silhouettes))
+
+        /*Get decorations*/
+        var selectedDecorationsItems = BooleanArray(catalogs?.decorations!!.size)
+        adapterDecorations =  ArrayAdapter<String>(activity!!, android.R.layout.simple_spinner_item)
+        for((index, decoration) in catalogs?.decorations!!.withIndex()){
+            adapterDecorations!!.add(decoration.name)
+            if(checkIfDecorationExist(decoration.productCatalogId!!.toLong())){
+                selectedDecorationsItems[index] = true
+                selectedDecorationsIds.add(catalogs?.decorations!![index].productCatalogId!!.toLong())
+            }else{
+                selectedDecorationsItems[index] = false
+            }
+        }
+
+        /*Fill spinner with decorations*/
+        spinnerDecorations = activity!!.findViewById(R.id.updateProductDecoration)
+        spinnerDecorations!!.setAdapter(adapterDecorations, false, onSelectedDecorationListener)
+
+        /*set selected decorations*/
+        spinnerDecorations!!.selected = selectedDecorationsItems
     }
 
     fun fillMenProductsCatalogs(){
@@ -412,6 +436,15 @@ class ProductUpdate : Fragment()  {
         for ((index, value) in it.withIndex()){
             if(value){
                 selectedIds.add(catalogs?.colors!![index].productColorCatalogId!!.toLong())
+            }
+        }
+    }
+
+    private val onSelectedDecorationListener = MultiSpinner.MultiSpinnerListener {
+        selectedDecorationsIds = ArrayList()
+        for ((index, value) in it.withIndex()){
+            if(value){
+                selectedDecorationsIds.add(catalogs?.decorations!![index].productCatalogId!!.toLong())
             }
         }
     }
@@ -446,5 +479,17 @@ class ProductUpdate : Fragment()  {
             }
         }
         return isInColorArr
+    }
+
+    fun checkIfDecorationExist(decorationId: Long): Boolean{
+        var isInDecorationArr = false
+        if(!isInDecorationArr){
+            for(decoration in productObj?.productDecorations!!){
+                if(decoration.productDecorationId?.toLong() == decorationId){
+                    isInDecorationArr = true
+                }
+            }
+        }
+        return isInDecorationArr
     }
 }

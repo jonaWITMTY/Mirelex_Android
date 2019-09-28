@@ -263,8 +263,7 @@ class ProductCreate : Fragment() {
         if(
             createProductBrand.editText?.text.toString()!!.isEmpty() ||
             createProductPrice.editText?.text.toString()!!.isEmpty() ||
-            selectedIds.size < 1 ||
-            selectedDecorationsIds.size < 1
+            selectedIds.size < 1
         ){
             isCorrect = false
         }else{
@@ -275,7 +274,8 @@ class ProductCreate : Fragment() {
                         createProductWaist.editText?.text.toString()!!.isEmpty() ||
                         createProductHip.editText?.text.toString()!!.isEmpty() ||
                         createProductHeight.editText?.text.toString()!!.isEmpty() ||
-                        createProductDescription.editText?.text.toString()!!.isEmpty()
+                        createProductDescription.editText?.text.toString()!!.isEmpty() ||
+                        selectedDecorationsIds.size < 1
                     ){
                         isCorrect = false
                     }
