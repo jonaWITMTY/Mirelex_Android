@@ -57,7 +57,11 @@ class OrderCheckoutActivity : AppCompatActivity(), SelectItems.OnFragmentInterac
         orderCheckoutSize.text = productObj?.productInformation?.size
         orderCheckoutColors.text = productObj?.productInformation?.brand
         orderCheckoutMaterial.text = productObj?.productInformation?.productMaterial
-        orderCheckoutDecoration.text = productObj?.productInformation?.productDecoration
+        var decorations: String = ""
+        productObj?.productDecorations?.forEach {
+            decorations += " ${it.decoration},"
+        }
+        orderCheckoutDecoration.text = decorations.dropLast(1)
         orderCheckoutLength.text = productObj?.productInformation?.productLength
         var colors: String = ""
         productObj?.productColors?.forEach {

@@ -134,7 +134,11 @@ class ProductDetailActivity : AppCompatActivity() {
 
                                     val productDecoration = layoutInflater.inflate(R.layout.view_detail_info_row_with_title, detailProductInfo, false)
                                     productDecoration.detailInfoNameView.text = resources.getString(R.string.decoration)
-                                    productDecoration.detailInfoValueView.text = productObj?.productInformation?.productDecoration
+                                    var decorations: String = ""
+                                    productObj?.productDecorations?.forEach {
+                                        decorations += " ${it.decoration},"
+                                    }
+                                    productDecoration.detailInfoValueView.text = decorations.dropLast(1)
                                     detailProductInfo.addView(productDecoration)
 
                                     val productLength = layoutInflater.inflate(R.layout.view_detail_info_row_with_title, detailProductInfo, false)
