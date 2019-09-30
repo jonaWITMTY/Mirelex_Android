@@ -24,176 +24,191 @@
             app:layout_constraintTop_toBottomOf="@+id/linearLayout14">
         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                       android:orientation="vertical" android:paddingTop="16dp">
-            <LinearLayout
-                    android:orientation="vertical"
+
+            <Switch
+                    android:id="@+id/filterProductRecomendations"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="16dp" android:layout_marginRight="16dp"
-                    android:layout_marginLeft="16dp">
-                <TextView
-                        android:text="@string/size"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:text="@string/mirlexRecommendations" />
+
+        <LinearLayout
+                android:id="@+id/filterProductFilterFieldsLayout"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                        android:orientation="vertical"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" android:textSize="12sp"
-                        android:textColor="@android:color/black"/>
-                <Spinner
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="16dp" android:layout_marginRight="16dp"
+                        android:layout_marginLeft="16dp">
+                    <TextView
+                            android:text="@string/size"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:textSize="12sp"
+                            android:textColor="@android:color/black"/>
+                    <Spinner
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:id="@+id/filterProductSize"
+                            style="@android:style/Widget.Material.Light.Spinner.Underlined"
+                            android:backgroundTint="@android:color/black" android:spinnerMode="dialog"/>
+                </LinearLayout>
+                <LinearLayout
+                        android:orientation="vertical"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" android:id="@+id/filterProductSize"
-                        style="@android:style/Widget.Material.Light.Spinner.Underlined"
-                        android:backgroundTint="@android:color/black" android:spinnerMode="dialog"/>
-            </LinearLayout>
-            <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="16dp" android:layout_marginRight="16dp"
-                    android:layout_marginLeft="16dp">
-                <TextView
-                        android:text="@string/condition"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="16dp" android:layout_marginRight="16dp"
+                        android:layout_marginLeft="16dp">
+                    <TextView
+                            android:text="@string/condition"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:textSize="12sp"
+                            android:textColor="@android:color/black"/>
+                    <Spinner
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:id="@+id/filterProductCondition"
+                            style="@android:style/Widget.Material.Light.Spinner.Underlined"
+                            android:backgroundTint="@android:color/black" android:spinnerMode="dialog"/>
+                </LinearLayout>
+                <LinearLayout
+                        android:orientation="vertical"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" android:textSize="12sp"
-                        android:textColor="@android:color/black"/>
-                <Spinner
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="16dp" android:layout_marginRight="16dp"
+                        android:layout_marginLeft="16dp">
+                    <TextView
+                            android:text="@string/style"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:textSize="12sp"
+                            android:textColor="@android:color/black"/>
+                    <Spinner
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:id="@+id/filterProductStyle"
+                            style="@android:style/Widget.Material.Light.Spinner.Underlined"
+                            android:backgroundTint="@android:color/black" android:spinnerMode="dialog"/>
+                </LinearLayout>
+                <LinearLayout
+                        android:orientation="vertical"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" android:id="@+id/filterProductCondition"
-                        style="@android:style/Widget.Material.Light.Spinner.Underlined"
-                        android:backgroundTint="@android:color/black" android:spinnerMode="dialog"/>
-            </LinearLayout>
-            <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="16dp" android:layout_marginRight="16dp"
-                    android:layout_marginLeft="16dp">
-                <TextView
-                        android:text="@string/style"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="16dp" android:layout_marginRight="16dp"
+                        android:layout_marginLeft="16dp">
+                    <TextView
+                            android:text="@string/material"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:textSize="12sp"
+                            android:textColor="@android:color/black"/>
+                    <Spinner
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:id="@+id/filterProductMaterial"
+                            style="@android:style/Widget.Material.Light.Spinner.Underlined"
+                            android:backgroundTint="@android:color/black" android:spinnerMode="dialog"/>
+                </LinearLayout>
+                <LinearLayout
+                        android:orientation="vertical"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" android:textSize="12sp"
-                        android:textColor="@android:color/black"/>
-                <Spinner
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="16dp" android:layout_marginRight="16dp"
+                        android:layout_marginLeft="16dp">
+                    <TextView
+                            android:text="@string/colors"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:textSize="12sp"
+                            android:textColor="@android:color/black"/>
+                    <com.thomashaertel.widget.MultiSpinner
+                            android:id="@+id/spinnerMulti"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            style="@android:style/Widget.Material.Light.Spinner.Underlined"
+                            android:backgroundTint="@color/black"/>
+                </LinearLayout>
+                <LinearLayout
+                        android:orientation="vertical"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" android:id="@+id/filterProductStyle"
-                        style="@android:style/Widget.Material.Light.Spinner.Underlined"
-                        android:backgroundTint="@android:color/black" android:spinnerMode="dialog"/>
-            </LinearLayout>
-            <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="16dp" android:layout_marginRight="16dp"
-                    android:layout_marginLeft="16dp">
-                <TextView
-                        android:text="@string/material"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="16dp" android:layout_marginRight="16dp"
+                        android:layout_marginLeft="16dp">
+                    <TextView
+                            android:text="@string/sleeveStyle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:textSize="12sp"
+                            android:textColor="@android:color/black"/>
+                    <Spinner
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:id="@+id/filterProductSleeveStyle"
+                            style="@android:style/Widget.Material.Light.Spinner.Underlined"
+                            android:backgroundTint="@android:color/black" android:spinnerMode="dialog"/>
+                </LinearLayout>
+                <LinearLayout
+                        android:orientation="vertical"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" android:textSize="12sp"
-                        android:textColor="@android:color/black"/>
-                <Spinner
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="16dp" android:layout_marginRight="16dp"
+                        android:layout_marginLeft="16dp">
+                    <TextView
+                            android:text="@string/length"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:textSize="12sp"
+                            android:textColor="@android:color/black"/>
+                    <Spinner
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:id="@+id/filterProductLength"
+                            style="@android:style/Widget.Material.Light.Spinner.Underlined"
+                            android:backgroundTint="@android:color/black" android:spinnerMode="dialog"/>
+                </LinearLayout>
+                <LinearLayout
+                        android:orientation="vertical"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" android:id="@+id/filterProductMaterial"
-                        style="@android:style/Widget.Material.Light.Spinner.Underlined"
-                        android:backgroundTint="@android:color/black" android:spinnerMode="dialog"/>
-            </LinearLayout>
-            <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="16dp" android:layout_marginRight="16dp"
-                    android:layout_marginLeft="16dp">
-                <TextView
-                        android:text="@string/colors"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="16dp" android:layout_marginRight="16dp"
+                        android:layout_marginLeft="16dp">
+                    <TextView
+                            android:text="@string/decoration"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:textSize="12sp"
+                            android:textColor="@android:color/black"/>
+                    <Spinner
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:id="@+id/filterProductDecoration"
+                            style="@android:style/Widget.Material.Light.Spinner.Underlined"
+                            android:backgroundTint="@android:color/black" android:spinnerMode="dialog"/>
+                </LinearLayout>
+                <LinearLayout
+                        android:orientation="vertical"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" android:textSize="12sp"
-                        android:textColor="@android:color/black"/>
-                <com.thomashaertel.widget.MultiSpinner
-                        android:id="@+id/spinnerMulti"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="16dp" android:layout_marginRight="16dp"
+                        android:layout_marginLeft="16dp">
+                    <TextView
+                            android:text="@string/dressSilhouette"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:textSize="12sp"
+                            android:textColor="@android:color/black"/>
+                    <Spinner
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:id="@+id/filterProductSilouete"
+                            style="@android:style/Widget.Material.Light.Spinner.Underlined"
+                            android:backgroundTint="@android:color/black" android:spinnerMode="dialog"/>
+                </LinearLayout>
+                <LinearLayout
+                        android:orientation="vertical"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        style="@android:style/Widget.Material.Light.Spinner.Underlined"
-                        android:backgroundTint="@color/black"/>
-            </LinearLayout>
-            <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="16dp" android:layout_marginRight="16dp"
-                    android:layout_marginLeft="16dp">
-                <TextView
-                        android:text="@string/sleeveStyle"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" android:textSize="12sp"
-                        android:textColor="@android:color/black"/>
-                <Spinner
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" android:id="@+id/filterProductSleeveStyle"
-                        style="@android:style/Widget.Material.Light.Spinner.Underlined"
-                        android:backgroundTint="@android:color/black" android:spinnerMode="dialog"/>
-            </LinearLayout>
-            <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="16dp" android:layout_marginRight="16dp"
-                    android:layout_marginLeft="16dp">
-                <TextView
-                        android:text="@string/length"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" android:textSize="12sp"
-                        android:textColor="@android:color/black"/>
-                <Spinner
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" android:id="@+id/filterProductLength"
-                        style="@android:style/Widget.Material.Light.Spinner.Underlined"
-                        android:backgroundTint="@android:color/black" android:spinnerMode="dialog"/>
-            </LinearLayout>
-            <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="16dp" android:layout_marginRight="16dp"
-                    android:layout_marginLeft="16dp">
-                <TextView
-                        android:text="@string/decoration"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" android:textSize="12sp"
-                        android:textColor="@android:color/black"/>
-                <Spinner
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" android:id="@+id/filterProductDecoration"
-                        style="@android:style/Widget.Material.Light.Spinner.Underlined"
-                        android:backgroundTint="@android:color/black" android:spinnerMode="dialog"/>
-            </LinearLayout>
-            <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="16dp" android:layout_marginRight="16dp"
-                    android:layout_marginLeft="16dp">
-                <TextView
-                        android:text="@string/dressSilhouette"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" android:textSize="12sp"
-                        android:textColor="@android:color/black"/>
-                <Spinner
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" android:id="@+id/filterProductSilouete"
-                        style="@android:style/Widget.Material.Light.Spinner.Underlined"
-                        android:backgroundTint="@android:color/black" android:spinnerMode="dialog"/>
-            </LinearLayout>
-            <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="16dp" android:layout_marginRight="16dp"
-                    android:layout_marginLeft="16dp">
-                <TextView
-                        android:text="@string/ocation"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" android:textSize="12sp"
-                        android:textColor="@android:color/black"/>
-                <Spinner
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" android:id="@+id/filterProductOcation"
-                        style="@android:style/Widget.Material.Light.Spinner.Underlined"
-                        android:backgroundTint="@android:color/black" android:spinnerMode="dialog"/>
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="16dp" android:layout_marginRight="16dp"
+                        android:layout_marginLeft="16dp">
+                    <TextView
+                            android:text="@string/ocation"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:textSize="12sp"
+                            android:textColor="@android:color/black"/>
+                    <Spinner
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:id="@+id/filterProductOcation"
+                            style="@android:style/Widget.Material.Light.Spinner.Underlined"
+                            android:backgroundTint="@android:color/black" android:spinnerMode="dialog"/>
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

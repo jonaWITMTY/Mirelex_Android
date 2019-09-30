@@ -15,6 +15,7 @@ class ProductFilterRequest(
     var productOccasionId: String? = null,
     var minPrice: String? = null,
     var maxPrice: String? = null,
-    var productTypeId: String? = null
+    var productTypeId: String? = null,
+    var mirelexSuggestion: Boolean? = null
 
 ): GlobalRequest() {}

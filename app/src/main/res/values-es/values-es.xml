@@ -151,4 +151,5 @@
     <string name="pendingApprovalAlertTitle">Autorización Pendiente</string>
     <string name="pendingApprovalAlertDesc">Se esta revisando tu perfíl, para subir productos tienes que estar autorizado.</string>
     <string name="completeYourProfile">Para brindarte una mejor experiencia, completemos tu perfil</string>
+    <string name="mirlexRecommendations">Recomendación Mirelex</string>
 </resources>

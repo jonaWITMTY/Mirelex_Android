@@ -63,12 +63,26 @@ class FilterProducts : AppCompatActivity() {
             doFilterProducts(filterProductSearch.query.toString())
         })
 
+        /*On recommendations switch change event*/
+        filterProductRecomendations.setOnCheckedChangeListener { _, isChecked ->
+            showFilterFields(isChecked)
+        }
+
+
         /*Set catalogs depending on session usertypeid*/
         val bundleFromProducts = intent.extras
         val sizesObj = UtilsModel.getGson().fromJson(bundleFromProducts.getString("sizes"), CatalogArrayInterface::class.java)
         catalogs = UtilsModel.getGson().fromJson(bundleFromProducts.getString("catalogs"), ProductCatalogs::class.java)
         sizes = sizesObj?.data
         fillProductsCatalogs()
+    }
+
+    fun showFilterFields(isChecked: Boolean){
+        if(isChecked){
+            filterProductFilterFieldsLayout.visibility = View.GONE
+        }else{
+            filterProductFilterFieldsLayout.visibility = View.VISIBLE
+        }
     }
 
     fun doFilterProducts(query: String?){
@@ -88,46 +102,50 @@ class FilterProducts : AppCompatActivity() {
             productFilterObj.name = query.toString()
         }
 
-        if(sizes!![filterProductSize.selectedItemPosition].productCatalogId.toString() != "0"){
-            productFilterObj.sizeId = sizes!![filterProductSize.selectedItemPosition].productCatalogId.toString()
+        if(filterProductRecomendations.isChecked){
+            productFilterObj.mirelexSuggestion = filterProductRecomendations.isChecked
         }else{
-            productFilterObj.sizeId = user.characteristics?.sizeId
-        }
+            if(sizes!![filterProductSize.selectedItemPosition].productCatalogId.toString() != "0"){
+                productFilterObj.sizeId = sizes!![filterProductSize.selectedItemPosition].productCatalogId.toString()
+            }else{
+                productFilterObj.sizeId = user.characteristics?.sizeId
+            }
 
-        if(catalogs?.conditions!![filterProductCondition.selectedItemPosition].productCatalogId.toString() != "0"){
-            productFilterObj.productConditionId = catalogs?.conditions!![filterProductCondition.selectedItemPosition].productCatalogId.toString()
-        }
+            if(catalogs?.conditions!![filterProductCondition.selectedItemPosition].productCatalogId.toString() != "0"){
+                productFilterObj.productConditionId = catalogs?.conditions!![filterProductCondition.selectedItemPosition].productCatalogId.toString()
+            }
 
-        if(catalogs?.styles!![filterProductStyle.selectedItemPosition].productCatalogId.toString() != "0"){
-            productFilterObj.productStyleId = catalogs?.styles!![filterProductStyle.selectedItemPosition].productCatalogId.toString()
-        }
+            if(catalogs?.styles!![filterProductStyle.selectedItemPosition].productCatalogId.toString() != "0"){
+                productFilterObj.productStyleId = catalogs?.styles!![filterProductStyle.selectedItemPosition].productCatalogId.toString()
+            }
 
-        if(catalogs?.materials!![filterProductMaterial.selectedItemPosition].productCatalogId.toString() != "0"){
-            productFilterObj.productMaterialId = catalogs?.materials!![filterProductMaterial.selectedItemPosition].productCatalogId.toString()
-        }
+            if(catalogs?.materials!![filterProductMaterial.selectedItemPosition].productCatalogId.toString() != "0"){
+                productFilterObj.productMaterialId = catalogs?.materials!![filterProductMaterial.selectedItemPosition].productCatalogId.toString()
+            }
 
-        if(catalogs?.sleeveStyles!![filterProductSleeveStyle.selectedItemPosition].productCatalogId.toString() != "0"){
-            productFilterObj.productSleeveStyleId = catalogs?.sleeveStyles!![filterProductSleeveStyle.selectedItemPosition].productCatalogId.toString()
-        }
+            if(catalogs?.sleeveStyles!![filterProductSleeveStyle.selectedItemPosition].productCatalogId.toString() != "0"){
+                productFilterObj.productSleeveStyleId = catalogs?.sleeveStyles!![filterProductSleeveStyle.selectedItemPosition].productCatalogId.toString()
+            }
 
-        if(catalogs?.lengths!![filterProductLength.selectedItemPosition].productCatalogId.toString() != "0"){
-            productFilterObj.productLengthId = catalogs?.lengths!![filterProductLength.selectedItemPosition].productCatalogId.toString()
-        }
+            if(catalogs?.lengths!![filterProductLength.selectedItemPosition].productCatalogId.toString() != "0"){
+                productFilterObj.productLengthId = catalogs?.lengths!![filterProductLength.selectedItemPosition].productCatalogId.toString()
+            }
 
-        if(catalogs?.decorations!![filterProductDecoration.selectedItemPosition].productCatalogId.toString() != "0"){
-            productFilterObj.productDecorationId = catalogs?.decorations!![filterProductDecoration.selectedItemPosition].productCatalogId.toString()
-        }
+            if(catalogs?.decorations!![filterProductDecoration.selectedItemPosition].productCatalogId.toString() != "0"){
+                productFilterObj.productDecorationId = catalogs?.decorations!![filterProductDecoration.selectedItemPosition].productCatalogId.toString()
+            }
 
-        if(catalogs?.silhouettes!![filterProductSilouete.selectedItemPosition].productCatalogId.toString() != "0"){
-            productFilterObj.productSilhouetteId = catalogs?.silhouettes!![filterProductSilouete.selectedItemPosition].productCatalogId.toString()
-        }
+            if(catalogs?.silhouettes!![filterProductSilouete.selectedItemPosition].productCatalogId.toString() != "0"){
+                productFilterObj.productSilhouetteId = catalogs?.silhouettes!![filterProductSilouete.selectedItemPosition].productCatalogId.toString()
+            }
 
-        if(catalogs?.occasions!![filterProductOcation.selectedItemPosition].productCatalogId.toString() != "0"){
-            productFilterObj.productOccasionId = catalogs?.occasions!![filterProductOcation.selectedItemPosition].productCatalogId.toString()
-        }
+            if(catalogs?.occasions!![filterProductOcation.selectedItemPosition].productCatalogId.toString() != "0"){
+                productFilterObj.productOccasionId = catalogs?.occasions!![filterProductOcation.selectedItemPosition].productCatalogId.toString()
+            }
 
-        if(selectedIds != null){
-            productFilterObj.productColors = selectedIds
+            if(selectedIds != null){
+                productFilterObj.productColors = selectedIds
+            }
         }
 
         val strFilter = UtilsModel.getGson().toJson(productFilterObj)
@@ -168,36 +186,42 @@ class FilterProducts : AppCompatActivity() {
 
     fun fillProductCatalogsInputs(){
         val filterContent = UtilsModel.getGson().fromJson(SessionModel.getSessionValue(this, "filterProductRequest"), ProductFilterRequest::class.java)
-        filterProductSize.setSelection(getSizeItemPosition(filterContent.sizeId?.toLong()))
-        filterProductSearch.setQuery(filterContent.name, false)
-        filterProductCondition.setSelection(getCatalogItemPosition(filterContent.productConditionId?.toLong(), catalogs!!.conditions))
-        filterProductStyle.setSelection(getCatalogItemPosition(filterContent.productStyleId?.toLong(), catalogs!!.styles))
-        filterProductMaterial.setSelection(getCatalogItemPosition(filterContent.productMaterialId?.toLong(), catalogs!!.materials))
-        filterProductSleeveStyle.setSelection(getCatalogItemPosition(filterContent.productSleeveStyleId?.toLong(), catalogs!!.sleeveStyles))
-        filterProductLength.setSelection(getCatalogItemPosition(filterContent.productLengthId?.toLong(), catalogs!!.lengths))
-        filterProductDecoration.setSelection(getCatalogItemPosition(filterContent.productDecorationId?.toLong(), catalogs!!.decorations))
-        filterProductSilouete.setSelection(getCatalogItemPosition(filterContent.productSilhouetteId?.toLong(), catalogs!!.silhouettes))
-        filterProductOcation.setSelection(getCatalogItemPosition(filterContent.productOccasionId?.toLong(), catalogs!!.occasions))
 
-        /*Get colors*/
-        var selectedItems = BooleanArray(catalogs?.colors!!.size)
-        adapter =  ArrayAdapter<String>(this, android.R.layout.simple_spinner_item)
-        for((index, color) in catalogs?.colors!!.withIndex()){
-            adapter!!.add(color.name)
-            if(checkIfColorExist(color.productColorCatalogId!!.toLong(), filterContent?.productColors)){
-                selectedItems[index] = true
-                selectedIds.add(catalogs?.colors!![index].productColorCatalogId!!.toLong())
-            }else{
-                selectedItems[index] = false
+        if(filterContent.mirelexSuggestion == true){
+            filterProductRecomendations.isChecked = true
+            showFilterFields(true)
+        }else{
+            filterProductSize.setSelection(getSizeItemPosition(filterContent.sizeId?.toLong()))
+            filterProductSearch.setQuery(filterContent.name, false)
+            filterProductCondition.setSelection(getCatalogItemPosition(filterContent.productConditionId?.toLong(), catalogs!!.conditions))
+            filterProductStyle.setSelection(getCatalogItemPosition(filterContent.productStyleId?.toLong(), catalogs!!.styles))
+            filterProductMaterial.setSelection(getCatalogItemPosition(filterContent.productMaterialId?.toLong(), catalogs!!.materials))
+            filterProductSleeveStyle.setSelection(getCatalogItemPosition(filterContent.productSleeveStyleId?.toLong(), catalogs!!.sleeveStyles))
+            filterProductLength.setSelection(getCatalogItemPosition(filterContent.productLengthId?.toLong(), catalogs!!.lengths))
+            filterProductDecoration.setSelection(getCatalogItemPosition(filterContent.productDecorationId?.toLong(), catalogs!!.decorations))
+            filterProductSilouete.setSelection(getCatalogItemPosition(filterContent.productSilhouetteId?.toLong(), catalogs!!.silhouettes))
+            filterProductOcation.setSelection(getCatalogItemPosition(filterContent.productOccasionId?.toLong(), catalogs!!.occasions))
+
+            /*Get colors*/
+            var selectedItems = BooleanArray(catalogs?.colors!!.size)
+            adapter =  ArrayAdapter<String>(this, android.R.layout.simple_spinner_item)
+            for((index, color) in catalogs?.colors!!.withIndex()){
+                adapter!!.add(color.name)
+                if(checkIfColorExist(color.productColorCatalogId!!.toLong(), filterContent?.productColors)){
+                    selectedItems[index] = true
+                    selectedIds.add(catalogs?.colors!![index].productColorCatalogId!!.toLong())
+                }else{
+                    selectedItems[index] = false
+                }
             }
+
+            /*Fill spinner with colors*/
+            spinner = findViewById(R.id.spinnerMulti)
+            spinner!!.setAdapter(adapter, false, onSelectedListener)
+
+            /*set selected colors*/
+            spinner!!.selected = selectedItems
         }
-
-        /*Fill spinner with colors*/
-        spinner = findViewById(R.id.spinnerMulti)
-        spinner!!.setAdapter(adapter, false, onSelectedListener)
-
-        /*set selected colors*/
-        spinner!!.selected = selectedItems
     }
 
     fun checkIfColorExist(colorId: Long, colorArr: ArrayList<Long>?): Boolean{

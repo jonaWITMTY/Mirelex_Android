@@ -150,4 +150,5 @@
     <string name="pendingApprovalAlertTitle">Pending Approval</string>
     <string name="pendingApprovalAlertDesc">Your profile is under review, to upload products you need to be approved.</string>
     <string name="completeYourProfile">To bring you a better experience, let\'s finish your profile!</string>
+    <string name="mirlexRecommendations">Mirelex recommendations</string>
 </resources>
