@@ -27,14 +27,13 @@ import okhttp3.Response
 import java.io.IOException
 import android.app.Activity
 import android.content.Intent
+import com.example.jonathangalvan.mirelex.UI.MultiSpinnerCustom
 
 
 class FilterProducts : AppCompatActivity() {
 
     var catalogs: ProductCatalogs? = null
     var sizes: ArrayList<CatalogInterface>? = null
-    var spinner: MultiSpinner? = null
-    var adapter: ArrayAdapter<String>? = null
     var selectedIds: ArrayList<Long> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -167,17 +166,9 @@ class FilterProducts : AppCompatActivity() {
         fillSpinner(catalogs?.sleeveStyles, findViewById(R.id.filterProductSleeveStyle))
         fillSpinner(catalogs?.occasions, findViewById(R.id.filterProductOcation))
 
-        /*Get colors*/
-        adapter =  ArrayAdapter<String>(this, android.R.layout.simple_spinner_item)
-        if(catalogs?.colors != null){
-            for((index, color) in catalogs?.colors!!.withIndex()){
-                adapter!!.add(color.name)
-            }
-        }
-
         /*Fill spinner with colors*/
-        spinner = findViewById(R.id.spinnerMulti)
-        spinner!!.setAdapter(adapter, false, onSelectedListener)
+        val multiSpinner = findViewById<MultiSpinnerCustom>(R.id.spinnerMulti)
+        multiSpinner.setItems("", "colors", UtilsModel.getGson().toJson(catalogs), onSelectedListener)
 
         if(SessionModel.existSessionValue(this, "filterProductRequest")){
             fillProductCatalogsInputs()
@@ -204,9 +195,7 @@ class FilterProducts : AppCompatActivity() {
 
             /*Get colors*/
             var selectedItems = BooleanArray(catalogs?.colors!!.size)
-            adapter =  ArrayAdapter<String>(this, android.R.layout.simple_spinner_item)
             for((index, color) in catalogs?.colors!!.withIndex()){
-                adapter!!.add(color.name)
                 if(checkIfColorExist(color.productColorCatalogId!!.toLong(), filterContent?.productColors)){
                     selectedItems[index] = true
                     selectedIds.add(catalogs?.colors!![index].productColorCatalogId!!.toLong())
@@ -216,11 +205,8 @@ class FilterProducts : AppCompatActivity() {
             }
 
             /*Fill spinner with colors*/
-            spinner = findViewById(R.id.spinnerMulti)
-            spinner!!.setAdapter(adapter, false, onSelectedListener)
-
-            /*set selected colors*/
-            spinner!!.selected = selectedItems
+            val multiSpinner = findViewById<MultiSpinnerCustom>(R.id.spinnerMulti)
+            multiSpinner.setItems("", "colors", UtilsModel.getGson().toJson(catalogs), onSelectedListener, selectedItems)
         }
     }
 
@@ -238,11 +224,13 @@ class FilterProducts : AppCompatActivity() {
         return isInColorArr
     }
 
-    private val onSelectedListener = MultiSpinner.MultiSpinnerListener {
-        selectedIds = ArrayList()
-        for ((index, value) in it.withIndex()){
-            if(value){
-                selectedIds.add(catalogs?.colors!![index].productColorCatalogId!!.toLong())
+    private val onSelectedListener = object:  MultiSpinnerCustom.MultiSpinnerListener {
+        override fun onItemsSelected(selected: BooleanArray?) {
+            selectedIds = ArrayList()
+            for ((index, value) in selected!!.withIndex()){
+                if(value){
+                    selectedIds.add(catalogs?.colors!![index].productColorCatalogId!!.toLong())
+                }
             }
         }
     }

@@ -118,7 +118,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" android:textSize="12sp"
                             android:textColor="@android:color/black"/>
-                    <com.thomashaertel.widget.MultiSpinner
+                    <com.example.jonathangalvan.mirelex.UI.MultiSpinnerCustom
                             android:id="@+id/spinnerMulti"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
