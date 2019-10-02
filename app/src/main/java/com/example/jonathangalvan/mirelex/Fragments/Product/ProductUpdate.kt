@@ -22,6 +22,7 @@ import com.example.jonathangalvan.mirelex.ProductActivity
 import com.example.jonathangalvan.mirelex.R
 import com.example.jonathangalvan.mirelex.Requests.GetProductCatalogsRequest
 import com.example.jonathangalvan.mirelex.Requests.GetProductInfoRequest
+import com.example.jonathangalvan.mirelex.UI.MultiSpinnerCustom
 import com.example.jonathangalvan.mirelex.ViewModels.ProductViewModel
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_product_update.*
@@ -376,9 +377,7 @@ class ProductUpdate : Fragment()  {
 
         /*Get colors*/
         var selectedItems = BooleanArray(catalogs?.colors!!.size)
-        adapter =  ArrayAdapter<String>(activity!!, android.R.layout.simple_spinner_item)
         for((index, color) in catalogs?.colors!!.withIndex()){
-            adapter!!.add(color.name)
             if(checkIfColorExist(color.productColorCatalogId!!.toLong())){
                 selectedItems[index] = true
                 selectedIds.add(catalogs?.colors!![index].productColorCatalogId!!.toLong())
@@ -388,11 +387,8 @@ class ProductUpdate : Fragment()  {
         }
 
         /*Fill spinner with colors*/
-        spinner = activity!!.findViewById(R.id.spinnerMulti)
-        spinner!!.setAdapter(adapter, false, onSelectedListener)
-
-        /*set selected colors*/
-        spinner!!.selected = selectedItems
+        val multiSpinner = activity!!.findViewById<MultiSpinnerCustom>(R.id.spinnerMulti)
+        multiSpinner.setItems("", "colors", UtilsModel.getGson().toJson(catalogs), onSelectedListener, selectedItems)
     }
 
     fun fillWomanProductsCatalogs(){
@@ -431,11 +427,13 @@ class ProductUpdate : Fragment()  {
         updateProductSize.setSelection(getAdapterItemPosition( productObj?.productInformation?.sizeId?.toLong(), catalogs?.sizes))
     }
 
-    private val onSelectedListener = MultiSpinner.MultiSpinnerListener {
-        selectedIds = ArrayList()
-        for ((index, value) in it.withIndex()){
-            if(value){
-                selectedIds.add(catalogs?.colors!![index].productColorCatalogId!!.toLong())
+    private val onSelectedListener = object:  MultiSpinnerCustom.MultiSpinnerListener {
+        override fun onItemsSelected(selected: BooleanArray?) {
+            selectedIds = ArrayList()
+            for ((index, value) in selected!!.withIndex()){
+                if(value){
+                    selectedIds.add(catalogs?.colors!![index].productColorCatalogId!!.toLong())
+                }
             }
         }
     }

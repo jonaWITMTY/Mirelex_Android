@@ -35,7 +35,14 @@ class MultiSpinnerCustom : Spinner, OnMultiChoiceClickListener, DialogInterface.
     }
 
     override fun onCancel(dialog: DialogInterface) {
-        // refresh text on spinner
+        refreshText()
+    }
+
+    fun selectItem(p0: Int, isChecked: Boolean){
+        selected!![p0] = isChecked
+    }
+
+    fun refreshText(){
         val spinnerBuffer = StringBuffer()
         var someUnselected = false
 
@@ -68,10 +75,6 @@ class MultiSpinnerCustom : Spinner, OnMultiChoiceClickListener, DialogInterface.
         multiSpinnerlistener!!.onItemsSelected(selected)
     }
 
-    fun selectItem(p0: Int, isChecked: Boolean){
-        selected!![p0] = isChecked
-    }
-
     override fun performClick(): Boolean {
         val builder = AlertDialog.Builder(context)
 
@@ -90,7 +93,7 @@ class MultiSpinnerCustom : Spinner, OnMultiChoiceClickListener, DialogInterface.
         return true
     }
 
-    fun setItems(allText: String, type: String?, itemsObjArrStr: String?, listener: MultiSpinnerListener, selectedItems: List<Boolean>? = ArrayList()) {
+    fun setItems(allText: String, type: String?, itemsObjArrStr: String?, listener: MultiSpinnerListener, selectedItems: BooleanArray? = null) {
         defaultText = allText
         multiSpinnerlistener = listener
         multiSpinnerType = type
@@ -100,23 +103,26 @@ class MultiSpinnerCustom : Spinner, OnMultiChoiceClickListener, DialogInterface.
         when(multiSpinnerType){
             "colors" -> {
                 val catalogs = UtilsModel.getGson().fromJson(multiSpinnerItemsObjStr, ProductCatalogs::class.java)
-                if(!selectedItems.isNullOrEmpty()){
+                if(selectedItems != null){
                     selected = BooleanArray(catalogs.colors.size)
                     for (i in selected!!.indices){
                         selected!![i] = selectedItems!![i]
                     }
+
+                    /*Set text to spinner*/
+                    refreshText()
                 }else{
                     selected = BooleanArray(catalogs.colors.size)
                     for (i in selected!!.indices){
                         selected!![i] = false
                     }
+
+                    /*Set text to spinner*/
+                    val adapter = ArrayAdapter(context, android.R.layout.simple_spinner_item, arrayOf(allText))
+                    setAdapter(adapter)
                 }
             }
         }
-
-        // all text on the spinner
-        val adapter = ArrayAdapter(context, android.R.layout.simple_spinner_item, arrayOf(allText))
-        setAdapter(adapter)
     }
 
     interface MultiSpinnerListener {
