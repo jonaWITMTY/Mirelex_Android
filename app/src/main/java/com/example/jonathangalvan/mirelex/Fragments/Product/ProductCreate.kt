@@ -26,6 +26,7 @@ import com.example.jonathangalvan.mirelex.ProductActivity
 import com.example.jonathangalvan.mirelex.R
 import com.example.jonathangalvan.mirelex.Requests.GetProductCatalogsRequest
 import com.example.jonathangalvan.mirelex.Requests.GetProductPricesRequest
+import com.example.jonathangalvan.mirelex.UI.MultiSpinnerCustom
 import com.example.jonathangalvan.mirelex.ViewModels.ProductViewModel
 import com.thomashaertel.widget.MultiSpinner
 import kotlinx.android.synthetic.main.fragment_product_create.*
@@ -385,14 +386,13 @@ class ProductCreate : Fragment() {
         fillSpinner(catalogs?.occasions, activity!!.findViewById(R.id.createProductOcation))
 
         /*Get colors*/
-        adapter =  ArrayAdapter<String>(activity!!, android.R.layout.simple_spinner_item)
-        for((index, color) in catalogs?.colors!!.withIndex()){
-            adapter!!.add(color.name)
+        var colorsArr : ArrayList<String> = ArrayList()
+        for((index, decoration) in catalogs?.colors!!.withIndex()){
+            colorsArr!!.add(decoration.name)
         }
 
-        /*Fill spinner with colors*/
-        spinner = activity!!.findViewById(R.id.spinnerMulti)
-        spinner!!.setAdapter(adapter, false, onSelectedListener)
+        val multiSpinner = activity!!.findViewById<MultiSpinnerCustom>(R.id.spinnerMulti)
+        multiSpinner.setItems("", "colors", UtilsModel.getGson().toJson(catalogs), onSelectedListener)
 
         /*Get decorations*/
         adapterDecorations =  ArrayAdapter<String>(activity!!, android.R.layout.simple_spinner_item)
@@ -405,11 +405,13 @@ class ProductCreate : Fragment() {
         spinnerDecorations!!.setAdapter(adapterDecorations, false, onSelectedDecorationListener)
     }
 
-    private val onSelectedListener = MultiSpinner.MultiSpinnerListener {
-        selectedIds = ArrayList()
-        for ((index, value) in it.withIndex()){
-            if(value){
-                selectedIds.add(catalogs?.colors!![index].productColorCatalogId!!.toLong())
+    private val onSelectedListener = object:  MultiSpinnerCustom.MultiSpinnerListener {
+        override fun onItemsSelected(selected: BooleanArray?) {
+            selectedIds = ArrayList()
+            for ((index, value) in selected!!.withIndex()){
+                if(value){
+                    selectedIds.add(catalogs?.colors!![index].productColorCatalogId!!.toLong())
+                }
             }
         }
     }
