@@ -6,7 +6,7 @@
     <string name="createAnAccount">Create an account</string>
     <string name="emailField">Email</string>
     <string name="passwordField">Password</string>
-    <string name="customer">Particular</string>
+    <string name="customer">Ambassador</string>
     <string name="store">Store</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="firstNameField">First Name</string>

@@ -7,7 +7,7 @@
     <string name="createAnAccount">Crear nueva cuenta</string>
     <string name="emailField">Correo electrónico</string>
     <string name="passwordField">Contraseña</string>
-    <string name="customer">Particular</string>
+    <string name="customer">Embajador</string>
     <string name="store">Tienda</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="firstNameField">Nombre</string>

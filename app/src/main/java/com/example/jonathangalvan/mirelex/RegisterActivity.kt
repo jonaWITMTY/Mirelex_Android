@@ -49,7 +49,7 @@ class RegisterActivity : AppCompatActivity(), RegisterCustomerTab.OnFragmentInte
         val viewModel = ViewModelProviders.of(this).get(RegisterViewModel::class.java)
 
         /*Tabs*/
-        val fragmentAdapter = RegisterTabsAdapter(supportFragmentManager)
+        val fragmentAdapter = RegisterTabsAdapter(supportFragmentManager, this)
         viewPagerRegisterTabs.adapter = fragmentAdapter
         registerTabs.setupWithViewPager(viewPagerRegisterTabs)
         viewPagerRegisterTabs.addOnPageChangeListener(object : ViewPager.SimpleOnPageChangeListener() {
