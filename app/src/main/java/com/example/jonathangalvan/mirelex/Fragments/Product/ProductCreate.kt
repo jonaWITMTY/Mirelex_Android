@@ -386,11 +386,6 @@ class ProductCreate : Fragment() {
         fillSpinner(catalogs?.occasions, activity!!.findViewById(R.id.createProductOcation))
 
         /*Get colors*/
-        var colorsArr : ArrayList<String> = ArrayList()
-        for((index, decoration) in catalogs?.colors!!.withIndex()){
-            colorsArr!!.add(decoration.name)
-        }
-
         val multiSpinner = activity!!.findViewById<MultiSpinnerCustom>(R.id.spinnerMulti)
         multiSpinner.setItems("", "colors", UtilsModel.getGson().toJson(catalogs), onSelectedListener)
 
