@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
+    <string name="heightImage">http://servicio.mirelex.com.mx/Uploads/height.jpg</string>
+    <string name="bustImage">http://servicio.mirelex.com.mx/Uploads/bust.jpg</string>
+    <string name="waistImage">http://servicio.mirelex.com.mx/Uploads/waist.jpg</string>
+    <string name="hipImage">http://servicio.mirelex.com.mx/Uploads/hip.jpg</string>
+    <string name="cleaningImg">http://servicio.mirelex.com.mx/Uploads/cleaning.jpg</string>
+    <string name="sewingImg">http://servicio.mirelex.com.mx/Uploads/sewing.jpg</string>
+    <string name="whatsapp">5218127484422</string>
+    <string name="phoneCall">+5218127484422</string>
+</resources>
