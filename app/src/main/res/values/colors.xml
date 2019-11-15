@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    /*General*/
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="colorBlue">#6DFAFB</color>
+    <color name="colorFacebook">#2D70AB</color>
+    <color name="colorGrey">#727272</color>
+    <color name="colorGreyDark">#333333</color>
+    <color name="opacity80Black">#CC000000</color>
+    <color name="Tale">#58B3B2</color>
+    <color name="colorLightGray">#e8e8e8</color>
+    <color name="colorLightBlueGray">#99AAC6</color>
+    <color name="colorGreen">#359138</color>
+    <color name="colorLightRed">#ff5b5b</color>
+    <color name="colorGreenLight">#10c469</color>
+    <color name="colorBlueLight">#35B8E0</color>
+    <color name="colorDarkTextOpacity80">#CC333333</color>
+
+    /*Calendar library*/
+    <color name="calendar_highlighted_day_bg">@color/colorGrey</color>
+    <color name="calendar_text_highlighted">@android:color/white</color>
+    <color name="calendar_selected_day_bg">@color/Tale</color>
+    <color name="calendar_text_active">@android:color/black</color>
+
+    /*Multi select*/
+    <color name="list_background">@android:color/white</color>
+    <color name="list_even">@android:color/white</color>
+    <color name="list_header">@color/cyan</color>
+    <color name="list_odd">@android:color/white</color>
+    <color name="list_selected">@color/colorGrey</color>
+    <color name="primary_pressed">@android:color/black</color>
+    <color name="android_text_color">@android:color/black</color>
+</resources>

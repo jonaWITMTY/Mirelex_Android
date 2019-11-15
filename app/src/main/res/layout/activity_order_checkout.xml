@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".OrderCheckoutActivity">
+    <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <ImageView
+                android:layout_width="0dp"
+                android:layout_height="130dp" app:srcCompat="@drawable/mirelex_logo_cian"
+                android:id="@+id/orderCheckoutFeatureImage" app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
+                android:scaleType="centerCrop"/>
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/orderCheckoutFeatureImage"
+                app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent">
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp" android:id="@+id/view2" android:background="@color/colorLightGray"/>
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/orderCheckoutBrand" android:textSize="16dp"
+                    android:paddingLeft="16dp" android:paddingRight="16dp" android:paddingTop="10dp"
+                    android:paddingBottom="10dp" android:background="@drawable/border_bottom" tools:text="brand"
+                    android:textColor="@android:color/black"/>
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/orderCheckoutSize" android:textSize="16dp"
+                    android:paddingLeft="16dp" android:paddingRight="16dp" android:paddingTop="10dp"
+                    android:paddingBottom="10dp" android:background="@drawable/border_bottom"
+                    tools:text="size " android:textColor="@android:color/black"/>
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/orderCheckoutColors" android:textSize="16dp"
+                    android:paddingLeft="16dp" android:paddingRight="16dp" android:paddingTop="10dp"
+                    android:paddingBottom="10dp" android:background="@drawable/border_bottom" tools:text="colors"
+                    android:textColor="@android:color/black"/>
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/orderCheckoutMaterial" android:textSize="16dp"
+                    android:paddingLeft="16dp" android:paddingRight="16dp" android:paddingTop="10dp"
+                    android:paddingBottom="10dp" android:background="@drawable/border_bottom"
+                    tools:text="material " android:textColor="@android:color/black"/>
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/orderCheckoutDecoration"
+                    android:textSize="16dp"
+                    android:paddingLeft="16dp" android:paddingRight="16dp" android:paddingTop="10dp"
+                    android:paddingBottom="10dp" android:background="@drawable/border_bottom" tools:text="decoration "
+                    android:textColor="@android:color/black"/>
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/orderCheckoutLength" android:textSize="16dp"
+                    android:paddingLeft="16dp" android:paddingRight="16dp" android:paddingTop="10dp"
+                    android:paddingBottom="10dp" android:background="@drawable/border_bottom" tools:text="largo"
+                    android:textColor="@android:color/black"/>
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp" android:id="@+id/view3" android:background="@color/colorLightGray"/>
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/orderCheckoutOrderType"
+                    android:textSize="16dp"
+                    android:paddingLeft="16dp" android:paddingRight="16dp" android:paddingTop="10dp"
+                    android:paddingBottom="10dp" android:background="@drawable/border_bottom" tools:text="orderType"
+                    android:textColor="@android:color/black"/>
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/orderCheckoutDate"
+                    android:textSize="16dp"
+                    android:paddingLeft="16dp" android:paddingRight="16dp" android:paddingTop="10dp"
+                    android:paddingBottom="10dp" android:background="@drawable/border_bottom"
+                    tools:text="date "
+                    android:textColor="@android:color/black"/>
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/orderCheckoutTotal"
+                    android:textSize="16dp"
+                    android:paddingLeft="16dp" android:paddingRight="16dp" android:paddingTop="10dp"
+                    android:paddingBottom="10dp" android:background="@drawable/border_bottom" tools:text="total"
+                    android:textColor="@android:color/black"/>
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/orderCheckoutPaymentCard" android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp" android:textColor="@color/black" tools:text="paymentType"
+                    android:paddingTop="10dp" android:paddingBottom="10dp" android:textSize="16sp"/>
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp" android:id="@+id/view4" android:background="@color/colorLightGray"/>
+            <CheckBox
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/orderCheckoutDelivery"
+                    android:buttonTint="@color/colorBlue" android:text="@string/delivery"/>
+            <CheckBox
+                    android:text="@string/checkboxTermsField"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/orderCheckoutTerms"
+                    android:buttonTint="@color/colorBlue"/>
+
+            <View
+                    android:id="@+id/view6"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="@color/colorLightGray" />
+
+            <TextView
+                    android:id="@+id/orderCheckoutStoreSelection"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="@string/selectStore"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+            <com.example.jonathangalvan.mirelex.UI.SpinnerCustom
+                    android:id="@+id/orderCheckoutStateSelection"
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp"
+                    android:spinnerMode="dialog"
+                    android:visibility="invisible">
+            </com.example.jonathangalvan.mirelex.UI.SpinnerCustom>
+
+            <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:id="@+id/orderCheckoutOrderProduct"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:background="@drawable/radius_corner" android:backgroundTint="@color/colorBlue"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    android:layout_marginBottom="16dp" app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginTop="16dp" android:text="@string/orderProduct"/>
+        </LinearLayout>
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>

@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             tools:context=".Fragments.Product.ProductUpdate">
+
+
+        <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                          android:orientation="vertical"
+            >
+                <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                              android:orientation="vertical">
+                    <android.support.v4.view.ViewPager
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp" android:id="@+id/updateProductImageSlider"/>
+                    <me.relex.circleindicator.CircleIndicator
+                            android:id="@+id/indicator"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp" android:layout_alignBottom="@id/updateProductImageSlider"
+                            app:ci_drawable="@drawable/image_slider_indicator"/>
+                </RelativeLayout>
+                <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:theme="@style/textInputLayoutBlack"
+                        android:layout_marginBottom="16dp" android:layout_marginRight="16dp"
+                        android:layout_marginLeft="16dp" android:id="@+id/updateProductBrand">
+
+                    <android.support.design.widget.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/brand" android:singleLine="true"/>
+                </android.support.design.widget.TextInputLayout>
+                <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:theme="@style/textInputLayoutBlack"
+                        android:layout_marginBottom="16dp" android:layout_marginRight="16dp"
+                        android:layout_marginLeft="16dp" android:id="@+id/updateProductCategory">
+
+                    <android.support.design.widget.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/category" android:singleLine="true" android:focusable="false"/>
+                </android.support.design.widget.TextInputLayout>
+                <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:theme="@style/textInputLayoutBlack"
+                        android:layout_marginBottom="16dp" android:layout_marginRight="16dp"
+                        android:layout_marginLeft="16dp" android:id="@+id/updateProductPrice">
+
+                    <android.support.design.widget.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/price" android:singleLine="true" android:focusable="false"/>
+                </android.support.design.widget.TextInputLayout>
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp" android:layout_marginRight="16dp"
+                        android:layout_marginLeft="16dp">
+                    <TextView
+                            android:text="@string/condition"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:textSize="12sp"
+                            android:textColor="@android:color/black"/>
+                    <Spinner
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:id="@+id/updateProductCondition"
+                            style="@android:style/Widget.Material.Light.Spinner.Underlined"
+                            android:backgroundTint="@android:color/black" android:spinnerMode="dialog"/>
+                </LinearLayout>
+                <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:theme="@style/textInputLayoutBlack"
+                        android:layout_marginBottom="16dp">
+                    <CheckBox
+                            android:text="@string/leaseable"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:id="@+id/updateProductLeasable"
+                            android:layout_weight="1"
+                            android:layout_marginLeft="16dp" android:layout_marginRight="16dp"
+                            android:theme="@style/AppTheme" android:layout_gravity="center_vertical"
+                            android:buttonTint="@color/cyan"/>
+                    <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:layout_weight="1"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginRight="16dp" android:hint="@string/leasablePrice"
+                            android:id="@+id/updateProductLeaseablePrice">
+
+                        <android.support.design.widget.TextInputEditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:focusable="false"/>
+                    </android.support.design.widget.TextInputLayout>
+                </LinearLayout>
+                <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:theme="@style/textInputLayoutBlack"
+                        android:layout_marginBottom="16dp">
+                    <CheckBox
+                            android:text="@string/sellable"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:id="@+id/updateProductSellable"
+                            android:layout_weight="1"
+                            android:layout_marginLeft="16dp" android:layout_marginRight="16dp"
+                            android:theme="@style/AppTheme" android:layout_gravity="center_vertical"
+                            android:buttonTint="@color/cyan"/>
+                    <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:layout_weight="1"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginRight="16dp" android:hint="@string/sellPrice"
+                            android:id="@+id/updateProductSellablePrice">
+
+                        <android.support.design.widget.TextInputEditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:focusable="false"/>
+                    </android.support.design.widget.TextInputLayout>
+                </LinearLayout>
+                <CheckBox
+                        android:text="@string/isStretch"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:id="@+id/updateProductIsStretch"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="16dp" android:layout_marginRight="16dp"
+                        android:theme="@style/AppTheme" android:layout_gravity="center_vertical"
+                        android:buttonTint="@color/cyan" android:layout_marginBottom="16dp"/>
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" android:layout_marginBottom="16dp"
+                        android:layout_marginStart="16dp" android:layout_marginEnd="16dp" android:id="@+id/updateProductSizeLayout">
+                    <TextView
+                            android:text="@string/size"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:id="@+id/textView29"
+                            android:textColor="@color/black" android:textSize="12sp"/>
+                    <Spinner
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:id="@+id/updateProductSize"
+                            style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                            android:backgroundTint="@color/black" android:spinnerMode="dialog"/>
+                </LinearLayout>
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp" android:layout_marginRight="16dp"
+                        android:layout_marginLeft="16dp">
+
+                    <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/styleStore"
+                            android:textColor="@android:color/black"
+                            android:textSize="12sp" />
+                    <Spinner
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:id="@+id/updateProductStyle"
+                            style="@android:style/Widget.Material.Light.Spinner.Underlined"
+                            android:backgroundTint="@android:color/black" android:spinnerMode="dialog"/>
+                </LinearLayout>
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp" android:layout_marginRight="16dp"
+                        android:layout_marginLeft="16dp" android:id="@+id/updateProductDecorationLayout">
+                    <TextView
+                            android:text="@string/decoration"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:textSize="12sp"
+                            android:textColor="@android:color/black"/>
+<!--                    <Spinner-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content" android:id="@+id/updateProductDecoration"-->
+<!--                            style="@android:style/Widget.Material.Light.Spinner.Underlined"-->
+<!--                            android:backgroundTint="@android:color/black" android:spinnerMode="dialog"/>-->
+                    <com.thomashaertel.widget.MultiSpinner
+                            android:id="@+id/updateProductDecoration"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            style="@android:style/Widget.Material.Light.Spinner.Underlined"
+                            android:backgroundTint="@color/black"/>
+                </LinearLayout>
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp" android:layout_marginRight="16dp"
+                        android:layout_marginLeft="16dp" android:id="@+id/updateProductLengthLayout">
+                    <TextView
+                            android:text="@string/length"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:textSize="12sp"
+                            android:textColor="@android:color/black"/>
+                    <Spinner
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:id="@+id/updateProductLength"
+                            style="@android:style/Widget.Material.Light.Spinner.Underlined"
+                            android:backgroundTint="@android:color/black" android:spinnerMode="dialog"/>
+                </LinearLayout>
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp" android:layout_marginRight="16dp"
+                        android:layout_marginLeft="16dp">
+                    <TextView
+                            android:text="@string/material"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:textSize="12sp"
+                            android:textColor="@android:color/black"/>
+                    <Spinner
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:id="@+id/updateProductMaterial"
+                            style="@android:style/Widget.Material.Light.Spinner.Underlined"
+                            android:backgroundTint="@android:color/black" android:spinnerMode="dialog"/>
+                </LinearLayout>
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp" android:layout_marginRight="16dp"
+                        android:layout_marginLeft="16dp">
+                    <TextView
+                            android:text="@string/colors"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:textSize="12sp"
+                            android:textColor="@android:color/black"/>
+<!--                    <com.thomashaertel.widget.MultiSpinner-->
+<!--                            android:id="@+id/spinnerMulti"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            style="@android:style/Widget.Material.Light.Spinner.Underlined"-->
+<!--                            android:backgroundTint="@color/black"/>-->
+                    <com.example.jonathangalvan.mirelex.UI.MultiSpinnerCustom
+                            android:layout_height="wrap_content"
+                            android:id="@+id/spinnerMulti"
+                            android:layout_width="match_parent"
+                            style="@android:style/Widget.Material.Light.Spinner.Underlined"
+                            android:backgroundTint="@color/black"/>
+                </LinearLayout>
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp" android:layout_marginRight="16dp"
+                        android:layout_marginLeft="16dp" android:id="@+id/updateProductSiloueteLayout">
+                    <TextView
+                            android:text="@string/dressSilhouette"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:textSize="12sp"
+                            android:textColor="@android:color/black"/>
+                    <Spinner
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:id="@+id/updateProductSilouete"
+                            style="@android:style/Widget.Material.Light.Spinner.Underlined"
+                            android:backgroundTint="@android:color/black" android:spinnerMode="dialog"/>
+                </LinearLayout>
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp" android:layout_marginRight="16dp"
+                        android:layout_marginLeft="16dp">
+                    <TextView
+                            android:text="@string/sleeveStyle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:textSize="12sp"
+                            android:textColor="@android:color/black"/>
+                    <Spinner
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:id="@+id/updateProductSleeveStyle"
+                            style="@android:style/Widget.Material.Light.Spinner.Underlined"
+                            android:backgroundTint="@android:color/black" android:spinnerMode="dialog"/>
+                </LinearLayout>
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp" android:layout_marginRight="16dp"
+                        android:layout_marginLeft="16dp">
+                    <TextView
+                            android:text="@string/ocation"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:textSize="12sp"
+                            android:textColor="@android:color/black"/>
+                    <Spinner
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:id="@+id/updateProductOcation"
+                            style="@android:style/Widget.Material.Light.Spinner.Underlined"
+                            android:backgroundTint="@android:color/black" android:spinnerMode="dialog"/>
+                </LinearLayout>
+                <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp" android:layout_marginBottom="16dp"
+                        android:id="@+id/updateProductBustLayout">
+                    <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:theme="@style/textInputLayoutBlack"
+                            android:id="@+id/updateProductBust" android:layout_weight="1">
+
+                        <android.support.design.widget.TextInputEditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/bust" android:singleLine="true" android:inputType="numberDecimal"/>
+                    </android.support.design.widget.TextInputLayout>
+                    <Button
+                            android:text="?"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp" android:id="@+id/imagePreviewBust" android:layout_weight="0"
+                            android:textColor="@color/cyan" android:background="@color/colorGrey"
+                            android:layout_marginTop="15dp"/>
+                </LinearLayout>
+                <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp" android:layout_marginBottom="16dp"
+                        android:id="@+id/updateProductWaistLayout">
+                    <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:theme="@style/textInputLayoutBlack"
+                            android:id="@+id/updateProductWaist" android:layout_weight="1">
+
+                        <android.support.design.widget.TextInputEditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/waist" android:singleLine="true" android:inputType="numberDecimal"/>
+                    </android.support.design.widget.TextInputLayout>
+                    <Button
+                            android:text="?"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp" android:id="@+id/imagePreviewWaist" android:layout_weight="0"
+                            android:textColor="@color/cyan" android:background="@color/colorGrey"
+                            android:layout_marginTop="15dp"/>
+                </LinearLayout>
+                <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp" android:layout_marginBottom="16dp"
+                        android:id="@+id/updateProductHipLayout">
+                    <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:theme="@style/textInputLayoutBlack"
+                            android:id="@+id/updateProductHip" android:layout_weight="1">
+
+                        <android.support.design.widget.TextInputEditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/hip" android:singleLine="true" android:inputType="numberDecimal"/>
+                    </android.support.design.widget.TextInputLayout>
+                    <Button
+                            android:text="?"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp" android:id="@+id/imagePreviewHip" android:layout_weight="0"
+                            android:textColor="@color/cyan" android:background="@color/colorGrey"
+                            android:layout_marginTop="15dp"/>
+                </LinearLayout>
+                <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp" android:layout_marginBottom="16dp"
+                        android:id="@+id/updateProductHeightLayout">
+                    <android.support.design.widget.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:theme="@style/textInputLayoutBlack"
+                            android:id="@+id/updateProductHeight" android:layout_weight="1">
+
+                        <android.support.design.widget.TextInputEditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/heightInCms" android:singleLine="true"
+                                android:inputType="numberDecimal"/>
+                    </android.support.design.widget.TextInputLayout>
+                    <Button
+                            android:text="?"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp" android:id="@+id/imagePreviewHeight" android:layout_weight="0"
+                            android:textColor="@color/cyan" android:background="@color/colorGrey"
+                            android:layout_marginTop="15dp"/>
+                </LinearLayout>
+                <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:theme="@style/textInputLayoutBlack"
+                        android:layout_marginBottom="16dp" android:layout_marginRight="16dp"
+                        android:layout_marginLeft="16dp"
+                        android:id="@+id/updateProductDescription">
+
+                    <android.support.design.widget.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/description"/>
+                </android.support.design.widget.TextInputLayout>
+                <Button
+                        android:text="@string/continueProcess"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/colorBlue" android:id="@+id/updateProductContinue"/>
+            </LinearLayout>
+        </ScrollView>
+
+</FrameLayout>
