@@ -25,8 +25,14 @@ import com.facebook.FacebookCallback
 import com.facebook.login.LoginManager
 import java.util.*
 import android.content.pm.PackageManager
+import android.os.Environment
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
+import com.example.jonathangalvan.mirelex.Enums.UserType
+import java.io.File
+import java.io.FileOutputStream
+import java.io.OutputStreamWriter
+import java.lang.Exception
 
 private val REQUEST_CODE_ASK_PERMISSIONS = 1
 private val REQUIRED_SDK_PERMISSIONS = arrayOf<String>(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA, Manifest.permission.CALL_PHONE)
@@ -68,6 +74,7 @@ class MainActivity : AppCompatActivity() {
                         val responseObj = UtilsModel.getPostResponse(this@MainActivity, responseStr)
                         if(responseObj.status == "logged"){
                             getUserInfo(responseObj.data!![0].toString())
+                            saveJsonFileForIntegration()
                         }else{
                             runOnUiThread {run{findViewById<ViewGroup>(android.R.id.content).removeView(findViewById(R.id.view_progressbar))}}
                             UtilsModel.getAlertView().newInstance(responseStr, 1, 0).show(supportFragmentManager,"alertDialog")
@@ -154,6 +161,7 @@ class MainActivity : AppCompatActivity() {
                 if(responseUserObj.status == "success"){
                     SessionModel.saveSessionValue(this@MainActivity, "user", UtilsModel.getGson().toJson(responseUserObj.data!![0]))
                     val user = SessionModel(this@MainActivity).getUser()
+                    saveJsonFileForIntegration()
                     when(user.person?.userTypeId){
                         "3" ->{
                             startActivity(Intent(this@MainActivity, CustomerTabsActivity::class.java))
@@ -170,6 +178,38 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
+    }
+
+    fun saveJsonFileForIntegration(){
+        try {
+            // Set up the file directory
+            val filePath = Environment.getExternalStorageDirectory().toString() + "/Android/data/VestidosAr"
+            val fileDirectory = File(filePath)
+            fileDirectory.mkdirs();
+            println("Directory created")
+
+            // Set up the file itself
+            val textFile = File(fileDirectory, "example.json")
+            textFile.createNewFile()
+
+            var isClient = ""
+            when(SessionModel(this).getUser().person?.userTypeId){
+                UserType.Store.userTypeId -> isClient = "{0}"
+                UserType.Customer.userTypeId -> isClient = "{1}"
+            }
+
+            // Write to the file
+            val fileOutputStream = FileOutputStream(textFile)
+            val outputStreamWriter = OutputStreamWriter(fileOutputStream)
+            outputStreamWriter.append(isClient)
+            outputStreamWriter.close()
+            fileOutputStream.close()
+
+            println("Si se creo todo bien")
+        } catch (e: Exception) {
+            println("Error aqui")
+            println(e.message)
+        }
     }
 
     fun checkPermissions() {
