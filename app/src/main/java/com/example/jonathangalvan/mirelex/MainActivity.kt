@@ -194,8 +194,8 @@ class MainActivity : AppCompatActivity() {
 
             var isClient = ""
             when(SessionModel(this).getUser().person?.userTypeId){
-                UserType.Store.userTypeId -> isClient = "{0}"
-                UserType.Customer.userTypeId -> isClient = "{1}"
+                UserType.Store.userTypeId -> isClient = "0"
+                UserType.Customer.userTypeId -> isClient = "1"
             }
 
             // Write to the file
