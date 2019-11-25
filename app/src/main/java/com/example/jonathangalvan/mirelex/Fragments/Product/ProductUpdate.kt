@@ -20,11 +20,11 @@ import com.example.jonathangalvan.mirelex.Interfaces.ProductInfoInterface
 import com.example.jonathangalvan.mirelex.Models.UtilsModel
 import com.example.jonathangalvan.mirelex.ProductActivity
 import com.example.jonathangalvan.mirelex.R
+import com.example.jonathangalvan.mirelex.Requests.DeleteProductRequest
 import com.example.jonathangalvan.mirelex.Requests.GetProductCatalogsRequest
 import com.example.jonathangalvan.mirelex.Requests.GetProductInfoRequest
 import com.example.jonathangalvan.mirelex.UI.MultiSpinnerCustom
 import com.example.jonathangalvan.mirelex.ViewModels.ProductViewModel
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_product_update.*
 import okhttp3.Call
 import okhttp3.Callback
@@ -185,6 +185,29 @@ class ProductUpdate : Fragment()  {
                 val duration = Toast.LENGTH_SHORT
                 Toast.makeText(activity, text, duration).show()
             }
+        })
+
+        /*On delete product*/
+        updateProductDeleteProduct.setOnClickListener(View.OnClickListener {
+            val loader = layoutInflater.inflate(R.layout.view_progressbar, activity!!.findViewById(android.R.id.content), true)
+            val objReq = UtilsModel.getGson().toJson(DeleteProductRequest(productId))
+            UtilsModel.getOkClient().newCall(UtilsModel.postRequest(activity!!, resources.getString(R.string.deleteProduct), objReq)).enqueue(object: Callback {
+                override fun onFailure(call: Call, e: IOException) {
+                    activity?.runOnUiThread {run{activity!!.findViewById<ViewGroup>(android.R.id.content).removeView(activity!!.findViewById(R.id.view_progressbar))}}
+                    UtilsModel.getAlertView().newInstance(UtilsModel.getErrorRequestCall(), 1, 0).show(activity!!.supportFragmentManager,"alertDialog")
+                }
+
+                override fun onResponse(call: Call, response: Response) {
+                    activity?.runOnUiThread {run{activity!!.findViewById<ViewGroup>(android.R.id.content).removeView(activity!!.findViewById(R.id.view_progressbar))}}
+                    val responseStr = response.body()?.string()
+                    val response = UtilsModel.getPostResponse(activity!!, responseStr)
+                    if(response.status == "success"){
+                        UtilsModel.getAlertView().newInstance(responseStr, 1, 1).show(activity!!.supportFragmentManager,"alertDialog")
+                    }else{
+                        UtilsModel.getAlertView().newInstance(responseStr, 1, 0).show(activity!!.supportFragmentManager,"alertDialog")
+                    }
+                }
+            })
         })
     }
 
