@@ -50,7 +50,7 @@
     <string name="length">Length</string>
     <string name="sleeveStyle">Sleeve Style</string>
     <string name="leaseable">Lease</string>
-    <string name="sellable">Purchase</string>
+    <string name="sellable">Sellable</string>
     <string name="fitting">Fitting</string>
     <string name="sell">Sell</string>
     <string name="yes">Yes</string>
@@ -118,6 +118,7 @@
     <string name="adjustedMesaurements">Measuments adjustment</string>
     <string name="lease">Lease</string>
     <string name="purchase">Purchase</string>
+    <string name="toBuy">Purchase</string>
     <string name="all">All</string>
     <string name="availableUpdate">Update available</string>
     <string name="availableUpdateDescription">There is a new version available.</string>

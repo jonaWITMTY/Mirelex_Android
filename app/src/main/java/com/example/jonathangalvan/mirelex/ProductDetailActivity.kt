@@ -28,6 +28,9 @@ import okhttp3.Response
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
+import android.widget.Toast
+
+
 
 class ProductDetailActivity : AppCompatActivity() {
 
@@ -162,6 +165,23 @@ class ProductDetailActivity : AppCompatActivity() {
                             productColor.detailInfoJustValueView.text = colors.dropLast(1)
                             detailProductInfo.addView(productColor)
 
+//                            val modelAr = layoutInflater.inflate(R.layout.view_detail_info_row_with_chevron_title, detailProductInfo,false)
+//                            modelAr.detailInfoChevronTitle.text = "Abrir modelo Ar"
+//                            modelAr.setOnClickListener(View.OnClickListener {
+//                                val launchIntent =
+//                                    packageManager.getLaunchIntentForPackage("com.VirtualMindStudio.Vestidos_AR")
+//                                if (launchIntent != null) {
+//                                    startActivity(launchIntent)
+//                                } else {
+//                                    Toast.makeText(
+//                                        this@ProductDetailActivity,
+//                                        "There is no package available in android",
+//                                        Toast.LENGTH_LONG
+//                                    ).show()
+//                                }
+//                            })
+//                            detailProductInfo.addView(modelAr)
+
                             if(productObj?.productInformation?.fittable == "1") {
                                 val productFitting = layoutInflater.inflate(
                                     R.layout.view_detail_info_row_with_chevron_title,
@@ -198,7 +218,7 @@ class ProductDetailActivity : AppCompatActivity() {
 
                             if(productObj?.productInformation?.sellable == "1"){
                                 val productSellable = layoutInflater.inflate(R.layout.view_detail_info_row_with_chevron_title, detailProductInfo, false)
-                                productSellable.detailInfoChevronTitle.text = resources.getString(R.string.sellable)
+                                productSellable.detailInfoChevronTitle.text = resources.getString(R.string.toBuy)
                                 productSellable.detailInfoChevronValue.setTextColor(ContextCompat.getColor(this@ProductDetailActivity, R.color.colorGreen))
                                 productSellable.detailInfoChevronValue.text = productObj?.productInformation?.sellPriceFormatted
                                 productSellable.setOnClickListener(View.OnClickListener {

@@ -51,7 +51,7 @@
     <string name="length">Largo</string>
     <string name="sleeveStyle">Estilo manga</string>
     <string name="leaseable">Rentar</string>
-    <string name="sellable">Comprar</string>
+    <string name="sellable">Vender</string>
     <string name="fitting">Prueba</string>
     <string name="sell">Compra</string>
     <string name="yes">Sí</string>
@@ -119,6 +119,7 @@
     <string name="adjustedMesaurements">Ajuste de medidas</string>
     <string name="lease">Renta</string>
     <string name="purchase">Compra</string>
+    <string name="toBuy">Comprar</string>
     <string name="all">Todo</string>
     <string name="availableUpdate">Actualización disponible</string>
     <string name="availableUpdateDescription">Hay una nueva versión disponible. Por favor, actualiza a la versión</string>

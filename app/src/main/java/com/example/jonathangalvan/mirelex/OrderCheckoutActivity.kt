@@ -73,7 +73,7 @@ class OrderCheckoutActivity : AppCompatActivity(), SelectItems.OnFragmentInterac
             OrderType.Purchase.orderTypeId -> {
                 orderCheckoutOrderType.text = resources.getString(R.string.sell)
                 orderCheckoutTotal.text = "Total: ${productObj?.productInformation?.sellPriceFormatted}"
-                orderCheckoutOrderProduct.text = resources.getString(R.string.sellable)
+                orderCheckoutOrderProduct.text = resources.getString(R.string.toBuy)
                 orderRequestObj?.total = productObj?.productInformation?.sellPrice.toString()
             }
             OrderType.Lease.orderTypeId -> {
