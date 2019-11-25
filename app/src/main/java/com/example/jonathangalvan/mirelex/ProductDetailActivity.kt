@@ -126,7 +126,7 @@ class ProductDetailActivity : AppCompatActivity() {
                                 ProductType.Dress.productTypeId -> {
 
                                     val productStyle = layoutInflater.inflate(R.layout.view_detail_info_row_with_title, detailProductInfo, false)
-                                    productStyle.detailInfoNameView.text = resources.getString(R.string.style)
+                                    productStyle.detailInfoNameView.text = resources.getString(R.string.styleClient)
                                     productStyle.detailInfoValueView.text = productObj?.productInformation?.productStyle
                                     detailProductInfo.addView(productStyle)
 
