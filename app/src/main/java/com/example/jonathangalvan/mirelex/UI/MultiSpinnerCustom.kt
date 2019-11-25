@@ -43,36 +43,38 @@ class MultiSpinnerCustom : Spinner, OnMultiChoiceClickListener, DialogInterface.
     }
 
     fun refreshText(){
-        val spinnerBuffer = StringBuffer()
-        var someUnselected = false
+        if(selected != null){
+            val spinnerBuffer = StringBuffer()
+            var someUnselected = false
 
-        /*Set text to display in spinner depending on type*/
-        when(multiSpinnerType){
-            "colors" -> {
-                val catalogs = UtilsModel.getGson().fromJson(multiSpinnerItemsObjStr, ProductCatalogs::class.java)
-                for (i in catalogs.colors.indices) {
-                    if (selected!![i]) {
-                        spinnerBuffer.append(catalogs.colors!![i].name)
-                        spinnerBuffer.append(", ")
-                    } else {
-                        someUnselected = true
+            /*Set text to display in spinner depending on type*/
+            when(multiSpinnerType){
+                "colors" -> {
+                    val catalogs = UtilsModel.getGson().fromJson(multiSpinnerItemsObjStr, ProductCatalogs::class.java)
+                    for (i in catalogs.colors.indices) {
+                        if (selected!![i]) {
+                            spinnerBuffer.append(catalogs.colors!![i].name)
+                            spinnerBuffer.append(", ")
+                        } else {
+                            someUnselected = true
+                        }
                     }
                 }
             }
-        }
 
-        var spinnerText: String?
-        if (someUnselected) {
-            spinnerText = spinnerBuffer.toString()
-            if (spinnerText.length > 2)
-                spinnerText = spinnerText.substring(0, spinnerText.length - 2)
-        } else {
-            spinnerText = defaultText
-        }
+            var spinnerText: String?
+            if (someUnselected) {
+                spinnerText = spinnerBuffer.toString()
+                if (spinnerText.length > 2)
+                    spinnerText = spinnerText.substring(0, spinnerText.length - 2)
+            } else {
+                spinnerText = defaultText
+            }
 
-        val adapter = ArrayAdapter(context, android.R.layout.simple_spinner_item, arrayOf<String>(spinnerText!!))
-        setAdapter(adapter)
-        multiSpinnerlistener!!.onItemsSelected(selected)
+            val adapter = ArrayAdapter(context, android.R.layout.simple_spinner_item, arrayOf<String>(spinnerText!!))
+            setAdapter(adapter)
+            multiSpinnerlistener!!.onItemsSelected(selected)
+        }
     }
 
     override fun performClick(): Boolean {

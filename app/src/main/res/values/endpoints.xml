@@ -40,6 +40,7 @@
     <string name="getProductTypes">product/types</string>
     <string name="getProductPrices">product/suggested/prices</string>
     <string name="createProduct">product/create</string>
+    <string name="deleteProduct">product/delete</string>
 
     //Payment
     <string name="deleteCard">user/card/delete</string>
