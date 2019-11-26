@@ -287,6 +287,8 @@ class ProfileActivity : AppCompatActivity() {
                                 val alert = CustomBottomAlert().bottomSheetDialogInstance(ba)
                                 alert.isCancelable = false
                                 alert.show(supportFragmentManager, "alert")
+                            }else{
+                                UtilsModel.getAlertView().newInstance(responseStr, 1, 1).show(supportFragmentManager,"alertDialog")
                             }
                         }else{
                             UtilsModel.getAlertView().newInstance(responseStr, 1, 1).show(supportFragmentManager,"alertDialog")
