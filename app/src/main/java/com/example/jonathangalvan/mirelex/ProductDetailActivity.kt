@@ -190,7 +190,7 @@ class ProductDetailActivity : AppCompatActivity() {
                                 )
                                 productFitting.detailInfoChevronTitle.text = resources.getString(R.string.doFittingOrder)
                                 productFitting.setOnClickListener(View.OnClickListener {
-                                    if(sessionUser?.address!!.size > 0){
+                                    if(sessionUser?.person?.phoneVerified != "0" && sessionUser?.person?.phoneVerified != null){
                                         continueForFitting()
                                     }else{
                                         CustomAlert().newInstance("{'status': '${OrderType.Fitting.orderTypeId}','title':'${resources.getString(R.string.alert)}', 'desc': '${resources.getString(R.string.completeYourProfile)}'}", 3, 0)
@@ -206,7 +206,7 @@ class ProductDetailActivity : AppCompatActivity() {
                                 productLeaseable.detailInfoChevronValue.setTextColor(ContextCompat.getColor(this@ProductDetailActivity, R.color.Tale))
                                 productLeaseable.detailInfoChevronValue.text = productObj?.productInformation?.priceFormatted
                                 productLeaseable.setOnClickListener(View.OnClickListener {
-                                    if(sessionUser?.address!!.size > 0){
+                                    if(sessionUser?.person?.phoneVerified != "0" && sessionUser?.person?.phoneVerified != null){
                                         confirmFittingAlert()
                                     }else{
                                         CustomAlert().newInstance("{'status': '${OrderType.Lease.orderTypeId}','title':'${resources.getString(R.string.alert)}', 'desc': '${resources.getString(R.string.completeYourProfile)}'}", 3, 0)
@@ -222,7 +222,7 @@ class ProductDetailActivity : AppCompatActivity() {
                                 productSellable.detailInfoChevronValue.setTextColor(ContextCompat.getColor(this@ProductDetailActivity, R.color.colorGreen))
                                 productSellable.detailInfoChevronValue.text = productObj?.productInformation?.sellPriceFormatted
                                 productSellable.setOnClickListener(View.OnClickListener {
-                                    if(sessionUser?.address!!.size > 0){
+                                    if(sessionUser?.person?.phoneVerified != "0" && sessionUser?.person?.phoneVerified != null){
                                         continueForPurchase()
                                     }else{
                                         CustomAlert().newInstance("{'status': '${OrderType.Purchase.orderTypeId}','title':'${resources.getString(R.string.alert)}', 'desc': '${resources.getString(R.string.completeYourProfile)}'}", 3, 0)

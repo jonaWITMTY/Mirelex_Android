@@ -64,7 +64,7 @@ class Products : Fragment() {
         user = SessionModel(activity!!).getUser()
 
         /*Confirm phone*/
-        if(user?.address!!.size > 0) {
+        if(!user?.person!!.personalPhone.isNullOrEmpty()) {
             if(user?.person?.phoneVerified == "0" || user?.person?.phoneVerified == null){
                 val ba = UtilsModel.getGson().toJson(BottomAlertInterface(
                     alertType = "confirmAccountPhone"

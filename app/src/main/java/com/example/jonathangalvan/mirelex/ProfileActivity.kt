@@ -232,7 +232,9 @@ class ProfileActivity : AppCompatActivity() {
                 updateUserObj.numExt = updateSessionUserNumber.editText?.text.toString()
                 updateUserObj.numInt = updateSessionUserInternalNumber.editText?.text.toString()
                 updateUserObj.zipCode = updateSessionUserZip.editText?.text.toString()
-                updateUserObj.neighborhoodId = neighborhoodsArr!!.data[updateSessionUserNeighborhoods.selectedItemPosition].neighborhoodId
+                if(updateSessionUserNeighborhoods.isSelected){
+                    updateUserObj.neighborhoodId = neighborhoodsArr!!.data[updateSessionUserNeighborhoods.selectedItemPosition].neighborhoodId
+                }
 
                 when(user?.person?.userTypeId){
                     UserType.Store.userTypeId -> {
@@ -336,11 +338,7 @@ class ProfileActivity : AppCompatActivity() {
         var isCorrect = true
         if(
             updateSessionUserEmail.editText?.text.toString().isEmpty() ||
-            updateSessionUserPersonalPhone.editText?.text.toString().isEmpty() ||
-            updateSessionUserStreet.editText?.text.toString().isEmpty() ||
-            updateSessionUserNumber.editText?.text.toString().isEmpty() ||
-            updateSessionUserZip.editText?.text.toString().isEmpty() ||
-            neighborhoodsArr == null
+            updateSessionUserPersonalPhone.editText?.text.toString().isEmpty()
         ){
             isCorrect = false
         }else{
@@ -353,27 +351,9 @@ class ProfileActivity : AppCompatActivity() {
                 else -> {
                     if(
                         updateSessionUserName.editText?.text.toString().isEmpty() ||
-                        updateSessionUserPaternal.editText?.text.toString().isEmpty() ||
-                        updateSessionUserHeight.editText?.text.toString().isEmpty()
+                        updateSessionUserPaternal.editText?.text.toString().isEmpty()
                     ){
                         isCorrect = false
-                    }else{
-                        when(user?.person?.userGenderId) {
-                            Gender.Male.genderId -> {
-                                if(sizes == null){
-                                    isCorrect = false
-                                }
-                            }
-                            else -> {
-                                if(
-                                    updateSessionUserBust.editText?.text.toString().isEmpty() ||
-                                    updateSessionUserWaist.editText?.text.toString().isEmpty() ||
-                                    updateSessionUserHip.editText?.text.toString().isEmpty()
-                                ){
-                                    isCorrect = false
-                                }
-                            }
-                        }
                     }
                 }
             }

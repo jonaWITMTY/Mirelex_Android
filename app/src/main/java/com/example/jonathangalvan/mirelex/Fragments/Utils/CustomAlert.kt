@@ -142,17 +142,17 @@ class CustomAlert : DialogFragment() {
 
                             val btnCancel = alertView.findViewById<View>(R.id.btnCancel)
                             btnCancel.setOnClickListener(View.OnClickListener {
-                                when(alertInfo?.status){
-                                    OrderType.Fitting.orderTypeId -> {
-                                        (activity as ProductDetailActivity).continueForFitting()
-                                    }
-                                    OrderType.Lease.orderTypeId -> {
-                                        (activity as ProductDetailActivity).confirmFittingAlert()
-                                    }
-                                    OrderType.Purchase.orderTypeId -> {
-                                        (activity as ProductDetailActivity).continueForPurchase()
-                                    }
-                                }
+//                                when(alertInfo?.status){
+//                                    OrderType.Fitting.orderTypeId -> {
+//                                        (activity as ProductDetailActivity).continueForFitting()
+//                                    }
+//                                    OrderType.Lease.orderTypeId -> {
+//                                        (activity as ProductDetailActivity).confirmFittingAlert()
+//                                    }
+//                                    OrderType.Purchase.orderTypeId -> {
+//                                        (activity as ProductDetailActivity).continueForPurchase()
+//                                    }
+//                                }
                                 onDismiss(dialog)
                             })
 
