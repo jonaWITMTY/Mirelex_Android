@@ -13,6 +13,8 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.FrameLayout
 import android.widget.Toast
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.jonathangalvan.mirelex.Enums.OrderType
 import com.example.jonathangalvan.mirelex.Enums.UserType
 import com.example.jonathangalvan.mirelex.Fragments.Utils.SelectItems
@@ -52,7 +54,8 @@ class OrderCheckoutActivity : AppCompatActivity(), SelectItems.OnFragmentInterac
         orderRequestObj = UtilsModel.getGson().fromJson(bundleFromCalendar.getString("orderRequestObj"), CreateOrderRequest::class.java)
 
         /*Fill fields*/
-        Picasso.with(this).load(productObj?.productInformation?.productFeaturedImage).into(orderCheckoutFeatureImage)
+//        Picasso.with(this).load(productObj?.productInformation?.productFeaturedImage).into(orderCheckoutFeatureImage)
+        Glide.with(this).load(productObj?.productInformation?.productFeaturedImage).apply( RequestOptions().override(800, 0)).into(orderCheckoutFeatureImage)
         orderCheckoutBrand.text = productObj?.productInformation?.brand
         orderCheckoutSize.text = productObj?.productInformation?.size
         orderCheckoutColors.text = productObj?.productInformation?.brand

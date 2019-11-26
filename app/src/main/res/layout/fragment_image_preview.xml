@@ -11,13 +11,18 @@
             android:layout_height="match_parent">
 
         <ImageView
-                android:src="@drawable/mirelex_logo_cian"
+                android:id="@+id/imagePreviewMain"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content" android:id="@+id/imagePreviewMain" android:scaleType="center"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="20dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/mirelex_logo_cian"
+                android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" android:layout_marginBottom="20dp"
-                android:visibility="visible" android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
         <ImageView
                 android:src="@drawable/close"
                 android:layout_width="33dp"

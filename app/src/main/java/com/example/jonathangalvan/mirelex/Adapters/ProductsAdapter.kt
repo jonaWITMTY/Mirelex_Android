@@ -3,6 +3,8 @@ package com.example.jonathangalvan.mirelex.Adapters
 import android.content.Context
 import android.view.View
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.jonathangalvan.mirelex.Interfaces.ProductInterface
 import com.example.jonathangalvan.mirelex.R
 import com.squareup.picasso.Picasso
@@ -16,9 +18,9 @@ class ProductsAdapter(private var context: Context, private var productsList: Ar
             view.productAdapterName.text = "${context.resources.getText(R.string.size)}: ${productsList[position].size}"
             view.productadapterPrice.text = productsList[position].priceFormatted
             if(productsList[position].productFeaturedImage != null){
-                Picasso.with(view.productAdapaterImage.context).load(productsList[position].productFeaturedImage).resize(600, 0).into(view.productAdapaterImage)
+                Glide.with(view.productAdapaterImage.context).load(productsList[position].productFeaturedImage).apply( RequestOptions().override(600, 0)).into(view.productAdapaterImage)
             }else{
-                Picasso.with(view.productAdapaterImage.context).load(R.drawable.mirelex_logo_cian).resize(600, 0).into(view.productAdapaterImage)
+                Glide.with(view.productAdapaterImage.context).load(R.drawable.mirelex_logo_cian).into(view.productAdapaterImage)
             }
         }else{
             view = convertView

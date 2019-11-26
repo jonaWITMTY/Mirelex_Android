@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.jonathangalvan.mirelex.Fragments.Utils.ImagePreview
 import com.example.jonathangalvan.mirelex.R
 import com.squareup.picasso.Picasso
@@ -18,7 +20,8 @@ class SliderPagerAdapter(var images: ArrayList<String>, var fm: FragmentManager?
         val img = imageLayout.findViewById<ImageView>(R.id.imageSliderImg)
 
         if(images.isNotEmpty()){
-            Picasso.with(container.context).load(images[position]).into(img)
+//            Picasso.with(container.context).load(images[position]).into(img)
+            Glide.with(container.context).load(images[position]).apply( RequestOptions().override(800, 0)).into(img)
             img.setOnClickListener( View.OnClickListener {
                 ImagePreview().newInstance(images[position]).show(fm,"alertDialog")
             })

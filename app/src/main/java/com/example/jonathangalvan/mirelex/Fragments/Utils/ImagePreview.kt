@@ -12,6 +12,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 
 import com.example.jonathangalvan.mirelex.R
 import com.squareup.picasso.Picasso
@@ -35,7 +37,8 @@ class ImagePreview : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val alertView = activity?.layoutInflater!!.inflate(R.layout.fragment_image_preview, null)
         val alert = AlertDialog.Builder(activity)
-        Picasso.with(activity!!).load(arguments?.getString("image")).error(R.drawable.mirelex_logo_cian).into(alertView.findViewById<ImageView>(R.id.imagePreviewMain))
+//        Picasso.with(activity!!).load(arguments?.getString("image")).error(R.drawable.mirelex_logo_cian).into(alertView.findViewById<ImageView>(R.id.imagePreviewMain))
+        Glide.with(activity!!).load(arguments?.getString("image")).apply( RequestOptions().override(800, 0)).into(alertView.findViewById<ImageView>(R.id.imagePreviewMain))
         alertView.findViewById<ImageView>(R.id.imagePreviewClose).setOnClickListener(View.OnClickListener {
             onDismiss(dialog)
         })
