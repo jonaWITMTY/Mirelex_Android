@@ -299,6 +299,9 @@ class CustomBottomAlert: DialogFragment() {
                                     user.person?.phoneVerified = "1"
                                     SessionModel.saveSessionValue(activity!!, "user", UtilsModel.getGson().toJson(user))
                                     onDismiss(dialog)
+                                    if(alertObj.formProfilePage != "0"){
+                                        activity!!.finish()
+                                    }
                                 }else{
                                     inputText.text = responseObj.desc
                                 }

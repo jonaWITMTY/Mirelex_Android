@@ -9,5 +9,8 @@ class BottomAlertInterface(
     /*Fitting sizes*/
     var productId: String? = null,
     var orderId: String? = null,
-    var userId: String? = null
+    var userId: String? = null,
+
+    /*Twilio*/
+    var formProfilePage: String = "0"
 ) {}

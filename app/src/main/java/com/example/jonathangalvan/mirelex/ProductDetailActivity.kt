@@ -238,6 +238,11 @@ class ProductDetailActivity : AppCompatActivity() {
         })
     }
 
+    override fun onResume() {
+        super.onResume()
+        sessionUser = SessionModel(this@ProductDetailActivity).getUser()
+    }
+
     fun confirmFittingAlert(){
         UtilsModel.getAlertView().newInstance("", 3, 0).show(supportFragmentManager,"alertDialog")
     }

@@ -12,6 +12,7 @@ import android.widget.Toast
 import com.example.jonathangalvan.mirelex.Enums.Gender
 import com.example.jonathangalvan.mirelex.Enums.ProductType
 import com.example.jonathangalvan.mirelex.Enums.UserType
+import com.example.jonathangalvan.mirelex.Fragments.Utils.CustomBottomAlert
 import com.example.jonathangalvan.mirelex.Fragments.Utils.ImagePreview
 import com.example.jonathangalvan.mirelex.Interfaces.*
 import com.example.jonathangalvan.mirelex.Models.SessionModel
@@ -276,8 +277,18 @@ class ProfileActivity : AppCompatActivity() {
                         val responseObj = UtilsModel.getPostResponse(this@ProfileActivity, responseStr)
                         if(responseObj.status == "success"){
                             SessionModel.saveSessionValue(this@ProfileActivity, "user", UtilsModel.getGson().toJson(responseObj.data!![0]))
+                            if(user?.person?.phoneVerified == "0" || user?.person?.phoneVerified == null){
+                                val ba = UtilsModel.getGson().toJson(BottomAlertInterface(
+                                    alertType = "confirmAccountPhone",
+                                    formProfilePage = "1"
+                                ))
+                                val alert = CustomBottomAlert().bottomSheetDialogInstance(ba)
+                                alert.isCancelable = false
+                                alert.show(supportFragmentManager, "alert")
+                            }
+                        }else{
+                            UtilsModel.getAlertView().newInstance(responseStr, 1, 1).show(supportFragmentManager,"alertDialog")
                         }
-                        UtilsModel.getAlertView().newInstance(responseStr, 1, 1).show(supportFragmentManager,"alertDialog")
                     }
                 })
             }else{
