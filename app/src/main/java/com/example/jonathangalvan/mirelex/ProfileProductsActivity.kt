@@ -5,15 +5,13 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v4.graphics.drawable.DrawableCompat
+import android.support.v7.widget.GridLayoutManager
 import android.view.*
 import com.example.jonathangalvan.mirelex.Adapters.ProductsAdapter
-import com.example.jonathangalvan.mirelex.Enums.UserType
-import com.example.jonathangalvan.mirelex.Interfaces.ProductInterface
 import com.example.jonathangalvan.mirelex.Interfaces.ProductsInterface
-import com.example.jonathangalvan.mirelex.Models.SessionModel
+import com.example.jonathangalvan.mirelex.Listeners.RecyclerItemClickListener
 import com.example.jonathangalvan.mirelex.Models.UtilsModel
 import kotlinx.android.synthetic.main.activity_profile_products.*
-import kotlinx.android.synthetic.main.fragment_products.*
 import kotlinx.android.synthetic.main.view_centered_message.view.*
 import okhttp3.Call
 import okhttp3.Callback
@@ -22,7 +20,7 @@ import java.io.IOException
 
 class ProfileProductsActivity : AppCompatActivity() {
 
-    var productAdapter: ProductsAdapter? = null
+    var productAdapter: ProductsAdapter? = ProductsAdapter(ArrayList())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +29,22 @@ class ProfileProductsActivity : AppCompatActivity() {
 
         /*Set title to activity*/
         supportActionBar?.title = resources.getString(R.string.myProducts)
+
+        /*Set productGrid config*/
+        profileProductsGrid.layoutManager = GridLayoutManager(this, 2)
+        profileProductsGrid.adapter = productAdapter
+
+        profileProductsGrid?.addOnItemTouchListener(RecyclerItemClickListener(this, profileProductsGrid, object : RecyclerItemClickListener.OnItemClickListener {
+            override fun onItemClick(view: View, position: Int) {
+                val goToProductDetail: Intent = Intent(this@ProfileProductsActivity, ProductActivity::class.java)
+                val b = Bundle()
+                b.putString("productId", productAdapter!!.getProduct(position).productId.toString())
+                goToProductDetail.putExtras(b)
+                startActivity(goToProductDetail)
+            }
+
+            override fun onItemLongClick(view: View?, position: Int) {}
+        }))
     }
 
     override fun onResume() {
@@ -60,23 +74,13 @@ class ProfileProductsActivity : AppCompatActivity() {
                             if(findViewById<ViewGroup>(R.id.viewCenteredMessage) != null) {
                                 findViewById<ViewGroup>(android.R.id.content)?.removeView(findViewById(R.id.viewCenteredMessage))
                             }
-                            productAdapter = ProductsAdapter(this@ProfileProductsActivity, responseProducts.data)
-                            profileProductsGrid?.adapter = productAdapter
-                            profileProductsGrid?.setOnItemClickListener { parent, view, position, id ->
-                                val goToProductDetail: Intent
-                                goToProductDetail = Intent(this@ProfileProductsActivity, ProductActivity::class.java)
-                                val b = Bundle()
-                                b.putString("productId", (profileProductsGrid.adapter.getItem(position) as ProductInterface).productId.toString())
-                                goToProductDetail.putExtras(b)
-                                startActivity(goToProductDetail)
-                            }
+                            productAdapter!!.loadNewData(responseProducts.data)
                         }
                     }
                     "noDataAvailable" -> {
                         runOnUiThread {
                             run {
-                                productAdapter = ProductsAdapter(this@ProfileProductsActivity, ArrayList())
-                                profileProductsGrid?.adapter = productAdapter
+                                productAdapter!!.loadNewData(ArrayList())
                                 if((findViewById<ViewGroup>(R.id.viewCenteredMessage)) == null) {
                                     val ceneteredLayout = layoutInflater.inflate(
                                         R.layout.view_centered_message,

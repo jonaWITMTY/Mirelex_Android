@@ -5,10 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v4.content.ContextCompat
-import android.support.v4.graphics.drawable.DrawableCompat
 import android.view.*
-import com.example.jonathangalvan.mirelex.Adapters.ProductsAdapter
 import com.example.jonathangalvan.mirelex.Enums.UserType
 import com.example.jonathangalvan.mirelex.FilterProducts
 import com.example.jonathangalvan.mirelex.Fragments.Utils.CustomBottomAlert
@@ -25,19 +22,20 @@ import okhttp3.Response
 import java.io.IOException
 import com.onesignal.OneSignal
 import android.app.Activity
-import android.support.v4.app.FragmentManager
-import android.widget.FrameLayout
+import android.support.v7.widget.GridLayoutManager
+import com.example.jonathangalvan.mirelex.Adapters.ProductsAdapter
 import com.example.jonathangalvan.mirelex.Enums.Gender
 import com.example.jonathangalvan.mirelex.Enums.ProductType
 import com.example.jonathangalvan.mirelex.Fragments.Utils.CustomAlert
 import com.example.jonathangalvan.mirelex.Interfaces.*
+import com.example.jonathangalvan.mirelex.Listeners.RecyclerItemClickListener
 import com.example.jonathangalvan.mirelex.Requests.*
 
 
 class Products : Fragment() {
     private var listener: OnFragmentInteractionListener? = null
     var filterAction = false
-    var productAdapter: ProductsAdapter? = null
+    var productAdapter: ProductsAdapter? = ProductsAdapter(ArrayList())
     var catalogs: ProductCatalogs? = null
     var sizes: String = ""
     var user: UserInterface? = null
@@ -91,6 +89,30 @@ class Products : Fragment() {
         /*Get filter objs*/
         getProductCatalogs()
         getSizes()
+
+        /*Set productGrid config*/
+        productsGrid.layoutManager = GridLayoutManager(activity, 2)
+        productsGrid.adapter = productAdapter
+
+        productsGrid?.addOnItemTouchListener(RecyclerItemClickListener(context!!, productsGrid, object : RecyclerItemClickListener.OnItemClickListener {
+            override fun onItemClick(view: View, position: Int) {
+                val goToProductDetail: Intent
+                when(SessionModel(activity!!).getSessionUserType()){
+                    UserType.Store.userTypeId -> {
+                        goToProductDetail = Intent(activity!!, ProductActivity::class.java)
+                    }
+                    else -> {
+                        goToProductDetail = Intent(activity!!, ProductDetailActivity::class.java)
+                    }
+                }
+                val b = Bundle()
+                b.putString("productId", productAdapter!!.getProduct(position).productId.toString())
+                goToProductDetail.putExtras(b)
+                startActivity(goToProductDetail)
+            }
+
+            override fun onItemLongClick(view: View?, position: Int) {}
+        }))
     }
 
     override fun onResume() {
@@ -146,30 +168,13 @@ class Products : Fragment() {
                             if(activity!!.findViewById<ViewGroup>(R.id.viewCenteredMessage) != null) {
                                 activity?.findViewById<ViewGroup>(R.id.contentTabsFrameLayout)?.removeView(activity?.findViewById(R.id.viewCenteredMessage))
                             }
-                            productAdapter = ProductsAdapter(activity!!, responseProducts.data)
-                            productsGrid?.adapter = productAdapter
-                            productsGrid?.setOnItemClickListener { parent, view, position, id ->
-                                val goToProductDetail: Intent
-                                when(SessionModel(activity!!).getSessionUserType()){
-                                    UserType.Store.userTypeId -> {
-                                        goToProductDetail = Intent(activity!!, ProductActivity::class.java)
-                                    }
-                                    else -> {
-                                        goToProductDetail = Intent(activity!!, ProductDetailActivity::class.java)
-                                    }
-                                }
-                                val b = Bundle()
-                                b.putString("productId", (productsGrid.adapter.getItem(position) as ProductInterface).productId.toString())
-                                goToProductDetail.putExtras(b)
-                                startActivity(goToProductDetail)
-                            }
+                            productAdapter!!.loadNewData(responseProducts.data)
                         }
                     }
                     "noDataAvailable" -> {
                         activity?.runOnUiThread {
                             run {
-                                productAdapter = ProductsAdapter(activity!!, ArrayList())
-                                productsGrid?.adapter = productAdapter
+                                productAdapter!!.loadNewData(ArrayList())
                                 if((activity!!.findViewById<ViewGroup>(R.id.viewCenteredMessage)) == null) {
                                     val ceneteredLayout = layoutInflater.inflate(
                                         R.layout.view_centered_message,
