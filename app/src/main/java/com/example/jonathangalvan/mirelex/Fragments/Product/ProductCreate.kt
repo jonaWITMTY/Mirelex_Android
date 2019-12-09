@@ -431,7 +431,7 @@ class ProductCreate : Fragment() {
 
     fun fillProductTypesSpinner(data: ArrayList<ProductTypeInterface>?, adapterView: AdapterView<ArrayAdapter<ProductTypeInterface>>){
         if(data != null){
-            data.add(0,ProductTypeInterface("","--Seleccione--"))
+//            data.add(0,ProductTypeInterface("","--Seleccione--"))
             val adapter = ArrayAdapter<ProductTypeInterface>(activity!!, R.layout.view_spinner_item_black, R.id.spinnerItemBlackSelect, data)
             adapter.setDropDownViewResource(R.layout.view_spinner_item_black_select)
             adapterView.adapter = adapter
