@@ -237,7 +237,7 @@ class FilterProducts : AppCompatActivity() {
 
     fun fillSpinner(data: ArrayList<ProductCatalog>?, adapterView: AdapterView<ArrayAdapter<ProductCatalog>>){
         if(data != null){
-            data.add(0, ProductCatalog("0", "--Seleccione--"))
+            data.add(0, ProductCatalog("0", resources!!.getString(R.string.selectOptionDropdown)))
             val adapter = ArrayAdapter<ProductCatalog>(this, R.layout.view_spinner_item_black, R.id.spinnerItemBlackSelect, data)
             adapter.setDropDownViewResource(R.layout.view_spinner_item_black_select)
             adapterView.adapter = adapter
@@ -246,7 +246,7 @@ class FilterProducts : AppCompatActivity() {
 
     fun fillSpinnerSize(data: ArrayList<CatalogInterface>?, adapterView: AdapterView<ArrayAdapter<CatalogInterface>>){
         if(data != null){
-            data.add(0, CatalogInterface(0, "--Seleccione--"))
+            data.add(0, CatalogInterface(0, resources!!.getString(R.string.selectOptionDropdown)))
             val adapter = ArrayAdapter<CatalogInterface>(this, R.layout.view_spinner_item_black, R.id.spinnerItemBlackSelect, data)
             adapter.setDropDownViewResource(R.layout.view_spinner_item_black_select)
             adapterView.adapter = adapter
