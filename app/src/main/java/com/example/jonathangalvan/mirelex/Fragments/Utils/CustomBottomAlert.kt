@@ -328,6 +328,13 @@ class CustomBottomAlert: DialogFragment() {
                     intentToProfile.putExtras(bundleToProfile)
                     activity?.startActivity(intentToProfile)
                 })
+
+                /*Logout*/
+                val btnLogout = view.findViewById<View>(R.id.verifyPhoneLogout)
+                btnLogout?.setOnClickListener(View.OnClickListener {
+                    SessionModel(activity!!).signOutSession()
+                    startActivity(Intent(activity!!, MainActivity::class.java))
+                })
             }
         }
 

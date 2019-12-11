@@ -3,6 +3,36 @@
               xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
               android:layout_height="match_parent" android:orientation="vertical" android:padding="10dp">
 
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:orientation="horizontal">
+
+        <Button
+                android:id="@+id/verifyPhoneLogout"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:gravity="left"
+                android:text="@string/closeSession"
+                android:textAllCaps="false"
+                android:textColor="@color/colorLightRed"
+                android:textSize="11sp" />
+
+        <Button
+                android:id="@+id/verifyPhoneUpdateProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:gravity="right"
+                android:text="@string/verifyPhoneUpdateProfile"
+                android:textAllCaps="false"
+                android:textSize="11sp" />
+    </LinearLayout>
+
     <ImageView
             android:layout_width="match_parent"
             android:layout_height="100dp" app:srcCompat="@drawable/mirelex_logo_cian"
@@ -23,22 +53,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" android:id="@+id/verifyPhoneText" android:layout_marginBottom="8dp"
             android:textAlignment="center"/>
-
-    <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="right"
-            android:orientation="vertical">
-
-        <Button
-                android:id="@+id/verifyPhoneUpdateProfile"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
-                android:text="@string/verifyPhoneUpdateProfile"
-                android:textAllCaps="false"
-                android:textSize="11sp" />
-    </LinearLayout>
 
     <LinearLayout
             android:orientation="horizontal"
