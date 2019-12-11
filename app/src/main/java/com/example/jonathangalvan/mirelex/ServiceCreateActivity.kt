@@ -162,6 +162,11 @@ class ServiceCreateActivity : AppCompatActivity(),
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         })
+
+        /*Click event to go to terms and conditions*/
+        serviceCreateTermsLink.setOnClickListener(View.OnClickListener {
+            startActivity(Intent(this, WebviewActivity::class.java))
+        })
     }
 
     override fun onResume() {

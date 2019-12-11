@@ -31,16 +31,18 @@
                     android:paddingLeft="10dp" android:paddingBottom="5dp" android:paddingTop="5dp"
                     android:textSize="14sp"/>
         </LinearLayout>
+
         <Button
+                android:id="@+id/serviceCreateOrderService"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:background="@drawable/radius_corner" android:backgroundTint="@color/colorBlue"
-                app:layout_constraintHorizontal_bias="0.0"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/radius_corner"
+                android:backgroundTint="@color/colorBlue"
                 android:text="@string/orderService"
-                android:id="@+id/serviceCreateOrderService" android:layout_marginTop="16dp"
-                app:layout_constraintTop_toBottomOf="@+id/serviceCreateTerms"/>
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout16" />
         <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="0dp"
@@ -86,14 +88,41 @@
                     style="@style/Widget.AppCompat.Spinner.Underlined" android:backgroundTint="@android:color/black"
                     android:spinnerMode="dialog"/>
         </LinearLayout>
-        <CheckBox
-                android:text="@string/checkboxTermsField"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/serviceCreateTerms" android:buttonTint="@color/colorBlue"
+
+        <LinearLayout
+                android:id="@+id/linearLayout16"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
                 android:layout_marginStart="16dp"
-                app:layout_constraintStart_toStartOf="parent" android:layout_marginTop="16dp"
-                app:layout_constraintTop_toBottomOf="@+id/createServiceSend"/>
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:gravity="center_vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/createServiceSend">
+
+            <CheckBox
+                    android:id="@+id/serviceCreateTerms"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:buttonTint="@color/cyan"
+                    android:textColorLink="@color/cyan"
+                    app:layout_constraintEnd_toStartOf="@+id/registerTerms"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                    android:id="@+id/serviceCreateTermsLink"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/checkboxTermsField"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+        </LinearLayout>
+
         <android.support.design.widget.TabLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
