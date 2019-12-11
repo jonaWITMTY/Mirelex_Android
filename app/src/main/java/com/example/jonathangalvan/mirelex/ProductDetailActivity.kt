@@ -29,7 +29,7 @@ import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 import android.widget.Toast
-
+import com.example.jonathangalvan.mirelex.Enums.UserType
 
 
 class ProductDetailActivity : AppCompatActivity() {
@@ -74,13 +74,15 @@ class ProductDetailActivity : AppCompatActivity() {
                             supportActionBar?.title = "${productObj?.productInformation?.brand}"
 
                             /*Go to store info*/
-                            detailProductGoToStoreProfile.setOnClickListener(View.OnClickListener {
-                                val detailStoreBundle: Bundle = Bundle()
-                                val goToStoreDetail = Intent(this@ProductDetailActivity, StoreDetailActivity::class.java)
-                                detailStoreBundle.putString("productInfo", UtilsModel.getGson().toJson(productObj))
-                                goToStoreDetail.putExtras(detailStoreBundle)
-                                startActivity(goToStoreDetail)
-                            })
+                            if(productObj?.productOwner?.person?.userTypeId != UserType.Customer.userTypeId){
+                                detailProductGoToStoreProfile.setOnClickListener(View.OnClickListener {
+                                    val detailStoreBundle: Bundle = Bundle()
+                                    val goToStoreDetail = Intent(this@ProductDetailActivity, StoreDetailActivity::class.java)
+                                    detailStoreBundle.putString("productInfo", UtilsModel.getGson().toJson(productObj))
+                                    goToStoreDetail.putExtras(detailStoreBundle)
+                                    startActivity(goToStoreDetail)
+                                })
+                            }
 
                             /*Slider Gallery*/
                             var images: ArrayList<String> = ArrayList()

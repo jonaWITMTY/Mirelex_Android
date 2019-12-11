@@ -217,13 +217,15 @@ class OrderDetailActivity : AppCompatActivity(), OrderStatusDetailList.OnFragmen
                             })
 
                             /*Go to store detail*/
-                            detailOrderGoToStoreProfile.setOnClickListener(View.OnClickListener {
-                                val goToStoreDetailShort = Intent(this@OrderDetailActivity, StoreDetailShortActivity::class.java)
-                                val bundleToStoreDetailShort = Bundle()
-                                bundleToStoreDetailShort.putString("personObj", json)
-                                goToStoreDetailShort.putExtras(bundleToStoreDetailShort)
-                                startActivity(goToStoreDetailShort)
-                            })
+                            if(sessionUser?.person?.userTypeId == UserType.Customer.userTypeId && orderInfo.orderOwnerInformation.userTypeId == UserType.Store.userTypeId){
+                                detailOrderGoToStoreProfile.setOnClickListener(View.OnClickListener {
+                                    val goToStoreDetailShort = Intent(this@OrderDetailActivity, StoreDetailShortActivity::class.java)
+                                    val bundleToStoreDetailShort = Bundle()
+                                    bundleToStoreDetailShort.putString("personObj", json)
+                                    goToStoreDetailShort.putExtras(bundleToStoreDetailShort)
+                                    startActivity(goToStoreDetailShort)
+                                })
+                            }
                         }
                     }
                 }
