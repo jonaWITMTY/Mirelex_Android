@@ -100,11 +100,35 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/orderCheckoutDelivery"
                     android:buttonTint="@color/colorBlue" android:text="@string/delivery"/>
-            <CheckBox
-                    android:text="@string/checkboxTermsField"
+
+            <LinearLayout
+                    android:id="@+id/linearLayout16"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:id="@+id/orderCheckoutTerms"
-                    android:buttonTint="@color/colorBlue"/>
+                    android:layout_height="40dp"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center_vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/viewPagerRegisterTabs">
+
+                <CheckBox
+                        android:id="@+id/orderCheckoutTerms"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0"
+                        android:buttonTint="@color/cyan"
+                        android:textColorLink="@color/cyan" />
+
+                <TextView
+                        android:id="@+id/orderCheckoutTermsLink"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/checkboxTermsField"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+
+            </LinearLayout>
 
             <View
                     android:id="@+id/view6"

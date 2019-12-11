@@ -239,6 +239,11 @@ class OrderCheckoutActivity : AppCompatActivity(), SelectItems.OnFragmentInterac
             orderCheckoutStoreSelection.visibility = View.GONE
         }
 
+        /*Click event to go to terms and conditions*/
+        orderCheckoutTermsLink.setOnClickListener(View.OnClickListener {
+            startActivity(Intent(this, WebviewActivity::class.java))
+        })
+
     }
 
     override fun onResume() {
