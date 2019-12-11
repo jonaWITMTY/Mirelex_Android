@@ -13,7 +13,7 @@
     <string name="paternalLastnameField">Paternal Lastname</string>
     <string name="genderFIeld">Gender</string>
     <string name="companyNameField">Company Name</string>
-    <string name="checkboxTermsField">I Agree with the Terms and Conditions</string>
+    <string name="checkboxTermsField"><u>I Agree with the Terms and Conditions</u></string>
     <string name="accept">Accept</string>
     <string name="cancel">Cancel</string>
     <string name="storeTabProducts">Products</string>

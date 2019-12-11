@@ -48,25 +48,50 @@
                 android:layout_marginTop="8dp" android:layout_height="250sp"
         >
         </com.example.jonathangalvan.mirelex.UI.ViewPagerCustom>
+
         <Button
-                android:text="@string/createAnAccount"
+                android:id="@+id/registerSubmitBtn"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
-                android:id="@+id/registerSubmitBtn"
-                app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="16dp"
-                app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="16dp"
-                android:background="@drawable/radius_corner" android:backgroundTint="@color/colorBlue"
-                app:layout_constraintHorizontal_bias="0.0"
-                android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/termsCheckbox"/>
-        <CheckBox
-                android:layout_width="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/radius_corner"
+                android:backgroundTint="@color/colorBlue"
+                android:text="@string/createAnAccount"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout16" />
+
+        <LinearLayout
+                android:id="@+id/linearLayout16"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/termsCheckbox" app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="16dp" android:layout_marginTop="8dp"
-                app:layout_constraintTop_toBottomOf="@+id/viewPagerRegisterTabs"
-                android:text="@string/checkboxTermsField" android:textColor="@android:color/white"
-                android:textColorLink="@color/colorBlue" android:backgroundTint="@android:color/holo_green_dark"
-                android:buttonTint="@color/colorBlue"/>
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/viewPagerRegisterTabs">
+
+            <CheckBox
+                    android:id="@+id/termsCheckbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:buttonTint="@color/cyan"
+                    android:textColorLink="@color/cyan" />
+
+            <TextView
+                    android:id="@+id/registerTerms"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/checkboxTermsField"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+
+        </LinearLayout>
+
         <android.support.design.widget.TextInputLayout
                 android:layout_width="0dp"
                 android:theme="@style/textInputLayoutWhite"

@@ -85,6 +85,11 @@ class RegisterActivity : AppCompatActivity(), RegisterCustomerTab.OnFragmentInte
             }
         })
 
+        /*Click event to go to terms and conditions*/
+        registerTerms.setOnClickListener(View.OnClickListener {
+            startActivity(Intent(this, WebviewActivity::class.java))
+        })
+
         /*RegisterCLickListener*/
         val listener = View.OnClickListener{
             val loader = layoutInflater.inflate(R.layout.view_progressbar,findViewById(android.R.id.content), true)

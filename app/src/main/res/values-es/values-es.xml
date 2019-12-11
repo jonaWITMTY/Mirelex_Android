@@ -14,7 +14,7 @@
     <string name="paternalLastnameField">Apellido paterno</string>
     <string name="genderFIeld">Género</string>
     <string name="companyNameField">Nombre de la empresa</string>
-    <string name="checkboxTermsField">Estoy de acuerdo con los términos y condiciones</string>
+    <string name="checkboxTermsField"><u>Estoy de acuerdo con los términos y condiciones</u></string>
     <string name="accept">Aceptar</string>
     <string name="cancel">Cancelar</string>
     <string name="storeTabProducts">Productos</string>
