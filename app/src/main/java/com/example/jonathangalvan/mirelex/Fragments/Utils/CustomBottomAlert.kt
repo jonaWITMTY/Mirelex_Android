@@ -4,11 +4,13 @@ import android.app.Dialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.se.omapi.Session
 import android.support.design.widget.BottomSheetDialog
 import android.support.design.widget.TextInputLayout
 import android.support.v4.app.DialogFragment
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import com.example.jonathangalvan.mirelex.*
@@ -312,6 +314,19 @@ class CustomBottomAlert: DialogFragment() {
                         val duration = Toast.LENGTH_SHORT
                         Toast.makeText(activity!!, text, duration).show()
                     }
+                })
+
+                /*Update profile*/
+                val btnUpdateProfile = view.findViewById<View>(R.id.verifyPhoneUpdateProfile)
+                if(alertObj.formProfilePage == "1"){
+                    btnUpdateProfile.visibility = View.GONE
+                }
+                btnUpdateProfile.setOnClickListener(View.OnClickListener {
+                    val bundleToProfile = Bundle()
+                    val intentToProfile = Intent(activity, ProfileActivity::class.java)
+                    bundleToProfile.putString("comeFromVerifyPhoneAlert", "1")
+                    intentToProfile.putExtras(bundleToProfile)
+                    activity?.startActivity(intentToProfile)
                 })
             }
         }

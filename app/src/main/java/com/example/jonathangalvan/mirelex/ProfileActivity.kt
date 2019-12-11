@@ -32,6 +32,7 @@ class ProfileActivity : AppCompatActivity() {
     var sizes: ArrayList<CatalogInterface>? = null
     var womanCatalog: WomenCatalogsInterface? = null
     var neighborhoodsArr: NeighborhoodArrayInterface? = null
+    var comesFromPhoneVerify: String? = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +41,15 @@ class ProfileActivity : AppCompatActivity() {
 
         /*Get session user info*/
         user = SessionModel(this).getUser()
+
+        /*Get flag from phone verified alert*/
+        val bundeFromCustom = intent?.extras
+        comesFromPhoneVerify = bundeFromCustom?.getString("comeFromVerifyPhoneAlert")
+
+        /*Set modifiable phone field depending on phone verify flag*/
+        if(user?.person?.phoneVerified == "1"){
+            updateSessionUserPersonalPhone.editText?.isFocusable = false
+        }
 
         /*Get name depending on userTYpeId*/
         var title : String = ""
@@ -279,7 +289,7 @@ class ProfileActivity : AppCompatActivity() {
                         val responseObj = UtilsModel.getPostResponse(this@ProfileActivity, responseStr)
                         if(responseObj.status == "success"){
                             SessionModel.saveSessionValue(this@ProfileActivity, "user", UtilsModel.getGson().toJson(responseObj.data!![0]))
-                            if(user?.person?.phoneVerified == "0" || user?.person?.phoneVerified == null){
+                            if((user?.person?.phoneVerified == "0" || user?.person?.phoneVerified == null) && comesFromPhoneVerify != "1"){
                                 val ba = UtilsModel.getGson().toJson(BottomAlertInterface(
                                     alertType = "confirmAccountPhone",
                                     formProfilePage = "1"

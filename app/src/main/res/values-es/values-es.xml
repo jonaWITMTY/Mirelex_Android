@@ -155,4 +155,5 @@
     <string name="completeYourProfile">Para brindarte una mejor experiencia, completemos tu perfil</string>
     <string name="mirlexRecommendations">Recomendación Mirelex</string>
     <string name="selectOptionDropdown">--Seleccione--</string>
+    <string name="verifyPhoneUpdateProfile">Actualizar perfil</string>
 </resources>
