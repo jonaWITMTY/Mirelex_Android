@@ -74,6 +74,8 @@ class ProfileActivity : AppCompatActivity() {
             updateSessionUserZip.editText?.setText(user?.address!![0].postalCode)
             getNeighborhoods()
         }
+        updateSessionUserFacebook.editText?.setText(user?.person?.facebookUrl)
+        updateSessionUserInstagram.editText?.setText(user?.person?.instagramUrl)
 
         /*Postal code event*/
         updateSessionUserZip.editText?.addTextChangedListener(object: TextWatcher {
@@ -121,15 +123,11 @@ class ProfileActivity : AppCompatActivity() {
 
                 /*Fill store fields*/
                 updateSessionUserCompanyName.editText?.setText(user?.person?.companyName)
-                updateSessionUserFacebook.editText?.setText(user?.person?.facebookUrl)
-                updateSessionUserInstagram.editText?.setText(user?.person?.instagramUrl)
 
             }
             else -> {
                 /*Hide store fields*/
                 updateSessionUserCompanyName.visibility = View.GONE
-                updateSessionUserInstagram.visibility = View.GONE
-                updateSessionUserFacebook.visibility = View.GONE
 
                 /*Fill common person fields*/
                 updateSessionUserName.editText?.setText(user?.person?.firstName )
@@ -245,13 +243,15 @@ class ProfileActivity : AppCompatActivity() {
                 if(updateSessionUserNeighborhoods.isSelected){
                     updateUserObj.neighborhoodId = neighborhoodsArr!!.data[updateSessionUserNeighborhoods.selectedItemPosition].neighborhoodId
                 }
+                updateUserObj.instagramProfile = updateSessionUserInstagram.editText?.text.toString()
+                updateUserObj.facebookProfile = updateSessionUserFacebook.editText?.text.toString()
 
                 when(user?.person?.userTypeId){
                     UserType.Store.userTypeId -> {
                         updateUserObj.companyName = updateSessionUserCompanyName.editText?.text.toString()
                         updateUserObj.isMirelexStore = user?.person?.isMirelexStore.toString()
-                        updateUserObj.instagramProfile = updateSessionUserInstagram.editText?.text.toString()
-                        updateUserObj.facebookProfile = updateSessionUserFacebook.editText?.text.toString()
+//                        updateUserObj.instagramProfile = updateSessionUserInstagram.editText?.text.toString()
+//                        updateUserObj.facebookProfile = updateSessionUserFacebook.editText?.text.toString()
 
                     }
                     else -> {
