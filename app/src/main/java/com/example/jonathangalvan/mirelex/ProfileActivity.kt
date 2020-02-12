@@ -1,5 +1,6 @@
 package com.example.jonathangalvan.mirelex
 
+import android.app.DatePickerDialog
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -8,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.DatePicker
 import android.widget.Toast
 import com.example.jonathangalvan.mirelex.Enums.Gender
 import com.example.jonathangalvan.mirelex.Enums.ProductType
@@ -25,6 +27,9 @@ import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.Response
 import java.io.IOException
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class ProfileActivity : AppCompatActivity() {
 
@@ -33,6 +38,7 @@ class ProfileActivity : AppCompatActivity() {
     var womanCatalog: WomenCatalogsInterface? = null
     var neighborhoodsArr: NeighborhoodArrayInterface? = null
     var comesFromPhoneVerify: String? = ""
+    var myCalendar : Calendar? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -120,6 +126,7 @@ class ProfileActivity : AppCompatActivity() {
                 updateSessionUserBustLayout.visibility = View.GONE
                 updateSessionUserWaistLayout.visibility = View.GONE
                 updateSessionUserHipLayout.visibility = View.GONE
+                updateSessionUserBirthDate.visibility = View.GONE
 
                 /*Fill store fields*/
                 updateSessionUserCompanyName.editText?.setText(user?.person?.companyName)
@@ -135,6 +142,7 @@ class ProfileActivity : AppCompatActivity() {
                 updateSessionUserMaternal.editText?.setText(user?.person?.maternalLastName)
                 updateSessionUserGender.editText?.setText(user?.person?.userGender)
                 updateSessionUserHeight.editText?.setText(user?.characteristics?.height)
+                updateSessionUserBirthDate.editText?.setText(user?.person?.birthDate)
 
                 /*Filter fields depending on user gender*/
                 when(user?.person?.userGenderId){
@@ -261,6 +269,7 @@ class ProfileActivity : AppCompatActivity() {
                         updateUserObj.paternalLastName = updateSessionUserPaternal.editText?.text.toString()
                         updateUserObj.maternalLastName = updateSessionUserMaternal.editText?.text.toString()
                         updateUserObj.characteristicsId = user?.characteristics?.characteristicsId
+                        updateUserObj.birthDate = updateSessionUserBirthDate.editText?.text.toString()
 
                         when(user?.person?.userGenderId){
                             Gender.Male.genderId -> {
@@ -311,6 +320,37 @@ class ProfileActivity : AppCompatActivity() {
                 Toast.makeText(this, text, duration).show()
             }
         })
+
+
+        myCalendar = Calendar.getInstance()
+        val date = object : DatePickerDialog.OnDateSetListener{
+
+            override fun onDateSet(
+                view: DatePicker, year: Int, monthOfYear: Int,
+                dayOfMonth: Int
+            ) {
+                myCalendar?.set(Calendar.YEAR, year)
+                myCalendar?.set(Calendar.MONTH, monthOfYear)
+                myCalendar?.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+                updateDateField()
+            }
+
+        }
+
+        updateSessionUserBirthDate.editText?.setOnClickListener(View.OnClickListener{
+            DatePickerDialog(
+                this, date, myCalendar!!
+                    .get(Calendar.YEAR), myCalendar!!.get(Calendar.MONTH),
+                myCalendar!!.get(Calendar.DAY_OF_MONTH)
+            ).show()
+        })
+    }
+
+    fun updateDateField() {
+        val myFormat = "yyyy-MM-dd" //In which you need put here
+        val sdf = SimpleDateFormat(myFormat, Locale.US)
+
+        updateSessionUserBirthDate.editText?.setText(sdf.format(myCalendar!!.time))
     }
 
     fun getNeighborhoods(){

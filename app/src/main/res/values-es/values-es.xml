@@ -156,4 +156,5 @@
     <string name="mirlexRecommendations">Recomendación Mirelex</string>
     <string name="selectOptionDropdown">--Seleccione--</string>
     <string name="verifyPhoneUpdateProfile">Actualizar perfil</string>
+    <string name="birthDate">Fecha de nacimiento</string>
 </resources>

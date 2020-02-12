@@ -155,4 +155,5 @@
     <string name="mirlexRecommendations">Mirelex recommendations</string>
     <string name="selectOptionDropdown">--Select--</string>
     <string name="verifyPhoneUpdateProfile">Update profile</string>
+    <string name="birthDate">Birth date</string>
 </resources>
