@@ -13,9 +13,9 @@ import com.example.jonathangalvan.mirelex.Interfaces.ProductInterface
 import com.example.jonathangalvan.mirelex.R
 
 class ProductViewHolder(view: View): RecyclerView.ViewHolder(view){
-    var productAdapterName = view.findViewById<TextView>(R.id.productAdapterName)
+//    var productAdapterName = view.findViewById<TextView>(R.id.productAdapterName)
     var productAdapaterImage = view.findViewById<ImageView>(R.id.productAdapaterImage)
-    var productadapterPrice = view.findViewById<TextView>(R.id.productadapterPrice)
+//    var productadapterPrice = view.findViewById<TextView>(R.id.productadapterPrice)
 }
 
 class ProductsAdapter(private var productsList: ArrayList<ProductInterface>): RecyclerView.Adapter<ProductViewHolder>(){
@@ -33,8 +33,8 @@ class ProductsAdapter(private var productsList: ArrayList<ProductInterface>): Re
     }
 
     override fun onBindViewHolder(p0: ProductViewHolder, p1: Int) {
-        p0.productAdapterName.text = "${p0.productAdapterName.context.resources.getText(R.string.size)}: ${productsList[p1].size}"
-        p0.productadapterPrice.text = productsList[p1].priceFormatted
+//        p0.productAdapterName.text = "${p0.productAdapterName.context.resources.getText(R.string.size)}: ${productsList[p1].size}"
+//        p0.productadapterPrice.text = productsList[p1].priceFormatted
         if(productsList[p1].productFeaturedImage != null){
             Glide.with(p0.productAdapaterImage.context).load(productsList[p1].productFeaturedImage).apply( RequestOptions().override(300, 0)).into(p0.productAdapaterImage)
         }else{
