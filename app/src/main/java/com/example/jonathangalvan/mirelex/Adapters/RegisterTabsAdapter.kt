@@ -32,7 +32,7 @@ class RegisterTabsAdapter(fm: FragmentManager, private var context: Context): Fr
                 return context.resources.getString(R.string.customer)
             }
             1 -> {
-                return context.resources.getString(R.string.store)
+                return context.resources.getString(R.string.storeAndDesign)
             }
             else -> return null
         }
