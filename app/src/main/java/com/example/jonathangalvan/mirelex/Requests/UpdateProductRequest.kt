@@ -9,7 +9,7 @@ class UpdateProductRequest(
     var originalPrice: String? = "",
     var productTypeId: String? = "",
     var productStyleId: String? = "",
-    var productMaterialId: String? = "",
+    var productMaterialId: String? = null,
     var productColors: List<Long>? = null,
     var productSleeveStyleId: String? = "",
     var price: String? = "",

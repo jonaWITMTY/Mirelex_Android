@@ -161,6 +161,13 @@ class ProductCreate : Fragment() {
             }
         }
 
+        /*Hide field depending on usertype*/
+        when(SessionModel(activity!!).getUser().person?.userTypeId){
+            UserType.Customer.userTypeId ->{
+                createProductMaterialLayout.visibility = View.GONE
+            }
+        }
+
         /*On type price and hide timesUsedField*/
         val user = SessionModel(activity!!).getUser()
         when(user.person?.userTypeId){
@@ -228,10 +235,13 @@ class ProductCreate : Fragment() {
                 viewModel.productObjRequest.price = createProductLeaseablePrice.editText?.text.toString()
                 viewModel.productObjRequest.description = createProductDescription.editText?.text.toString()
                 viewModel.productObjRequest.productStyleId = catalogs!!.styles[createProductStyle.selectedItemPosition].productCatalogId
-                viewModel.productObjRequest.productMaterialId = catalogs!!.materials[createProductMaterial.selectedItemPosition].productCatalogId
                 viewModel.productObjRequest.productOccasionId= catalogs!!.occasions[createProductOcation.selectedItemPosition].productCatalogId
                 viewModel.productObjRequest.productSleeveStyleId = catalogs!!.sleeveStyles[createProductSleeveStyle.selectedItemPosition].productCatalogId
                 viewModel.productObjRequest.productColors = selectedIds
+
+                if(UserType.Customer.userTypeId != SessionModel(activity!!).getUser().person?.userTypeId){
+                    viewModel.productObjRequest.productMaterialId = catalogs!!.materials[createProductMaterial.selectedItemPosition].productCatalogId
+                }
 
                 /*Fill fields depending on category type*/
                 when(productTypes!![createProductCategory.selectedItemPosition].productTypeId.toString()){

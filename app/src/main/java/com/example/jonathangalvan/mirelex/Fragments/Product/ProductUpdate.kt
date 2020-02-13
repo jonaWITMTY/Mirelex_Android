@@ -13,10 +13,12 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import com.example.jonathangalvan.mirelex.Adapters.SliderPagerAdapter
 import com.example.jonathangalvan.mirelex.Enums.ProductType
+import com.example.jonathangalvan.mirelex.Enums.UserType
 import com.example.jonathangalvan.mirelex.Fragments.Utils.ImagePreview
 import com.example.jonathangalvan.mirelex.Interfaces.ProductCatalog
 import com.example.jonathangalvan.mirelex.Interfaces.ProductCatalogs
 import com.example.jonathangalvan.mirelex.Interfaces.ProductInfoInterface
+import com.example.jonathangalvan.mirelex.Models.SessionModel
 import com.example.jonathangalvan.mirelex.Models.UtilsModel
 import com.example.jonathangalvan.mirelex.ProductActivity
 import com.example.jonathangalvan.mirelex.R
@@ -126,6 +128,13 @@ class ProductUpdate : Fragment()  {
             }
         }
 
+        /*Hide field depending on usertype*/
+        when(SessionModel(activity!!).getUser().person?.userTypeId){
+            UserType.Customer.userTypeId ->{
+                updateProductMaterialLayout.visibility = View.GONE
+            }
+        }
+
         /*Clicks measures "?"*/
         imagePreviewHeight.setOnClickListener(View.OnClickListener {
             ImagePreview().newInstance(resources.getString(R.string.heightImage)).show(fragmentManager, "alertDialog")
@@ -157,10 +166,13 @@ class ProductUpdate : Fragment()  {
                 viewModel.productObjRequest.price = productObj?.productInformation?.price
                 viewModel.productObjRequest.description = updateProductDescription.editText?.text.toString()
                 viewModel.productObjRequest.productStyleId = catalogs!!.styles[updateProductStyle.selectedItemPosition].productCatalogId
-                viewModel.productObjRequest.productMaterialId = catalogs!!.materials[updateProductMaterial.selectedItemPosition].productCatalogId
                 viewModel.productObjRequest.productOccasionId= catalogs!!.occasions[updateProductOcation.selectedItemPosition].productCatalogId
                 viewModel.productObjRequest.productSleeveStyleId = catalogs!!.sleeveStyles[updateProductSleeveStyle.selectedItemPosition].productCatalogId
                 viewModel.productObjRequest.productColors = selectedIds
+
+                if(UserType.Customer.userTypeId != SessionModel(activity!!).getUser().person?.userTypeId){
+                    viewModel.productObjRequest.productMaterialId = catalogs!!.materials[updateProductMaterial.selectedItemPosition].productCatalogId
+                }
 
                 /*Fill fields depending on category type*/
                 when(productObj?.productInformation?.productTypeId){
