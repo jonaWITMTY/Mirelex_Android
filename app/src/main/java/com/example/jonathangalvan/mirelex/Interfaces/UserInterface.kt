@@ -39,6 +39,7 @@ class Person(
     var notifications: String?,
     var textMessages: String?,
     var isMirelexStore: String?,
+    var isDesigner: Int?,
     var homePhone: String?,
     var oneSignalId: String?,
     var facebookUrl: String?,

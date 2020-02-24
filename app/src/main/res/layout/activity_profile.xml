@@ -137,6 +137,32 @@
                         android:layout_height="wrap_content"
                         android:singleLine="true"/>
             </android.support.design.widget.TextInputLayout>
+
+            <LinearLayout
+                    android:id="@+id/updateSessionUserAreYouDesignerLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp">
+
+                <CheckBox
+                        android:id="@+id/updateSessionUserAreYouDesigner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0"
+                        android:buttonTint="@color/cyan"
+                        android:textColorLink="@color/cyan" />
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/areYouADesigner"
+                        android:textColor="@color/black"
+                        android:textStyle="bold" />
+
+            </LinearLayout>
             <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
