@@ -158,4 +158,5 @@
     <string name="verifyPhoneUpdateProfile">Actualizar perfil</string>
     <string name="birthDate">Fecha de nacimiento</string>
     <string name="storeAndDesign">Tienda y diseñador</string>
+    <string name="areYouADesigner">Soy diseñador</string>
 </resources>

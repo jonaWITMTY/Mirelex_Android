@@ -157,4 +157,5 @@
     <string name="verifyPhoneUpdateProfile">Update profile</string>
     <string name="birthDate">Birth date</string>
     <string name="storeAndDesign">Store and designer</string>
+    <string name="areYouADesigner">I am a designer</string>
 </resources>
