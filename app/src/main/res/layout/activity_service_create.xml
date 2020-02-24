@@ -13,6 +13,37 @@
             android:layout_height="match_parent">
 
         <LinearLayout
+                android:id="@+id/serviceCreateTypeLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/createServiceType">
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/type"
+                    android:textColor="@android:color/black"
+                    android:textSize="12sp" />
+            <!--                <Spinner-->
+            <!--                        android:layout_width="match_parent"-->
+            <!--                        android:layout_height="wrap_content" android:id="@+id/createProductDecoration"-->
+            <!--                        style="@android:style/Widget.Material.Light.Spinner.Underlined"-->
+            <!--                        android:backgroundTint="@android:color/black" android:spinnerMode="dialog"/>-->
+            <com.thomashaertel.widget.MultiSpinner
+                    android:id="@+id/serviceCreateSrviceTypeMultiSelect"
+                    style="@android:style/Widget.Material.Light.Spinner.Underlined"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/black" />
+        </LinearLayout>
+
+        <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -68,25 +99,34 @@
                 android:layout_marginTop="8dp"
                 app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="16dp" android:id="@+id/serviceCreateClose"/>
+
         <LinearLayout
-                android:orientation="vertical"
+                android:id="@+id/linearLayout3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" android:layout_marginStart="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                app:layout_constraintHorizontal_bias="0.0" android:layout_marginTop="16dp"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout2" android:id="@+id/linearLayout3">
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/serviceCreateTypeLayout">
+
             <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:text="@string/stores"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:textColor="@android:color/black"
-                    android:textSize="12sp"/>
+                    android:textColor="@android:color/black"
+                    android:textSize="12sp" />
+
             <Spinner
+                    android:id="@+id/serviceCreateStores"
+                    style="@style/Widget.AppCompat.Spinner.Underlined"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:id="@+id/serviceCreateStores"
-                    style="@style/Widget.AppCompat.Spinner.Underlined" android:backgroundTint="@android:color/black"
-                    android:spinnerMode="dialog"/>
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@android:color/black"
+                    android:spinnerMode="dialog" />
         </LinearLayout>
 
         <LinearLayout
@@ -143,25 +183,7 @@
                     android:text="@string/sewing"/>
 
         </android.support.design.widget.TabLayout>
-        <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" app:layout_constraintTop_toBottomOf="@+id/createServiceType"
-                android:layout_marginTop="16dp" app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:id="@+id/linearLayout2">
-            <TextView
-                    android:text="@string/type"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:id="@+id/createServiceTitle1"
-                    android:textColor="@android:color/black" android:textSize="12sp"/>
-            <Spinner
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:id="@+id/serviceCreateTypes"
-                    style="@style/Widget.AppCompat.Spinner.Underlined" android:backgroundTint="@android:color/black"
-                    android:spinnerMode="dialog"/>
-        </LinearLayout>
+
         <CheckBox
                 android:text="@string/send"
                 android:layout_width="0dp"

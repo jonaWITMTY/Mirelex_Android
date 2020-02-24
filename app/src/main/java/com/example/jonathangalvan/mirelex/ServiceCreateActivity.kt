@@ -22,6 +22,7 @@ import com.example.jonathangalvan.mirelex.Models.UtilsModel
 import com.example.jonathangalvan.mirelex.Requests.CreateServiceRequest
 import com.example.jonathangalvan.mirelex.Requests.GetCleanningServiceStoresRequest
 import com.example.jonathangalvan.mirelex.Requests.GetServiceTotalRequest
+import com.thomashaertel.widget.MultiSpinner
 import kotlinx.android.synthetic.main.activity_service_create.*
 import okhttp3.Call
 import okhttp3.Callback
@@ -38,6 +39,9 @@ class ServiceCreateActivity : AppCompatActivity(),
     private var total: String? = null
     private var sessionUser: UserInterface? = null
     private var defaultCard: PaymentCard? = null
+    private var spinnerServices: MultiSpinner? = null
+    private var adapterServices: ArrayAdapter<String>? = null
+    private var servicesSelectedIds: ArrayList<Long> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,13 +65,13 @@ class ServiceCreateActivity : AppCompatActivity(),
         paymentCardButtonAction()
 
         /*On type change*/
-        serviceCreateTypes.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(parent: AdapterView<*>?) {}
-
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                reseatServiceStores(position)
-            }
-        }
+//        serviceCreateTypes.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
+//            override fun onNothingSelected(parent: AdapterView<*>?) {}
+//
+//            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+//                reseatServiceStores(position)
+//            }
+//        }
 
         /*Date picker*/
         serviceCreateDate.setOnClickListener(View.OnClickListener {
@@ -115,12 +119,12 @@ class ServiceCreateActivity : AppCompatActivity(),
                     when(service){
                         0 -> {
                             /*Cleanning tab*/
-                            serviceObj.productStyleId = serviceTypes[serviceCreateTypes.selectedItemPosition].productCatalogId.toString()
+                            serviceObj.productStyleId = servicesSelectedIds
 //                            serviceObj.clientDelivery = createServiceSend.isChecked - Hide delivery and payments
                         }
                         else -> {
                             /*Sewing tab*/
-                            serviceObj.sewingTypeId = sewingTypes[serviceCreateTypes.selectedItemPosition].sewingTypeId.toString()
+                            serviceObj.sewingTypeId = servicesSelectedIds
 
                         }
                     }
@@ -249,11 +253,11 @@ class ServiceCreateActivity : AppCompatActivity(),
             when(service){
                 0 -> {
                     /*Cleanning tab*/
-                    serviceTotalObj.productStyleId = serviceTypes[serviceCreateTypes.selectedItemPosition].productCatalogId.toString()
+                    serviceTotalObj.productStyleId = servicesSelectedIds
                 }
                 else -> {
                     /*Sewing tab*/
-                    serviceTotalObj.sewingTypeId = sewingTypes[serviceCreateTypes.selectedItemPosition].sewingTypeId.toString()
+                    serviceTotalObj.sewingTypeId = servicesSelectedIds
 
                 }
             }
@@ -313,9 +317,15 @@ class ServiceCreateActivity : AppCompatActivity(),
                             serviceTypes = serviceTypesObj.data
                             runOnUiThread {
                                 run {
-                                    val adapterServicesTypes = ArrayAdapter<CatalogInterface>(this@ServiceCreateActivity, R.layout.view_spinner_item_black, R.id.spinnerItemBlackSelect, serviceTypesObj.data)
-                                    adapterServicesTypes.setDropDownViewResource(R.layout.view_spinner_item_black_select)
-                                    serviceCreateTypes.adapter = adapterServicesTypes
+                                    /*Get services*/
+                                    adapterServices =  ArrayAdapter<String>(this@ServiceCreateActivity, android.R.layout.simple_spinner_item)
+                                    for((index, service) in serviceTypesObj?.data!!.withIndex()){
+                                        adapterServices!!.add(service.name)
+                                    }
+
+                                    /*Fill spinner with services*/
+                                    spinnerServices = findViewById(R.id.serviceCreateSrviceTypeMultiSelect)
+                                    spinnerServices!!.setAdapter(adapterServices, false, onSelectedServiceListener)
                                 }
                             }
                         }
@@ -325,9 +335,15 @@ class ServiceCreateActivity : AppCompatActivity(),
                             sewingTypes = serviceTypesObj.data
                             runOnUiThread {
                                 run {
-                                    val adapterServicesTypes = ArrayAdapter<SewingInterface>(this@ServiceCreateActivity, R.layout.view_spinner_item_black, R.id.spinnerItemBlackSelect, serviceTypesObj.data)
-                                    adapterServicesTypes.setDropDownViewResource(R.layout.view_spinner_item_black_select)
-                                    serviceCreateTypes.adapter = adapterServicesTypes
+                                    /*Get services*/
+                                    adapterServices =  ArrayAdapter<String>(this@ServiceCreateActivity, android.R.layout.simple_spinner_item)
+                                    for((index, service) in serviceTypesObj?.data!!.withIndex()){
+                                        adapterServices!!.add(service.name)
+                                    }
+
+                                    /*Fill spinner with services*/
+                                    spinnerServices = findViewById(R.id.serviceCreateSrviceTypeMultiSelect)
+                                    spinnerServices!!.setAdapter(adapterServices, false, onSelectedServiceListener)
                                 }
                             }
                         }
@@ -337,7 +353,28 @@ class ServiceCreateActivity : AppCompatActivity(),
         })
     }
 
-    fun reseatServiceStores(position: Int){
+    private val onSelectedServiceListener = MultiSpinner.MultiSpinnerListener {
+        servicesSelectedIds = ArrayList()
+        for ((index, value) in it.withIndex()){
+            if(value){
+//                servicesSelectedIds.add(catalogs?.decorations!![index].productCatalogId!!.toLong())
+                when(service){
+                    0 -> {
+                        /*Cleanning tab*/
+                        servicesSelectedIds.add(serviceTypes!![index].productCatalogId!!.toLong())
+                    }
+                    else -> {
+                        /*Sewing tab*/
+                        servicesSelectedIds.add(sewingTypes!![index].sewingTypeId!!.toLong())
+                    }
+                }
+
+                reseatServiceStores()
+            }
+        }
+    }
+
+    fun reseatServiceStores(){
         val loader = layoutInflater.inflate(R.layout.view_progressbar, findViewById(android.R.id.content), true)
         var endpoint = ""
         var storeObj = ""
@@ -346,7 +383,7 @@ class ServiceCreateActivity : AppCompatActivity(),
             0 -> {
                 /*Cleanning tab*/
                 endpoint = resources.getString(R.string.getCleanningStores)
-                storeObj = UtilsModel.getGson().toJson(GetCleanningServiceStoresRequest(serviceTypes[position].productCatalogId.toString()))
+                storeObj = UtilsModel.getGson().toJson(GetCleanningServiceStoresRequest(servicesSelectedIds))
             }
             else -> {
                 /*Sewing tab*/
