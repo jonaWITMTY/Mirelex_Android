@@ -7,13 +7,9 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.*
 import com.example.jonathangalvan.mirelex.Enums.UserType
-import com.example.jonathangalvan.mirelex.FilterProducts
 import com.example.jonathangalvan.mirelex.Fragments.Utils.CustomBottomAlert
 import com.example.jonathangalvan.mirelex.Models.SessionModel
 import com.example.jonathangalvan.mirelex.Models.UtilsModel
-import com.example.jonathangalvan.mirelex.ProductDetailActivity
-import com.example.jonathangalvan.mirelex.ProductActivity
-import com.example.jonathangalvan.mirelex.R
 import kotlinx.android.synthetic.main.fragment_products.*
 import kotlinx.android.synthetic.main.view_centered_message.view.*
 import okhttp3.Call
@@ -23,6 +19,7 @@ import java.io.IOException
 import com.onesignal.OneSignal
 import android.app.Activity
 import android.support.v7.widget.GridLayoutManager
+import com.example.jonathangalvan.mirelex.*
 import com.example.jonathangalvan.mirelex.Adapters.ProductsAdapter
 import com.example.jonathangalvan.mirelex.Enums.Gender
 import com.example.jonathangalvan.mirelex.Enums.ProductType
@@ -280,6 +277,9 @@ class Products : Fragment() {
                 b.putString("sizes", sizes)
                 goToFilterProducts.putExtras(b)
                 startActivityForResult(goToFilterProducts, 1)
+            }
+            R.id.customerTabsWishlist -> {
+                startActivity(Intent(activity!!, WhishlistActivity::class.java))
             }
         }
         return super.onOptionsItemSelected(item)
