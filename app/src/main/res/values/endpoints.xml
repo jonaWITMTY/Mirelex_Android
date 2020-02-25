@@ -41,6 +41,9 @@
     <string name="getProductPrices">product/suggested/prices</string>
     <string name="createProduct">product/create</string>
     <string name="deleteProduct">product/delete</string>
+    <string name="getProductFavorites">product/favorites</string>
+    <string name="deleteProductFavorite">product/favorite/delete</string>
+    <string name="createProductFavorite">product/favorite/create</string>
 
     //Payment
     <string name="deleteCard">user/card/delete</string>

@@ -20,6 +20,11 @@ import com.example.jonathangalvan.mirelex.Models.UtilsModel
 import com.example.jonathangalvan.mirelex.ProductActivity
 import com.example.jonathangalvan.mirelex.ProductDetailActivity
 import com.example.jonathangalvan.mirelex.R
+import com.example.jonathangalvan.mirelex.Requests.createProductFavorite
+import okhttp3.Call
+import okhttp3.Callback
+import okhttp3.Response
+import java.io.IOException
 
 class ProductViewHolder(view: View): RecyclerView.ViewHolder(view){
 //    var productAdapterName = view.findViewById<TextView>(R.id.productAdapterName)
@@ -51,6 +56,12 @@ class ProductsAdapter(private var productsList: ArrayList<ProductInterface>): Re
             Glide.with(p0.productAdapaterImage.context).load(R.drawable.mirelex_logo_cian).into(p0.productAdapaterImage)
         }
 
+        if(productsList[p1].isFavorite == "0"){
+            p0.productAdapterWishlist.setColorFilter(ContextCompat.getColor(p0.productAdapterWishlist.context, R.color.colorLightGray), android.graphics.PorterDuff.Mode.SRC_IN)
+        }else{
+            p0.productAdapterWishlist.setColorFilter(ContextCompat.getColor(p0.productAdapterWishlist.context, R.color.colorPinkRed), android.graphics.PorterDuff.Mode.SRC_IN)
+        }
+
         p0.productAdapaterImage.setOnClickListener(View.OnClickListener {
             val goToProductDetail: Intent
             when(SessionModel(p0.productAdapaterImage.context).getSessionUserType()){
@@ -70,13 +81,35 @@ class ProductsAdapter(private var productsList: ArrayList<ProductInterface>): Re
         p0.productAdapterWishlist.setOnClickListener(View.OnClickListener {
             val imgHeart: ImageView = it as ImageView
             if(productsList[p1].isFavorite == "0"){
-                productsList[p1].isFavorite = "1"
-                imgHeart.setColorFilter(ContextCompat.getColor(imgHeart.context, R.color.colorPinkRed), android.graphics.PorterDuff.Mode.SRC_IN)
+                val reqObj = UtilsModel.getGson().toJson(createProductFavorite(productsList[p1].productId.toString()))
+                UtilsModel.getOkClient().newCall(UtilsModel.postRequest(imgHeart.context, imgHeart.context.resources.getString(R.string.createProductFavorite), reqObj)).enqueue(object: Callback {
+                    override fun onFailure(call: Call, e: IOException) { }
+
+                    override fun onResponse(call: Call, response: Response) {
+                        val responseStr = response.body()?.string()
+                        val responseObj = UtilsModel.getPostResponse(imgHeart.context, responseStr)
+                        if(responseObj.status == "success") {
+                            productsList[p1].isFavorite = "1"
+                            imgHeart.setColorFilter(ContextCompat.getColor(imgHeart.context, R.color.colorPinkRed), android.graphics.PorterDuff.Mode.SRC_IN)
+                        }
+                    }
+                })
+
             }else{
-                productsList[p1].isFavorite = "0"
-                imgHeart.setColorFilter(ContextCompat.getColor(imgHeart.context, R.color.colorLightGray), android.graphics.PorterDuff.Mode.SRC_IN)
+                val reqObj = UtilsModel.getGson().toJson(createProductFavorite(productsList[p1].productId.toString()))
+                UtilsModel.getOkClient().newCall(UtilsModel.postRequest(imgHeart.context, imgHeart.context.resources.getString(R.string.deleteProductFavorite), reqObj)).enqueue(object: Callback {
+                    override fun onFailure(call: Call, e: IOException) { }
+
+                    override fun onResponse(call: Call, response: Response) {
+                        val responseStr = response.body()?.string()
+                        val responseObj = UtilsModel.getPostResponse(imgHeart.context, responseStr)
+                        if(responseObj.status == "success") {
+                            productsList[p1].isFavorite = "0"
+                            imgHeart.setColorFilter(ContextCompat.getColor(imgHeart.context, R.color.colorLightGray), android.graphics.PorterDuff.Mode.SRC_IN)
+                        }
+                    }
+                })
             }
-//            UtilsModel.getOkClient().newCall(UtilsModel.)
         })
     }
 
