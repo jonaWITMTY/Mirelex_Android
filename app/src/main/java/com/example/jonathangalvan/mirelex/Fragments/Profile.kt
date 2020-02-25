@@ -120,6 +120,7 @@ class Profile : Fragment() {
         /*Customer tabs icons*/
         menu?.findItem(R.id.customerTabsFilterIcon)?.isVisible = false
         menu?.findItem(R.id.customerTabsAddProductIcon)?.isVisible = false
+        menu?.findItem(R.id.customerTabsWishlist)?.isVisible = false
     }
 
     override fun onAttach(context: Context) {
