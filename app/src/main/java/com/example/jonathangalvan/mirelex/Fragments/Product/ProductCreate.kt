@@ -273,8 +273,15 @@ class ProductCreate : Fragment() {
         var isCorrect = true
         if(
             createProductBrand.editText?.text.toString()!!.isEmpty() ||
+            productTypes!![createProductCategory.selectedItemPosition].productTypeId.toString() == "" ||
             createProductPrice.editText?.text.toString()!!.isEmpty() ||
-            selectedIds.size < 1
+            catalogs == null ||
+            catalogs!!.conditions[createProductCondition.selectedItemPosition].productCatalogId.toString().isEmpty() ||
+            catalogs!!.styles[createProductStyle.selectedItemPosition].productCatalogId.toString().isEmpty() ||
+            selectedIds.size < 1 ||
+            catalogs!!.sleeveStyles[createProductSleeveStyle.selectedItemPosition].productCatalogId.toString().isEmpty() ||
+            catalogs!!.occasions[createProductOcation.selectedItemPosition].productCatalogId.toString().isEmpty() ||
+            createProductDescription.editText?.text.toString()!!.isEmpty()
         ){
             isCorrect = false
         }else{
@@ -285,13 +292,18 @@ class ProductCreate : Fragment() {
                         createProductWaist.editText?.text.toString()!!.isEmpty() ||
                         createProductHip.editText?.text.toString()!!.isEmpty() ||
                         createProductHeight.editText?.text.toString()!!.isEmpty() ||
-                        createProductDescription.editText?.text.toString()!!.isEmpty() ||
-                        selectedDecorationsIds.size < 1
+                        selectedDecorationsIds.size < 1 ||
+                        catalogs!!.lengths[createProductLength.selectedItemPosition].productCatalogId.toString().isEmpty() ||
+                        catalogs!!.silhouettes[createProductSilouete.selectedItemPosition].productCatalogId.toString().isEmpty()
+
                     ){
                         isCorrect = false
                     }
                 }
                 else -> {
+                    if(catalogs!!.sizes[createProductSizes.selectedItemPosition].productCatalogId.toString().isEmpty()){
+                        isCorrect = false
+                    }
                 }
             }
         }
