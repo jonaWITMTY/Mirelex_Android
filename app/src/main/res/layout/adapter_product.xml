@@ -41,7 +41,7 @@
                     android:layout_marginEnd="10dp"
                     android:clickable="true"
                     android:focusableInTouchMode="false"
-                    android:tint="@color/colorLightGray"
+                    android:tint="@color/black"
                     android:translationZ="200dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"

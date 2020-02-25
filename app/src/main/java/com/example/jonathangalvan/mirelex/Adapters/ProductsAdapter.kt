@@ -57,7 +57,7 @@ class ProductsAdapter(private var productsList: ArrayList<ProductInterface>): Re
         }
 
         if(productsList[p1].isFavorite == "0"){
-            p0.productAdapterWishlist.setColorFilter(ContextCompat.getColor(p0.productAdapterWishlist.context, R.color.colorLightGray), android.graphics.PorterDuff.Mode.SRC_IN)
+            p0.productAdapterWishlist.setColorFilter(ContextCompat.getColor(p0.productAdapterWishlist.context, R.color.black), android.graphics.PorterDuff.Mode.SRC_IN)
         }else{
             p0.productAdapterWishlist.setColorFilter(ContextCompat.getColor(p0.productAdapterWishlist.context, R.color.colorPinkRed), android.graphics.PorterDuff.Mode.SRC_IN)
         }
@@ -112,7 +112,7 @@ class ProductsAdapter(private var productsList: ArrayList<ProductInterface>): Re
                         val responseObj = UtilsModel.getPostResponse(imgHeart.context, responseStr)
                         if(responseObj.status == "success") {
                             productsList[p1].isFavorite = "0"
-                            imgHeart.setColorFilter(ContextCompat.getColor(imgHeart.context, R.color.colorLightGray), android.graphics.PorterDuff.Mode.SRC_IN)
+                            imgHeart.setColorFilter(ContextCompat.getColor(imgHeart.context, R.color.black), android.graphics.PorterDuff.Mode.SRC_IN)
                         }
                     }
                 })

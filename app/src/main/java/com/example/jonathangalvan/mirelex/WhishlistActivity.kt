@@ -33,6 +33,10 @@ class WhishlistActivity : AppCompatActivity() {
         favoritesProductGrid.layoutManager = GridLayoutManager(this, 2)
         favoritesProductGrid.adapter = productAdapter
 
+    }
+
+    override fun onResume() {
+        super.onResume()
         getProducts()
     }
 
