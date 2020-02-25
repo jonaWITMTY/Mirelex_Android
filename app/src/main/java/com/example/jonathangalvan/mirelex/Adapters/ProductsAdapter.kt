@@ -62,6 +62,13 @@ class ProductsAdapter(private var productsList: ArrayList<ProductInterface>): Re
             p0.productAdapterWishlist.setColorFilter(ContextCompat.getColor(p0.productAdapterWishlist.context, R.color.colorPinkRed), android.graphics.PorterDuff.Mode.SRC_IN)
         }
 
+        if(
+            SessionModel(p0.productAdapaterImage.context).getUser().person?.userTypeId == UserType.Store.userTypeId ||
+            (SessionModel(p0.productAdapaterImage.context).getUser().person?.userId == productsList[p1].userId && SessionModel(p0.productAdapaterImage.context).getUser().person?.userTypeId == UserType.Customer.userTypeId)
+        ){
+            p0.productAdapterWishlist.visibility = View.GONE
+        }
+
         p0.productAdapaterImage.setOnClickListener(View.OnClickListener {
             val goToProductDetail: Intent
             when(SessionModel(p0.productAdapaterImage.context).getSessionUserType()){

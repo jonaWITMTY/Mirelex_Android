@@ -101,7 +101,11 @@ class ProfileProductsActivity : AppCompatActivity() {
     }
 
     override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
+
+        /*Customer*/
         menu?.findItem(R.id.customerTabsFilterIcon)?.isVisible = false
+        menu?.findItem(R.id.customerTabsWishlist)?.isVisible = false
+
         return super.onPrepareOptionsMenu(menu)
     }
 
