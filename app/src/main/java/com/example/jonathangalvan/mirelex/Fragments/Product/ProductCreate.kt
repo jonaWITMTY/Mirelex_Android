@@ -262,7 +262,7 @@ class ProductCreate : Fragment() {
                 (activity as ProductActivity).openTab(ProductImagePicker(), "productImagePicker")
 
             }else{
-                val text = resources.getText(R.string.fillRequiredFields)
+                val text = "${resources.getText(R.string.fillRequiredFields)}  ${validateMissingErrorFields()}"
                 val duration = Toast.LENGTH_SHORT
                 Toast.makeText(activity, text, duration).show()
             }
@@ -273,8 +273,15 @@ class ProductCreate : Fragment() {
         var isCorrect = true
         if(
             createProductBrand.editText?.text.toString()!!.isEmpty() ||
+            productTypes!![createProductCategory.selectedItemPosition].productTypeId.toString() == "" ||
             createProductPrice.editText?.text.toString()!!.isEmpty() ||
-            selectedIds.size < 1
+            catalogs == null ||
+            catalogs!!.conditions[createProductCondition.selectedItemPosition].productCatalogId.toString().isEmpty() ||
+            catalogs!!.styles[createProductStyle.selectedItemPosition].productCatalogId.toString().isEmpty() ||
+            selectedIds.size < 1 ||
+            catalogs!!.sleeveStyles[createProductSleeveStyle.selectedItemPosition].productCatalogId.toString().isEmpty() ||
+            catalogs!!.occasions[createProductOcation.selectedItemPosition].productCatalogId.toString().isEmpty() ||
+            createProductDescription.editText?.text.toString()!!.isEmpty()
         ){
             isCorrect = false
         }else{
@@ -285,17 +292,102 @@ class ProductCreate : Fragment() {
                         createProductWaist.editText?.text.toString()!!.isEmpty() ||
                         createProductHip.editText?.text.toString()!!.isEmpty() ||
                         createProductHeight.editText?.text.toString()!!.isEmpty() ||
-                        createProductDescription.editText?.text.toString()!!.isEmpty() ||
-                        selectedDecorationsIds.size < 1
+                        selectedDecorationsIds.size < 1 ||
+                        catalogs!!.lengths[createProductLength.selectedItemPosition].productCatalogId.toString().isEmpty() ||
+                        catalogs!!.silhouettes[createProductSilouete.selectedItemPosition].productCatalogId.toString().isEmpty()
+
                     ){
                         isCorrect = false
                     }
                 }
                 else -> {
+                    if(catalogs!!.sizes[createProductSizes.selectedItemPosition].productCatalogId.toString().isEmpty()){
+                        isCorrect = false
+                    }
                 }
             }
         }
         return isCorrect
+    }
+
+    private fun validateMissingErrorFields(): String{
+        var errorText = "\n"
+
+        if(createProductBrand.editText?.text.toString()!!.isEmpty() ){
+            errorText += "\n ${activity?.resources?.getString(R.string.brand)} ${activity?.resources?.getString(R.string.isRequired)}"
+        }
+
+        if(productTypes!![createProductCategory.selectedItemPosition].productTypeId.toString() == ""){
+            errorText += "\n ${activity?.resources?.getString(R.string.category)} ${activity?.resources?.getString(R.string.isRequired)}"
+        }
+
+        if(createProductPrice.editText?.text.toString()!!.isEmpty() ){
+            errorText += "\n ${activity?.resources?.getString(R.string.price)} ${activity?.resources?.getString(R.string.isRequired)}"
+        }
+
+        if(catalogs == null || catalogs!!.conditions[createProductCondition.selectedItemPosition].productCatalogId.toString().isEmpty()){
+            errorText += "\n ${activity?.resources?.getString(R.string.condition)} ${activity?.resources?.getString(R.string.isRequired)}"
+        }
+
+        if(catalogs == null || catalogs!!.styles[createProductStyle.selectedItemPosition].productCatalogId.toString().isEmpty()){
+            errorText += "\n ${activity?.resources?.getString(R.string.style)} ${activity?.resources?.getString(R.string.isRequired)}"
+        }
+
+        if(selectedIds.size <1){
+            errorText += "\n ${activity?.resources?.getString(R.string.colors)} ${activity?.resources?.getString(R.string.isRequired)}"
+        }
+
+        if(catalogs == null || catalogs!!.sleeveStyles[createProductSleeveStyle.selectedItemPosition].productCatalogId.toString().isEmpty()){
+            errorText += "\n ${activity?.resources?.getString(R.string.sleeveStyle)} ${activity?.resources?.getString(R.string.isRequired)}"
+        }
+
+        if(catalogs == null || catalogs!!.occasions[createProductOcation.selectedItemPosition].productCatalogId.toString().isEmpty()){
+            errorText += "\n ${activity?.resources?.getString(R.string.ocation)} ${activity?.resources?.getString(R.string.isRequired)}"
+        }
+
+        when(productTypes!![createProductCategory.selectedItemPosition].productTypeId.toString()){
+            ProductType.Dress.productTypeId -> {
+
+                if(selectedDecorationsIds.size < 1){
+                    errorText += "\n ${activity?.resources?.getString(R.string.decoration)} ${activity?.resources?.getString(R.string.isRequired)}"
+                }
+
+                if(catalogs == null || catalogs!!.lengths[createProductLength.selectedItemPosition].productCatalogId.toString().isEmpty()){
+                    errorText += "\n ${activity?.resources?.getString(R.string.length)} ${activity?.resources?.getString(R.string.isRequired)}"
+                }
+
+                if(catalogs == null || catalogs!!.silhouettes[createProductSilouete.selectedItemPosition].productCatalogId.toString().isEmpty()){
+                    errorText += "\n ${activity?.resources?.getString(R.string.dressSilhouette)} ${activity?.resources?.getString(R.string.isRequired)}"
+                }
+
+                if(createProductBust.editText?.text.toString()!!.isEmpty()){
+                    errorText += "\n ${activity?.resources?.getString(R.string.bust)} ${activity?.resources?.getString(R.string.isRequired)}"
+                }
+
+                if(createProductWaist.editText?.text.toString()!!.isEmpty()){
+                    errorText += "\n ${activity?.resources?.getString(R.string.waist)} ${activity?.resources?.getString(R.string.isRequired)}"
+                }
+
+                if(createProductHip.editText?.text.toString()!!.isEmpty()){
+                    errorText += "\n ${activity?.resources?.getString(R.string.hip)} ${activity?.resources?.getString(R.string.isRequired)}"
+                }
+
+                if(createProductHeight.editText?.text.toString()!!.isEmpty()){
+                    errorText += "\n ${activity?.resources?.getString(R.string.heightInCms)} ${activity?.resources?.getString(R.string.isRequired)}"
+                }
+            }
+            else -> {
+                if(catalogs == null || catalogs!!.sizes[createProductSizes.selectedItemPosition].productCatalogId.toString().isEmpty()){
+                    errorText += "\n ${activity?.resources?.getString(R.string.size)} ${activity?.resources?.getString(R.string.isRequired)}"
+                }
+            }
+        }
+
+        if(createProductDescription.editText?.text.toString()!!.isEmpty()){
+            errorText += "\n ${activity?.resources?.getString(R.string.description)} ${activity?.resources?.getString(R.string.isRequired)}"
+        }
+
+        return errorText
     }
 
     fun getProductPrices(){

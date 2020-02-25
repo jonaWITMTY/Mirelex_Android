@@ -130,11 +130,15 @@ class ProfileActivity : AppCompatActivity() {
 
                 /*Fill store fields*/
                 updateSessionUserCompanyName.editText?.setText(user?.person?.companyName)
+                if(user?.person?.isDesigner == 1){
+                    updateSessionUserAreYouDesigner.isChecked = true
+                }
 
             }
             else -> {
                 /*Hide store fields*/
                 updateSessionUserCompanyName.visibility = View.GONE
+                updateSessionUserAreYouDesignerLayout.visibility = View.GONE
 
                 /*Fill common person fields*/
                 updateSessionUserName.editText?.setText(user?.person?.firstName )
@@ -260,7 +264,7 @@ class ProfileActivity : AppCompatActivity() {
                         updateUserObj.isMirelexStore = user?.person?.isMirelexStore.toString()
 //                        updateUserObj.instagramProfile = updateSessionUserInstagram.editText?.text.toString()
 //                        updateUserObj.facebookProfile = updateSessionUserFacebook.editText?.text.toString()
-
+                        updateUserObj.isDesigner = if(updateSessionUserAreYouDesigner.isChecked){1}else{0}
                     }
                     else -> {
                         updateUserObj.height = updateSessionUserHeight.editText?.text.toString()

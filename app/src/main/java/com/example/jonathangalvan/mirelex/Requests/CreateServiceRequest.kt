@@ -11,8 +11,8 @@ class CreateServiceRequest(
     var clientDelivery: Boolean = false,
     var addressId: String? = "",
     var storeId: String?,
-    var productStyleId: String? = null,
-    var sewingTypeId: String? = null
+    var productStyleId: ArrayList<Long>? = null,
+    var sewingTypeId: ArrayList<Long>? = null
 ): GlobalRequest(){
     override fun toString(): String {
         return "CreateServiceRequest(startDate=$startDate, endDate=$endDate, startHour='$startHour', endHour='$endHour', orderType=$orderType, total=$total, cardId=$cardId, clientDelivery='$clientDelivery', addressId=$addressId, storeId=$storeId, productStyleId=$productStyleId, sewingTypeId=$sewingTypeId)"

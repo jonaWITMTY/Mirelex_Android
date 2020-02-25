@@ -46,6 +46,7 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
+                                                <entry key="opacityPercent" value="60" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -67,8 +68,8 @@
                                   <option name="values">
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
-                                      <entry key="imageAsset" value="$USER_HOME$/Downloads/007.png" />
-                                      <entry key="outputName" value="ic_mirelex" />
+                                      <entry key="imageAsset" value="$USER_HOME$/Downloads/logo-1.png" />
+                                      <entry key="outputName" value="ic_stat_onesignal_default" />
                                       <entry key="themeColor" value="faf4ff" />
                                     </map>
                                   </option>
@@ -165,7 +166,7 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputIconType" value="LAUNCHER_LEGACY" />
+                            <entry key="outputIconType" value="ACTIONBAR" />
                           </map>
                         </option>
                       </PersistentState>

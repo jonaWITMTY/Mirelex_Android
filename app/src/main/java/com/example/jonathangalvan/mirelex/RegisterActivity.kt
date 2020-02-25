@@ -115,6 +115,12 @@ class RegisterActivity : AppCompatActivity(), RegisterCustomerTab.OnFragmentInte
                 }
             }
 
+            if(viewPagerRegisterTabs.currentItem == 1){
+                if(viewPagerRegisterTabs.registerCompanyreYouDesigner.isChecked){
+                    registerObj.isDesigner = 1
+                }
+            }
+
             if(termsCheckbox.isChecked){
                 UtilsModel.getOkClient().newCall(UtilsModel.postRequest(this, resources.getString(R.string.createUser), UtilsModel.getGson().toJson(registerObj))).enqueue(object : Callback{
                     override fun onFailure(call: Call, e: IOException) {
