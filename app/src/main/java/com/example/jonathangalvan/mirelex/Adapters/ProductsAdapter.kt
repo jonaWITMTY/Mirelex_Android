@@ -3,6 +3,7 @@ package com.example.jonathangalvan.mirelex.Adapters
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
 import android.support.v4.content.ContextCompat.startActivity
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -15,6 +16,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.jonathangalvan.mirelex.Enums.UserType
 import com.example.jonathangalvan.mirelex.Interfaces.ProductInterface
 import com.example.jonathangalvan.mirelex.Models.SessionModel
+import com.example.jonathangalvan.mirelex.Models.UtilsModel
 import com.example.jonathangalvan.mirelex.ProductActivity
 import com.example.jonathangalvan.mirelex.ProductDetailActivity
 import com.example.jonathangalvan.mirelex.R
@@ -66,7 +68,15 @@ class ProductsAdapter(private var productsList: ArrayList<ProductInterface>): Re
         })
 
         p0.productAdapterWishlist.setOnClickListener(View.OnClickListener {
-            it.setBackgroundColor(p0.productAdapaterImage.context.resources.getColor(R.color.cyan))
+            val imgHeart: ImageView = it as ImageView
+            if(productsList[p1].isFavorite == "0"){
+                productsList[p1].isFavorite = "1"
+                imgHeart.setColorFilter(ContextCompat.getColor(imgHeart.context, R.color.colorPinkRed), android.graphics.PorterDuff.Mode.SRC_IN)
+            }else{
+                productsList[p1].isFavorite = "0"
+                imgHeart.setColorFilter(ContextCompat.getColor(imgHeart.context, R.color.colorLightGray), android.graphics.PorterDuff.Mode.SRC_IN)
+            }
+//            UtilsModel.getOkClient().newCall(UtilsModel.)
         })
     }
 
