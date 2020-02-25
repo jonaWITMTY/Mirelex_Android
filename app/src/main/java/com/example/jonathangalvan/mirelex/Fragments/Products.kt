@@ -94,25 +94,11 @@ class Products : Fragment() {
         productsGrid.layoutManager = GridLayoutManager(activity, 2)
         productsGrid.adapter = productAdapter
 
-        productsGrid?.addOnItemTouchListener(RecyclerItemClickListener(context!!, productsGrid, object : RecyclerItemClickListener.OnItemClickListener {
-            override fun onItemClick(view: View, position: Int) {
-                val goToProductDetail: Intent
-                when(SessionModel(activity!!).getSessionUserType()){
-                    UserType.Store.userTypeId -> {
-                        goToProductDetail = Intent(activity!!, ProductActivity::class.java)
-                    }
-                    else -> {
-                        goToProductDetail = Intent(activity!!, ProductDetailActivity::class.java)
-                    }
-                }
-                val b = Bundle()
-                b.putString("productId", productAdapter!!.getProduct(position).productId.toString())
-                goToProductDetail.putExtras(b)
-                startActivity(goToProductDetail)
-            }
-
-            override fun onItemLongClick(view: View?, position: Int) {}
-        }))
+//        productsGrid?.addOnItemTouchListener(RecyclerItemClickListener(context!!, productsGrid, object : RecyclerItemClickListener.OnItemClickListener {
+//            override fun onItemClick(view: View, position: Int) {}
+//
+//            override fun onItemLongClick(view: View?, position: Int) {}
+//        }))
     }
 
     override fun onResume() {

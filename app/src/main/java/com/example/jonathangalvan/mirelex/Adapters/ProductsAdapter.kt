@@ -1,6 +1,9 @@
 package com.example.jonathangalvan.mirelex.Adapters
 
 import android.content.Context
+import android.content.Intent
+import android.os.Bundle
+import android.support.v4.content.ContextCompat.startActivity
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -9,13 +12,18 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.example.jonathangalvan.mirelex.Enums.UserType
 import com.example.jonathangalvan.mirelex.Interfaces.ProductInterface
+import com.example.jonathangalvan.mirelex.Models.SessionModel
+import com.example.jonathangalvan.mirelex.ProductActivity
+import com.example.jonathangalvan.mirelex.ProductDetailActivity
 import com.example.jonathangalvan.mirelex.R
 
 class ProductViewHolder(view: View): RecyclerView.ViewHolder(view){
 //    var productAdapterName = view.findViewById<TextView>(R.id.productAdapterName)
     var productAdapaterImage = view.findViewById<ImageView>(R.id.productAdapaterImage)
 //    var productadapterPrice = view.findViewById<TextView>(R.id.productadapterPrice)
+    var productAdapterWishlist = view.findViewById<ImageView>(R.id.productAdapterWishlist)
 }
 
 class ProductsAdapter(private var productsList: ArrayList<ProductInterface>): RecyclerView.Adapter<ProductViewHolder>(){
@@ -40,6 +48,26 @@ class ProductsAdapter(private var productsList: ArrayList<ProductInterface>): Re
         }else{
             Glide.with(p0.productAdapaterImage.context).load(R.drawable.mirelex_logo_cian).into(p0.productAdapaterImage)
         }
+
+        p0.productAdapaterImage.setOnClickListener(View.OnClickListener {
+            val goToProductDetail: Intent
+            when(SessionModel(p0.productAdapaterImage.context).getSessionUserType()){
+                UserType.Store.userTypeId -> {
+                    goToProductDetail = Intent(p0.productAdapaterImage.context, ProductActivity::class.java)
+                }
+                else -> {
+                    goToProductDetail = Intent(p0.productAdapaterImage.context, ProductDetailActivity::class.java)
+                }
+            }
+            val b = Bundle()
+            b.putString("productId", productsList[p1].productId.toString())
+            goToProductDetail.putExtras(b)
+            p0.productAdapaterImage.context.startActivity(goToProductDetail)
+        })
+
+        p0.productAdapterWishlist.setOnClickListener(View.OnClickListener {
+            it.setBackgroundColor(p0.productAdapaterImage.context.resources.getColor(R.color.cyan))
+        })
     }
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ProductViewHolder {
