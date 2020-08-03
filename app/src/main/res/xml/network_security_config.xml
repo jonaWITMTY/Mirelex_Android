@@ -3,5 +3,6 @@
     <domain-config cleartextTrafficPermitted="true">
         <domain includeSubdomains="true">servicio.mirelex.com.mx</domain>
         <domain includeSubdomains="true">serviciomirelex.wiredit.mx</domain>
+        <domain includeSubdomains="true">servicio.mirelex.net</domain>
     </domain-config>
 </network-security-config>
