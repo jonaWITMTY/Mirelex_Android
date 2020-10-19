@@ -84,20 +84,38 @@
                         android:id="@+id/imageView6" android:layout_weight="0" android:layout_marginTop="20dp"
                         android:layout_marginRight="30dp"/>
             </LinearLayout>
+
             <LinearLayout
-                    android:orientation="vertical"
+                    android:id="@+id/orderStatusIcons"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" android:id="@+id/detailOrderInfo"
-                    android:layout_marginTop="20dp" app:layout_constraintTop_toBottomOf="@+id/detailOrderFittingInfo">
-            </LinearLayout>
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:textAlignment="center"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/detailOrderGoToProduct"></LinearLayout>
+
             <LinearLayout
+                    android:id="@+id/detailOrderInfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="16dp"
                     android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/orderStatusIcons"></LinearLayout>
+
+            <LinearLayout
+                    android:id="@+id/detailOrderFittingInfo"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginTop="16dp" app:layout_constraintTop_toBottomOf="@+id/detailOrderGoToProduct"
-                    android:id="@+id/detailOrderFittingInfo">
-            </LinearLayout>
+                    android:layout_marginTop="16dp"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/detailOrderInfo"></LinearLayout>
         </android.support.constraint.ConstraintLayout>
     </ScrollView>
     <LinearLayout

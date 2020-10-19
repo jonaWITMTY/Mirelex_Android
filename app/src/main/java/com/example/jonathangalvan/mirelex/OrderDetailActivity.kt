@@ -11,6 +11,10 @@ import android.util.TypedValue
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.LinearLayout
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.jonathangalvan.mirelex.Adapters.SliderPagerAdapter
 import com.example.jonathangalvan.mirelex.Enums.OrderStatus
 import com.example.jonathangalvan.mirelex.Enums.OrderType
@@ -225,6 +229,15 @@ class OrderDetailActivity : AppCompatActivity(), OrderStatusDetailList.OnFragmen
                                     goToStoreDetailShort.putExtras(bundleToStoreDetailShort)
                                     startActivity(goToStoreDetailShort)
                                 })
+                            }
+
+                            if(!orderInfo.orderUpdates.isEmpty() && orderInfo.orderUpdates.size > 0){
+                                orderInfo.orderUpdates.forEach {
+                                    val imageView = ImageView(this@OrderDetailActivity)
+                                    imageView.layoutParams = LinearLayout.LayoutParams(80, 60)
+                                    Glide.with(this@OrderDetailActivity).load("http://servicio.mirelex.com.mx/Uploads/Products/c53a35808a93a9379a7630c8f7dc1197.jpg").apply( RequestOptions().override(80, 80)).into(imageView)
+                                    orderStatusIcons.addView(imageView)
+                                }
                             }
                         }
                     }
