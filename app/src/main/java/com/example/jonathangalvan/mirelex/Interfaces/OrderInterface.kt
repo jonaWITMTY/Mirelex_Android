@@ -59,7 +59,8 @@ class OrderUpdates(
     var newOrderStatusId: String?,
     var created: String?,
     var originalStatus: String?,
-    var newStatus: String?
+    var newStatus: String?,
+    var icon: String?
 ){}
 
 class OrderPaymentInformation(

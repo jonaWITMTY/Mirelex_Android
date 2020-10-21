@@ -235,7 +235,7 @@ class OrderDetailActivity : AppCompatActivity(), OrderStatusDetailList.OnFragmen
                                 orderInfo.orderUpdates.forEach {
                                     val imageView = ImageView(this@OrderDetailActivity)
                                     imageView.layoutParams = LinearLayout.LayoutParams(80, 60)
-                                    Glide.with(this@OrderDetailActivity).load("http://servicio.mirelex.com.mx/Uploads/Products/c53a35808a93a9379a7630c8f7dc1197.jpg").apply( RequestOptions().override(80, 80)).into(imageView)
+                                    Glide.with(this@OrderDetailActivity).load(it?.icon).apply( RequestOptions().override(80, 80)).into(imageView)
                                     orderStatusIcons.addView(imageView)
                                 }
                             }
