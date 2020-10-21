@@ -231,12 +231,36 @@ class OrderDetailActivity : AppCompatActivity(), OrderStatusDetailList.OnFragmen
                                 })
                             }
 
-                            if(!orderInfo.orderUpdates.isEmpty() && orderInfo.orderUpdates.size > 0){
-                                orderInfo.orderUpdates.forEach {
+                            if(!orderInfo.orderStatusHistory.isEmpty() && orderInfo.orderStatusHistory.size > 0){
+                                var highlitedVlineFound = false
+                                orderInfo.orderStatusHistory.forEachIndexed {index, value ->
+
+                                    //Status img
                                     val imageView = ImageView(this@OrderDetailActivity)
-                                    imageView.layoutParams = LinearLayout.LayoutParams(80, 60)
-                                    Glide.with(this@OrderDetailActivity).load(it?.icon).apply( RequestOptions().override(80, 80)).into(imageView)
+                                    var lp = LinearLayout.LayoutParams(70, 70)
+                                    lp.setMargins(10,0,10,0)
+                                    imageView.layoutParams = lp
+                                    Glide.with(this@OrderDetailActivity).load(value?.icon).apply( RequestOptions().override(70, 70)).into(imageView)
                                     orderStatusIcons.addView(imageView)
+
+                                    //Line
+                                    if(orderInfo.orderStatusHistory.size > (index + 1)){
+                                        val vLine = View(this@OrderDetailActivity)
+
+                                        if(highlitedVlineFound){
+                                            vLine.setBackgroundColor(ContextCompat.getColor(this@OrderDetailActivity, R.color.colorGrey))
+                                        }else{
+                                            vLine.setBackgroundColor(ContextCompat.getColor(this@OrderDetailActivity, R.color.red))
+                                        }
+
+                                        lp = LinearLayout.LayoutParams(30, 3)
+                                        vLine.layoutParams = lp
+                                        orderStatusIcons.addView(vLine)
+
+                                        if(value.active){
+                                            highlitedVlineFound = true
+                                        }
+                                    }
                                 }
                             }
                         }

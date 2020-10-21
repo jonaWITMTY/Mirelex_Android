@@ -34,7 +34,8 @@ class OrderProductInfo(
     var orderClientInformation: OrderPersonInformation,
     var orderOwnerInformation: OrderPersonInformation,
     var orderUpdates: ArrayList<OrderUpdates>,
-    var orderPaymentInformation: OrderPaymentInformation
+    var orderPaymentInformation: OrderPaymentInformation,
+    var orderStatusHistory: ArrayList<OrderStatusUpdates>
 ){}
 
 class OrderProducts(
@@ -61,6 +62,19 @@ class OrderUpdates(
     var originalStatus: String?,
     var newStatus: String?,
     var icon: String?
+){}
+
+class OrderStatusUpdates(
+    var orderUpdateId: String?,
+    var orderId: String?,
+    var originalOrderStatusId: String?,
+    var newOrderStatusId: String?,
+    var created: String?,
+    var originalStatus: String?,
+    var newStatus: String?,
+    var icon: String?,
+    var name: String?,
+    var active: Boolean
 ){}
 
 class OrderPaymentInformation(
