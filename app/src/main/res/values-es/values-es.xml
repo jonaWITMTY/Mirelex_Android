@@ -161,4 +161,6 @@
     <string name="areYouADesigner">Soy diseñador</string>
     <string name="isRequired">es requerido</string>
     <string name="wishlist">Favoritos</string>
+    <string name="myRequest">Mis pedidos</string>
+    <string name="myBusiness">Mi empresa</string>
 </resources>

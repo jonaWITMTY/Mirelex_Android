@@ -10,7 +10,7 @@ import java.security.AccessControlContext
 
 class SelectedItemsListener(val context: Context, var fm: FragmentManager){
     interface SelectedItemsListenerInterface {
-        fun callback(tag: String, inputName: String, id: String, inputText: String)
+        fun callback(tag: String, inputName: String, id: String, inputText: String, obj: Any)
         fun callbackClose(tag: String)
     }
 

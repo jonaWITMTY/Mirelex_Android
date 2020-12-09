@@ -37,7 +37,7 @@ class ContactActivity : AppCompatActivity() {
         val currentUser = SessionModel(this).getUser()
 
         /*Fill email*/
-        contactEmail.editText?.setText(currentUser.person?.email.toString())
+//        contactEmail.editText?.setText(currentUser.person?.email.toString())
 
         /*Whatsapp event*/
         contactWhatsapp.setOnClickListener(View.OnClickListener {
@@ -74,8 +74,8 @@ class ContactActivity : AppCompatActivity() {
         contactSendBtn.setOnClickListener(View.OnClickListener {
             if(inputValidations()){
                 val sendContactMessageObj = SendContactMessageRequest(
-                    contactName.editText?.text.toString(),
-                    contactEmail.editText?.text.toString(),
+                    currentUser.person?.firstName + " " + currentUser.person?.paternalLastName.toString(),
+                    currentUser.person?.email.toString(),
                     contactSubject.editText?.text.toString(),
                     contactMessage.editText?.text.toString()
                 )
@@ -118,10 +118,11 @@ class ContactActivity : AppCompatActivity() {
     }
 
     fun inputValidations(): Boolean{
+        val currentUser = SessionModel(this).getUser()
         var isCorrect = true
         if(
-            contactName.editText?.text.toString().isEmpty() ||
-            contactEmail.editText?.text.toString().isEmpty() ||
+            currentUser.person?.firstName.toString().isEmpty() ||
+            currentUser.person?.email.toString().isEmpty() ||
             contactSubject.editText?.text.toString().isEmpty() ||
             contactMessage.editText?.text.toString().isEmpty()
         ){

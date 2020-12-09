@@ -22,6 +22,7 @@ import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.Response
 import java.io.IOException
+import java.util.*
 
 class CustomAlert : DialogFragment() {
 
@@ -90,6 +91,12 @@ class CustomAlert : DialogFragment() {
                         alertView.alertDescription.text = activity?.getString(R.string.systemErrorDescription)
                     }
                 }
+
+                Timer().schedule(object : TimerTask() {
+                    override fun run() {
+                        onDismiss(dialog)
+                    }
+                }, 4000)
             }
             2 ->{
                 alertView = activity?.layoutInflater!!.inflate(R.layout.fragment_forgot_email_alert, null)
