@@ -160,4 +160,6 @@
     <string name="areYouADesigner">I am a designer</string>
     <string name="isRequired">is required</string>
     <string name="wishlist">Favorites</string>
+    <string name="myRequest">My orders</string>
+    <string name="myBusiness">My business</string>
 </resources>
