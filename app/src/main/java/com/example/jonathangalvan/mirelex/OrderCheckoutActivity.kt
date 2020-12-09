@@ -354,14 +354,19 @@ class OrderCheckoutActivity : AppCompatActivity(), SelectItems.OnFragmentInterac
 
     override fun onFragmentInteraction(uri: Uri) {}
 
-    override fun callback(tag: String, inputName: String, id: String, inputText: String) {
+    override fun callback(tag: String, inputName: String, id: String, inputText: String, obj: Any) {
         showSupportActionBar()
         val fragment = supportFragmentManager.findFragmentByTag(tag)
         if (fragment != null) {
 //            supportFragmentManager.beginTransaction().remove(fragment).commit()
             supportFragmentManager.popBackStack()
         }
-        orderCheckoutStoreSelection.text = inputText
+        var address: AddressListInterface = obj as AddressListInterface
+        orderCheckoutStoreSelection.text = inputText + " " +
+                "\n${address.email.toString()} " +
+                "\n${address.personalPhone.toString()}" +
+                "\n\n${address.street}, ${address.neighborhood}, ${address.postalCode}, ${address.city}, ${address.state}, ${address.country}"
+
         orderRequestObj?.addressId = id
     }
 

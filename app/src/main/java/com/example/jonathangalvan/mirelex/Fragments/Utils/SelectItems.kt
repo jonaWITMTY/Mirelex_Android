@@ -83,7 +83,7 @@ class SelectItems() : Fragment() {
 
                 selectListItems.addOnItemTouchListener(RecyclerItemClickListener(context!!, selectListItems, object : RecyclerItemClickListener.OnItemClickListener {
                     override fun onItemClick(view: View, position: Int) {
-                        ml?.callback(tag!!, inputName!!, obj.data!![position].addressId.toString(), obj.data!![position].businessName.toString())
+                        ml?.callback(tag!!, inputName!!, obj.data!![position].addressId.toString(), obj.data!![position].businessName.toString(), obj.data!![position])
                     }
 
                     override fun onItemLongClick(view: View?, position: Int) {}
