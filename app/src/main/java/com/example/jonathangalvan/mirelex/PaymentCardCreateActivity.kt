@@ -55,7 +55,7 @@ class PaymentCardCreateActivity : AppCompatActivity() {
         paymentCardCreateBtn.setOnClickListener(View.OnClickListener {
             if(inputValidations()){
                 val activity = this
-                Conekta.setPublicKey("key_BqcAYyRc1rUFAT4Kr3kYEgA")
+                Conekta.setPublicKey("key_JHAg2Eei1nzvMezF1aSyrcw")
                 Conekta.collectDevice(activity)
 
                 val card = Card(

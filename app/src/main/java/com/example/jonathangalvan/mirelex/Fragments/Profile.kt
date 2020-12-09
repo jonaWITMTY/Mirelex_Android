@@ -43,7 +43,7 @@ class Profile : Fragment() {
         }
 
         /*Hide delivery and payments*/
-        sessionUserPayments.visibility = View.GONE
+//        sessionUserPayments.visibility = View.GONE
 
         /*Fill user cell*/
         updateUser()

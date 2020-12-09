@@ -15,6 +15,7 @@
             android:networkSecurityConfig="@xml/network_security_config"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+        <uses-library android:name="org.apache.http.legacy" android:required="false" />
         <activity android:name=".WhishlistActivity"></activity>
         <activity android:name=".ProfileProductsActivity" />
         <activity android:name=".FilterProducts" />
