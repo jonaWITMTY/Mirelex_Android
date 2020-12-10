@@ -59,7 +59,9 @@ class OrderCheckoutActivity : AppCompatActivity(), SelectItems.OnFragmentInterac
 
         /*Fill fields*/
 //        Picasso.with(this).load(productObj?.productInformation?.productFeaturedImage).into(orderCheckoutFeatureImage)
-        Glide.with(this).load(productObj?.productInformation?.productFeaturedImage).apply( RequestOptions().override(800, 0)).into(orderCheckoutFeatureImage)
+        if(!productObj?.productInformation?.productFeaturedImage.isNullOrEmpty()){
+            Glide.with(this).load(productObj?.productInformation?.productFeaturedImage).apply( RequestOptions().override(800, 0)).into(orderCheckoutFeatureImage)
+        }
         orderCheckoutBrand.text = productObj?.productInformation?.brand
         orderCheckoutSize.text = productObj?.productInformation?.size
         orderCheckoutColors.text = productObj?.productInformation?.brand
