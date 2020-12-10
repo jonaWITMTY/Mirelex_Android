@@ -34,9 +34,11 @@
     </LinearLayout>
 
     <ImageView
+            android:id="@+id/imageView18"
             android:layout_width="match_parent"
-            android:layout_height="100dp" app:srcCompat="@drawable/mirelex_logo_cian"
-            android:id="@+id/imageView18" android:layout_marginBottom="8dp"/>
+            android:layout_height="100dp"
+            android:layout_marginBottom="8dp"
+            app:srcCompat="@drawable/mirelex_logo" />
     <TextView
             android:text="@string/confirmPhone"
             android:layout_width="match_parent"
