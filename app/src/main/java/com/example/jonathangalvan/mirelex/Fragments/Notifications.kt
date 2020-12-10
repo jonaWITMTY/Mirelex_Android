@@ -4,8 +4,8 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.View
@@ -29,7 +29,7 @@ import okhttp3.Callback
 import okhttp3.Response
 import java.io.IOException
 
-class Notifications : Fragment() {
+class Notifications : androidx.fragment.app.Fragment() {
     private var listener: OnFragmentInteractionListener? = null
     var notificationAdapater = NotificationsAdapter(ArrayList())
 
@@ -95,7 +95,8 @@ class Notifications : Fragment() {
     }
 
     fun getNotifications(){
-        notificationsList.layoutManager = LinearLayoutManager(activity)
+        notificationsList.layoutManager =
+            androidx.recyclerview.widget.LinearLayoutManager(activity)
         notificationsList.adapter = notificationAdapater
         val loader = layoutInflater.inflate(R.layout.view_progressbar, activity?.findViewById(android.R.id.content), true)
         UtilsModel.getOkClient().newCall(UtilsModel.postRequest(activity!!, resources.getString(R.string.getUserNotifications))).enqueue(object: Callback {

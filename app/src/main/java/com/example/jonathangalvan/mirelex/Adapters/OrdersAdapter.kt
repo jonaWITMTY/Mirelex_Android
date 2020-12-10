@@ -1,7 +1,7 @@
 package com.example.jonathangalvan.mirelex.Adapters
 
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.RecyclerView
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +13,7 @@ import com.example.jonathangalvan.mirelex.Enums.OrderType
 import com.example.jonathangalvan.mirelex.R
 import com.squareup.picasso.Picasso
 
-class OrderViewHolder(view: View): RecyclerView.ViewHolder(view){
+class OrderViewHolder(view: View): androidx.recyclerview.widget.RecyclerView.ViewHolder(view){
     var orderAdapterBrand = view.findViewById<TextView>(R.id.orderAdapterBrand)
     var orderAdapterFolio = view.findViewById<TextView>(R.id.orderAdapterFolio)
     var orderAdapterPrice = view.findViewById<TextView>(R.id.orderAdapterPrice)
@@ -23,7 +23,7 @@ class OrderViewHolder(view: View): RecyclerView.ViewHolder(view){
     var orderAdapterStatus = view.findViewById<TextView>(R.id.orderAdapterStatus)
 }
 
-class OrdersAdapter(private var orders: ArrayList<OrderInterface>): RecyclerView.Adapter<OrderViewHolder>(){
+class OrdersAdapter(private var orders: ArrayList<OrderInterface>): androidx.recyclerview.widget.RecyclerView.Adapter<OrderViewHolder>(){
     override fun getItemCount(): Int {
         return if(orders.isNotEmpty()) orders.size else 0
     }

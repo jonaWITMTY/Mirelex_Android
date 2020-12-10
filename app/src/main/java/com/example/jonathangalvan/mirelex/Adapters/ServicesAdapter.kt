@@ -1,7 +1,7 @@
 package com.example.jonathangalvan.mirelex.Adapters
 
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.RecyclerView
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +13,7 @@ import com.example.jonathangalvan.mirelex.Interfaces.ServiceInterface
 import com.example.jonathangalvan.mirelex.R
 import com.squareup.picasso.Picasso
 
-class ServiceViewHolder(view: View): RecyclerView.ViewHolder(view){
+class ServiceViewHolder(view: View): androidx.recyclerview.widget.RecyclerView.ViewHolder(view){
     var serviceAdapterFeaturedImage = view.findViewById<ImageView>(R.id.serviceAdapterFeaturedImage)
     var serviceAdapterFolio = view.findViewById<TextView>(R.id.serviceAdapterFolio)
     var serviceAdapterStartDate = view.findViewById<TextView>(R.id.serviceAdapterStartDate)
@@ -22,7 +22,7 @@ class ServiceViewHolder(view: View): RecyclerView.ViewHolder(view){
     var serviceAdapterTotal = view.findViewById<TextView>(R.id.serviceAdapterTotal)
 }
 
-class ServicesAdapter( private var services: ArrayList<ServiceInterface>): RecyclerView.Adapter<ServiceViewHolder>() {
+class ServicesAdapter( private var services: ArrayList<ServiceInterface>): androidx.recyclerview.widget.RecyclerView.Adapter<ServiceViewHolder>() {
     override fun getItemCount(): Int {
         return if(services.isNotEmpty()) services.size else 0
     }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
                                              xmlns:app="http://schemas.android.com/apk/res-auto"
                                              android:layout_width="match_parent"
                                              android:layout_height="wrap_content"
@@ -22,4 +22,4 @@
             app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="10dp" android:textSize="16sp"
             android:layout_marginBottom="10dp"
             app:layout_constraintBottom_toBottomOf="parent" android:id="@+id/detailInfoValueView"/>
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

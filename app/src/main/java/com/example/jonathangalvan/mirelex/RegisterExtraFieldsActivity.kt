@@ -1,11 +1,11 @@
 package com.example.jonathangalvan.mirelex
 
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.net.Uri
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -110,7 +110,7 @@ class RegisterExtraFieldsActivity : AppCompatActivity(),
         })
     }
 
-    fun openTab(fragment: Fragment, tag: String){
+    fun openTab(fragment: androidx.fragment.app.Fragment, tag: String){
         val transaction = supportFragmentManager.beginTransaction()
         if(supportFragmentManager.findFragmentById(R.id.registerExtraFieldsFrame) != null){
             transaction.setCustomAnimations(R.anim.abc_fade_in, R.anim.abc_fade_out)

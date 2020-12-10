@@ -3,7 +3,7 @@ package com.example.jonathangalvan.mirelex.Fragments.Product
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,10 +11,10 @@ import com.example.jonathangalvan.mirelex.R
 import kotlinx.android.synthetic.main.fragment_product_image_picker.*
 import android.content.Intent
 import android.app.Activity
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProviders
 import java.io.FileNotFoundException
 import android.provider.MediaStore.MediaColumns
-import android.support.v4.app.FragmentManager
+import androidx.fragment.app.FragmentManager
 import android.widget.ImageView
 import com.example.jonathangalvan.mirelex.Fragments.Utils.CustomBottomAlert
 import com.example.jonathangalvan.mirelex.Interfaces.BottomAlertInterface
@@ -30,7 +30,7 @@ import okhttp3.Response
 import java.io.File
 import java.io.IOException
 
-class ProductImagePicker : Fragment() {
+class ProductImagePicker : androidx.fragment.app.Fragment() {
     private var listener: OnFragmentInteractionListener? = null
     var imageTarget: ImageView? = null
     var imageSecondaryIndex: Int = 0

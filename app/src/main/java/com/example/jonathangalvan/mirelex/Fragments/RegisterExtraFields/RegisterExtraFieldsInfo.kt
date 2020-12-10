@@ -1,10 +1,10 @@
 package com.example.jonathangalvan.mirelex.Fragments.RegisterExtraFields
 
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProviders
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,7 +20,7 @@ import com.example.jonathangalvan.mirelex.ViewModels.RegisterViewModel
 import kotlinx.android.synthetic.main.fragment_register_extra_fields_info.*
 
 
-class RegisterExtraFieldsInfo : Fragment() {
+class RegisterExtraFieldsInfo : androidx.fragment.app.Fragment() {
     private var listener: OnFragmentInteractionListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {

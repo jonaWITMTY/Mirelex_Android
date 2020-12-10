@@ -2,12 +2,12 @@ package com.example.jonathangalvan.mirelex
 
 import android.app.ActivityOptions
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v4.app.FragmentManager
-import android.support.v4.content.ContextCompat
-import android.support.v4.graphics.drawable.DrawableCompat
-import android.support.v7.widget.LinearLayoutManager
+import androidx.fragment.app.FragmentManager
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.DrawableCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -40,7 +40,8 @@ class PaymentCardsActivity : AppCompatActivity() {
 
         /*Get current paymentCards and fill list*/
         sessionUser = SessionModel(this).getUser()
-        paymentCardsList.layoutManager = LinearLayoutManager(this)
+        paymentCardsList.layoutManager =
+            androidx.recyclerview.widget.LinearLayoutManager(this)
         paymentCardsList.adapter = paymentAdapter
 
         /*Onclick card*/

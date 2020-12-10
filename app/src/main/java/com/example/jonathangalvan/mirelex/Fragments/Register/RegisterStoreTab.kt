@@ -3,13 +3,13 @@ package com.example.jonathangalvan.mirelex.Fragments.Register
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.jonathangalvan.mirelex.R
 
-class RegisterStoreTab : Fragment() {
+class RegisterStoreTab : androidx.fragment.app.Fragment() {
     private var listener: OnFragmentInteractionListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {

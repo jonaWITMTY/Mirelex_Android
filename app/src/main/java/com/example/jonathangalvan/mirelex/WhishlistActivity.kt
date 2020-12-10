@@ -1,8 +1,8 @@
 package com.example.jonathangalvan.mirelex
 
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.widget.GridLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import android.view.ViewGroup
 import com.example.jonathangalvan.mirelex.Adapters.ProductsAdapter
 import com.example.jonathangalvan.mirelex.Enums.UserType
@@ -30,7 +30,8 @@ class WhishlistActivity : AppCompatActivity() {
 
 
         /*Set productGrid config*/
-        favoritesProductGrid.layoutManager = GridLayoutManager(this, 2)
+        favoritesProductGrid.layoutManager =
+            androidx.recyclerview.widget.GridLayoutManager(this, 2)
         favoritesProductGrid.adapter = productAdapter
 
     }

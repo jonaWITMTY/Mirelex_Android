@@ -14,16 +14,16 @@
                 android:layout_height="wrap_content" android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp" android:layout_marginBottom="16dp"
                 android:id="@+id/fittingCustomSizesLayout">
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:theme="@style/textInputLayoutBlack"
                 android:id="@+id/fittingCustomSizesHeight" android:layout_weight="1"  android:hint="@string/heightInCms">
 
-            <android.support.design.widget.TextInputEditText
+            <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:singleLine="true" android:inputType="numberDecimal"/>
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
         <Button
                 android:text="?"
                 android:layout_width="20dp"
@@ -37,16 +37,16 @@
             android:layout_height="wrap_content" android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp" android:layout_marginBottom="16dp"
             android:id="@+id/fittingCustomSizesBustLayout">
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:theme="@style/textInputLayoutBlack"
                 android:id="@+id/fittingCustomSizesBust" android:layout_weight="1" android:hint="@string/bust">
 
-            <android.support.design.widget.TextInputEditText
+            <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:singleLine="true" android:inputType="numberDecimal"/>
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
         <Button
                 android:text="?"
                 android:layout_width="20dp"
@@ -60,16 +60,16 @@
             android:layout_height="wrap_content" android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp" android:layout_marginBottom="16dp"
             android:id="@+id/fittingCustomSizesWaistLayout">
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:theme="@style/textInputLayoutBlack"
                 android:id="@+id/fittingCustomSizesWaist" android:layout_weight="1" android:hint="@string/waist">
 
-            <android.support.design.widget.TextInputEditText
+            <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:singleLine="true" android:inputType="numberDecimal"/>
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
         <Button
                 android:text="?"
                 android:layout_width="20dp"
@@ -83,16 +83,16 @@
             android:layout_height="wrap_content" android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp" android:layout_marginBottom="16dp"
             android:id="@+id/fittingCustomSizesHipLayout">
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:theme="@style/textInputLayoutBlack"
                 android:id="@+id/fittingCustomSizesHip" android:layout_weight="1" android:hint="@string/hip">
 
-            <android.support.design.widget.TextInputEditText
+            <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:singleLine="true" android:inputType="numberDecimal"/>
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
         <Button
                 android:text="?"
                 android:layout_width="20dp"

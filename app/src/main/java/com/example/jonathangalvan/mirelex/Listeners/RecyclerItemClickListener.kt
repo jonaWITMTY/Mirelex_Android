@@ -2,12 +2,12 @@ package com.example.jonathangalvan.mirelex.Listeners
 
 import android.content.Context
 import android.view.MotionEvent
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.GestureDetector
 import android.view.View
 
 
-class RecyclerItemClickListener(context: Context, recyclerView: RecyclerView, private val mListener: OnItemClickListener?) : RecyclerView.OnItemTouchListener {
+class RecyclerItemClickListener(context: Context, recyclerView: androidx.recyclerview.widget.RecyclerView, private val mListener: OnItemClickListener?) : androidx.recyclerview.widget.RecyclerView.OnItemTouchListener {
     private val mGestureDetector: GestureDetector
 
     interface OnItemClickListener {
@@ -32,7 +32,7 @@ class RecyclerItemClickListener(context: Context, recyclerView: RecyclerView, pr
         })
     }
 
-    override fun onInterceptTouchEvent(view: RecyclerView, e: MotionEvent): Boolean {
+    override fun onInterceptTouchEvent(view: androidx.recyclerview.widget.RecyclerView, e: MotionEvent): Boolean {
         val childView = view.findChildViewUnder(e.x, e.y)
 
         if (childView != null && mListener != null && mGestureDetector.onTouchEvent(e)) {
@@ -42,7 +42,7 @@ class RecyclerItemClickListener(context: Context, recyclerView: RecyclerView, pr
         return false
     }
 
-    override fun onTouchEvent(view: RecyclerView, motionEvent: MotionEvent) {}
+    override fun onTouchEvent(view: androidx.recyclerview.widget.RecyclerView, motionEvent: MotionEvent) {}
 
     override fun onRequestDisallowInterceptTouchEvent(disallowIntercept: Boolean) {
 

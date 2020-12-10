@@ -1,12 +1,12 @@
 package com.example.jonathangalvan.mirelex.UI
 
 import android.content.Context
-import android.support.v4.view.ViewPager
+import androidx.viewpager.widget.ViewPager
 import android.util.AttributeSet
 import android.view.View
 
 
-class ViewPagerCustom(context: Context, attrs: AttributeSet?): ViewPager(context, attrs) {
+class ViewPagerCustom(context: Context, attrs: AttributeSet?): androidx.viewpager.widget.ViewPager(context, attrs) {
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         val child = getChildAt(currentItem)

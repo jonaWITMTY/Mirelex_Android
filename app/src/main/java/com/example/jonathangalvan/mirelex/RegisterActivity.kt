@@ -1,16 +1,16 @@
 package com.example.jonathangalvan.mirelex
 
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
+import androidx.core.content.ContextCompat
 import com.example.jonathangalvan.mirelex.Adapters.RegisterTabsAdapter
 import com.example.jonathangalvan.mirelex.Fragments.Register.RegisterCustomerTab
 import kotlinx.android.synthetic.main.activity_register.*
-import android.support.v4.view.ViewPager
+import androidx.viewpager.widget.ViewPager
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
@@ -52,7 +52,7 @@ class RegisterActivity : AppCompatActivity(), RegisterCustomerTab.OnFragmentInte
         val fragmentAdapter = RegisterTabsAdapter(supportFragmentManager, this)
         viewPagerRegisterTabs.adapter = fragmentAdapter
         registerTabs.setupWithViewPager(viewPagerRegisterTabs)
-        viewPagerRegisterTabs.addOnPageChangeListener(object : ViewPager.SimpleOnPageChangeListener() {
+        viewPagerRegisterTabs.addOnPageChangeListener(object : androidx.viewpager.widget.ViewPager.SimpleOnPageChangeListener() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
                 viewPagerRegisterTabs.reMeasureCurrentPage()

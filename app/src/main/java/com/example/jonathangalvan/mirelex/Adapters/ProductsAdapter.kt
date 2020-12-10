@@ -3,9 +3,9 @@ package com.example.jonathangalvan.mirelex.Adapters
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
-import android.support.v4.content.ContextCompat.startActivity
-import android.support.v7.widget.RecyclerView
+import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.startActivity
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,14 +26,14 @@ import okhttp3.Callback
 import okhttp3.Response
 import java.io.IOException
 
-class ProductViewHolder(view: View): RecyclerView.ViewHolder(view){
+class ProductViewHolder(view: View): androidx.recyclerview.widget.RecyclerView.ViewHolder(view){
 //    var productAdapterName = view.findViewById<TextView>(R.id.productAdapterName)
     var productAdapaterImage = view.findViewById<ImageView>(R.id.productAdapaterImage)
 //    var productadapterPrice = view.findViewById<TextView>(R.id.productadapterPrice)
     var productAdapterWishlist = view.findViewById<ImageView>(R.id.productAdapterWishlist)
 }
 
-class ProductsAdapter(private var productsList: ArrayList<ProductInterface>): RecyclerView.Adapter<ProductViewHolder>(){
+class ProductsAdapter(private var productsList: ArrayList<ProductInterface>): androidx.recyclerview.widget.RecyclerView.Adapter<ProductViewHolder>(){
     override fun getItemCount(): Int {
         return if(productsList.isNotEmpty()) productsList.size else 0
     }

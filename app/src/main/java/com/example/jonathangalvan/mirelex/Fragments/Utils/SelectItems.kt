@@ -4,8 +4,8 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.fragment_register_extra_fields_address.vie
 import kotlinx.android.synthetic.main.fragment_select_items.*
 
 
-class SelectItems() : Fragment() {
+class SelectItems() : androidx.fragment.app.Fragment() {
     private var listener: OnFragmentInteractionListener? = null
     private var ml: SelectedItemsListener.SelectedItemsListenerInterface? = null
     private var addressAdapter = SelecListAddressAdapter(ArrayList())
@@ -74,7 +74,8 @@ class SelectItems() : Fragment() {
         })
 
         /*Fill list*/
-        selectListItems.layoutManager = LinearLayoutManager(activity)
+        selectListItems.layoutManager =
+            androidx.recyclerview.widget.LinearLayoutManager(activity)
         when(listType){
             "storesList" -> {
                 selectListItems.adapter = addressAdapter

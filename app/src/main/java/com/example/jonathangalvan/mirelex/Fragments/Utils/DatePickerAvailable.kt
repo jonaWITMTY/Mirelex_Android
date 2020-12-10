@@ -3,7 +3,7 @@ package com.example.jonathangalvan.mirelex.Fragments.Utils
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +13,7 @@ import android.widget.TextView
 import com.example.jonathangalvan.mirelex.R
 import kotlinx.android.synthetic.main.fragment_date_picker_available.*
 
-class DatePickerAvailable : Fragment() {
+class DatePickerAvailable : androidx.fragment.app.Fragment() {
 
     private var listener: OnFragmentInteractionListener? = null
 

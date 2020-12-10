@@ -1,11 +1,11 @@
 package com.example.jonathangalvan.mirelex
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
-import android.support.v4.graphics.drawable.DrawableCompat
-import android.support.v7.widget.GridLayoutManager
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.DrawableCompat
+import androidx.recyclerview.widget.GridLayoutManager
 import android.view.*
 import com.example.jonathangalvan.mirelex.Adapters.ProductsAdapter
 import com.example.jonathangalvan.mirelex.Interfaces.ProductsInterface
@@ -31,7 +31,8 @@ class ProfileProductsActivity : AppCompatActivity() {
         supportActionBar?.title = resources.getString(R.string.myProducts)
 
         /*Set productGrid config*/
-        profileProductsGrid.layoutManager = GridLayoutManager(this, 2)
+        profileProductsGrid.layoutManager =
+            androidx.recyclerview.widget.GridLayoutManager(this, 2)
         profileProductsGrid.adapter = productAdapter
 
         profileProductsGrid?.addOnItemTouchListener(RecyclerItemClickListener(this, profileProductsGrid, object : RecyclerItemClickListener.OnItemClickListener {

@@ -1,6 +1,6 @@
 package com.example.jonathangalvan.mirelex.Adapters
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,11 +8,11 @@ import android.widget.TextView
 import com.example.jonathangalvan.mirelex.Interfaces.OrderUpdates
 import com.example.jonathangalvan.mirelex.R
 
-class OrderStatusViewHolder(view: View): RecyclerView.ViewHolder(view){
+class OrderStatusViewHolder(view: View): androidx.recyclerview.widget.RecyclerView.ViewHolder(view){
     val name = view.findViewById<TextView>(R.id.orderStatusListAdapterName)
 }
 
-class OrderStatusAdapater(var orderStatus: ArrayList<OrderUpdates>): RecyclerView.Adapter<OrderStatusViewHolder>() {
+class OrderStatusAdapater(var orderStatus: ArrayList<OrderUpdates>): androidx.recyclerview.widget.RecyclerView.Adapter<OrderStatusViewHolder>() {
 
     fun loadNewData(orderStatusNew: ArrayList<OrderUpdates>){
         orderStatus = orderStatusNew

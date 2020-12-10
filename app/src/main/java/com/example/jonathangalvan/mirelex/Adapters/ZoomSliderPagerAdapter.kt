@@ -1,8 +1,8 @@
 package com.example.jonathangalvan.mirelex.Adapters
 
-import android.support.constraint.ConstraintLayout
-import android.support.v4.app.FragmentManager
-import android.support.v4.view.PagerAdapter
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.fragment.app.FragmentManager
+import androidx.viewpager.widget.PagerAdapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +14,7 @@ import com.example.jonathangalvan.mirelex.Fragments.Utils.ImagePreview
 import com.example.jonathangalvan.mirelex.R
 import com.squareup.picasso.Picasso
 
-class ZoomSliderPagerAdapter(var images: ArrayList<String>, var fm: FragmentManager?) : PagerAdapter() {
+class ZoomSliderPagerAdapter(var images: ArrayList<String>, var fm: androidx.fragment.app.FragmentManager?) : androidx.viewpager.widget.PagerAdapter() {
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         val imageLayout = LayoutInflater.from(container.context).inflate(R.layout.view_image_zoomslider, container, false)
