@@ -96,7 +96,7 @@ class CustomAlert : DialogFragment() {
                     override fun run() {
                         onDismiss(dialog)
                     }
-                }, 4000)
+                }, 3000)
             }
             2 ->{
                 alertView = activity?.layoutInflater!!.inflate(R.layout.fragment_forgot_email_alert, null)
