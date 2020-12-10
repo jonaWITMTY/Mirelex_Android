@@ -162,4 +162,5 @@
     <string name="wishlist">Favorites</string>
     <string name="myRequest">My orders</string>
     <string name="myBusiness">My business</string>
+    <string name="storeWithPoints">Store:</string>
 </resources>

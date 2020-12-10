@@ -163,4 +163,5 @@
     <string name="wishlist">Favoritos</string>
     <string name="myRequest">Mis pedidos</string>
     <string name="myBusiness">Mi empresa</string>
+    <string name="storeWithPoints">Tienda:</string>
 </resources>

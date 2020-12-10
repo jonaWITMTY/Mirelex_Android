@@ -2,6 +2,7 @@ package com.example.jonathangalvan.mirelex
 
 import android.app.ActivityOptions
 import android.content.Intent
+import android.graphics.Typeface
 import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -47,6 +48,9 @@ class OrderCheckoutActivity : AppCompatActivity(), SelectItems.OnFragmentInterac
         setContentView(R.layout.activity_order_checkout)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = resources.getString(R.string.orderDetails)
+
+//      Hide general values
+        orderCheckoutStoreTitle.visibility = View.GONE
 
         /*Get bundle information*/
         val bundleFromCalendar = intent.extras
@@ -369,6 +373,8 @@ class OrderCheckoutActivity : AppCompatActivity(), SelectItems.OnFragmentInterac
                 "\n${address.personalPhone.toString()}" +
                 "\n\n${address.street}, ${address.neighborhood}, ${address.postalCode}, ${address.city}, ${address.state}, ${address.country}"
 
+        orderCheckoutStoreTitle.visibility = View.VISIBLE
+        orderCheckoutStoreSelection.setTypeface(null, Typeface.NORMAL)
         orderRequestObj?.addressId = id
     }
 
