@@ -2,6 +2,7 @@ package com.example.jonathangalvan.mirelex
 
 import android.app.ActivityOptions
 import android.content.Intent
+import android.graphics.Typeface
 import android.net.Uri
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -48,6 +49,9 @@ class OrderCheckoutActivity : AppCompatActivity(), SelectItems.OnFragmentInterac
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = resources.getString(R.string.orderDetails)
 
+//      Hide general values
+        orderCheckoutStoreTitle.visibility = View.GONE
+
         /*Get bundle information*/
         val bundleFromCalendar = intent.extras
         productObj = UtilsModel.getGson().fromJson(bundleFromCalendar.getString("productInfo"), ProductInfoInterface::class.java)
@@ -55,7 +59,9 @@ class OrderCheckoutActivity : AppCompatActivity(), SelectItems.OnFragmentInterac
 
         /*Fill fields*/
 //        Picasso.with(this).load(productObj?.productInformation?.productFeaturedImage).into(orderCheckoutFeatureImage)
-        Glide.with(this).load(productObj?.productInformation?.productFeaturedImage).apply( RequestOptions().override(800, 0)).into(orderCheckoutFeatureImage)
+        if(!productObj?.productInformation?.productFeaturedImage.isNullOrEmpty()){
+            Glide.with(this).load(productObj?.productInformation?.productFeaturedImage).apply( RequestOptions().override(800, 0)).into(orderCheckoutFeatureImage)
+        }
         orderCheckoutBrand.text = productObj?.productInformation?.brand
         orderCheckoutSize.text = productObj?.productInformation?.size
         orderCheckoutColors.text = productObj?.productInformation?.brand
@@ -369,6 +375,8 @@ class OrderCheckoutActivity : AppCompatActivity(), SelectItems.OnFragmentInterac
                 "\n${address.personalPhone.toString()}" +
                 "\n\n${address.street}, ${address.neighborhood}, ${address.postalCode}, ${address.city}, ${address.state}, ${address.country}"
 
+        orderCheckoutStoreTitle.visibility = View.VISIBLE
+        orderCheckoutStoreSelection.setTypeface(null, Typeface.NORMAL)
         orderRequestObj?.addressId = id
     }
 
