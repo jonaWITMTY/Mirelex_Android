@@ -48,6 +48,19 @@ class OrdersAdapter(private var orders: ArrayList<OrderInterface>): RecyclerView
         p0.orderAdapterStartDate.text = orders[p1].startDate
         p0.orderAdapterStatus.text = orders[p1].orderStatus
 
+        when(orders[p1].orderTypeId){
+            OrderType.Lease.orderTypeId ->{
+                p0.orderAdapterOrderType.backgroundTintList = ContextCompat.getColorStateList(p0.orderAdapterOrderType.context, R.color.colorEmerald)
+            }
+            OrderType.Purchase.orderTypeId ->{
+                p0.orderAdapterOrderType.backgroundTintList = ContextCompat.getColorStateList(p0.orderAdapterOrderType.context, R.color.colorYellow)
+                p0.orderAdapterOrderType.setTextColor(ContextCompat.getColorStateList(p0.orderAdapterOrderType.context, R.color.black))
+            }
+            OrderType.Fitting.orderTypeId ->{
+                p0.orderAdapterOrderType.backgroundTintList = ContextCompat.getColorStateList(p0.orderAdapterOrderType.context, R.color.colorLilac)
+            }
+        }
+
         when(orders[p1].orderStatusId){
             OrderStatus.Open.orderStatusId -> {
                 p0.orderAdapterStatus.backgroundTintList = ContextCompat.getColorStateList(p0.orderAdapterStatus.context, R.color.colorGreenLight)

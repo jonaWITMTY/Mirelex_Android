@@ -85,17 +85,17 @@ class ServiceCreateActivity : AppCompatActivity(),
 
         /*Hide delivery and payments - hide fields*/
         createServiceSend.visibility = View.GONE
-        createServicePaymentCard.visibility = View.GONE
+//        createServicePaymentCard.visibility = View.GONE
 
         /*Create service button*/
         serviceCreateOrderService.setOnClickListener(View.OnClickListener {
             if(serviceCreateTerms.isChecked){
 
                 /*Hide delivery and payments - conditional with payment*/
-//                if(inputValidations() && defaultCard != null){
+                if(inputValidations() && defaultCard != null){
 
                 /*Hide delivery and payments - conditional with payment*/
-                if(inputValidations()){
+//                if(inputValidations()){
                     val loader = layoutInflater.inflate(R.layout.view_progressbar,findViewById(android.R.id.content), true)
                     var orderTypeId = ""
                     when(service){
@@ -113,8 +113,8 @@ class ServiceCreateActivity : AppCompatActivity(),
                         endDate = serviceCreateDate.text.toString(),
                         orderType = orderTypeId,
                         total = total,
-                        storeId = serviceStores[serviceCreateStores.selectedItemPosition].userId
-//                        cardId = defaultCard?.cardId - Hide delivery and payments
+                        storeId = serviceStores[serviceCreateStores.selectedItemPosition].userId,
+                        cardId = defaultCard?.cardId /*- Hide delivery and payments*/
                     )
                     when(service){
                         0 -> {

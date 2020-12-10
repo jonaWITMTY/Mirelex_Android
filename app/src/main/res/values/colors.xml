@@ -18,6 +18,11 @@
     <color name="colorBlueLight">#35B8E0</color>
     <color name="colorDarkTextOpacity80">#CC333333</color>
     <color name="colorPinkRed">#e75e6f</color>
+    <color name="colorEmerald">#009975</color>
+    <color name="colorLilac">#6c4675</color>
+    <color name="colorYellow">#ffff00</color>
+    <color name="colorFuchsia">#e30052</color>
+    <color name="colorGoogleBlue">#007bff</color>
 
     /*Calendar library*/
     <color name="calendar_highlighted_day_bg">@color/colorGrey</color>

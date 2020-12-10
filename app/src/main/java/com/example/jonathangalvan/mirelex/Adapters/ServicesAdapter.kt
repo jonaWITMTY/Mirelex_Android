@@ -48,9 +48,11 @@ class ServicesAdapter( private var services: ArrayList<ServiceInterface>): Recyc
         when(services[p1].orderTypeId){
             OrderType.Cleaning.orderTypeId -> {
                 drawableStr = p0.serviceAdapterFeaturedImage.context.resources.getString(R.string.cleaningImg)
+                p0.serviceAdapterServiceType.backgroundTintList = ContextCompat.getColorStateList(p0.serviceAdapterServiceType.context, R.color.colorGoogleBlue)
             }
             OrderType.Sewing.orderTypeId -> {
                 drawableStr = p0.serviceAdapterFeaturedImage.context.resources.getString(R.string.sewingImg)
+                p0.serviceAdapterServiceType.backgroundTintList = ContextCompat.getColorStateList(p0.serviceAdapterServiceType.context, R.color.colorFuchsia)
             }
         }
 

@@ -98,17 +98,17 @@ class OrderCheckoutActivity : AppCompatActivity(), SelectItems.OnFragmentInterac
 
         /*Hide delivery and Payments*/
         orderCheckoutDelivery.visibility = View.GONE
-        orderCheckoutPaymentCard.visibility = View.GONE
+//        orderCheckoutPaymentCard.visibility = View.GONE
 
         /*Create order event*/
         orderCheckoutOrderProduct.setOnClickListener(View.OnClickListener {
             val loader = layoutInflater.inflate(R.layout.view_progressbar,findViewById(android.R.id.content), true)
 
             /*Hide delivery and Payments - conditional*/
-//            if(orderCheckoutTerms.isChecked && defaultCard != null){
+            if(orderCheckoutTerms.isChecked && defaultCard != null){
 
             /*Hide delivery and Payments - Conditional without delivery and payments*/
-            if(orderCheckoutTerms.isChecked){
+//            if(orderCheckoutTerms.isChecked){
                 orderRequestObj!!.clientDelivery = orderCheckoutDelivery.isChecked
 
                 if(productObj?.productOwner?.person?.userTypeId == UserType.Customer.userTypeId){
@@ -118,28 +118,30 @@ class OrderCheckoutActivity : AppCompatActivity(), SelectItems.OnFragmentInterac
                         val duration = Toast.LENGTH_SHORT
                         Toast.makeText(this, text, duration).show()
                     }else{
-                        createOrderRequest()
+                        /*Hide delivery and Payments - without delivery and payments*/
+//                        createOrderRequest()
                     }
                 }else{
-                    createOrderRequest()
+                    /*Hide delivery and Payments - without delivery and payments*/
+//                    createOrderRequest()
                 }
 
                 /*Hide delivery and Payments - switch*/
-//                when(orderRequestObj?.orderType){
-//                    OrderType.Lease.orderTypeId, OrderType.Purchase.orderTypeId -> {
-//                        if(defaultCard != null){
-//                            orderRequestObj!!.cardId = defaultCard?.cardId
-//                            createOrderRequest()
-//                        }else{
-//                            val text = resources.getText(R.string.fillRequiredFields)
-//                            val duration = Toast.LENGTH_SHORT
-//                            Toast.makeText(this, text, duration).show()
-//                        }
-//                    }
-//                    OrderType.Fitting.orderTypeId -> {
-//                        createOrderRequest()
-//                    }
-//                }
+                when(orderRequestObj?.orderType){
+                    OrderType.Lease.orderTypeId, OrderType.Purchase.orderTypeId -> {
+                        if(defaultCard != null){
+                            orderRequestObj!!.cardId = defaultCard?.cardId
+                            createOrderRequest()
+                        }else{
+                            val text = resources.getText(R.string.fillRequiredFields)
+                            val duration = Toast.LENGTH_SHORT
+                            Toast.makeText(this, text, duration).show()
+                        }
+                    }
+                    OrderType.Fitting.orderTypeId -> {
+                        createOrderRequest()
+                    }
+                }
             }else{
                 runOnUiThread {run{findViewById<ViewGroup>(android.R.id.content).removeView(findViewById(R.id.view_progressbar))}}
                 UtilsModel.getAlertView().newInstance(UtilsModel.getErrorMissingTerms(), 1, 0).show(supportFragmentManager, "alertView")
