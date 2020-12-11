@@ -92,7 +92,7 @@ class OrderDetailActivity : AppCompatActivity(), OrderStatusDetailList.OnFragmen
                             /*Event for action button*/
                             if(
                                 ((orderInfoForBundle?.orderInformation?.acceptedDate == null && orderInfoForBundle?.orderInformation?.rejectedDate == null) ||
-                                orderInfoForBundle?.orderInformation?.orderStatusId == OrderStatus.Open.orderStatusId) &&
+                                orderInfoForBundle?.orderInformation?.orderStatusId == OrderStatus.AcceptDate.orderStatusId) &&
                                 orderInfoForBundle?.orderOwnerInformation?.userId == sessionUser?.person?.userId
                             ){
                                 detailOrderActionAceptReject.visibility = View.VISIBLE
@@ -468,14 +468,13 @@ class OrderDetailActivity : AppCompatActivity(), OrderStatusDetailList.OnFragmen
         var currentDeliveryStatusDifference = 0
         val sessionUserId = sessionUser?.person?.userId
 
-        for(update in orderInfoForBundle!!.orderUpdates){
-            if(update.newOrderStatusId == "2"){
-                currentDeliveryStatusCount++
-            }
-        }
-
-
         if(orderInfoForBundle?.orderOwnerInformation?.isMirelexStore == "0"){
+
+            for(update in orderInfoForBundle!!.orderUpdates){
+                if(update.newOrderStatusId == "2"){
+                    currentDeliveryStatusCount++
+                }
+            }
 
             /*Order customer to customer*/
             when("${orderInfoForBundle!!.orderInformation.ownerDelivery}${orderInfoForBundle!!.orderInformation.clientDelivery}"){
@@ -493,6 +492,12 @@ class OrderDetailActivity : AppCompatActivity(), OrderStatusDetailList.OnFragmen
 //                }
             }
         }else{
+
+            for(update in orderInfoForBundle!!.orderUpdates){
+                if(update.newOrderStatusId == OrderStatus.ReadyInStore.orderStatusId){
+                    currentDeliveryStatusCount++
+                }
+            }
 
             /*Order store to customer*/
             when("${orderInfoForBundle!!.orderInformation.ownerDelivery}${orderInfoForBundle!!.orderInformation.clientDelivery}"){
@@ -589,22 +594,15 @@ class OrderDetailActivity : AppCompatActivity(), OrderStatusDetailList.OnFragmen
             /*Session user is store*/
             if (orderInfoForBundle!!.orderOwnerInformation.userId == sessionUserId) {
                 when (orderInfoForBundle!!.orderInformation.orderStatusId) {
-                    OrderStatus.Processing.orderStatusId -> {
-                        if(
-                            (currentDeliveryStatusWay == 1 && (currentDeliveryStatusDifference == 2)) ||
-                            (currentDeliveryStatusWay == 1 && (currentDeliveryStatusDifference == 1))
-                        ){
-                            orderFutureStatus = OrderStatus.Gathering.orderStatusId
-                            inputValue = "Listo para recolectar"
-                            displayForm = true
-                        }
+                    OrderStatus.YesItCould.orderStatusId -> {
+                        orderFutureStatus = OrderStatus.ReadyInStore.orderStatusId
+                        inputValue = "En Proceso"
+                        displayForm = true
                     }
-                    OrderStatus.Gathering.orderStatusId , OrderStatus.DeliveringProcess.orderStatusId , OrderStatus.Delivered.orderStatusId  -> {
-                        if(currentDeliveryStatusWay == 0){
-                            orderFutureStatus = OrderStatus.Finished.orderStatusId
-                            inputValue = "Finalizar"
-                            displayForm = true
-                        }
+                    OrderStatus.ReadyInStore.orderStatusId -> {
+                        orderFutureStatus = OrderStatus.SeeYouSoon.orderStatusId
+                        inputValue = "Recolectado"
+                        displayForm = true
                     }
                 }
             }

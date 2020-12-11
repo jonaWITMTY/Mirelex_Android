@@ -8,7 +8,15 @@ enum class OrderStatus(val orderStatusId: String) {
     DeliveringProcess("4"),
     Delivered("5"),
     Received("6"),
-    Finished("7")
+    Finished("7"),
+    Section("00000000"),
+    AcceptDate("1"),
+    YesItCould("2"),
+    RentInCourse("4"),
+    ReadyInStore("5"),
+    IsInStore("6"),
+    IsCancelled("9"),
+    SeeYouSoon("10"),
 }
 
 enum class OrderType(val orderTypeId: String) {
