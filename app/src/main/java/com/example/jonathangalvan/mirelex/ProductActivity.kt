@@ -29,8 +29,8 @@ class ProductActivity : AppCompatActivity(),
         val bunldeFromProducts = intent.extras
 
         if(intent.extras != null){
-            val productId = bunldeFromProducts.getString("productId")
-            vmp.productId = productId
+            val productId = bunldeFromProducts?.getString("productId")
+            vmp.productId = productId!!
             openTab(ProductUpdate(), "productUpdate")
         }else{
             openTab(ProductCreate(), "productCreate")

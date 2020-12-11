@@ -70,8 +70,8 @@ class FilterProducts : AppCompatActivity() {
 
         /*Set catalogs depending on session usertypeid*/
         val bundleFromProducts = intent.extras
-        val sizesObj = UtilsModel.getGson().fromJson(bundleFromProducts.getString("sizes"), CatalogArrayInterface::class.java)
-        catalogs = UtilsModel.getGson().fromJson(bundleFromProducts.getString("catalogs"), ProductCatalogs::class.java)
+        val sizesObj = UtilsModel.getGson().fromJson(bundleFromProducts?.getString("sizes"), CatalogArrayInterface::class.java)
+        catalogs = UtilsModel.getGson().fromJson(bundleFromProducts?.getString("catalogs"), ProductCatalogs::class.java)
         sizes = sizesObj?.data
         fillProductsCatalogs()
     }

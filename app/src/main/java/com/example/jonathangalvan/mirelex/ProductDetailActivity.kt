@@ -47,7 +47,7 @@ class ProductDetailActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val getProductIdFromBundle = intent.extras
-        productId = getProductIdFromBundle.getString("productId")
+        productId = getProductIdFromBundle?.getString("productId")
 
         /*Session user*/
         sessionUser = SessionModel(this@ProductDetailActivity).getUser()

@@ -31,7 +31,7 @@ class StoreDetailShortActivity : AppCompatActivity() {
 
         /*Get bundle info*/
         val bundleFromServiceDetail = intent.extras
-        val ownerObj = UtilsModel.getGson().fromJson(bundleFromServiceDetail.getString("personObj"), OrderPersonInformation::class.java)
+        val ownerObj = UtilsModel.getGson().fromJson(bundleFromServiceDetail?.getString("personObj"), OrderPersonInformation::class.java)
 
         /*Fill image*/
         if(ownerObj.profilePictureUrl != null){

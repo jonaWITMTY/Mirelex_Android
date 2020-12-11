@@ -74,7 +74,7 @@ class RegisterActivity : AppCompatActivity(), RegisterCustomerTab.OnFragmentInte
                 if(responseObj.status == "success"){
                     val productTypeObj = UtilsModel.getGson().fromJson(UtilsModel.getGson().toJson(responseObj), ProductTypes::class.java)
                     productTypes = productTypeObj.data
-                    val adapter = ArrayAdapter<ProductTypeInterface>(this@RegisterActivity, R.layout.view_spinner_item, R.id.spinnerItemWhiteSelect, productTypes)
+                    val adapter = ArrayAdapter<ProductTypeInterface>(this@RegisterActivity, R.layout.view_spinner_item, R.id.spinnerItemWhiteSelect, productTypes!!)
                     adapter.setDropDownViewResource(R.layout.view_spinner_item_select)
                     runOnUiThread {
                         run{

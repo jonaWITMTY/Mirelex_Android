@@ -22,7 +22,7 @@ class StoreDetailActivity : AppCompatActivity() {
         setContentView(R.layout.activity_store_detail)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         val getProductInfoFromBundle = intent.extras
-        val productInfo = UtilsModel.getGson().fromJson(getProductInfoFromBundle.getString("productInfo"), ProductInfoInterface::class.java)
+        val productInfo = UtilsModel.getGson().fromJson(getProductInfoFromBundle?.getString("productInfo"), ProductInfoInterface::class.java)
 
         supportActionBar?.title = ""
         if(productInfo.productOwner.person?.profilePictureUrl != null){

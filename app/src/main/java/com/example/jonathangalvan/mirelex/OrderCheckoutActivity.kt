@@ -54,8 +54,8 @@ class OrderCheckoutActivity : AppCompatActivity(), SelectItems.OnFragmentInterac
 
         /*Get bundle information*/
         val bundleFromCalendar = intent.extras
-        productObj = UtilsModel.getGson().fromJson(bundleFromCalendar.getString("productInfo"), ProductInfoInterface::class.java)
-        orderRequestObj = UtilsModel.getGson().fromJson(bundleFromCalendar.getString("orderRequestObj"), CreateOrderRequest::class.java)
+        productObj = UtilsModel.getGson().fromJson(bundleFromCalendar?.getString("productInfo"), ProductInfoInterface::class.java)
+        orderRequestObj = UtilsModel.getGson().fromJson(bundleFromCalendar?.getString("orderRequestObj"), CreateOrderRequest::class.java)
 
         /*Fill fields*/
 //        Picasso.with(this).load(productObj?.productInformation?.productFeaturedImage).into(orderCheckoutFeatureImage)
@@ -193,7 +193,7 @@ class OrderCheckoutActivity : AppCompatActivity(), SelectItems.OnFragmentInterac
                             "success" -> {
                                 states = UtilsModel.getGson().fromJson(responseStr, StatesInterface::class.java)
 
-                                val adapterStates = ArrayAdapter<StateInterface>(this@OrderCheckoutActivity, R.layout.view_spinner_item_black, R.id.spinnerItemBlackSelect, states?.data)
+                                val adapterStates = ArrayAdapter<StateInterface>(this@OrderCheckoutActivity, R.layout.view_spinner_item_black, R.id.spinnerItemBlackSelect, states?.data!!)
                                 adapterStates.setDropDownViewResource(R.layout.view_spinner_item_black_select)
                                 runOnUiThread{
                                     run {

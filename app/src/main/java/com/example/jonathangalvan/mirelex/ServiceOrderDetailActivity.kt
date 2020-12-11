@@ -35,7 +35,7 @@ class ServiceOrderDetailActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val bundleFromServices = intent.extras
-        serviceObj = UtilsModel.getGson().fromJson(bundleFromServices.getString("serviceObj"), ServiceInterface::class.java)
+        serviceObj = UtilsModel.getGson().fromJson(bundleFromServices?.getString("serviceObj"), ServiceInterface::class.java)
         sessionUser = SessionModel(this).getUser()
 
         supportActionBar?.title = serviceObj?.folio

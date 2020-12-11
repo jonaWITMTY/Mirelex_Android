@@ -418,13 +418,13 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     fun fillWomanSpinner(data: ArrayList<WomenCatalogInterface>?, adapterView: AdapterView<ArrayAdapter<WomenCatalogInterface>>){
-        val adapter = ArrayAdapter<WomenCatalogInterface>(this@ProfileActivity, R.layout.view_spinner_item_black, R.id.spinnerItemBlackSelect, data)
+        val adapter = ArrayAdapter<WomenCatalogInterface>(this@ProfileActivity, R.layout.view_spinner_item_black, R.id.spinnerItemBlackSelect, data!!)
         adapter.setDropDownViewResource(R.layout.view_spinner_item_black_select)
         adapterView.adapter = adapter
     }
 
     fun fillMaleSpinner(data: ArrayList<CatalogInterface>?, adapterView: AdapterView<ArrayAdapter<CatalogInterface>>){
-        val adapter = ArrayAdapter<CatalogInterface>(this@ProfileActivity, R.layout.view_spinner_item_black, R.id.spinnerItemBlackSelect, data)
+        val adapter = ArrayAdapter<CatalogInterface>(this@ProfileActivity, R.layout.view_spinner_item_black, R.id.spinnerItemBlackSelect, data!!)
         adapter.setDropDownViewResource(R.layout.view_spinner_item_black_select)
         adapterView.adapter = adapter
     }
