@@ -526,9 +526,18 @@ class OrderDetailActivity : AppCompatActivity(), OrderStatusDetailList.OnFragmen
             if (orderInfoForBundle!!.orderOwnerInformation.userId == sessionUserId) {
                 when (orderInfoForBundle!!.orderInformation.orderStatusId) {
                     OrderStatus.YesItCould.orderStatusId -> {
-                        orderFutureStatus = OrderStatus.RentInCourse.orderStatusId
-                        inputValue = "Entregado a cliente"
-                        displayForm = true
+                        when(orderInfoForBundle!!.orderInformation.orderTypeId){
+                            OrderType.Lease.orderTypeId -> {
+                                orderFutureStatus = OrderStatus.RentInCourse.orderStatusId
+                                inputValue = "Entregado a cliente"
+                                displayForm = true
+                            }
+                            OrderType.Purchase.orderTypeId -> {
+                                orderFutureStatus = OrderStatus.SeeYouSoon.orderStatusId
+                                inputValue = "Finalizar"
+                                displayForm = true
+                            }
+                        }
                     }
                     OrderStatus.RentInCourse.orderStatusId -> {
                         orderFutureStatus = OrderStatus.SeeYouSoon.orderStatusId
