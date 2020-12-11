@@ -278,8 +278,7 @@ class OrderDetailActivity : AppCompatActivity(), OrderStatusDetailList.OnFragmen
             detailOrderActionButton.setOnClickListener(View.OnClickListener {
                 if(orderInfoForBundle!!.orderInformation.orderTypeId == OrderType.Fitting.orderTypeId ){
                     if(
-                        (orderFutureStatus == OrderStatus.Finished.orderStatusId && sessionUser?.person?.isMirelexStore == "1") ||
-                        (orderFutureStatus == OrderStatus.Gathering.orderStatusId && sessionUser?.person?.isMirelexStore == "1")
+                        (orderFutureStatus == OrderStatus.SeeYouSoon.orderStatusId && sessionUser?.person?.isMirelexStore == "1")
                     ){
                         val ba = UtilsModel.getGson().toJson(BottomAlertInterface(
                             alertType = "fittingOrderProcess",
@@ -362,13 +361,13 @@ class OrderDetailActivity : AppCompatActivity(), OrderStatusDetailList.OnFragmen
         var currentDeliveryStatusDifference = 0
         val sessionUserId = sessionUser?.person?.userId
 
-        for(update in orderInfoForBundle!!.orderUpdates){
-            if(update.newOrderStatusId == "2"){
-                currentDeliveryStatusCount++
-            }
-        }
-
         if(orderInfoForBundle?.orderOwnerInformation?.isMirelexStore == "0") {
+
+            for(update in orderInfoForBundle!!.orderUpdates){
+                if(update.newOrderStatusId == "2"){
+                    currentDeliveryStatusCount++
+                }
+            }
 
             /*Order customer to customer*/
             when("${orderInfoForBundle!!.orderInformation.ownerDelivery}${orderInfoForBundle!!.orderInformation.clientDelivery}"){
@@ -384,20 +383,20 @@ class OrderDetailActivity : AppCompatActivity(), OrderStatusDetailList.OnFragmen
         }else{
 
             /*Order store to customer*/
-            when("${orderInfoForBundle!!.orderInformation.ownerDelivery}${orderInfoForBundle!!.orderInformation.clientDelivery}"){
-                "00" -> {
-                    val coutnDeliveryStatus = 1
-                    currentDeliveryStatusDifference = coutnDeliveryStatus - currentDeliveryStatusCount
-                }
-                "10", "01" -> {
-                    val coutnDeliveryStatus = 2
-                    currentDeliveryStatusDifference = coutnDeliveryStatus - currentDeliveryStatusCount
-                }
-                "11" -> {
-                    val coutnDeliveryStatus = 3
-                    currentDeliveryStatusDifference = coutnDeliveryStatus - currentDeliveryStatusCount
-                }
-            }
+//            when("${orderInfoForBundle!!.orderInformation.ownerDelivery}${orderInfoForBundle!!.orderInformation.clientDelivery}"){
+//                "00" -> {
+//                    val coutnDeliveryStatus = 1
+//                    currentDeliveryStatusDifference = coutnDeliveryStatus - currentDeliveryStatusCount
+//                }
+//                "10", "01" -> {
+//                    val coutnDeliveryStatus = 2
+//                    currentDeliveryStatusDifference = coutnDeliveryStatus - currentDeliveryStatusCount
+//                }
+//                "11" -> {
+//                    val coutnDeliveryStatus = 3
+//                    currentDeliveryStatusDifference = coutnDeliveryStatus - currentDeliveryStatusCount
+//                }
+//            }
         }
 
         if(currentDeliveryStatusDifference == 0){
@@ -452,8 +451,8 @@ class OrderDetailActivity : AppCompatActivity(), OrderStatusDetailList.OnFragmen
             /*Session user is store*/
             if (orderInfoForBundle!!.orderOwnerInformation.userId == sessionUserId) {
                 when (orderInfoForBundle!!.orderInformation.orderStatusId) {
-                    OrderStatus.Processing.orderStatusId -> {
-                        orderFutureStatus = OrderStatus.Finished.orderStatusId
+                    OrderStatus.YesItCould.orderStatusId -> {
+                        orderFutureStatus = OrderStatus.SeeYouSoon.orderStatusId
                         inputValue = "Finalizar"
                         displayForm = true
                     }
