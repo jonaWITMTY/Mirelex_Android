@@ -46,7 +46,7 @@ class OrderDetailActivity : AppCompatActivity(), OrderStatusDetailList.OnFragmen
     var orderFutureStatus = ""
     var inputValue = ""
     var displayForm = false
-    var orderId = ""
+    var orderId: String? = ""
     var sessionUser: UserInterface? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,7 +56,7 @@ class OrderDetailActivity : AppCompatActivity(), OrderStatusDetailList.OnFragmen
 
         /*Getorder info*/
         val bundleFromOrders = intent.extras
-        orderId = bundleFromOrders.getString("orderId")
+        orderId = bundleFromOrders?.getString("orderId")
         getOrderInfo()
 
         /*Set user info*/

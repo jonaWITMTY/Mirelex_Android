@@ -31,7 +31,7 @@ class ChatActivity : AppCompatActivity() {
 
         /*Get bunlde info*/
         val bundleFromChat = intent.extras
-        val conversationObj = UtilsModel.getGson().fromJson(bundleFromChat.getString("conversationObj"), ConversationInterface::class.java)
+        val conversationObj = UtilsModel.getGson().fromJson(bundleFromChat?.getString("conversationObj"), ConversationInterface::class.java)
 
         /*Set activity actionbar title*/
         supportActionBar?.title = conversationObj.userTo
