@@ -4,9 +4,9 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v4.app.ActivityCompat
+import androidx.core.app.ActivityCompat
 import android.view.View
 import com.example.jonathangalvan.mirelex.Fragments.Utils.ImagePreview
 import com.example.jonathangalvan.mirelex.Interfaces.ConversationInterface
@@ -31,7 +31,7 @@ class StoreDetailShortActivity : AppCompatActivity() {
 
         /*Get bundle info*/
         val bundleFromServiceDetail = intent.extras
-        val ownerObj = UtilsModel.getGson().fromJson(bundleFromServiceDetail.getString("personObj"), OrderPersonInformation::class.java)
+        val ownerObj = UtilsModel.getGson().fromJson(bundleFromServiceDetail?.getString("personObj"), OrderPersonInformation::class.java)
 
         /*Fill image*/
         if(ownerObj.profilePictureUrl != null){

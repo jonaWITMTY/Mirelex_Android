@@ -5,9 +5,9 @@ import android.app.Dialog
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.DialogFragment
-import android.support.v4.app.FragmentActivity
-import android.support.v4.app.FragmentManager
+import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentManager
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
@@ -24,7 +24,7 @@ import okhttp3.Response
 import java.io.IOException
 import java.util.*
 
-class CustomAlert : DialogFragment() {
+class CustomAlert : androidx.fragment.app.DialogFragment() {
 
     private var onSuccessFinishRes = 0
     private var alertInfo: ResponseInterface? = null
@@ -96,7 +96,7 @@ class CustomAlert : DialogFragment() {
                     override fun run() {
                         onDismiss(dialog)
                     }
-                }, 4000)
+                }, 3000)
             }
             2 ->{
                 alertView = activity?.layoutInflater!!.inflate(R.layout.fragment_forgot_email_alert, null)

@@ -7,7 +7,7 @@
         android:layout_height="match_parent"
         tools:context=".ProductDetailActivity">
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
         <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content"
@@ -16,7 +16,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         android:id="@+id/detailProductFeaturedSlider">
 
-            <android.support.v4.view.ViewPager
+            <androidx.viewpager.widget.ViewPager
                     android:id="@+id/detailProductImageSlider"
                     android:layout_width="match_parent"
                     android:layout_height="300dp" />
@@ -64,5 +64,5 @@
         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                       android:orientation="vertical" android:id="@+id/detailProductInfo"
                       android:layout_marginTop="16dp" app:layout_constraintTop_toBottomOf="@+id/detailProductGoToStoreProfile"/>
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

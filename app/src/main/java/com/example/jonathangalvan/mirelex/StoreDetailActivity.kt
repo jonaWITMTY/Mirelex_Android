@@ -5,9 +5,9 @@ import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v4.app.ActivityCompat
+import androidx.core.app.ActivityCompat
 import android.view.View
 import com.example.jonathangalvan.mirelex.Fragments.Utils.ImagePreview
 import com.example.jonathangalvan.mirelex.Interfaces.ProductInfoInterface
@@ -22,7 +22,7 @@ class StoreDetailActivity : AppCompatActivity() {
         setContentView(R.layout.activity_store_detail)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         val getProductInfoFromBundle = intent.extras
-        val productInfo = UtilsModel.getGson().fromJson(getProductInfoFromBundle.getString("productInfo"), ProductInfoInterface::class.java)
+        val productInfo = UtilsModel.getGson().fromJson(getProductInfoFromBundle?.getString("productInfo"), ProductInfoInterface::class.java)
 
         supportActionBar?.title = ""
         if(productInfo.productOwner.person?.profilePictureUrl != null){

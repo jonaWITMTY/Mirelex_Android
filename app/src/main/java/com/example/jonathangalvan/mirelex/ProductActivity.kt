@@ -1,10 +1,10 @@
 package com.example.jonathangalvan.mirelex
 
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProviders
 import android.net.Uri
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.ViewGroup
 import com.example.jonathangalvan.mirelex.Fragments.Product.ProductCreate
 import com.example.jonathangalvan.mirelex.Fragments.Product.ProductImagePicker
@@ -29,15 +29,15 @@ class ProductActivity : AppCompatActivity(),
         val bunldeFromProducts = intent.extras
 
         if(intent.extras != null){
-            val productId = bunldeFromProducts.getString("productId")
-            vmp.productId = productId
+            val productId = bunldeFromProducts?.getString("productId")
+            vmp.productId = productId!!
             openTab(ProductUpdate(), "productUpdate")
         }else{
             openTab(ProductCreate(), "productCreate")
         }
     }
 
-    fun openTab(fragment: Fragment, tag: String){
+    fun openTab(fragment: androidx.fragment.app.Fragment, tag: String){
         val transaction = supportFragmentManager.beginTransaction()
         if(supportFragmentManager.findFragmentById(R.id.productActivityContainer) != null){
             transaction.setCustomAnimations(R.anim.abc_fade_in, R.anim.abc_fade_out)

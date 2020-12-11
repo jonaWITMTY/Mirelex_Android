@@ -1,9 +1,9 @@
 package com.example.jonathangalvan.mirelex
 
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.CardView
+import androidx.core.content.ContextCompat
+import androidx.cardview.widget.CardView
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
@@ -31,7 +31,7 @@ class ChatActivity : AppCompatActivity() {
 
         /*Get bunlde info*/
         val bundleFromChat = intent.extras
-        val conversationObj = UtilsModel.getGson().fromJson(bundleFromChat.getString("conversationObj"), ConversationInterface::class.java)
+        val conversationObj = UtilsModel.getGson().fromJson(bundleFromChat?.getString("conversationObj"), ConversationInterface::class.java)
 
         /*Set activity actionbar title*/
         supportActionBar?.title = conversationObj.userTo
@@ -126,7 +126,7 @@ class ChatActivity : AppCompatActivity() {
         (nt.findViewById<TextView>(R.id.viewChatDate)).text = message?.created ?: ""
         if(isUserMessage){
             ((nt.findViewById<TextView>(R.id.viewChatText)).parent.parent as LinearLayout).gravity = Gravity.RIGHT
-            ((nt.findViewById<TextView>(R.id.viewChatText)).parent as CardView).setCardBackgroundColor(ContextCompat.getColor(this, R.color.colorBlue))
+            ((nt.findViewById<TextView>(R.id.viewChatText)).parent as androidx.cardview.widget.CardView).setCardBackgroundColor(ContextCompat.getColor(this, R.color.colorBlue))
         }
         chatSendMessageText.setText("")
         chatSendMessages.addView(nt)

@@ -19,7 +19,7 @@
                     app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginStart="8dp" android:textSize="24sp" android:textColor="@android:color/white"
                     android:text="@string/information"/>
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
@@ -28,13 +28,13 @@
                     android:id="@+id/registerExtraCompanyNameField"
                     android:layout_marginTop="30dp" app:layout_constraintTop_toBottomOf="@+id/textView">
 
-                <android.support.design.widget.TextInputEditText
+                <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:singleLine="true" android:inputType="text"
                 />
-            </android.support.design.widget.TextInputLayout>
-            <android.support.design.widget.TextInputLayout
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
@@ -45,12 +45,12 @@
                     android:layout_marginTop="16dp"
                     app:layout_constraintTop_toBottomOf="@+id/registerExtraCompanyNameField">
 
-                <android.support.design.widget.TextInputEditText
+                <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:singleLine="true" android:inputType="text"/>
-            </android.support.design.widget.TextInputLayout>
-            <android.support.design.widget.TextInputLayout
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
@@ -60,13 +60,13 @@
                     app:layout_constraintTop_toBottomOf="@+id/registerExtraNameField"
                     android:id="@+id/registerExtraPaternalLastNameField" android:layout_marginTop="16dp">
 
-                <android.support.design.widget.TextInputEditText
+                <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:singleLine="true" android:inputType="text"
                 />
-            </android.support.design.widget.TextInputLayout>
-            <android.support.design.widget.TextInputLayout
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
@@ -77,12 +77,12 @@
                     app:layout_constraintTop_toBottomOf="@+id/registerExtraPaternalLastNameField"
                     android:id="@+id/registerExtraMaternalLastNameField">
 
-                <android.support.design.widget.TextInputEditText
+                <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:singleLine="true" android:inputType="text"
                 />
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
             <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="match_parent"
@@ -103,7 +103,7 @@
                         style="@style/Widget.AppCompat.Spinner.Underlined"
                         android:backgroundTint="@android:color/white"/>
             </LinearLayout>
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
@@ -113,12 +113,12 @@
                     android:layout_marginTop="16dp"
                     android:id="@+id/registerExtraEmailField">
 
-                <android.support.design.widget.TextInputEditText
+                <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:singleLine="true" android:inputType="text" android:focusableInTouchMode="false"/>
-            </android.support.design.widget.TextInputLayout>
-            <android.support.design.widget.TextInputLayout
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
@@ -128,12 +128,12 @@
                     android:layout_marginTop="16dp" app:layout_constraintTop_toBottomOf="@+id/registerExtraEmailField"
                     android:id="@+id/registerExtraPersonalPhoneField">
 
-                <android.support.design.widget.TextInputEditText
+                <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:singleLine="true"
                         android:inputType="number"/>
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
             <Button
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/continueBtn" android:textAlignment="center"

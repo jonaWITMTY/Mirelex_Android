@@ -1,7 +1,7 @@
 package com.example.jonathangalvan.mirelex
 
 import android.Manifest
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import kotlinx.android.synthetic.main.activity_contact.*
@@ -11,7 +11,7 @@ import android.content.pm.PackageManager
 import android.telephony.PhoneNumberUtils
 import android.content.ComponentName
 import android.net.Uri
-import android.support.v4.app.ActivityCompat
+import androidx.core.app.ActivityCompat
 import android.view.ViewGroup
 import com.example.jonathangalvan.mirelex.Interfaces.ResponseInterface
 import com.example.jonathangalvan.mirelex.Models.SessionModel
@@ -21,7 +21,7 @@ import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.Response
 import java.io.IOException
-import android.support.v4.content.PermissionChecker.checkCallingOrSelfPermission
+import androidx.core.content.PermissionChecker.checkCallingOrSelfPermission
 
 
 

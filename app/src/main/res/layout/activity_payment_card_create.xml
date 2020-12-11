@@ -23,43 +23,43 @@
                 android:scaleType="fitCenter"
                 app:srcCompat="@drawable/credit_card" />
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" android:theme="@style/textInputLayoutBlack"
                 android:hint="@string/firstNameField" android:layout_marginBottom="16dp"
                 android:id="@+id/paymentCardCreateName">
 
-            <android.support.design.widget.TextInputEditText
+            <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
             />
-        </android.support.design.widget.TextInputLayout>
-        <android.support.design.widget.TextInputLayout
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" android:theme="@style/textInputLayoutBlack"
                 android:hint="@string/cardNumber" android:layout_marginBottom="16dp"
                 android:id="@+id/paymentCardCreateNumber">
 
-            <android.support.design.widget.TextInputEditText
+            <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="number" android:maxLength="16"/>
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" android:layout_marginBottom="16dp">
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent" android:theme="@style/textInputLayoutBlack"
                     android:layout_weight="1" android:hint="CVC" android:id="@+id/paymentCardCreateCVC"
                     android:gravity="bottom">
 
-                <android.support.design.widget.TextInputEditText
+                <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="number" android:maxLength="4"/>
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
             <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="wrap_content"

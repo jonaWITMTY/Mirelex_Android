@@ -1,6 +1,6 @@
 package com.example.jonathangalvan.mirelex.Adapters
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,14 +9,14 @@ import com.example.jonathangalvan.mirelex.Interfaces.AddressListArrayInterface
 import com.example.jonathangalvan.mirelex.Interfaces.AddressListInterface
 import com.example.jonathangalvan.mirelex.R
 
-class SelecListAdapterViewHolder(view: View): RecyclerView.ViewHolder(view){
+class SelecListAdapterViewHolder(view: View): androidx.recyclerview.widget.RecyclerView.ViewHolder(view){
     var addressAdapterName = view.findViewById<TextView>(R.id.addressAdapterName)
     var addressAdapterEmail = view.findViewById<TextView>(R.id.addressAdapterEmail)
     var addressAdapterPhone = view.findViewById<TextView>(R.id.addressAdapterPhone)
     var addressAdapterAddress = view.findViewById<TextView>(R.id.addressAdapterAddress)
 }
 
-class SelecListAddressAdapter(var list: ArrayList<AddressListInterface>): RecyclerView.Adapter<SelecListAdapterViewHolder>() {
+class SelecListAddressAdapter(var list: ArrayList<AddressListInterface>): androidx.recyclerview.widget.RecyclerView.Adapter<SelecListAdapterViewHolder>() {
 
     override fun onBindViewHolder(p0: SelecListAdapterViewHolder, p1: Int) {
         p0.addressAdapterName.text = list[p1].businessName.toString()

@@ -5,9 +5,9 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.se.omapi.Session
-import android.support.design.widget.BottomSheetDialog
-import android.support.design.widget.TextInputLayout
-import android.support.v4.app.DialogFragment
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.textfield.TextInputLayout
+import androidx.fragment.app.DialogFragment
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
@@ -28,7 +28,7 @@ import okhttp3.Callback
 import okhttp3.Response
 import java.io.IOException
 
-class CustomBottomAlert: DialogFragment() {
+class CustomBottomAlert: androidx.fragment.app.DialogFragment() {
 
     fun bottomSheetDialogInstance(alertObj: String?): CustomBottomAlert {
         val bsd = CustomBottomAlert()
@@ -39,7 +39,8 @@ class CustomBottomAlert: DialogFragment() {
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val alert = BottomSheetDialog(activity!!)
+        val alert =
+            BottomSheetDialog(activity!!)
         val alertObj = UtilsModel.getGson().fromJson(arguments?.getString("alertObj"), BottomAlertInterface::class.java)
         var view: View? = null
 

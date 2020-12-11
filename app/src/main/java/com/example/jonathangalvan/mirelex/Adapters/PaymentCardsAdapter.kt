@@ -1,7 +1,7 @@
 package com.example.jonathangalvan.mirelex.Adapters
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,13 +9,13 @@ import android.widget.TextView
 import com.example.jonathangalvan.mirelex.Interfaces.PaymentCard
 import com.example.jonathangalvan.mirelex.R
 
-class PaymenrCardsViewHolder(view: View): RecyclerView.ViewHolder(view){
+class PaymenrCardsViewHolder(view: View): androidx.recyclerview.widget.RecyclerView.ViewHolder(view){
     var paymentCardAdapterCardNumber = view.findViewById<TextView>(R.id.paymentCardAdapterCardNumber)
     var paymentCardAdapterDate = view.findViewById<TextView>(R.id.paymentCardAdapterDate)
     var paymentCardAdapterDefault = view.findViewById<TextView>(R.id.paymentCardAdapterIsDefault)
 }
 
-class PaymentCardsAdapter(private var context: Context, private var paymentCards: ArrayList<PaymentCard>): RecyclerView.Adapter<PaymenrCardsViewHolder>() {
+class PaymentCardsAdapter(private var context: Context, private var paymentCards: ArrayList<PaymentCard>): androidx.recyclerview.widget.RecyclerView.Adapter<PaymenrCardsViewHolder>() {
 
     fun getItem(position: Int): PaymentCard {
         return paymentCards[position]

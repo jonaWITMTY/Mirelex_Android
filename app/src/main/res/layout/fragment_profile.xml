@@ -10,7 +10,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
     </ScrollView>
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -156,6 +156,6 @@
                 app:layout_constraintEnd_toEndOf="parent" android:background="@android:color/holo_red_light"
                 android:textColor="@android:color/white" app:layout_constraintTop_toBottomOf="@+id/linearLayout6"
                 android:layout_marginTop="30dp" android:text="@string/closeSession"/>
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

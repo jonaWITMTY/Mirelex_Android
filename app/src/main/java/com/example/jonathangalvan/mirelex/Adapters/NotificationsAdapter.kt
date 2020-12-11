@@ -1,7 +1,7 @@
 package com.example.jonathangalvan.mirelex.Adapters
 
 import android.graphics.Typeface
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,12 +9,12 @@ import android.widget.TextView
 import com.example.jonathangalvan.mirelex.Interfaces.NotificationInterface
 import com.example.jonathangalvan.mirelex.R
 
-class NotificationsViewHolder(view: View): RecyclerView.ViewHolder(view) {
+class NotificationsViewHolder(view: View): androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
     var notificationAdapterText = view.findViewById<TextView>(R.id.notificationAdapterText)
     var notificationDate = view.findViewById<TextView>(R.id.notificationAdapterDate)
 }
 
-class NotificationsAdapter(private var notifications: ArrayList<NotificationInterface>): RecyclerView.Adapter<NotificationsViewHolder>() {
+class NotificationsAdapter(private var notifications: ArrayList<NotificationInterface>): androidx.recyclerview.widget.RecyclerView.Adapter<NotificationsViewHolder>() {
 
     fun getItem(position: Int): NotificationInterface{
         return notifications[position]

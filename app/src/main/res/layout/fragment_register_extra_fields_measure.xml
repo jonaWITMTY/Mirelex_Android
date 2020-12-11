@@ -113,7 +113,7 @@
                     android:layout_height="wrap_content" android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp" android:layout_marginTop="16dp"
                     android:id="@+id/registerExtraHeightLayout">
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:layout_constraintStart_toStartOf="parent"
@@ -121,11 +121,11 @@
                         android:theme="@style/textInputLayoutWhite" android:id="@+id/registerExtraHeightField"
                         app:layout_constraintEnd_toEndOf="parent" android:layout_weight="1">
 
-                    <android.support.design.widget.TextInputEditText
+                    <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="@string/heightInCms" android:inputType="number" android:singleLine="true"/>
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
                 <Button
                         android:text="?"
                         android:layout_width="20dp"
@@ -139,7 +139,7 @@
                     android:layout_height="wrap_content" android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp" android:layout_marginTop="16dp"
                     android:id="@+id/registerExtraBustLayout">
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:theme="@style/textInputLayoutWhite"
@@ -149,11 +149,11 @@
                         android:id="@+id/registerExtraBustField"
                         app:layout_constraintTop_toBottomOf="@+id/registerExtraHairColorWrap" android:layout_weight="1">
 
-                    <android.support.design.widget.TextInputEditText
+                    <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:singleLine="true" android:inputType="number"/>
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
                 <Button
                         android:text="?"
                         android:layout_width="20dp"
@@ -167,7 +167,7 @@
                     android:layout_height="match_parent" android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp" android:layout_marginTop="16dp"
                     android:id="@+id/registerExtraWaistLayout">
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:theme="@style/textInputLayoutWhite"
@@ -177,11 +177,11 @@
                         app:layout_constraintHorizontal_bias="0.0" android:id="@+id/registerExtraWaistField"
                         app:layout_constraintTop_toBottomOf="@+id/registerExtraBustField" android:layout_weight="1">
 
-                    <android.support.design.widget.TextInputEditText
+                    <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:singleLine="true" android:inputType="number"/>
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
                 <Button
                         android:text="?"
                         android:layout_width="20dp"
@@ -194,7 +194,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp" android:layout_marginTop="16dp" android:id="@+id/registerExtraHipLayout">
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:theme="@style/textInputLayoutWhite"
@@ -204,11 +204,11 @@
                         app:layout_constraintTop_toBottomOf="@+id/registerExtraWaistField"
                         android:id="@+id/registerExtraHipField" android:layout_weight="1">
 
-                    <android.support.design.widget.TextInputEditText
+                    <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:singleLine="true" android:inputType="number"/>
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
                 <Button
                         android:text="?"
                         android:layout_width="20dp"

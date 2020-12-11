@@ -1,10 +1,10 @@
 package com.example.jonathangalvan.mirelex.Fragments.RegisterExtraFields
 
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProviders
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
@@ -25,7 +25,7 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import com.example.jonathangalvan.mirelex.Interfaces.NeighborhoodInterface
 
-class RegisterExtraFieldsAddress : Fragment() {
+class RegisterExtraFieldsAddress : androidx.fragment.app.Fragment() {
     private var listener: OnFragmentInteractionListener? = null
     private var neighborhoodsArr: NeighborhoodArrayInterface? = null
 

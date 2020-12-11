@@ -5,9 +5,9 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.support.design.widget.TabLayout
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
+import com.google.android.material.tabs.TabLayout
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.*
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -32,7 +32,7 @@ import com.example.jonathangalvan.mirelex.Requests.GetOrdersRequest
 import kotlinx.android.synthetic.main.view_centered_message.view.*
 
 
-class Orders : Fragment() {
+class Orders : androidx.fragment.app.Fragment() {
     private var listener: OnFragmentInteractionListener? = null
     private val ordersAdapter = OrdersAdapter(ArrayList())
     private var ordersObj: OrdersInterface? = null
@@ -55,7 +55,8 @@ class Orders : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        ordersList.layoutManager = LinearLayoutManager(activity)
+        ordersList.layoutManager =
+            androidx.recyclerview.widget.LinearLayoutManager(activity)
         ordersList.adapter = ordersAdapter
         ordersList.addOnItemTouchListener(RecyclerItemClickListener(context!!, ordersList, object : RecyclerItemClickListener.OnItemClickListener {
             override fun onItemClick(view: View, position: Int) {

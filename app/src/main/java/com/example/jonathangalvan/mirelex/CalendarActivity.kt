@@ -1,7 +1,7 @@
 package com.example.jonathangalvan.mirelex
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
@@ -35,7 +35,7 @@ class CalendarActivity : AppCompatActivity() {
 
         /*Get bundle information*/
         val bundleFromProductDetail = intent.extras
-        when(bundleFromProductDetail.getString("orderType")){
+        when(bundleFromProductDetail?.getString("orderType")){
             OrderType.Lease.orderTypeId -> {
                 supportActionBar?.title = resources.getString(R.string.leaseable)
             }
@@ -45,7 +45,7 @@ class CalendarActivity : AppCompatActivity() {
         }
 
         /*Get product info*/
-        val productObj = UtilsModel.getGson().fromJson(bundleFromProductDetail.getString("productInfo"), ProductInfoInterface::class.java)
+        val productObj = UtilsModel.getGson().fromJson(bundleFromProductDetail?.getString("productInfo"), ProductInfoInterface::class.java)
 
         /*Get current date*/
         val c = Calendar.getInstance().getTime()
@@ -87,14 +87,14 @@ class CalendarActivity : AppCompatActivity() {
 
         /*On click event*/
         calendarContinueProcess.setOnClickListener(View.OnClickListener {
-            val orderRequestObj = CreateOrderRequest(orderType = bundleFromProductDetail.getString("orderType"))
+            val orderRequestObj = CreateOrderRequest(orderType = bundleFromProductDetail?.getString("orderType"))
             val goToOrderCheckout = Intent(this, OrderCheckoutActivity::class.java)
             val orderCheckoutBundle = Bundle()
             orderRequestObj.productId = productObj.productInformation.productId.toString()
             orderRequestObj.startDate = selectedDate
             orderRequestObj.endDate = selectedDate
             orderCheckoutBundle.putString("orderRequestObj", UtilsModel.getGson().toJson(orderRequestObj))
-            orderCheckoutBundle.putString("productInfo", bundleFromProductDetail.getString("productInfo"))
+            orderCheckoutBundle.putString("productInfo", bundleFromProductDetail?.getString("productInfo"))
             goToOrderCheckout.putExtras(orderCheckoutBundle)
             startActivity(goToOrderCheckout)
         })

@@ -3,8 +3,8 @@ package com.example.jonathangalvan.mirelex.Fragments.Utils
 import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
-import android.support.v4.app.DialogFragment
-import android.support.v4.view.ViewPager
+import androidx.fragment.app.DialogFragment
+import androidx.viewpager.widget.ViewPager
 import android.view.View
 import android.widget.ImageView
 import com.bumptech.glide.Glide
@@ -13,11 +13,11 @@ import com.example.jonathangalvan.mirelex.Adapters.ZoomSliderPagerAdapter
 import com.example.jonathangalvan.mirelex.R
 import me.relex.circleindicator.CircleIndicator
 
-class ImagePreview : DialogFragment() {
+class ImagePreview : androidx.fragment.app.DialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setStyle(DialogFragment.STYLE_NORMAL, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
+        setStyle(androidx.fragment.app.DialogFragment.STYLE_NORMAL, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
     }
 
     fun newInstance(image: Any?, position: Int = -1): ImagePreview {
@@ -44,11 +44,11 @@ class ImagePreview : DialogFragment() {
 
 
         val sliderAdapter = ZoomSliderPagerAdapter(arguments!!.getStringArrayList("image"), activity?.supportFragmentManager)
-        alertView.findViewById<ViewPager>(R.id.imagePreviewSlider).adapter = sliderAdapter
+        alertView.findViewById<androidx.viewpager.widget.ViewPager>(R.id.imagePreviewSlider).adapter = sliderAdapter
         if(arguments!!.getInt("position") != -1){
-            alertView.findViewById<ViewPager>(R.id.imagePreviewSlider).currentItem = arguments!!.getInt("position")
+            alertView.findViewById<androidx.viewpager.widget.ViewPager>(R.id.imagePreviewSlider).currentItem = arguments!!.getInt("position")
         }
-        alertView.findViewById<CircleIndicator>(R.id.imagePreviewIndicator).setViewPager(alertView.findViewById<ViewPager>(R.id.imagePreviewSlider))
+        alertView.findViewById<CircleIndicator>(R.id.imagePreviewIndicator).setViewPager(alertView.findViewById<androidx.viewpager.widget.ViewPager>(R.id.imagePreviewSlider))
 
 
         alertView.findViewById<ImageView>(R.id.imagePreviewClose).setOnClickListener(View.OnClickListener {

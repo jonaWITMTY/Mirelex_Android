@@ -3,10 +3,10 @@ package com.example.jonathangalvan.mirelex
 import android.app.ActivityOptions
 import android.content.Intent
 import android.net.Uri
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.support.design.widget.TabLayout
-import android.support.v4.app.Fragment
+import com.google.android.material.tabs.TabLayout
+import androidx.fragment.app.Fragment
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
@@ -417,7 +417,7 @@ class ServiceCreateActivity : AppCompatActivity(),
         })
     }
 
-    fun openTab(fragment: Fragment){
+    fun openTab(fragment: androidx.fragment.app.Fragment){
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(android.R.id.content, fragment)
         transaction.addToBackStack(null)

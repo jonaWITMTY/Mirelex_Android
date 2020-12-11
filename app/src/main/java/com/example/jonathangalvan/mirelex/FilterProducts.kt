@@ -1,9 +1,9 @@
 package com.example.jonathangalvan.mirelex
 
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_filter_products.*
-import android.databinding.adapters.SearchViewBindingAdapter.setOnQueryTextListener
+import androidx.databinding.adapters.SearchViewBindingAdapter.setOnQueryTextListener
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
@@ -70,8 +70,8 @@ class FilterProducts : AppCompatActivity() {
 
         /*Set catalogs depending on session usertypeid*/
         val bundleFromProducts = intent.extras
-        val sizesObj = UtilsModel.getGson().fromJson(bundleFromProducts.getString("sizes"), CatalogArrayInterface::class.java)
-        catalogs = UtilsModel.getGson().fromJson(bundleFromProducts.getString("catalogs"), ProductCatalogs::class.java)
+        val sizesObj = UtilsModel.getGson().fromJson(bundleFromProducts?.getString("sizes"), CatalogArrayInterface::class.java)
+        catalogs = UtilsModel.getGson().fromJson(bundleFromProducts?.getString("catalogs"), ProductCatalogs::class.java)
         sizes = sizesObj?.data
         fillProductsCatalogs()
     }

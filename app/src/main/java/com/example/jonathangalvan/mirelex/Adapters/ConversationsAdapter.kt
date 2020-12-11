@@ -1,7 +1,7 @@
 package com.example.jonathangalvan.mirelex.Adapters
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,12 +10,12 @@ import com.example.jonathangalvan.mirelex.Interfaces.ConversationInterface
 import com.example.jonathangalvan.mirelex.Models.SessionModel
 import com.example.jonathangalvan.mirelex.R
 
-class ConversationViewHolder(view: View): RecyclerView.ViewHolder(view){
+class ConversationViewHolder(view: View): androidx.recyclerview.widget.RecyclerView.ViewHolder(view){
     var conversationViewSendTo = view.findViewById<TextView>(R.id.conversationViewSendTo)
     var conversationViewLastMessage = view.findViewById<TextView>(R.id.conversationViewLastMessage)
 }
 
-class ConversationsAdapter(var context: Context, private var conversations: ArrayList<ConversationInterface>): RecyclerView.Adapter<ConversationViewHolder>() {
+class ConversationsAdapter(var context: Context, private var conversations: ArrayList<ConversationInterface>): androidx.recyclerview.widget.RecyclerView.Adapter<ConversationViewHolder>() {
 
     fun loadNewData(newObj: ArrayList<ConversationInterface>){
         conversations = newObj

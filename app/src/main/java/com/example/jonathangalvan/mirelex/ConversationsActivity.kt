@@ -1,9 +1,9 @@
 package com.example.jonathangalvan.mirelex
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.View
 import android.view.ViewGroup
 import com.example.jonathangalvan.mirelex.Adapters.ConversationsAdapter
@@ -30,7 +30,8 @@ class ConversationsActivity : AppCompatActivity() {
         supportActionBar?.title = resources.getString(R.string.conversations)
 
         /*Fill conversation list*/
-        conversationsList.layoutManager = LinearLayoutManager(this)
+        conversationsList.layoutManager =
+            androidx.recyclerview.widget.LinearLayoutManager(this)
         conversationsList.adapter = conversationAdapter
         val loader = layoutInflater.inflate(R.layout.view_progressbar, findViewById(android.R.id.content), true)
         UtilsModel.getOkClient().newCall(UtilsModel.postRequest(this, resources.getString(R.string.getConversations))).enqueue(object : Callback {

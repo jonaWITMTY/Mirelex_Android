@@ -1,10 +1,10 @@
 package com.example.jonathangalvan.mirelex.Fragments.Product
 
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProviders
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -35,7 +35,7 @@ import java.io.IOException
 import com.thomashaertel.widget.MultiSpinner
 
 
-class ProductUpdate : Fragment()  {
+class ProductUpdate : androidx.fragment.app.Fragment()  {
 
     private var listener: OnFragmentInteractionListener? = null
     var productId: String = ""

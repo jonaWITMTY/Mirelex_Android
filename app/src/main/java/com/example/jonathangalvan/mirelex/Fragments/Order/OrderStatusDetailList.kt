@@ -3,8 +3,8 @@ package com.example.jonathangalvan.mirelex.Fragments.Order
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,7 +18,7 @@ import com.example.jonathangalvan.mirelex.R
 import kotlinx.android.synthetic.main.fragment_order_status_detail_list.*
 import kotlinx.android.synthetic.main.fragment_register_extra_fields_address.view.*
 
-class OrderStatusDetailList : Fragment() {
+class OrderStatusDetailList : androidx.fragment.app.Fragment() {
     private var listener: OnFragmentInteractionListener? = null
     private var orderObj: OrderProductInfo? = null
     private var orderStatusAdapter = OrderStatusAdapater( ArrayList())
@@ -40,7 +40,8 @@ class OrderStatusDetailList : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        orderStatusDetailList.layoutManager = LinearLayoutManager(activity)
+        orderStatusDetailList.layoutManager =
+            androidx.recyclerview.widget.LinearLayoutManager(activity)
         orderStatusDetailList.adapter = orderStatusAdapter
         orderStatusAdapter.loadNewData(orderObj!!.orderUpdates)
     }

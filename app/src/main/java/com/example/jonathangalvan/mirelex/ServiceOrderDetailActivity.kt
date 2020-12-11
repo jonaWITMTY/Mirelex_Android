@@ -1,7 +1,7 @@
 package com.example.jonathangalvan.mirelex
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
@@ -35,7 +35,7 @@ class ServiceOrderDetailActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val bundleFromServices = intent.extras
-        serviceObj = UtilsModel.getGson().fromJson(bundleFromServices.getString("serviceObj"), ServiceInterface::class.java)
+        serviceObj = UtilsModel.getGson().fromJson(bundleFromServices?.getString("serviceObj"), ServiceInterface::class.java)
         sessionUser = SessionModel(this).getUser()
 
         supportActionBar?.title = serviceObj?.folio

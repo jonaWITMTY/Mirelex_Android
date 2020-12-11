@@ -3,11 +3,11 @@ package com.example.jonathangalvan.mirelex
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
-import android.support.design.widget.BottomNavigationView
-import android.support.v4.app.Fragment
-import android.support.v4.content.ContextCompat
-import android.support.v4.graphics.drawable.DrawableCompat
-import android.support.v7.app.AppCompatActivity
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import androidx.fragment.app.Fragment
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.DrawableCompat
+import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.widget.FrameLayout
 import com.example.jonathangalvan.mirelex.Fragments.*
@@ -93,7 +93,7 @@ class CustomerTabsActivity : AppCompatActivity(),
         }
     }
 
-    fun openTab(fragment: Fragment){
+    fun openTab(fragment: androidx.fragment.app.Fragment){
         findViewById<FrameLayout>(R.id.contentTabsFrameLayout).removeAllViews()
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.contentTabsFrameLayout, fragment)

@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.*
 import com.example.jonathangalvan.mirelex.Enums.UserType
 import com.example.jonathangalvan.mirelex.Fragments.Utils.CustomBottomAlert
@@ -18,7 +18,7 @@ import okhttp3.Response
 import java.io.IOException
 import com.onesignal.OneSignal
 import android.app.Activity
-import android.support.v7.widget.GridLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.jonathangalvan.mirelex.*
 import com.example.jonathangalvan.mirelex.Adapters.ProductsAdapter
 import com.example.jonathangalvan.mirelex.Enums.Gender
@@ -29,7 +29,7 @@ import com.example.jonathangalvan.mirelex.Listeners.RecyclerItemClickListener
 import com.example.jonathangalvan.mirelex.Requests.*
 
 
-class Products : Fragment() {
+class Products : androidx.fragment.app.Fragment() {
     private var listener: OnFragmentInteractionListener? = null
     var filterAction = false
     var productAdapter: ProductsAdapter? = ProductsAdapter(ArrayList())
@@ -88,7 +88,8 @@ class Products : Fragment() {
         getSizes()
 
         /*Set productGrid config*/
-        productsGrid.layoutManager = GridLayoutManager(activity, 2)
+        productsGrid.layoutManager =
+            androidx.recyclerview.widget.GridLayoutManager(activity, 2)
         productsGrid.adapter = productAdapter
 
 //        productsGrid?.addOnItemTouchListener(RecyclerItemClickListener(context!!, productsGrid, object : RecyclerItemClickListener.OnItemClickListener {

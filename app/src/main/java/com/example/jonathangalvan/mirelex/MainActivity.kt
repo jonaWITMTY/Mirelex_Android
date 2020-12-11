@@ -3,7 +3,7 @@ package com.example.jonathangalvan.mirelex
 import android.Manifest
 import android.content.Context
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.example.jonathangalvan.mirelex.Interfaces.ResponseInterface
@@ -26,8 +26,8 @@ import com.facebook.login.LoginManager
 import java.util.*
 import android.content.pm.PackageManager
 import android.os.Environment
-import android.support.v4.app.ActivityCompat
-import android.support.v4.content.ContextCompat
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.example.jonathangalvan.mirelex.Enums.UserType
 import java.io.File
 import java.io.FileOutputStream

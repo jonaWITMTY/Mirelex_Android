@@ -3,10 +3,10 @@ package com.example.jonathangalvan.mirelex
 import android.content.Intent
 import android.graphics.Typeface
 import android.net.Uri
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.content.ContextCompat
+import androidx.fragment.app.Fragment
+import androidx.core.content.ContextCompat
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.View
@@ -46,7 +46,7 @@ class OrderDetailActivity : AppCompatActivity(), OrderStatusDetailList.OnFragmen
     var orderFutureStatus = ""
     var inputValue = ""
     var displayForm = false
-    var orderId = ""
+    var orderId: String? = ""
     var sessionUser: UserInterface? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,7 +56,7 @@ class OrderDetailActivity : AppCompatActivity(), OrderStatusDetailList.OnFragmen
 
         /*Getorder info*/
         val bundleFromOrders = intent.extras
-        orderId = bundleFromOrders.getString("orderId")
+        orderId = bundleFromOrders?.getString("orderId")
         getOrderInfo()
 
         /*Set user info*/
@@ -633,7 +633,7 @@ class OrderDetailActivity : AppCompatActivity(), OrderStatusDetailList.OnFragmen
         viewGroup.addView(insertRow)
     }
 
-    fun openTab(fragment: Fragment){
+    fun openTab(fragment: androidx.fragment.app.Fragment){
         val b = Bundle()
         b.putString("orderObj", UtilsModel.getGson().toJson(orderInfoForBundle))
         fragment.arguments = b
