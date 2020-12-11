@@ -462,62 +462,7 @@ class OrderDetailActivity : AppCompatActivity(), OrderStatusDetailList.OnFragmen
     }
 
     fun orderStatusLeasePurchaseProcess(){
-        var currentDeliveryStatusWay = 1
-        var currentDeliveryStatusCount = 0
-        var currentDeliveryStatusDifference = 0
         val sessionUserId = sessionUser?.person?.userId
-
-        if(orderInfoForBundle?.orderOwnerInformation?.isMirelexStore == "0"){
-
-            for(update in orderInfoForBundle!!.orderUpdates){
-                if(update.newOrderStatusId == "2"){
-                    currentDeliveryStatusCount++
-                }
-            }
-
-            /*Order customer to customer*/
-            when("${orderInfoForBundle!!.orderInformation.ownerDelivery}${orderInfoForBundle!!.orderInformation.clientDelivery}"){
-                "00"-> {
-                    val coutnDeliveryStatus = 3
-                    currentDeliveryStatusDifference = coutnDeliveryStatus - currentDeliveryStatusCount
-                }
-//                "10", "01" -> {
-//                    val coutnDeliveryStatus = 2
-//                    currentDeliveryStatusDifference = coutnDeliveryStatus - currentDeliveryStatusCount
-//                }
-//                "11" -> {
-//                    val coutnDeliveryStatus = 3
-//                    currentDeliveryStatusDifference = coutnDeliveryStatus - currentDeliveryStatusCount
-//                }
-            }
-        }else{
-
-            for(update in orderInfoForBundle!!.orderUpdates){
-                if(update.newOrderStatusId == OrderStatus.ReadyInStore.orderStatusId){
-                    currentDeliveryStatusCount++
-                }
-            }
-
-            /*Order store to customer*/
-            when("${orderInfoForBundle!!.orderInformation.ownerDelivery}${orderInfoForBundle!!.orderInformation.clientDelivery}"){
-                "00"-> {
-                    val coutnDeliveryStatus = 1
-                    currentDeliveryStatusDifference = coutnDeliveryStatus - currentDeliveryStatusCount
-                }
-//                "10", "01" -> {
-//                    val coutnDeliveryStatus = 2
-//                    currentDeliveryStatusDifference = coutnDeliveryStatus - currentDeliveryStatusCount
-//                }
-//                "11" -> {
-//                    val coutnDeliveryStatus = 3
-//                    currentDeliveryStatusDifference = coutnDeliveryStatus - currentDeliveryStatusCount
-//                }
-            }
-        }
-
-        if(currentDeliveryStatusDifference == 0){
-            currentDeliveryStatusWay = 0
-        }
 
         if(orderInfoForBundle!!.orderOwnerInformation.isMirelexStore == "0"){
 
@@ -526,18 +471,15 @@ class OrderDetailActivity : AppCompatActivity(), OrderStatusDetailList.OnFragmen
             /*Session user is owner*/
             if(orderInfoForBundle!!.orderOwnerInformation.userId == sessionUserId){
                 when (orderInfoForBundle!!.orderInformation.orderStatusId) {
-                    OrderStatus.Gathering.orderStatusId -> {
-                        if (currentDeliveryStatusWay == 0){
-                            orderFutureStatus = OrderStatus.Finished.orderStatusId
-                            inputValue = "Finalizar"
-                            displayForm = true
-                        }
-
-                        if (currentDeliveryStatusWay == 1 && currentDeliveryStatusDifference == 2){
-                            orderFutureStatus = OrderStatus.Processing.orderStatusId
-                            inputValue = "Entregado en tienda"
-                            displayForm = true
-                        }
+                    OrderStatus.YesItCould.orderStatusId -> {
+                        orderFutureStatus = OrderStatus.ReadyInStore.orderStatusId
+                        inputValue = "Entregado en tienda"
+                        displayForm = true
+                    }
+                    OrderStatus.IsInStore.orderStatusId -> {
+                        orderFutureStatus = OrderStatus.SeeYouSoon.orderStatusId
+                        inputValue = "Finalizar"
+                        displayForm = true
                     }
                 }
             }else{
@@ -552,34 +494,24 @@ class OrderDetailActivity : AppCompatActivity(), OrderStatusDetailList.OnFragmen
                     /*Session user is store*/
                     UserType.Store.userTypeId ->{
                         when (orderInfoForBundle!!.orderInformation.orderStatusId) {
-                            OrderStatus.Processing.orderStatusId -> {
-                                if(currentDeliveryStatusWay == 1){
-                                    orderFutureStatus = OrderStatus.Gathering.orderStatusId
-                                    inputValue = "Listo para recolectar"
-                                    displayForm = true
-                                }
-                            }
-
-                            OrderStatus.Gathering.orderStatusId -> {
-                                if(currentDeliveryStatusWay == 1 && currentDeliveryStatusDifference == 1){
-                                    if(orderInfoForBundle?.orderInformation?.orderTypeId == OrderType.Lease.orderTypeId){
-                                        orderFutureStatus = OrderStatus.Delivered.orderStatusId
-                                        inputValue = "Entregado"
+                            OrderStatus.ReadyInStore.orderStatusId -> {
+                                when(orderInfoForBundle!!.orderInformation.orderTypeId){
+                                    OrderType.Lease.orderTypeId -> {
+                                        orderFutureStatus = OrderStatus.RentInCourse.orderStatusId
+                                        inputValue = "Entregado a cliente"
                                         displayForm = true
-                                    }else{
-                                        orderFutureStatus = OrderStatus.Finished.orderStatusId
+                                    }
+                                    OrderType.Purchase.orderTypeId -> {
+                                        orderFutureStatus = OrderStatus.SeeYouSoon.orderStatusId
                                         inputValue = "Finalizar"
                                         displayForm = true
                                     }
                                 }
                             }
-
-                            OrderStatus.Delivered.orderStatusId -> {
-                                if(currentDeliveryStatusWay == 1){
-                                    orderFutureStatus = OrderStatus.Gathering.orderStatusId
-                                    inputValue = "Recibido"
-                                    displayForm = true
-                                }
+                            OrderStatus.RentInCourse.orderStatusId -> {
+                                orderFutureStatus = OrderStatus.IsInStore.orderStatusId
+                                inputValue = "Recibido del cliente"
+                                displayForm = true
                             }
                         }
                     }
@@ -594,13 +526,13 @@ class OrderDetailActivity : AppCompatActivity(), OrderStatusDetailList.OnFragmen
             if (orderInfoForBundle!!.orderOwnerInformation.userId == sessionUserId) {
                 when (orderInfoForBundle!!.orderInformation.orderStatusId) {
                     OrderStatus.YesItCould.orderStatusId -> {
-                        orderFutureStatus = OrderStatus.ReadyInStore.orderStatusId
-                        inputValue = "En Proceso"
+                        orderFutureStatus = OrderStatus.RentInCourse.orderStatusId
+                        inputValue = "Entregado a cliente"
                         displayForm = true
                     }
-                    OrderStatus.ReadyInStore.orderStatusId -> {
+                    OrderStatus.RentInCourse.orderStatusId -> {
                         orderFutureStatus = OrderStatus.SeeYouSoon.orderStatusId
-                        inputValue = "Recolectado"
+                        inputValue = "Finalizar"
                         displayForm = true
                     }
                 }
