@@ -14,9 +14,11 @@
             >
                 <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                               android:orientation="vertical">
+
                     <androidx.viewpager.widget.ViewPager
+                            android:id="@+id/updateProductImageSlider"
                             android:layout_width="match_parent"
-                            android:layout_height="200dp" android:id="@+id/updateProductImageSlider"/>
+                            android:layout_height="300dp" />
                     <me.relex.circleindicator.CircleIndicator
                             android:id="@+id/indicator"
                             android:layout_width="match_parent"

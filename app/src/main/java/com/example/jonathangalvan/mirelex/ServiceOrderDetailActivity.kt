@@ -73,7 +73,9 @@ class ServiceOrderDetailActivity : AppCompatActivity() {
 
         addRow(resources.getString(R.string.type), serviceObj?.orderType!!)
         addRow(resources.getString(R.string.date), serviceObj?.startDate!!)
-        addRow(resources.getString(R.string.status), serviceObj?.orderStatus!!)
+        if(serviceObj?.orderStatus != null){
+            addRow(resources.getString(R.string.status), serviceObj?.orderStatus!!)
+        }
         addRow(resources.getString(R.string.total), serviceObj?.totalFormatted!!)
 
         if( isThereImage != null){

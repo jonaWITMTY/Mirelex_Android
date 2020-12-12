@@ -59,25 +59,25 @@ class ServicesAdapter( private var services: ArrayList<ServiceInterface>): andro
         Picasso.with(p0.serviceAdapterFeaturedImage.context).load(drawableStr).into(p0.serviceAdapterFeaturedImage)
 
         when(services[p1].orderStatusId){
-            OrderStatus.Open.orderStatusId -> {
+            OrderStatus.AcceptDate.orderStatusId -> {
                 p0.serviceAdapterStatus.backgroundTintList = ContextCompat.getColorStateList(p0.serviceAdapterStatus.context, R.color.colorGreenLight)
             }
-            OrderStatus.Gathering.orderStatusId -> {
+            OrderStatus.YesItCould.orderStatusId -> {
                 p0.serviceAdapterStatus.backgroundTintList = ContextCompat.getColorStateList(p0.serviceAdapterStatus.context, android.R.color.black)
             }
-            OrderStatus.Processing.orderStatusId -> {
+            OrderStatus.RentInCourse.orderStatusId -> {
                 p0.serviceAdapterStatus.backgroundTintList = ContextCompat.getColorStateList(p0.serviceAdapterStatus.context, R.color.colorBlueLight)
             }
-            OrderStatus.DeliveringProcess.orderStatusId -> {
+            OrderStatus.ReadyInStore.orderStatusId -> {
                 p0.serviceAdapterStatus.backgroundTintList = ContextCompat.getColorStateList(p0.serviceAdapterStatus.context, android.R.color.black)
             }
-            OrderStatus.Delivered.orderStatusId -> {
+            OrderStatus.IsInStore.orderStatusId -> {
                 p0.serviceAdapterStatus.backgroundTintList = ContextCompat.getColorStateList(p0.serviceAdapterStatus.context, android.R.color.black)
             }
-            OrderStatus.Received.orderStatusId -> {
+            OrderStatus.FitiingDone.orderStatusId -> {
                 p0.serviceAdapterStatus.backgroundTintList = ContextCompat.getColorStateList(p0.serviceAdapterStatus.context, android.R.color.black)
             }
-            OrderStatus.Finished.orderStatusId -> {
+            OrderStatus.SeeYouSoon.orderStatusId -> {
                 p0.serviceAdapterStatus.backgroundTintList = ContextCompat.getColorStateList(p0.serviceAdapterStatus.context, android.R.color.black)
             }
         }
