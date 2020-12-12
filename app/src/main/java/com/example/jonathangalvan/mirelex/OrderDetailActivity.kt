@@ -278,7 +278,8 @@ class OrderDetailActivity : AppCompatActivity(), OrderStatusDetailList.OnFragmen
             detailOrderActionButton.setOnClickListener(View.OnClickListener {
                 if(orderInfoForBundle!!.orderInformation.orderTypeId == OrderType.Fitting.orderTypeId ){
                     if(
-                        (orderFutureStatus == OrderStatus.SeeYouSoon.orderStatusId && sessionUser?.person?.isMirelexStore == "1")
+                        (orderFutureStatus == OrderStatus.SeeYouSoon.orderStatusId && sessionUser?.person?.isMirelexStore == "1") ||
+                        (orderFutureStatus == OrderStatus.FitiingDone.orderStatusId && sessionUser?.person?.isMirelexStore == "1")
                     ){
                         val ba = UtilsModel.getGson().toJson(BottomAlertInterface(
                             alertType = "fittingOrderProcess",
@@ -356,52 +357,7 @@ class OrderDetailActivity : AppCompatActivity(), OrderStatusDetailList.OnFragmen
     }
 
     fun orderStatusFittingProcess(){
-        var currentDeliveryStatusWay = 1
-        var currentDeliveryStatusCount = 0
-        var currentDeliveryStatusDifference = 0
         val sessionUserId = sessionUser?.person?.userId
-
-        if(orderInfoForBundle?.orderOwnerInformation?.isMirelexStore == "0") {
-
-            for(update in orderInfoForBundle!!.orderUpdates){
-                if(update.newOrderStatusId == "2"){
-                    currentDeliveryStatusCount++
-                }
-            }
-
-            /*Order customer to customer*/
-            when("${orderInfoForBundle!!.orderInformation.ownerDelivery}${orderInfoForBundle!!.orderInformation.clientDelivery}"){
-                "00", "10", "01" -> {
-                    val coutnDeliveryStatus = 2
-                    currentDeliveryStatusDifference = coutnDeliveryStatus - currentDeliveryStatusCount
-                }
-                "11" -> {
-                    val coutnDeliveryStatus = 3
-                    currentDeliveryStatusDifference = coutnDeliveryStatus - currentDeliveryStatusCount
-                }
-            }
-        }else{
-
-            /*Order store to customer*/
-//            when("${orderInfoForBundle!!.orderInformation.ownerDelivery}${orderInfoForBundle!!.orderInformation.clientDelivery}"){
-//                "00" -> {
-//                    val coutnDeliveryStatus = 1
-//                    currentDeliveryStatusDifference = coutnDeliveryStatus - currentDeliveryStatusCount
-//                }
-//                "10", "01" -> {
-//                    val coutnDeliveryStatus = 2
-//                    currentDeliveryStatusDifference = coutnDeliveryStatus - currentDeliveryStatusCount
-//                }
-//                "11" -> {
-//                    val coutnDeliveryStatus = 3
-//                    currentDeliveryStatusDifference = coutnDeliveryStatus - currentDeliveryStatusCount
-//                }
-//            }
-        }
-
-        if(currentDeliveryStatusDifference == 0){
-            currentDeliveryStatusWay = 0
-        }
 
         if(orderInfoForBundle!!.orderOwnerInformation.isMirelexStore == "0"){
             /*Process when order is customer - customer*/
@@ -409,13 +365,16 @@ class OrderDetailActivity : AppCompatActivity(), OrderStatusDetailList.OnFragmen
             /*Session user is owner*/
             if(orderInfoForBundle!!.orderOwnerInformation.userId == sessionUserId){
                 when (orderInfoForBundle!!.orderInformation.orderStatusId) {
-                    OrderStatus.Gathering.orderStatusId, OrderStatus.DeliveringProcess.orderStatusId -> {
-                        if (currentDeliveryStatusWay == 0){
-                            orderFutureStatus = OrderStatus.Finished.orderStatusId
+                        OrderStatus.YesItCould.orderStatusId -> {
+                            orderFutureStatus = OrderStatus.ReadyInStore.orderStatusId
+                            inputValue = "Entregado en tienda"
+                            displayForm = true
+                        }
+                        OrderStatus.FitiingDone.orderStatusId -> {
+                            orderFutureStatus = OrderStatus.SeeYouSoon.orderStatusId
                             inputValue = "Finalizar"
                             displayForm = true
                         }
-                    }
                 }
             }else{
 
@@ -427,19 +386,15 @@ class OrderDetailActivity : AppCompatActivity(), OrderStatusDetailList.OnFragmen
                     /*Session user is store*/
                     UserType.Store.userTypeId ->{
                         when (orderInfoForBundle!!.orderInformation.orderStatusId) {
-                            OrderStatus.Processing.orderStatusId -> {
-                                if (currentDeliveryStatusWay == 1 && currentDeliveryStatusWay == 1) {
-                                    orderFutureStatus = OrderStatus.Gathering.orderStatusId
-                                    inputValue = "Listo para recolectar"
-                                    displayForm = true
-                                }
+                            OrderStatus.ReadyInStore.orderStatusId -> {
+                                orderFutureStatus = OrderStatus.RentInCourse.orderStatusId
+                                inputValue = "LLego el cliente"
+                                displayForm = true
                             }
-                            OrderStatus.Gathering.orderStatusId, OrderStatus.DeliveringProcess.orderStatusId -> {
-                                if (currentDeliveryStatusWay == 1) {
-                                    orderFutureStatus = OrderStatus.Processing.orderStatusId
-                                    inputValue = "Entregado en tienda"
-                                    displayForm = true
-                                }
+                            OrderStatus.RentInCourse.orderStatusId -> {
+                                orderFutureStatus = OrderStatus.FitiingDone.orderStatusId
+                                inputValue = "Prueba finalizada"
+                                displayForm = true
                             }
                         }
                     }

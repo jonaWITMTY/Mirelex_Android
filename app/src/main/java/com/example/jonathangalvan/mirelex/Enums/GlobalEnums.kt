@@ -17,6 +17,7 @@ enum class OrderStatus(val orderStatusId: String) {
     IsInStore("6"),
     IsCancelled("9"),
     SeeYouSoon("10"),
+    FitiingDone("11"),
 }
 
 enum class OrderType(val orderTypeId: String) {
