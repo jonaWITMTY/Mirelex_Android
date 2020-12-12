@@ -62,25 +62,25 @@ class OrdersAdapter(private var orders: ArrayList<OrderInterface>): androidx.rec
         }
 
         when(orders[p1].orderStatusId){
-            OrderStatus.Open.orderStatusId -> {
+            OrderStatus.AcceptDate.orderStatusId -> {
                 p0.orderAdapterStatus.backgroundTintList = ContextCompat.getColorStateList(p0.orderAdapterStatus.context, R.color.colorGreenLight)
             }
-            OrderStatus.Gathering.orderStatusId -> {
+            OrderStatus.YesItCould.orderStatusId -> {
                 p0.orderAdapterStatus.backgroundTintList = ContextCompat.getColorStateList(p0.orderAdapterStatus.context, android.R.color.black)
             }
-            OrderStatus.Processing.orderStatusId -> {
+            OrderStatus.RentInCourse.orderStatusId -> {
                 p0.orderAdapterStatus.backgroundTintList = ContextCompat.getColorStateList(p0.orderAdapterStatus.context, R.color.colorBlueLight)
             }
-            OrderStatus.DeliveringProcess.orderStatusId -> {
+            OrderStatus.ReadyInStore.orderStatusId -> {
                 p0.orderAdapterStatus.backgroundTintList = ContextCompat.getColorStateList(p0.orderAdapterStatus.context, android.R.color.black)
             }
-            OrderStatus.Delivered.orderStatusId -> {
+            OrderStatus.IsInStore.orderStatusId -> {
                 p0.orderAdapterStatus.backgroundTintList = ContextCompat.getColorStateList(p0.orderAdapterStatus.context, android.R.color.black)
             }
-            OrderStatus.Received.orderStatusId -> {
+            OrderStatus.FitiingDone.orderStatusId -> {
                 p0.orderAdapterStatus.backgroundTintList = ContextCompat.getColorStateList(p0.orderAdapterStatus.context, android.R.color.black)
             }
-            OrderStatus.Finished.orderStatusId -> {
+            OrderStatus.SeeYouSoon.orderStatusId -> {
                 p0.orderAdapterStatus.backgroundTintList = ContextCompat.getColorStateList(p0.orderAdapterStatus.context, android.R.color.black)
             }
         }
