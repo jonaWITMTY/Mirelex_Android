@@ -197,6 +197,11 @@ class ServiceOrderDetailActivity : AppCompatActivity() {
             if (serviceObj?.owner?.userId == sessionUser?.person?.userId) {
                 when (serviceObj?.orderStatusId) {
                     OrderStatus.YesItCould.orderStatusId -> {
+                        orderFutureStatus = OrderStatus.IsInStore.orderStatusId
+                        inputValue = "Llegó a tienda"
+                        displayForm = true
+                    }
+                    OrderStatus.IsInStore.orderStatusId -> {
                         orderFutureStatus = OrderStatus.ReadyInStore.orderStatusId
                         inputValue = "Listo para recolectar"
                         displayForm = true
@@ -216,6 +221,11 @@ class ServiceOrderDetailActivity : AppCompatActivity() {
             if (serviceObj?.owner?.userId == sessionUser?.person?.userId) {
                 when (serviceObj?.orderStatusId) {
                     OrderStatus.YesItCould.orderStatusId -> {
+                        orderFutureStatus = OrderStatus.IsInStore.orderStatusId
+                        inputValue = "Llegó a tienda"
+                        displayForm = true
+                    }
+                    OrderStatus.IsInStore.orderStatusId -> {
                         orderFutureStatus = OrderStatus.ReadyInStore.orderStatusId
                         inputValue = "Listo para recolectar"
                         displayForm = true
