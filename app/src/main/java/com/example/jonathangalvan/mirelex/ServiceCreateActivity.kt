@@ -76,13 +76,13 @@ class ServiceCreateActivity : AppCompatActivity(),
         paymentCardButtonAction()
 
         /*On type change*/
-//        serviceCreateTypes.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
-//            override fun onNothingSelected(parent: AdapterView<*>?) {}
-//
-//            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-//                reseatServiceStores(position)
-//            }
-//        }
+        serviceCreateSrviceTypeSingleSpinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                reseatServiceStores()
+            }
+        }
 
         /*Date picker*/
         serviceCreateDate.setOnClickListener(View.OnClickListener {
@@ -182,6 +182,15 @@ class ServiceCreateActivity : AppCompatActivity(),
         serviceCreateTermsLink.setOnClickListener(View.OnClickListener {
             startActivity(Intent(this, WebviewActivity::class.java))
         })
+
+        /*On store change*/
+        serviceCreateStores.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                getServiceTotal()
+            }
+        }
     }
 
     override fun onResume() {
@@ -240,7 +249,7 @@ class ServiceCreateActivity : AppCompatActivity(),
     }
 
     fun getServiceTotal(){
-        if(inputValidations()){
+        if(inputValidationsForTotals()){
             var orderTypeId = ""
             when(service){
                 0 -> {
@@ -264,7 +273,7 @@ class ServiceCreateActivity : AppCompatActivity(),
             when(service){
                 0 -> {
                     /*Cleanning tab*/
-                    serviceTotalObj.productStyleId = servicesSelectedIds
+                    serviceTotalObj.productStyleId = serviceTypes[serviceCreateSrviceTypeSingleSpinner.selectedItemPosition].productCatalogId?.toLong()
                 }
                 else -> {
                     /*Sewing tab*/
@@ -373,10 +382,6 @@ class ServiceCreateActivity : AppCompatActivity(),
             if(value){
 //                servicesSelectedIds.add(catalogs?.decorations!![index].productCatalogId!!.toLong())
                 when(service){
-                    0 -> {
-                        /*Cleanning tab*/
-                        servicesSelectedIds.add(serviceTypes!![index].productCatalogId!!.toLong())
-                    }
                     else -> {
                         /*Sewing tab*/
                         servicesSelectedIds.add(sewingTypes!![index].sewingTypeId!!.toLong())
@@ -397,7 +402,7 @@ class ServiceCreateActivity : AppCompatActivity(),
             0 -> {
                 /*Cleanning tab*/
                 endpoint = resources.getString(R.string.getCleanningStores)
-                storeObj = UtilsModel.getGson().toJson(GetCleanningServiceStoresRequest(servicesSelectedIds))
+                storeObj = UtilsModel.getGson().toJson(GetCleanningServiceStoresRequest(serviceTypes[serviceCreateSrviceTypeSingleSpinner.selectedItemPosition].productCatalogId?.toLong()))
             }
             else -> {
                 /*Sewing tab*/
@@ -436,6 +441,17 @@ class ServiceCreateActivity : AppCompatActivity(),
         transaction.replace(android.R.id.content, fragment)
         transaction.addToBackStack(null)
         transaction.commit()
+    }
+
+    fun inputValidationsForTotals(): Boolean{
+        var isCorrect = true
+        if(
+            serviceStores.isEmpty() ||
+            serviceCreateDate.text.toString().isEmpty()
+        ){
+            isCorrect = false
+        }
+        return isCorrect
     }
 
     fun inputValidations(): Boolean{

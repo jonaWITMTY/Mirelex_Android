@@ -6,6 +6,6 @@ class GetServiceTotalRequest(
    var orderType: String?,
    var clientDelivery: String?,
    var storeId: String?,
-   var productStyleId: ArrayList<Long>?,
+   var productStyleId: Long?,
    var sewingTypeId: ArrayList<Long>?
 ): GlobalRequest() {}
