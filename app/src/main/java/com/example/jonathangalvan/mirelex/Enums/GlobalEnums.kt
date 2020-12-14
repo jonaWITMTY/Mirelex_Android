@@ -9,7 +9,6 @@ enum class OrderStatus(val orderStatusId: String) {
     Delivered("5"),
     Received("6"),
     Finished("7"),
-    Section("00000000"),
     AcceptDate("1"),
     YesItCould("2"),
     RentInCourse("4"),
