@@ -23,6 +23,7 @@ import com.example.jonathangalvan.mirelex.Requests.CreateServiceRequest
 import com.example.jonathangalvan.mirelex.Requests.GetCleanningServiceStoresRequest
 import com.example.jonathangalvan.mirelex.Requests.GetServiceTotalRequest
 import com.thomashaertel.widget.MultiSpinner
+import kotlinx.android.synthetic.main.activity_profile.*
 import kotlinx.android.synthetic.main.activity_service_create.*
 import okhttp3.Call
 import okhttp3.Callback
@@ -49,6 +50,9 @@ class ServiceCreateActivity : AppCompatActivity(),
         supportActionBar?.hide()
         reseatServiceTypes()
 
+        /*When init hide multispinner*/
+        serviceCreateSrviceTypeMultiSelect.visibility = View.GONE
+
         /*Change tabs event*/
         createServiceType.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener {
             override fun onTabReselected(p0: TabLayout.Tab?) { }
@@ -57,6 +61,13 @@ class ServiceCreateActivity : AppCompatActivity(),
 
             override fun onTabSelected(p0: TabLayout.Tab?) {
                 service = p0!!.position
+                if(service == 0){
+                    serviceCreateSrviceTypeSingleSpinner.visibility = View.VISIBLE
+                    serviceCreateSrviceTypeMultiSelect.visibility = View.GONE
+                }else{
+                    serviceCreateSrviceTypeSingleSpinner.visibility = View.GONE
+                    serviceCreateSrviceTypeMultiSelect.visibility = View.VISIBLE
+                }
                 reseatServiceTypes()
             }
         })
@@ -119,7 +130,7 @@ class ServiceCreateActivity : AppCompatActivity(),
                     when(service){
                         0 -> {
                             /*Cleanning tab*/
-                            serviceObj.productStyleId = servicesSelectedIds
+                            serviceObj.productStyleId = serviceTypes[serviceCreateSrviceTypeSingleSpinner.selectedItemPosition].productCatalogId?.toLong()
 //                            serviceObj.clientDelivery = createServiceSend.isChecked - Hide delivery and payments
                         }
                         else -> {
@@ -324,8 +335,11 @@ class ServiceCreateActivity : AppCompatActivity(),
                                     }
 
                                     /*Fill spinner with services*/
-                                    spinnerServices = findViewById(R.id.serviceCreateSrviceTypeMultiSelect)
-                                    spinnerServices!!.setAdapter(adapterServices, false, onSelectedServiceListener)
+//                                    spinnerServices = findViewById(R.id.serviceCreateSrviceTypeMultiSelect)
+//                                    spinnerServices!!.setAdapter(adapterServices, false, onSelectedServiceListener)
+                                    val adapter = ArrayAdapter<CatalogInterface>(this@ServiceCreateActivity, R.layout.view_spinner_item_black, R.id.spinnerItemBlackSelect, serviceTypes)
+                                    adapter.setDropDownViewResource(R.layout.view_spinner_item_black_select)
+                                    serviceCreateSrviceTypeSingleSpinner.adapter = adapter
                                 }
                             }
                         }

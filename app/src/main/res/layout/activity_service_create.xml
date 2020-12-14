@@ -35,6 +35,14 @@
             <!--                        android:layout_height="wrap_content" android:id="@+id/createProductDecoration"-->
             <!--                        style="@android:style/Widget.Material.Light.Spinner.Underlined"-->
             <!--                        android:backgroundTint="@android:color/black" android:spinnerMode="dialog"/>-->
+            <Spinner
+                    android:id="@+id/serviceCreateSrviceTypeSingleSpinner"
+                    style="@style/Widget.AppCompat.Spinner.Underlined"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/black"
+                    android:spinnerMode="dialog" />
+
             <com.thomashaertel.widget.MultiSpinner
                     android:id="@+id/serviceCreateSrviceTypeMultiSelect"
                     style="@android:style/Widget.Material.Light.Spinner.Underlined"
