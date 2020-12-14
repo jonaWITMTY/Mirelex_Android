@@ -98,7 +98,7 @@ class ServiceOrderDetailActivity : AppCompatActivity() {
         if(serviceObj?.owner?.userId == sessionUser?.person?.userId){
             if(
                 (serviceObj?.acceptedDate == null && serviceObj?.rejectedDate == null) ||
-                serviceObj?.orderStatusId == OrderStatus.Open.orderStatusId
+                serviceObj?.orderStatusId == OrderStatus.AcceptDate.orderStatusId
             ){
                 serviceDetailActionAceptReject.visibility = View.VISIBLE
 
@@ -193,55 +193,18 @@ class ServiceOrderDetailActivity : AppCompatActivity() {
     }
 
     fun serviceOrderCleaningStatus(){
-        var currentDeliveryStatusWay = 1
-        var currentDeliveryStatusCount = 0
-        var currentDeliveryStatusDifference = 0
-
-        for(update in serviceObj!!.updates){
-            if(update.newOrderStatusId == "2"){
-                currentDeliveryStatusCount++
-            }
-        }
-
-        when ("${serviceObj?.ownerDelivery}${serviceObj?.clientDelivery}") {
-            "00" -> {
-                val coutnDeliveryStatus = 1 // numero de estados en recollecion
-                currentDeliveryStatusDifference = coutnDeliveryStatus - currentDeliveryStatusCount
-            }
-            "10", "01" -> {
-                val coutnDeliveryStatus = 2 // numero de estados en recollecion
-                currentDeliveryStatusDifference = coutnDeliveryStatus - currentDeliveryStatusCount
-            }
-            "11" -> {
-                val coutnDeliveryStatus = 3
-                currentDeliveryStatusDifference = coutnDeliveryStatus - currentDeliveryStatusCount
-            }
-        }
-
-        if (currentDeliveryStatusDifference === 0) {
-            currentDeliveryStatusWay = 0
-        }
-
         if (serviceObj?.owner?.isMirelexStore == "1") {
             if (serviceObj?.owner?.userId == sessionUser?.person?.userId) {
                 when (serviceObj?.orderStatusId) {
-                    OrderStatus.Gathering.orderStatusId, OrderStatus.Processing.orderStatusId, OrderStatus.DeliveringProcess.orderStatusId -> {
-                        if (currentDeliveryStatusWay == 1) {
-                            orderFutureStatus = OrderStatus.Delivered.orderStatusId
-                            inputValue = "Entregado"
-                            displayForm = true
-                        } else {
-                            orderFutureStatus = OrderStatus.Finished.orderStatusId
-                            inputValue = "Finalizar"
-                            displayForm = true
-                        }
+                    OrderStatus.YesItCould.orderStatusId -> {
+                        orderFutureStatus = OrderStatus.ReadyInStore.orderStatusId
+                        inputValue = "Listo para recolectar"
+                        displayForm = true
                     }
-                    "5" -> {
-                        if (currentDeliveryStatusWay == 1) {
-                            orderFutureStatus = OrderStatus.Gathering.orderStatusId
-                            inputValue = "Listo para recolectar"
-                            displayForm = true
-                        }
+                    OrderStatus.ReadyInStore.orderStatusId -> {
+                        orderFutureStatus = OrderStatus.SeeYouSoon.orderStatusId
+                        inputValue = "Finalizar"
+                        displayForm = true
                     }
                 }
             }
@@ -249,41 +212,16 @@ class ServiceOrderDetailActivity : AppCompatActivity() {
     }
 
     fun serviceOrderSewingStatus(){
-        var currentDeliveryStatusWay = 1
-        var currentDeliveryStatusCount = 0
-        var currentDeliveryStatusDifference = 0
-
-        for(update in serviceObj!!.updates){
-            if(update.newOrderStatusId == "2"){
-                currentDeliveryStatusCount++
-            }
-        }
-
-        when ("${serviceObj?.ownerDelivery}${serviceObj?.clientDelivery}") {
-            "00", "10", "01" -> {
-                val coutnDeliveryStatus = 2 // numero de estados en recollecion
-                currentDeliveryStatusDifference = coutnDeliveryStatus - currentDeliveryStatusCount
-            }
-            "11" -> {
-                val coutnDeliveryStatus = 3
-                currentDeliveryStatusDifference = coutnDeliveryStatus - currentDeliveryStatusCount
-            }
-        }
-
-        if (currentDeliveryStatusDifference === 0) {
-            currentDeliveryStatusWay = 0
-        }
-
         if (serviceObj?.owner?.isMirelexStore == "1") {
             if (serviceObj?.owner?.userId == sessionUser?.person?.userId) {
                 when (serviceObj?.orderStatusId) {
-                    "3" -> {
-                        orderFutureStatus = OrderStatus.Gathering.orderStatusId
+                    OrderStatus.YesItCould.orderStatusId -> {
+                        orderFutureStatus = OrderStatus.ReadyInStore.orderStatusId
                         inputValue = "Listo para recolectar"
                         displayForm = true
                     }
-                    "2" -> {
-                        orderFutureStatus = OrderStatus.Finished.orderStatusId
+                    OrderStatus.ReadyInStore.orderStatusId -> {
+                        orderFutureStatus = OrderStatus.SeeYouSoon.orderStatusId
                         inputValue = "Finalizar"
                         displayForm = true
                     }
