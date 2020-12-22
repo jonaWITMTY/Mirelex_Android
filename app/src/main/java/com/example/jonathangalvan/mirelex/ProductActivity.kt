@@ -58,9 +58,11 @@ class ProductActivity : AppCompatActivity(),
         when(vmp.productProcessType){
             "update" ->{
                 productEndpoint = resources.getString(R.string.updateProduct)
+                vmp.productObjRequest.active = vmp.productObj?.productInformation?.active
             }
             else ->{
                 productEndpoint = resources.getString(R.string.createProduct)
+                vmp.productObjRequest.active = "1"
             }
         }
         UtilsModel.getOkClient().newCall(UtilsModel.postRequest(this, productEndpoint, UtilsModel.getGson().toJson(vmp.productObjRequest))).enqueue(object : Callback {

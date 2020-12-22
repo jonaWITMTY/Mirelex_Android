@@ -28,7 +28,8 @@ class ServiceInterface(
     var sewingTypes: ArrayList<SewingType>,
     var client: OrderPersonInformation,
     var owner: OrderPersonInformation,
-    var updates: ArrayList<OrderUpdates>
+    var updates: ArrayList<OrderUpdates>,
+    var statusHistory: ArrayList<OrderStatusUpdates>
 ) {}
 
 class SewingType(

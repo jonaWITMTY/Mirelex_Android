@@ -443,6 +443,7 @@ class ProductUpdate : androidx.fragment.app.Fragment()  {
                 updateProductWaist.editText?.setText(productObj!!.productInformation.waist)
                 updateProductHip.editText?.setText(productObj!!.productInformation.hip)
                 updateProductHeight.editText?.setText(productObj!!.productInformation.height)
+                updateProducSizeDress.editText?.setText(productObj!!.productInformation.size)
 
                 /*Fill women products catalogs*/
                 fillWomanProductsCatalogs()
@@ -458,6 +459,7 @@ class ProductUpdate : androidx.fragment.app.Fragment()  {
                 updateProductDecorationLayout.visibility = View.VISIBLE
                 updateProductLengthLayout.visibility = View.VISIBLE
                 updateProductSiloueteLayout.visibility = View.VISIBLE
+                updateProductSizeDressLayout.visibility = View.VISIBLE
             }
             else -> {
                 (activity as ProductActivity).setActionBarTitle("${productObj?.productInformation?.brand}")
@@ -473,6 +475,9 @@ class ProductUpdate : androidx.fragment.app.Fragment()  {
                 updateProductDecorationLayout.visibility = View.GONE
                 updateProductLengthLayout.visibility = View.GONE
                 updateProductSiloueteLayout.visibility = View.GONE
+
+                /*Hide*/
+                updateProductSizeDressLayout.visibility = View.GONE
 
                 /*Show*/
                 updateProductSizeLayout.visibility = View.VISIBLE

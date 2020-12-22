@@ -69,9 +69,15 @@ class StoreDetailActivity : AppCompatActivity() {
 
         storeDetailEmail.text = productInfo.productOwner.person?.email
         storeDetailPersonalPhone.text = productInfo.productOwner.person?.personalPhone
-        storeDetailAddress1.text = "${productInfo.productOwner.address!![0].street}, ${productInfo.productOwner.address!![0].numExt}"
-        storeDetailAddress2.text = "${productInfo.productOwner.address!![0].neighborhoodName},  ${productInfo.productOwner.address!![0].postalCode}"
-        storeDetailAddress3.text = "${productInfo.productOwner.address!![0].cityName},  ${productInfo.productOwner.address!![0].stateName}"
+        if(productInfo.productOwner.address != null){
+            storeDetailAddress1.text = "${productInfo.productOwner.address!![0].street}, ${productInfo.productOwner.address!![0].numExt}"
+            storeDetailAddress2.text = "${productInfo.productOwner.address!![0].neighborhoodName},  ${productInfo.productOwner.address!![0].postalCode}"
+            storeDetailAddress3.text = "${productInfo.productOwner.address!![0].cityName},  ${productInfo.productOwner.address!![0].stateName}"
+        }else{
+            storeDetailAddress1.visibility  = View.GONE
+            storeDetailAddress2.visibility  = View.GONE
+            storeDetailAddress3.visibility  = View.GONE
+        }
 
         /*Email click event*/
         storeDetailEmail.setOnClickListener(View.OnClickListener {
