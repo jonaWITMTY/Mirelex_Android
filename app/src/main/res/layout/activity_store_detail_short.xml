@@ -57,6 +57,19 @@
                     android:textColor="@android:color/black"
                     android:layout_marginStart="16dp" android:layout_marginEnd="16dp"
                     tools:text="storePhone"/>
+
+            <TextView
+                    android:id="@+id/storeDetailShortAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    tools:text="storeAddress" />
+
             <TextView
                     android:text="@string/followUs"
                     android:layout_width="match_parent"

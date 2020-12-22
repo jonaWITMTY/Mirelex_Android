@@ -17,9 +17,9 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_store_detail_short.*
 import android.content.pm.ApplicationInfo
 import android.content.ActivityNotFoundException
-
-
-
+import com.example.jonathangalvan.mirelex.Interfaces.Address
+import com.example.jonathangalvan.mirelex.Interfaces.AddressListInterface
+import kotlinx.android.synthetic.main.activity_order_checkout.*
 
 
 class StoreDetailShortActivity : AppCompatActivity() {
@@ -76,6 +76,10 @@ class StoreDetailShortActivity : AppCompatActivity() {
         storeDetailShortName.text = storeName
         storeDetailShortPhone.text = ownerObj.personalPhone
         storeDetailShortEmail.text = ownerObj.email
+        var address: Address = ownerObj.address
+        if(ownerObj.address != null){
+            storeDetailShortAddress.text = "${address.street}, ${address.neighborhoodName}, ${address.postalCode}, ${address.cityName}, ${address.stateName}"
+        }
 
         /*Open chat*/
         storeDetailShortOpenChat.setOnClickListener(View.OnClickListener{
