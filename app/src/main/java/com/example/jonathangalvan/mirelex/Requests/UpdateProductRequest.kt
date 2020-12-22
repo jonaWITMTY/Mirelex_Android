@@ -26,5 +26,5 @@ class UpdateProductRequest(
     var sizeId: String? = "",
     var isStretch: String? = "0",
     var description: String? = "",
-    var active: String = "1"
+    var active: String? = null
 ): GlobalRequest() {}
