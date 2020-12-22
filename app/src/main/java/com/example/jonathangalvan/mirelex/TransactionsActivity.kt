@@ -11,6 +11,7 @@ class TransactionsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_transactions)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = resources.getString(R.string.transactions)
+        
     }
 
     override fun onSupportNavigateUp(): Boolean {
