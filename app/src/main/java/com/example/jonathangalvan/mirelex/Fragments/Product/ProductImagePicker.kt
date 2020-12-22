@@ -120,7 +120,7 @@ class ProductImagePicker : androidx.fragment.app.Fragment() {
         if (requestCode === 1)
             if (resultCode === Activity.RESULT_OK) {
                 val selectedImage = data!!.getData()
-                val filePath = getPath(selectedImage)
+                val filePath = getPath(selectedImage!!)
                 val file_extn = filePath.substring(filePath.lastIndexOf(".") + 1)
 
                 try {

@@ -35,7 +35,7 @@ import java.io.OutputStreamWriter
 import java.lang.Exception
 
 private val REQUEST_CODE_ASK_PERMISSIONS = 1
-private val REQUIRED_SDK_PERMISSIONS = arrayOf<String>(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA, Manifest.permission.CALL_PHONE)
+private val REQUIRED_SDK_PERMISSIONS = arrayOf<String>(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA, Manifest.permission.CALL_PHONE)
 
 class MainActivity : AppCompatActivity() {
     val callbackManager = CallbackManager.Factory.create()
