@@ -5,6 +5,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.LinearLayout
+import androidx.core.content.ContextCompat
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.jonathangalvan.mirelex.Enums.OrderStatus
 import com.example.jonathangalvan.mirelex.Enums.OrderType
 import com.example.jonathangalvan.mirelex.Enums.UserType
@@ -15,6 +20,7 @@ import com.example.jonathangalvan.mirelex.Models.UtilsModel
 import com.example.jonathangalvan.mirelex.Requests.AcceptRejectServiceOrderRequest
 import com.example.jonathangalvan.mirelex.Requests.UpdateServiceOrderStatusRequest
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_order_detail.*
 import kotlinx.android.synthetic.main.activity_service_order_detail.*
 import kotlinx.android.synthetic.main.view_detail_info_row_with_title.view.*
 import okhttp3.Call
@@ -71,10 +77,45 @@ class ServiceOrderDetailActivity : AppCompatActivity() {
             }
         }
 
+//      Set Status icons
+        if(!serviceObj!!.statusHistory!!.isEmpty() && serviceObj!!.statusHistory.size > 0){
+            var highlitedVlineFound = false
+            serviceObj?.statusHistory?.forEachIndexed {index, value ->
+
+                //Status img
+                val imageView = ImageView(this@ServiceOrderDetailActivity)
+                var lp = LinearLayout.LayoutParams(70, 70)
+                lp.setMargins(10,0,10,0)
+                imageView.layoutParams = lp
+                Glide.with(this@ServiceOrderDetailActivity).load(value?.icon).apply( RequestOptions().override(70, 70)).into(imageView)
+                serviceDetailStatusIcons.addView(imageView)
+
+                //Line
+                if(serviceObj!!.statusHistory.size > (index + 1)){
+                    val vLine = View(this@ServiceOrderDetailActivity)
+
+                    if(highlitedVlineFound){
+                        vLine.setBackgroundColor(ContextCompat.getColor(this@ServiceOrderDetailActivity, R.color.colorGrey))
+                    }else{
+                        vLine.setBackgroundColor(ContextCompat.getColor(this@ServiceOrderDetailActivity, R.color.colorBlue))
+                    }
+
+                    lp = LinearLayout.LayoutParams(30, 3)
+                    vLine.layoutParams = lp
+                    serviceDetailStatusIcons.addView(vLine)
+
+                    if(value.active){
+                        highlitedVlineFound = true
+                    }
+                }
+            }
+        }
+
         addRow(resources.getString(R.string.type), serviceObj?.orderType!!)
         addRow(resources.getString(R.string.date), serviceObj?.startDate!!)
         if(serviceObj?.orderStatus != null){
-            addRow(resources.getString(R.string.status), serviceObj?.orderStatus!!)
+//            addRow(resources.getString(R.string.status), serviceObj?.orderStatus!!)
+            serviceDetailEstatusName.text = serviceObj?.orderStatus!!
         }
         addRow(resources.getString(R.string.total), serviceObj?.totalFormatted!!)
 

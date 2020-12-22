@@ -10,41 +10,92 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+        <TextView
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="19dp"
+                android:layout_marginTop="50dp"
+                android:text="@string/selectedStore"
+                android:textColor="@color/black"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
         <LinearLayout
-                android:orientation="horizontal"
+                android:id="@+id/serviceDetailStore"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
-                android:id="@+id/serviceDetailStore"
-                app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="35dp">
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView12">
+
             <com.mikhaellopez.circularimageview.CircularImageView
+                    android:id="@+id/serviceDetailStoreImg"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
                     app:civ_border_color="#EEEEEE"
                     app:civ_shadow_radius="10"
-                    android:id="@+id/serviceDetailStoreImg"
-                    android:layout_marginLeft="16dp" android:layout_marginRight="16dp"
-                    app:srcCompat="@drawable/mirelex_logo_cian"/>
+                    app:srcCompat="@drawable/mirelex_logo_cian" />
+
             <TextView
+                    android:id="@+id/serviceDetailStoreName"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    tools:text="storeName" android:textAlignment="viewStart"
-                    android:gravity="center_vertical" android:id="@+id/serviceDetailStoreName"/>
+                    android:gravity="center_vertical"
+                    android:textAlignment="viewStart"
+                    tools:text="storeName" />
+
             <ImageView
+                    android:id="@+id/imageView6"
                     android:layout_width="20dp"
-                    android:layout_height="20dp" app:srcCompat="@drawable/chevron_right"
-                    android:id="@+id/imageView6" android:layout_weight="0" android:layout_marginTop="20dp"
-                    android:layout_marginRight="30dp"/>
+                    android:layout_height="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_weight="0"
+                    app:srcCompat="@drawable/chevron_right" />
         </LinearLayout>
+
+        <TextView
+                android:id="@+id/serviceDetailEstatusName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="16dp"
+                android:textColor="@color/black"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/serviceDetailStore"
+                tools:text="Status" />
+
         <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content" android:id="@+id/serviceDetailInfo"
+                android:id="@+id/serviceDetailStatusIcons"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="30dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:textAlignment="center"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginTop="30dp" app:layout_constraintTop_toBottomOf="@+id/serviceDetailStore">
-        </LinearLayout>
+                app:layout_constraintTop_toBottomOf="@+id/serviceDetailEstatusName"></LinearLayout>
+
+        <LinearLayout
+                android:id="@+id/serviceDetailInfo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/serviceDetailStatusIcons"></LinearLayout>
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
