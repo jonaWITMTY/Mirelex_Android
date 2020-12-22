@@ -148,7 +148,7 @@
                     android:paddingTop="10dp"
                     android:paddingEnd="16dp"
                     android:paddingBottom="10dp"
-                    android:text="@string/storeWithPoints"
+                    android:text="@string/selectedStore"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:textStyle="bold" />
