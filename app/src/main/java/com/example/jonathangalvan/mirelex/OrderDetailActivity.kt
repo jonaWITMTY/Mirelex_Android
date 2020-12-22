@@ -251,7 +251,7 @@ class OrderDetailActivity : AppCompatActivity(), OrderStatusDetailList.OnFragmen
                                         if(highlitedVlineFound){
                                             vLine.setBackgroundColor(ContextCompat.getColor(this@OrderDetailActivity, R.color.colorGrey))
                                         }else{
-                                            vLine.setBackgroundColor(ContextCompat.getColor(this@OrderDetailActivity, R.color.red))
+                                            vLine.setBackgroundColor(ContextCompat.getColor(this@OrderDetailActivity, R.color.colorBlue))
                                         }
 
                                         lp = LinearLayout.LayoutParams(30, 3)
