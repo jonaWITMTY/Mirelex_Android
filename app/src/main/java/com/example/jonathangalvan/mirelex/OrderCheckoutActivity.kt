@@ -111,7 +111,7 @@ class OrderCheckoutActivity : AppCompatActivity(), SelectItems.OnFragmentInterac
             val loader = layoutInflater.inflate(R.layout.view_progressbar,findViewById(android.R.id.content), true)
 
             /*Hide delivery and Payments - conditional*/
-            if(orderCheckoutTerms.isChecked && defaultCard != null){
+            if(orderCheckoutTerms.isChecked){
 
             /*Hide delivery and Payments - Conditional without delivery and payments*/
 //            if(orderCheckoutTerms.isChecked){
