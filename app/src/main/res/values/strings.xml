@@ -165,4 +165,5 @@
     <string name="storeWithPoints">Store:</string>
     <string name="selectedStore">Selected store:</string>
     <string name="pleaseSelectStore">Please select an store</string>
+    <string name="transactions">Transactions</string>
 </resources>

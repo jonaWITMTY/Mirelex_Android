@@ -83,6 +83,11 @@ class Profile : androidx.fragment.app.Fragment() {
         sessionUserProducts.setOnClickListener(View.OnClickListener {
             startActivity(Intent(activity, ProfileProductsActivity::class.java))
         })
+
+//      Click to transactions
+        sessionUserTransactions.setOnClickListener(View.OnClickListener {
+            startActivity(Intent(activity, TransactionsActivity::class.java))
+        })
     }
 
     fun onButtonPressed(uri: Uri) {
