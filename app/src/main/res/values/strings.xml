@@ -164,4 +164,5 @@
     <string name="myBusiness">My business</string>
     <string name="storeWithPoints">Store:</string>
     <string name="selectedStore">Selected store:</string>
+    <string name="pleaseSelectStore">Please select an store</string>
 </resources>

@@ -165,4 +165,5 @@
     <string name="myBusiness">Mi empresa</string>
     <string name="storeWithPoints">Tienda:</string>
     <string name="selectedStore">Tienda seleccionada:</string>
+    <string name="pleaseSelectStore">Por favor selecciona una tienda</string>
 </resources>
