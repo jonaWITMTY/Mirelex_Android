@@ -22,24 +22,42 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
-            <TextView
-                    android:id="@+id/transactionAdapterDate"
+            <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:textColor="@color/black"
-                    tools:text="date" />
+                    android:orientation="vertical">
+
+                <TextView
+                        android:id="@+id/transactionAdapterType"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        tools:text="type" />
+
+                <TextView
+                        android:id="@+id/transactionAdapterDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        tools:text="date" />
+            </LinearLayout>
 
             <TextView
-                    android:id="@+id/transactionAdapterType"
+                    android:id="@+id/transactionAdapterFolio"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="2"
                     android:gravity="center_vertical"
-                    android:textAlignment="textStart"
                     android:textColor="@color/black"
-                    tools:text="type" />
+                    android:textStyle="bold"
+                    tools:text="folio" />
 
             <TextView
                     android:id="@+id/transactionAdapterAmount"
@@ -49,6 +67,7 @@
                     android:gravity="center_vertical"
                     android:textAlignment="textEnd"
                     android:textColor="@color/black"
+                    android:textStyle="bold"
                     tools:text="amount" />
         </LinearLayout>
 

@@ -76,4 +76,6 @@
     <string name="getSewingTypes">service/sewing/types</string>
     <string name="getSewingStores">service/sewing/stores</string>
 
+    //Transactions
+    <string name="getTransactions">transactions</string>
 </resources>
