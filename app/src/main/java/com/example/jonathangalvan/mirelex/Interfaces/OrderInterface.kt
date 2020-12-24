@@ -21,7 +21,8 @@ class OrderInterface(
     var clientDelivery: String?,
     var ownerDelivery: String?,
     var product: ProductInterface,
-    var deliveryAddress: Address?
+    var deliveryAddress: Address?,
+    var store : Person?
 ) { }
 
 class OrdersInterface(

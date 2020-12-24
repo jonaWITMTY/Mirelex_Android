@@ -176,6 +176,11 @@ class OrderDetailActivity : AppCompatActivity(), OrderStatusDetailList.OnFragmen
                             addRow(resources.getString(R.string.folio), orderInfo.orderInformation.folio!!, detailOrderInfo)
                             addRow(resources.getString(R.string.type), orderInfo.orderInformation.orderType!!, detailOrderInfo)
                             addRow(resources.getString(R.string.date), orderInfo.orderInformation.startDate!!, detailOrderInfo)
+                            if(orderInfo.orderOwnerInformation.isMirelexStore == "1"){
+                                addRow(resources.getString(R.string.selectedStoreNoPoints), orderInfo!!.orderOwnerInformation.companyName!!, detailOrderInfo)
+                            }else{
+                                addRow(resources.getString(R.string.selectedStoreNoPoints), orderInfo!!.orderInformation.store?.firstName!!, detailOrderInfo)
+                            }
 //                            addRow(resources.getString(R.string.status), orderInfo.orderInformation.orderStatus!!, detailOrderInfo)
                             detailOrderEstatusName.text = orderInfo.orderInformation.orderStatus
                             addRow(resources.getString(R.string.total), orderInfo.orderInformation.totalFormatted!!, detailOrderInfo)

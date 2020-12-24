@@ -156,16 +156,22 @@ class ProductDetailActivity : AppCompatActivity() {
                                     productSleeveStyle.detailInfoValueView.text = productObj?.productInformation?.productSleeveStyle
                                     detailProductInfo.addView(productSleeveStyle)
 
+                                    val productDressSilhouette = layoutInflater.inflate(R.layout.view_detail_info_row_with_title, detailProductInfo, false)
+                                    productDressSilhouette.detailInfoNameView.text = resources.getString(R.string.dressSilhouette)
+                                    productDressSilhouette.detailInfoValueView.text = productObj?.productInformation?.productSilhouette
+                                    detailProductInfo.addView(productDressSilhouette)
+
                                 }
                             }
 
-                            val productColor = layoutInflater.inflate(R.layout.view_detail_info_row, detailProductInfo, false)
+                            val productColors = layoutInflater.inflate(R.layout.view_detail_info_row_with_title, detailProductInfo, false)
                             var colors: String = ""
                             productObj?.productColors?.forEach {
                                 colors += " ${it.color},"
                             }
-                            productColor.detailInfoJustValueView.text = colors.dropLast(1)
-                            detailProductInfo.addView(productColor)
+                            productColors.detailInfoNameView.text = resources.getString(R.string.colors)
+                            productColors.detailInfoValueView.text = colors.dropLast(1)
+                            detailProductInfo.addView(productColors)
 
 //                            val modelAr = layoutInflater.inflate(R.layout.view_detail_info_row_with_chevron_title, detailProductInfo,false)
 //                            modelAr.detailInfoChevronTitle.text = "Abrir modelo Ar"

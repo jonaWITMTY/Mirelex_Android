@@ -167,4 +167,5 @@
     <string name="selectedStore">Tienda seleccionada:</string>
     <string name="pleaseSelectStore">Por favor selecciona una tienda</string>
     <string name="transactions">Transacciones</string>
+    <string name="selectedStoreNoPoints">Tienda seleccionada</string>
 </resources>
