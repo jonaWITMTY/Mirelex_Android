@@ -115,7 +115,7 @@ class Profile : androidx.fragment.app.Fragment() {
         updateUser()
     }
 
-    override fun onPrepareOptionsMenu(menu: Menu?) {
+    override fun onPrepareOptionsMenu(menu: Menu) {
         super.onPrepareOptionsMenu(menu)
 
         /*Store tabs icons*/

@@ -33,7 +33,7 @@ class CustomAlert : androidx.fragment.app.DialogFragment() {
         super.onCreate(savedInstanceState)
     }
 
-    override fun onDismiss(dialog: DialogInterface?) {
+    override fun onDismiss(dialog: DialogInterface) {
         super.onDismiss(dialog)
         if(onSuccessFinishRes == 1 && alertInfo?.status == "success"){
             activity?.finish()
@@ -76,7 +76,7 @@ class CustomAlert : androidx.fragment.app.DialogFragment() {
                     }
                     "sessionFailed" -> {
                         alertView.visibility = View.GONE
-                        onDismiss(dialog)
+                        onDismiss(dialog!!)
                     }
                     "termsAndCondition"-> {
                         alertView.alertTitle.text = activity?.getString(R.string.termsAlert)
@@ -94,7 +94,7 @@ class CustomAlert : androidx.fragment.app.DialogFragment() {
 
                 Timer().schedule(object : TimerTask() {
                     override fun run() {
-                        onDismiss(dialog)
+                        onDismiss(dialog!!)
                     }
                 }, 3000)
             }
@@ -102,7 +102,7 @@ class CustomAlert : androidx.fragment.app.DialogFragment() {
                 alertView = activity?.layoutInflater!!.inflate(R.layout.fragment_forgot_email_alert, null)
                 val btnCancel: View = alertView.findViewById(R.id.btnCancel)
                 btnCancel.setOnClickListener(View.OnClickListener {
-                    onDismiss(dialog)
+                    onDismiss(dialog!!)
                 })
 
                 val btnSubmit: View = alertView.findViewById(R.id.btnSubmit)
@@ -110,19 +110,19 @@ class CustomAlert : androidx.fragment.app.DialogFragment() {
                     val emailField = alertView?.findViewById<TextView>(R.id.emailFieldWarp)
                     val personObj = ForgotPasswordRequest(emailField?.text.toString())
                     val loader = layoutInflater.inflate(R.layout.view_progressbar, activity!!.findViewById(android.R.id.content), true)
-                    dialog.hide()
+                    dialog?.hide()
                     UtilsModel.getOkClient().newCall(UtilsModel.postRequest(activity!!.applicationContext, activity!!.resources.getString(R.string.forgotUser), UtilsModel.getGson().toJson(personObj))).enqueue(object: Callback {
                         override fun onFailure(call: Call, e: IOException) {
                             activity!!.runOnUiThread {run{activity!!.findViewById<ViewGroup>(android.R.id.content).removeView(activity!!.findViewById(R.id.view_progressbar))}}
-                            UtilsModel.getAlertView().newInstance(UtilsModel.getErrorRequestCall(), 1, 0).show(activity?.supportFragmentManager,"alertDialog")
-                            onDismiss(dialog)
+                            UtilsModel.getAlertView().newInstance(UtilsModel.getErrorRequestCall(), 1, 0).show(activity?.supportFragmentManager!!,"alertDialog")
+                            onDismiss(dialog!!)
                         }
 
                         override fun onResponse(call: Call, response: Response) {
                             activity!!.runOnUiThread {run{activity!!.findViewById<ViewGroup>(android.R.id.content).removeView(activity!!.findViewById(R.id.view_progressbar))}}
                             val responseStr = response.body()?.string()
-                            onDismiss(dialog)
-                            UtilsModel.getAlertView().newInstance(responseStr, 1, 0).show(activity?.supportFragmentManager,"alertDialog")
+                            onDismiss(dialog!!)
+                            UtilsModel.getAlertView().newInstance(responseStr, 1, 0).show(activity?.supportFragmentManager!!,"alertDialog")
                         }
                     })
                 })
@@ -135,13 +135,13 @@ class CustomAlert : androidx.fragment.app.DialogFragment() {
                             val btnCancel = alertView.findViewById<View>(R.id.btnCancel)
                             btnCancel.setOnClickListener(View.OnClickListener {
                                 (activity as ProductDetailActivity).continueForLeaseble()
-                                onDismiss(dialog)
+                                onDismiss(dialog!!)
                             })
 
                             val btnSubmit = alertView.findViewById<View>(R.id.btnSubmit)
                             btnSubmit.setOnClickListener(View.OnClickListener {
                                 (activity as ProductDetailActivity).continueForFitting()
-                                onDismiss(dialog)
+                                onDismiss(dialog!!)
                             })
                         }else{
                             alertView.findViewById<TextView>(R.id.leasableAlertTitle).text = alertInfo?.title
@@ -160,13 +160,13 @@ class CustomAlert : androidx.fragment.app.DialogFragment() {
 //                                        (activity as ProductDetailActivity).continueForPurchase()
 //                                    }
 //                                }
-                                onDismiss(dialog)
+                                onDismiss(dialog!!)
                             })
 
                             val btnSubmit = alertView.findViewById<View>(R.id.btnSubmit)
                             btnSubmit.setOnClickListener(View.OnClickListener {
                                 startActivity(Intent(activity, ProfileActivity::class.java))
-                                onDismiss(dialog)
+                                onDismiss(dialog!!)
                             })
                         }
                     }
@@ -190,7 +190,7 @@ class CustomAlert : androidx.fragment.app.DialogFragment() {
                             (activity as ContactActivity).confirmBtnCallback()
                         }
                         else -> {
-                            onDismiss(dialog)
+                            onDismiss(dialog!!)
                         }
                     }
                 })

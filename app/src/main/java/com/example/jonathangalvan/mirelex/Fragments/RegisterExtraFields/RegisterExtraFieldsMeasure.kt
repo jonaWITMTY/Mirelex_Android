@@ -43,40 +43,40 @@ class RegisterExtraFieldsMeasure : androidx.fragment.app.Fragment() {
         val registeredUserInfo = viewModel.userCall.value
 
         /*Fill sizes*/
-        val adapterSizes = ArrayAdapter<CatalogInterface>(activity, R.layout.view_spinner_item, R.id.spinnerItemWhiteSelect, viewModel.sizes.value)
+        val adapterSizes = ArrayAdapter<CatalogInterface>(activity!!, R.layout.view_spinner_item, R.id.spinnerItemWhiteSelect, viewModel.sizes.value!!)
         adapterSizes.setDropDownViewResource(R.layout.view_spinner_item_select)
         registerExtraSizesField.adapter = adapterSizes
 
         /*Fill bodyType*/
-        val adapterBodyType = ArrayAdapter<WomenCatalogInterface>(activity, R.layout.view_spinner_item, R.id.spinnerItemWhiteSelect, viewModel.womenCatalogs.value?.bodyTypes)
+        val adapterBodyType = ArrayAdapter<WomenCatalogInterface>(activity!!, R.layout.view_spinner_item, R.id.spinnerItemWhiteSelect, viewModel.womenCatalogs.value?.bodyTypes!!)
         adapterBodyType.setDropDownViewResource(R.layout.view_spinner_item_select)
         registerExtraBodyTypesField.adapter = adapterBodyType
 
         /*Fill skinColorType*/
-        val adapterSkinColorType = ArrayAdapter<WomenCatalogInterface>(activity, R.layout.view_spinner_item, R.id.spinnerItemWhiteSelect, viewModel.womenCatalogs.value?.skinColors)
+        val adapterSkinColorType = ArrayAdapter<WomenCatalogInterface>(activity!!, R.layout.view_spinner_item, R.id.spinnerItemWhiteSelect, viewModel.womenCatalogs.value?.skinColors!!)
         adapterSkinColorType.setDropDownViewResource(R.layout.view_spinner_item_select)
         registerExtraSkinColorField.adapter = adapterSkinColorType
 
         /*Fill hairColor*/
-        val adapterHairColor = ArrayAdapter<WomenCatalogInterface>(activity, R.layout.view_spinner_item, R.id.spinnerItemWhiteSelect, viewModel.womenCatalogs.value?.hairColors)
+        val adapterHairColor = ArrayAdapter<WomenCatalogInterface>(activity!!, R.layout.view_spinner_item, R.id.spinnerItemWhiteSelect, viewModel.womenCatalogs.value?.hairColors!!)
         adapterHairColor.setDropDownViewResource(R.layout.view_spinner_item_select)
         registerExtraHairColorField.adapter = adapterHairColor
 
         /*Clicks measures "?"*/
         imagePreviewHeight.setOnClickListener(View.OnClickListener {
-            ImagePreview().newInstance(resources.getString(R.string.heightImage)).show(fragmentManager, "alertDialog")
+            ImagePreview().newInstance(resources.getString(R.string.heightImage)).show(fragmentManager!!, "alertDialog")
         })
 
         imagePreviewBust.setOnClickListener(View.OnClickListener {
-            ImagePreview().newInstance(resources.getString(R.string.bustImage)).show(fragmentManager, "alertDialog")
+            ImagePreview().newInstance(resources.getString(R.string.bustImage)).show(fragmentManager!!, "alertDialog")
         })
 
         imagePreviewWaist.setOnClickListener(View.OnClickListener {
-            ImagePreview().newInstance(resources.getString(R.string.waistImage)).show(fragmentManager, "alertDialog")
+            ImagePreview().newInstance(resources.getString(R.string.waistImage)).show(fragmentManager!!, "alertDialog")
         })
 
         imagePreviewHip.setOnClickListener(View.OnClickListener {
-            ImagePreview().newInstance(resources.getString(R.string.hipImage)).show(fragmentManager, "alertDialog")
+            ImagePreview().newInstance(resources.getString(R.string.hipImage)).show(fragmentManager!!, "alertDialog")
         })
 
         /*Hide fields*/

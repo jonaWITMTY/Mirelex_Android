@@ -43,7 +43,7 @@ class ImagePreview : androidx.fragment.app.DialogFragment() {
 //        Glide.with(activity!!).load(arguments?.getString("image")).apply( RequestOptions().override(800, 0)).into(alertView.findViewById<ImageView>(R.id.imagePreviewMain))
 
 
-        val sliderAdapter = ZoomSliderPagerAdapter(arguments!!.getStringArrayList("image"), activity?.supportFragmentManager)
+        val sliderAdapter = ZoomSliderPagerAdapter(arguments!!.getStringArrayList("image")!!, activity?.supportFragmentManager)
         alertView.findViewById<androidx.viewpager.widget.ViewPager>(R.id.imagePreviewSlider).adapter = sliderAdapter
         if(arguments!!.getInt("position") != -1){
             alertView.findViewById<androidx.viewpager.widget.ViewPager>(R.id.imagePreviewSlider).currentItem = arguments!!.getInt("position")
@@ -52,7 +52,7 @@ class ImagePreview : androidx.fragment.app.DialogFragment() {
 
 
         alertView.findViewById<ImageView>(R.id.imagePreviewClose).setOnClickListener(View.OnClickListener {
-            onDismiss(dialog)
+            onDismiss(dialog!!)
         })
         alert.setView(alertView)
         return alert.create()

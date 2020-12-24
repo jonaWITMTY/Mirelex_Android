@@ -137,7 +137,7 @@ class Products : androidx.fragment.app.Fragment() {
         UtilsModel.getOkClient().newCall(UtilsModel.postRequest(activity!!.applicationContext, activity!!.resources.getString(R.string.getProducts), requestStr)).enqueue( object: Callback {
             override fun onFailure(call: Call, e: IOException) {
                 activity?.runOnUiThread {run{activity?.findViewById<ViewGroup>(android.R.id.content)?.removeView(activity?.findViewById(R.id.view_progressbar))}}
-                UtilsModel.getAlertView().newInstance(UtilsModel.getErrorRequestCall(), 1, 0).show(activity?.supportFragmentManager,"alertDialog")
+                UtilsModel.getAlertView().newInstance(UtilsModel.getErrorRequestCall(), 1, 0).show(activity?.supportFragmentManager!!,"alertDialog")
             }
 
             override fun onResponse(call: Call, response: Response) {
@@ -171,7 +171,7 @@ class Products : androidx.fragment.app.Fragment() {
                         }
                     }
                     else -> {
-                        UtilsModel.getAlertView().newInstance(responseStr, 1, 0).show(activity?.supportFragmentManager,"alertDialog")
+                        UtilsModel.getAlertView().newInstance(responseStr, 1, 0).show(activity?.supportFragmentManager!!,"alertDialog")
                     }
                 }
             }
@@ -241,7 +241,7 @@ class Products : androidx.fragment.app.Fragment() {
         })
     }
 
-    override fun onPrepareOptionsMenu(menu: Menu?) {
+    override fun onPrepareOptionsMenu(menu: Menu) {
         super.onPrepareOptionsMenu(menu)
 
         /*Store tabs icons*/
@@ -251,7 +251,7 @@ class Products : androidx.fragment.app.Fragment() {
         menu?.findItem(R.id.customerTabsAddProductIcon)?.isVisible = false
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item?.itemId){
             R.id.storeTabsAddIcon ->{
                 when(user?.person?.userTypeId){
@@ -263,7 +263,7 @@ class Products : androidx.fragment.app.Fragment() {
                                 "{'status':'success', 'title':'${resources.getString(R.string.pendingApprovalAlertTitle)}', 'desc':'${resources.getString(R.string.pendingApprovalAlertDesc)}'}",
                                 1,
                                 0)
-                                .show(activity?.supportFragmentManager,"alertDialog")
+                                .show(activity?.supportFragmentManager!!,"alertDialog")
                         }
                     }
                     UserType.Customer.userTypeId ->{

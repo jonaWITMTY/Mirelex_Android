@@ -102,7 +102,7 @@ class Notifications : androidx.fragment.app.Fragment() {
         UtilsModel.getOkClient().newCall(UtilsModel.postRequest(activity!!, resources.getString(R.string.getUserNotifications))).enqueue(object: Callback {
             override fun onFailure(call: Call, e: IOException) {
                 activity?.runOnUiThread {run{activity?.findViewById<ViewGroup>(android.R.id.content)?.removeView(activity?.findViewById(R.id.view_progressbar))}}
-                UtilsModel.getAlertView().newInstance(UtilsModel.getErrorRequestCall(), 1, 0).show(activity?.supportFragmentManager,"alertDialog")
+                UtilsModel.getAlertView().newInstance(UtilsModel.getErrorRequestCall(), 1, 0).show(activity?.supportFragmentManager!!,"alertDialog")
             }
 
             override fun onResponse(call: Call, response: Response) {
@@ -134,14 +134,14 @@ class Notifications : androidx.fragment.app.Fragment() {
                         }
                     }
                     else -> {
-                        UtilsModel.getAlertView().newInstance(responseStr, 1, 0).show(activity?.supportFragmentManager,"alertDialog")
+                        UtilsModel.getAlertView().newInstance(responseStr, 1, 0).show(activity?.supportFragmentManager!!,"alertDialog")
                     }
                 }
             }
         })
     }
 
-    override fun onPrepareOptionsMenu(menu: Menu?) {
+    override fun onPrepareOptionsMenu(menu: Menu) {
         super.onPrepareOptionsMenu(menu)
 
         /*Store tabs icons*/
