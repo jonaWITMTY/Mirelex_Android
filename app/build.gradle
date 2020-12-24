@@ -79,4 +79,5 @@ dependencies {
     implementation 'com.thomashaertel:multispinner:0.1.1@aar' // Multiselect
     implementation 'com.facebook.android:facebook-login:5.0.3' // Facebook
     implementation 'me.relex:circleindicator:1.2.2' // Slider dots
+    implementation "com.rizlee.view:rangeseekbar:1.0.0" //Range slider
 }
