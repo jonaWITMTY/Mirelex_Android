@@ -22,7 +22,7 @@ class OrderInterface(
     var ownerDelivery: String?,
     var product: ProductInterface,
     var deliveryAddress: Address?,
-    var store : Person?
+    var store : OrderPersonInformation?
 ) { }
 
 class OrdersInterface(

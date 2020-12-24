@@ -177,9 +177,21 @@ class OrderDetailActivity : AppCompatActivity(), OrderStatusDetailList.OnFragmen
                             addRow(resources.getString(R.string.type), orderInfo.orderInformation.orderType!!, detailOrderInfo)
                             addRow(resources.getString(R.string.date), orderInfo.orderInformation.startDate!!, detailOrderInfo)
                             if(orderInfo.orderOwnerInformation.isMirelexStore == "1"){
-                                addRow(resources.getString(R.string.selectedStoreNoPoints), orderInfo!!.orderOwnerInformation.companyName!!, detailOrderInfo)
+                                val ownerinfo = orderInfo.orderOwnerInformation
+                                var storeStr = "\n${ownerinfo.companyName.toString()} " +
+                                        "\n${ownerinfo.email.toString()} " +
+                                        "\n${ownerinfo.personalPhone.toString()}" +
+                                        "\n\n${ownerinfo.address.street}, ${ownerinfo.address.neighborhoodName}, ${ownerinfo.address.postalCode}, ${ownerinfo.address.cityName}, ${ownerinfo.address.stateName}"
+                                addRow(resources.getString(R.string.selectedStoreNoPoints), storeStr, detailOrderInfo)
                             }else{
-                                addRow(resources.getString(R.string.selectedStoreNoPoints), orderInfo!!.orderInformation.store?.firstName!!, detailOrderInfo)
+                                val storeInfo = orderInfo!!.orderInformation.store
+                                var storeStr = "\n${storeInfo?.firstName.toString()} " +
+                                        "\n${storeInfo?.email.toString()} " +
+                                        "\n${storeInfo?.personalPhone.toString()}"
+                                if(storeInfo?.address != null){
+                                    storeStr += "\n\n${storeInfo?.address?.street}, ${storeInfo?.address?.neighborhoodName}, ${storeInfo?.address?.postalCode}, ${storeInfo?.address?.cityName}, ${storeInfo?.address?.stateName}"
+                                }
+                                addRow(resources.getString(R.string.selectedStoreNoPoints), storeStr, detailOrderInfo)
                             }
 //                            addRow(resources.getString(R.string.status), orderInfo.orderInformation.orderStatus!!, detailOrderInfo)
                             detailOrderEstatusName.text = orderInfo.orderInformation.orderStatus
