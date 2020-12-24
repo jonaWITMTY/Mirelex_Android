@@ -22,6 +22,7 @@ import com.example.jonathangalvan.mirelex.Enums.UserType
 import com.example.jonathangalvan.mirelex.Fragments.Order.OrderStatusDetailList
 import com.example.jonathangalvan.mirelex.Fragments.Utils.CustomBottomAlert
 import com.example.jonathangalvan.mirelex.Interfaces.BottomAlertInterface
+import com.example.jonathangalvan.mirelex.Interfaces.ConversationInterface
 import com.example.jonathangalvan.mirelex.Interfaces.OrderProductInfo
 import com.example.jonathangalvan.mirelex.Interfaces.UserInterface
 import com.example.jonathangalvan.mirelex.Models.SessionModel
@@ -151,19 +152,30 @@ class OrderDetailActivity : AppCompatActivity(), OrderStatusDetailList.OnFragmen
                                     isThereImage = orderInfo.orderClientInformation.profilePictureUrl
                                 }
                                 else -> {
-                                    when(orderInfo.orderOwnerInformation.companyName){
-                                        null -> {
-                                            pictureUrl = orderInfo.orderClientInformation.profilePictureUrl.toString()
-                                            name = "${orderInfo.orderClientInformation.firstName} ${orderInfo.orderClientInformation.paternalLastName}"
-                                            json = UtilsModel.getGson().toJson(orderInfo.orderClientInformation)
-                                            isThereImage = orderInfo.orderClientInformation.profilePictureUrl
+                                    if(sessionUser?.person?.userId == orderInfo.orderClientInformation.userId){
+                                         when(orderInfo.orderOwnerInformation.companyName){
+                                            null -> {
+                                                name = "${orderInfo.orderOwnerInformation.firstName} ${orderInfo.orderOwnerInformation.paternalLastName}"
+                                            }
+                                            else -> {
+                                                name = orderInfo.orderOwnerInformation.companyName.toString()
+                                            }
                                         }
-                                        else -> {
-                                            pictureUrl = orderInfo.orderOwnerInformation.profilePictureUrl.toString()
-                                            name = orderInfo.orderOwnerInformation.companyName.toString()
-                                            json = UtilsModel.getGson().toJson(orderInfo.orderOwnerInformation)
-                                            isThereImage = orderInfo.orderOwnerInformation.profilePictureUrl
+                                        pictureUrl = orderInfo.orderOwnerInformation.profilePictureUrl.toString()
+                                        json = UtilsModel.getGson().toJson(orderInfo.orderOwnerInformation)
+                                        isThereImage = orderInfo.orderOwnerInformation.profilePictureUrl
+                                    }else{
+                                        when(orderInfo.orderClientInformation.companyName){
+                                            null -> {
+                                                name = "${orderInfo.orderClientInformation.firstName} ${orderInfo.orderClientInformation.paternalLastName}"
+                                            }
+                                            else -> {
+                                                name = orderInfo.orderClientInformation.companyName.toString()
+                                            }
                                         }
+                                        pictureUrl = orderInfo.orderClientInformation.profilePictureUrl.toString()
+                                        json = UtilsModel.getGson().toJson(orderInfo.orderClientInformation)
+                                        isThereImage = orderInfo.orderClientInformation.profilePictureUrl
                                     }
                                 }
                             }
@@ -239,15 +251,56 @@ class OrderDetailActivity : AppCompatActivity(), OrderStatusDetailList.OnFragmen
                             })
 
                             /*Go to store detail*/
-                            if(sessionUser?.person?.userTypeId == UserType.Customer.userTypeId && orderInfo.orderOwnerInformation.userTypeId == UserType.Store.userTypeId){
-                                detailOrderGoToStoreProfile.setOnClickListener(View.OnClickListener {
-                                    val goToStoreDetailShort = Intent(this@OrderDetailActivity, StoreDetailShortActivity::class.java)
+                            detailOrderGoToStoreProfile.setOnClickListener(View.OnClickListener {
+                                if(sessionUser?.person?.userTypeId == UserType.Customer.userTypeId && orderInfo.orderOwnerInformation.userTypeId == UserType.Store.userTypeId) {
+                                    val goToStoreDetailShort = Intent(
+                                        this@OrderDetailActivity,
+                                        StoreDetailShortActivity::class.java
+                                    )
                                     val bundleToStoreDetailShort = Bundle()
                                     bundleToStoreDetailShort.putString("personObj", json)
                                     goToStoreDetailShort.putExtras(bundleToStoreDetailShort)
                                     startActivity(goToStoreDetailShort)
-                                })
-                            }
+                                }else{
+                                    if(sessionUser?.person?.userTypeId == UserType.Customer.userTypeId && orderInfo.orderOwnerInformation.userTypeId == UserType.Customer.userTypeId) {
+                                        val bundleToChat = Bundle()
+                                        val goToChat = Intent(this@OrderDetailActivity, ChatActivity::class.java)
+                                        val sessionUser = SessionModel(this@OrderDetailActivity).getUser()
+                                        var conversationObj : ConversationInterface
+
+                                        if(sessionUser?.person?.userId == orderInfo.orderClientInformation.userId) {
+                                             conversationObj = ConversationInterface(
+                                                userIdTo = orderInfo.orderOwnerInformation.userId,
+                                                userTo = if (orderInfo.orderOwnerInformation.companyName != null) orderInfo.orderOwnerInformation.companyName else "${orderInfo.orderOwnerInformation.firstName} ${orderInfo.orderOwnerInformation.paternalLastName}",
+                                                userIdFrom = sessionUser.person?.userId
+                                            )
+                                        }else{
+                                            conversationObj = ConversationInterface(
+                                                userIdTo = orderInfo.orderClientInformation.userId,
+                                                userTo = if (orderInfo.orderClientInformation.companyName != null) orderInfo.orderClientInformation.companyName else "${orderInfo.orderClientInformation.firstName} ${orderInfo.orderClientInformation.paternalLastName}",
+                                                userIdFrom = sessionUser.person?.userId
+                                            )
+                                        }
+                                        bundleToChat.putString("conversationObj", UtilsModel.getGson().toJson(conversationObj))
+                                        goToChat.putExtras(bundleToChat)
+                                        startActivity(goToChat)
+                                    }else{
+                                        if(sessionUser?.person?.userTypeId == UserType.Store.userTypeId && orderInfo.orderClientInformation.userTypeId == UserType.Customer.userTypeId) {
+                                            val bundleToChat = Bundle()
+                                            val goToChat = Intent(this@OrderDetailActivity, ChatActivity::class.java)
+                                            val sessionUser = SessionModel(this@OrderDetailActivity).getUser()
+                                            val conversationObj = ConversationInterface(
+                                                userIdTo = orderInfo.orderClientInformation.userId,
+                                                userTo = if(orderInfo.orderClientInformation.companyName != null) orderInfo.orderClientInformation.companyName  else "${orderInfo.orderClientInformation.firstName } ${orderInfo.orderClientInformation.paternalLastName }",
+                                                userIdFrom = sessionUser.person?.userId
+                                            )
+                                            bundleToChat.putString("conversationObj", UtilsModel.getGson().toJson(conversationObj))
+                                            goToChat.putExtras(bundleToChat)
+                                            startActivity(goToChat)
+                                        }
+                                    }
+                                }
+                            })
 
                             if(!orderInfo.orderStatusHistory.isEmpty() && orderInfo.orderStatusHistory.size > 0){
                                 var highlitedVlineFound = false
