@@ -39,7 +39,43 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <LinearLayout
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:orientation="vertical">
+
+                <TextView
+                        android:id="@+id/textView14"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/price"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                <com.rizlee.rangeseekbar.RangeSeekBar
+                        android:id="@+id/filterProductFilterPriceRange"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        app:active="true"
+                        app:additionalTextMargin="6dp"
+                        app:centerColor="@color/colorBlue"
+                        app:enableGradient="false"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:roundedCorners="true"
+                        app:showAdditionalText="none"
+                        app:showThumbsText="below"
+                        app:sideColor="@color/colorBlue"
+                        app:textColor="@android:color/black"
+                        app:thumbsTextMargin="6dp" />
+            </LinearLayout>
+
+            <LinearLayout
                         android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"

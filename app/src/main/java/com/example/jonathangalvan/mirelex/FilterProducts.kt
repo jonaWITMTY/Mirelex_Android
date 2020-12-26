@@ -45,6 +45,9 @@ class FilterProducts : AppCompatActivity() {
         /*Set actionbar title*/
         supportActionBar?.title = resources.getString(R.string.searchProductActionBarTitle)
 
+        /*Set Range slider*/
+        filterProductFilterPriceRange.setRange(1,5000,1)
+
         /*Filter products by submit keyboard*/
         filterProductSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -145,6 +148,9 @@ class FilterProducts : AppCompatActivity() {
             if(selectedIds != null){
                 productFilterObj.productColors = selectedIds
             }
+
+            productFilterObj.minPrice = filterProductFilterPriceRange.getCurrentValues().leftValue.toString()
+            productFilterObj.maxPrice = filterProductFilterPriceRange.getCurrentValues().rightValue.toString()
         }
 
         val strFilter = UtilsModel.getGson().toJson(productFilterObj)
@@ -182,6 +188,9 @@ class FilterProducts : AppCompatActivity() {
             filterProductRecomendations.isChecked = true
             showFilterFields(true)
         }else{
+            if(!filterContent.minPrice.isNullOrEmpty() && !filterContent.maxPrice.isNullOrEmpty()){
+                filterProductFilterPriceRange.setCurrentValues(filterContent.minPrice!!.toFloat() , filterContent.maxPrice!!.toFloat())
+            }
             filterProductSize.setSelection(getSizeItemPosition(filterContent.sizeId?.toLong()))
             filterProductSearch.setQuery(filterContent.name, false)
             filterProductCondition.setSelection(getCatalogItemPosition(filterContent.productConditionId?.toLong(), catalogs!!.conditions))

@@ -61,13 +61,13 @@ class CustomBottomAlert: androidx.fragment.app.DialogFragment() {
                     val deleteCardObj = UtilsModel.getGson().toJson(SetDefaultPaymentCardRequest(
                         alertObj.cardId
                     ))
-                    dialog.hide()
+                    dialog?.hide()
                     UtilsModel.getOkClient().newCall(UtilsModel.postRequest(activity!!, activity!!.resources.getString(R.string.setDefaultCard), deleteCardObj)).enqueue(object:
                         Callback {
                         override fun onFailure(call: Call, e: IOException) {
                             activity!!.runOnUiThread {run{activity!!.findViewById<ViewGroup>(android.R.id.content).removeView(activity!!.findViewById(R.id.view_progressbar))}}
-                            UtilsModel.getAlertView().newInstance(UtilsModel.getErrorRequestCall(), 1, 0).show(activity?.supportFragmentManager,"alertDialog")
-                            onDismiss(dialog)
+                            UtilsModel.getAlertView().newInstance(UtilsModel.getErrorRequestCall(), 1, 0).show(activity?.supportFragmentManager!!,"alertDialog")
+                            onDismiss(dialog!!)
                         }
 
                         override fun onResponse(call: Call, response: Response) {
@@ -81,8 +81,8 @@ class CustomBottomAlert: androidx.fragment.app.DialogFragment() {
                                     }
                                 }
                             }
-                            UtilsModel.getAlertView().newInstance(responseStr, 1, 0).show(activity?.supportFragmentManager,"alertDialog")
-                            onDismiss(dialog)
+                            UtilsModel.getAlertView().newInstance(responseStr, 1, 0).show(activity?.supportFragmentManager!!,"alertDialog")
+                            onDismiss(dialog!!)
                         }
                     })
                 })
@@ -90,7 +90,7 @@ class CustomBottomAlert: androidx.fragment.app.DialogFragment() {
                 /*Cancel operation*/
                 val cancelButton = view.findViewById<View>(R.id.paymentCardAlertCancel)
                 cancelButton.setOnClickListener(View.OnClickListener {
-                    onDismiss(dialog)
+                    onDismiss(dialog!!)
                 })
 
                 /*Delete card*/
@@ -101,13 +101,13 @@ class CustomBottomAlert: androidx.fragment.app.DialogFragment() {
                     val deleteCardObj = UtilsModel.getGson().toJson(DeleteCardRequest(
                         alertObj.cardId
                     ))
-                    dialog.hide()
+                    dialog?.hide()
                     UtilsModel.getOkClient().newCall(UtilsModel.postRequest(activity!!, activity!!.resources.getString(R.string.deleteCard), deleteCardObj)).enqueue(object:
                         Callback {
                         override fun onFailure(call: Call, e: IOException) {
                             activity!!.runOnUiThread {run{activity!!.findViewById<ViewGroup>(android.R.id.content).removeView(activity!!.findViewById(R.id.view_progressbar))}}
-                            UtilsModel.getAlertView().newInstance(UtilsModel.getErrorRequestCall(), 1, 0).show(activity?.supportFragmentManager,"alertDialog")
-                            onDismiss(dialog)
+                            UtilsModel.getAlertView().newInstance(UtilsModel.getErrorRequestCall(), 1, 0).show(activity?.supportFragmentManager!!,"alertDialog")
+                            onDismiss(dialog!!)
                         }
 
                         override fun onResponse(call: Call, response: Response) {
@@ -125,8 +125,8 @@ class CustomBottomAlert: androidx.fragment.app.DialogFragment() {
                                     }
                                 }
                             }
-                            UtilsModel.getAlertView().newInstance(responseStr, 1, 0).show(activity?.supportFragmentManager,"alertDialog")
-                            onDismiss(dialog)
+                            UtilsModel.getAlertView().newInstance(responseStr, 1, 0).show(activity?.supportFragmentManager!!,"alertDialog")
+                            onDismiss(dialog!!)
                         }
                     })
                 })
@@ -136,19 +136,19 @@ class CustomBottomAlert: androidx.fragment.app.DialogFragment() {
 
                 /*Clicks measures "?"*/
                 view.findViewById<View>(R.id.imagePreviewHeight).setOnClickListener(View.OnClickListener {
-                    ImagePreview().newInstance(resources.getString(R.string.heightImage)).show(fragmentManager, "alertDialog")
+                    ImagePreview().newInstance(resources.getString(R.string.heightImage)).show(fragmentManager!!, "alertDialog")
                 })
 
                 view.findViewById<View>(R.id.imagePreviewBust).setOnClickListener(View.OnClickListener {
-                    ImagePreview().newInstance(resources.getString(R.string.bustImage)).show(fragmentManager, "alertDialog")
+                    ImagePreview().newInstance(resources.getString(R.string.bustImage)).show(fragmentManager!!, "alertDialog")
                 })
 
                 view.findViewById<View>(R.id.imagePreviewWaist).setOnClickListener(View.OnClickListener {
-                    ImagePreview().newInstance(resources.getString(R.string.waistImage)).show(fragmentManager, "alertDialog")
+                    ImagePreview().newInstance(resources.getString(R.string.waistImage)).show(fragmentManager!!, "alertDialog")
                 })
 
                 view.findViewById<View>(R.id.imagePreviewHip).setOnClickListener(View.OnClickListener {
-                    ImagePreview().newInstance(resources.getString(R.string.hipImage)).show(fragmentManager, "alertDialog")
+                    ImagePreview().newInstance(resources.getString(R.string.hipImage)).show(fragmentManager!!, "alertDialog")
                 })
 
                 /*Upload client mesaurements info*/
@@ -176,12 +176,12 @@ class CustomBottomAlert: androidx.fragment.app.DialogFragment() {
                             fittingHip.editText?.text.toString(),
                             fittingHeight.editText?.text.toString()
                         ))
-                        dialog.hide()
+                        dialog?.hide()
                         UtilsModel.getOkClient().newCall(UtilsModel.postRequest(activity!!, resources.getString(R.string.orderFittingUpdate), createMeasurementObj)).enqueue(object: Callback {
                             override fun onFailure(call: Call, e: IOException) {
                                 activity!!.runOnUiThread {run{activity!!.findViewById<ViewGroup>(android.R.id.content).removeView(activity!!.findViewById(R.id.view_progressbar))}}
-                                UtilsModel.getAlertView().newInstance(UtilsModel.getErrorRequestCall(), 1, 0).show(activity?.supportFragmentManager,"alertDialog")
-                                onDismiss(dialog)
+                                UtilsModel.getAlertView().newInstance(UtilsModel.getErrorRequestCall(), 1, 0).show(activity?.supportFragmentManager!!,"alertDialog")
+                                onDismiss(dialog!!)
                             }
 
                             override fun onResponse(call: Call, response: Response) {
@@ -195,9 +195,9 @@ class CustomBottomAlert: androidx.fragment.app.DialogFragment() {
                                         }
                                     }
                                 }else{
-                                    UtilsModel.getAlertView().newInstance(responseStr, 1, 0).show(activity?.supportFragmentManager,"alertDialog")
+                                    UtilsModel.getAlertView().newInstance(responseStr, 1, 0).show(activity?.supportFragmentManager!!,"alertDialog")
                                 }
-                                onDismiss(dialog)
+                                onDismiss(dialog!!)
                             }
                         })
                     }else{
@@ -239,7 +239,7 @@ class CustomBottomAlert: androidx.fragment.app.DialogFragment() {
                     if (frag != null) {
                         frag!!.openGalleryPicker()
                     }
-                    onDismiss(dialog)
+                    onDismiss(dialog!!)
                 })
 
                 /*Delete image*/
@@ -249,7 +249,7 @@ class CustomBottomAlert: androidx.fragment.app.DialogFragment() {
                     if (frag != null) {
                         frag!!.reseatImage()
                     }
-                    onDismiss(dialog)
+                    onDismiss(dialog!!)
                 })
             }
             "confirmAccountPhone" -> {
@@ -301,7 +301,7 @@ class CustomBottomAlert: androidx.fragment.app.DialogFragment() {
                                     val user = SessionModel(activity!!).getUser()
                                     user.person?.phoneVerified = "1"
                                     SessionModel.saveSessionValue(activity!!, "user", UtilsModel.getGson().toJson(user))
-                                    onDismiss(dialog)
+                                    onDismiss(dialog!!)
                                     if(alertObj.formProfilePage != "0"){
                                         activity!!.finish()
                                     }

@@ -11,20 +11,24 @@
         <item name="android:windowIsTranslucent">true</item>
     </style>
 
-    <style name="textInputLayoutWhite" parent="TextAppearance.AppCompat">
+    <style name="textInputLayoutWhite" parent="Theme.AppCompat">
         <item name="android:textColorHint">@android:color/white</item>
         <item name="android:editTextColor">@android:color/white</item>
         <item name="colorAccent">@android:color/white</item>
         <item name="colorControlNormal">@android:color/white</item>
         <item name="colorControlActivated">@android:color/white</item>
+        <item name="android:textSize">14dp</item>
+        <item name="android:minHeight">50dp</item>
     </style>
 
-    <style name="textInputLayoutBlack" parent="TextAppearance.AppCompat">
+    <style name="textInputLayoutBlack" parent="Theme.AppCompat">
         <item name="android:textColorHint">@android:color/black</item>
         <item name="android:editTextColor">@android:color/black</item>
         <item name="colorAccent">@android:color/black</item>
         <item name="colorControlNormal">@android:color/black</item>
         <item name="colorControlActivated">@android:color/black</item>
+        <item name="android:textSize">14dp</item>
+        <item name="android:minHeight">50dp</item>
     </style>
 
     <style name="BottomNavigationTheme" parent="Theme.AppCompat.Light">

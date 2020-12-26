@@ -137,19 +137,19 @@ class ProductUpdate : androidx.fragment.app.Fragment()  {
 
         /*Clicks measures "?"*/
         imagePreviewHeight.setOnClickListener(View.OnClickListener {
-            ImagePreview().newInstance(resources.getString(R.string.heightImage)).show(fragmentManager, "alertDialog")
+            ImagePreview().newInstance(resources.getString(R.string.heightImage)).show(fragmentManager!!, "alertDialog")
         })
 
         imagePreviewBust.setOnClickListener(View.OnClickListener {
-            ImagePreview().newInstance(resources.getString(R.string.bustImage)).show(fragmentManager, "alertDialog")
+            ImagePreview().newInstance(resources.getString(R.string.bustImage)).show(fragmentManager!!, "alertDialog")
         })
 
         imagePreviewWaist.setOnClickListener(View.OnClickListener {
-            ImagePreview().newInstance(resources.getString(R.string.waistImage)).show(fragmentManager, "alertDialog")
+            ImagePreview().newInstance(resources.getString(R.string.waistImage)).show(fragmentManager!!, "alertDialog")
         })
 
         imagePreviewHip.setOnClickListener(View.OnClickListener {
-            ImagePreview().newInstance(resources.getString(R.string.hipImage)).show(fragmentManager, "alertDialog")
+            ImagePreview().newInstance(resources.getString(R.string.hipImage)).show(fragmentManager!!, "alertDialog")
         })
 
         /*On press continue button*/

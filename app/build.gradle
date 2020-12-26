@@ -34,8 +34,8 @@ android {
         applicationId "com.mirelex.app"
         minSdkVersion 22
         targetSdkVersion 29
-        versionCode 11
-        versionName "2.0"
+        versionCode 12
+        versionName "2.1"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
     buildTypes {
@@ -66,7 +66,7 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
     implementation 'com.squareup.okhttp3:okhttp:3.13.1'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
-    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'com.google.android.material:material:1.2.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'com.mikhaellopez:circularimageview:3.2.0'
@@ -79,4 +79,5 @@ dependencies {
     implementation 'com.thomashaertel:multispinner:0.1.1@aar' // Multiselect
     implementation 'com.facebook.android:facebook-login:5.0.3' // Facebook
     implementation 'me.relex:circleindicator:1.2.2' // Slider dots
+    implementation "com.rizlee.view:rangeseekbar:1.0.0" //Range slider
 }

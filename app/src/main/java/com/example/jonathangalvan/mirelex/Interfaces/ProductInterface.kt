@@ -45,6 +45,7 @@ class ProductInterface (
     var hip: String?,
     var height: String?,
     var productSilhouetteId: String?,
+    var productSilhouette: String?,
     var productOccasionId: String?,
     var fittings: ArrayList<ProductFittingsInterface>?
 ){}

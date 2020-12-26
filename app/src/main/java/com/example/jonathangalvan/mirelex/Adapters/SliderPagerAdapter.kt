@@ -23,7 +23,7 @@ class SliderPagerAdapter(var images: ArrayList<String>, var fm: androidx.fragmen
 //            Picasso.with(container.context).load(images[position]).into(img)
             Glide.with(container.context).load(images[position]).apply( RequestOptions().override(800, 0)).into(img)
             img.setOnClickListener( View.OnClickListener {
-                ImagePreview().newInstance(images, position).show(fm,"alertDialog")
+                ImagePreview().newInstance(images, position).show(fm!!,"alertDialog")
             })
         }else{
             Picasso.with(container.context).load(R.drawable.mirelex_logo_cian).into(img)

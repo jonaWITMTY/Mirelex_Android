@@ -10,15 +10,14 @@ import com.example.jonathangalvan.mirelex.R
 
 class RegisterTabsAdapter(fm: androidx.fragment.app.FragmentManager, private var context: Context): androidx.fragment.app.FragmentPagerAdapter(fm) {
 
-    override fun getItem(p0: Int): androidx.fragment.app.Fragment? {
+    override fun getItem(p0: Int): androidx.fragment.app.Fragment {
         when (p0) {
             0 -> {
                 return RegisterCustomerTab()
             }
-            1 -> {
+            else -> {
                 return RegisterStoreTab()
             }
-            else -> return null
         }
     }
 
