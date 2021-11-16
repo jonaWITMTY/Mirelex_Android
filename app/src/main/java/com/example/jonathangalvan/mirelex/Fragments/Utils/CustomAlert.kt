@@ -94,7 +94,7 @@ class CustomAlert : androidx.fragment.app.DialogFragment() {
 
                 Timer().schedule(object : TimerTask() {
                     override fun run() {
-                        onDismiss(dialog!!)
+                        dialog?.let { onDismiss(it) }
                     }
                 }, 3000)
             }
