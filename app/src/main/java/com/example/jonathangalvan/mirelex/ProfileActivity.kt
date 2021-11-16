@@ -252,7 +252,7 @@ class ProfileActivity : AppCompatActivity() {
                 updateUserObj.numExt = updateSessionUserNumber.editText?.text.toString()
                 updateUserObj.numInt = updateSessionUserInternalNumber.editText?.text.toString()
                 updateUserObj.zipCode = updateSessionUserZip.editText?.text.toString()
-                if(updateSessionUserNeighborhoods.isSelected){
+                if(updateSessionUserNeighborhoods.selectedItemPosition != null){
                     updateUserObj.neighborhoodId = neighborhoodsArr!!.data[updateSessionUserNeighborhoods.selectedItemPosition].neighborhoodId
                 }
                 updateUserObj.instagramProfile = updateSessionUserInstagram.editText?.text.toString()
