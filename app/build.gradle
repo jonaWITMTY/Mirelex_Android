@@ -21,7 +21,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 30
     defaultConfig {
         android {
             defaultConfig {
@@ -33,7 +33,7 @@ android {
         }
         applicationId "com.mirelex.app"
         minSdkVersion 22
-        targetSdkVersion 29
+        targetSdkVersion 30
         versionCode 12
         versionName "2.1"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
@@ -64,7 +64,7 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.5.2'
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
-    implementation 'com.squareup.okhttp3:okhttp:3.13.1'
+    implementation 'com.squareup.okhttp3:okhttp:3.14.9'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
     implementation 'com.google.android.material:material:1.2.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
