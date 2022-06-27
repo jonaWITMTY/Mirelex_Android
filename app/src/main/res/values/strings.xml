@@ -69,6 +69,7 @@
     <string name="folio">Folio</string>
     <string name="services">Services</string>
     <string name="orderService">Order Service</string>
+    <string name="askService">Request service</string>
     <string name="cleanning">Dry Cleaning</string>
     <string name="sewing">Sewing</string>
     <string name="stores">Stores</string>
@@ -167,4 +168,5 @@
     <string name="pleaseSelectStore">Please select an store</string>
     <string name="transactions">Transactions</string>
     <string name="selectedStoreNoPoints">Selected store</string>
+    orderService
 </resources>

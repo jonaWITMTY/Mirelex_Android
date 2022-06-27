@@ -14,7 +14,7 @@
     <string name="paternalLastnameField">Apellido paterno</string>
     <string name="genderFIeld">Género</string>
     <string name="companyNameField">Nombre de la empresa</string>
-    <string name="checkboxTermsField"><u>Estoy de acuerdo con los términos y condiciones</u></string>
+    <string name="checkboxTermsField"><u>Acepto los Términos y Condiciones</u></string>
     <string name="accept">Aceptar</string>
     <string name="cancel">Cancelar</string>
     <string name="storeTabProducts">Productos</string>
@@ -69,7 +69,8 @@
     <string name="total">Total</string>
     <string name="folio">Folio</string>
     <string name="services">Servicios</string>
-    <string name="orderService">Pedir servicio</string>
+    <string name="orderService">Ordenar servicio</string>
+    <string name="askService">Pedir servicio</string>
     <string name="cleanning">Tintorería</string>
     <string name="sewing">Costurería</string>
     <string name="stores">Tiendas</string>
@@ -115,7 +116,7 @@
     <string name="year">Año</string>
     <string name="noDataAvailable">No hay datos disponibles</string>
     <string name="defaultPaymentCard">Principal tarjeta de pago</string>
-    <string name="addPaymentCard">Agregar tarjeta de crédito</string>
+    <string name="addPaymentCard">Agregar método de pago</string>
     <string name="enterClientMesaurements">Ingresa las medidas del cliente</string>
     <string name="adjustedMesaurements">Ajuste de medidas</string>
     <string name="lease">Renta</string>
